@@ -14,11 +14,11 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "frontend" {
-  bucket = "chrrodri-learn-jenkins-app"
+  bucket = "chrrodri-quiz-entrevistas"
   force_destroy = true
 
   tags = {
-    Name        = "build-learn-jenkins-app"
+    Name        = "build-quiz-entrevistas"
     Environment = "dev"
   }
 }
@@ -51,7 +51,7 @@ resource "aws_s3_bucket_public_access_block" "frontend" {
 }
 
 resource "aws_cloudfront_origin_access_control" "frontend" {
-  name                              = "learn-jenkins-app-oac"
+  name                              = "quiz-entrevistas-oac"
   description                       = "Access to S3 bucket"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
