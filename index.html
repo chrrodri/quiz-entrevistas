@@ -1,0 +1,1731 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NTT DATA Interview Quiz | Study App</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7fb;
+      --panel: #ffffff;
+      --panel-2: #f0f3f8;
+      --text: #18202f;
+      --muted: #657184;
+      --line: #d9e0eb;
+      --strong: #0e3b56;
+      --accent: #1976a3;
+      --accent-2: #0f8f7e;
+      --danger: #b42335;
+      --warning: #b76b00;
+      --success: #117348;
+      --success-bg: #e7f6ef;
+      --danger-bg: #fdecef;
+      --warning-bg: #fff4dd;
+      --focus: rgba(25, 118, 163, .24);
+      --shadow: 0 18px 50px rgba(23, 36, 57, .12);
+      --radius: 8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, rgba(15, 143, 126, .08), transparent 260px),
+        var(--bg);
+      color: var(--text);
+    }
+
+    button, input, select { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      background: #102536;
+      color: #f8fbff;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: #f8fbff;
+      color: #102536;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .brand p {
+      margin: 3px 0 0;
+      color: rgba(248,251,255,.72);
+      font-size: 13px;
+    }
+
+    .side-section {
+      display: grid;
+      gap: 10px;
+    }
+
+    .side-title {
+      font-size: 12px;
+      color: rgba(248,251,255,.62);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .mode-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .mode-button, .category-button, .plain-button, .primary-button, .ghost-button, .option-button {
+      border: 0;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
+    }
+
+    .mode-button {
+      text-align: left;
+      background: rgba(255,255,255,.08);
+      color: #f8fbff;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .mode-button:hover, .mode-button.active {
+      background: rgba(255,255,255,.16);
+      border-color: rgba(255,255,255,.32);
+    }
+
+    .mode-button strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .mode-button span {
+      display: block;
+      color: rgba(248,251,255,.70);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .side-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      padding: 10px;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 750;
+    }
+
+    .stat-label {
+      color: rgba(248,251,255,.66);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .main {
+      padding: 28px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .title-block h2 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .title-block p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      line-height: 1.45;
+      max-width: 760px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .primary-button, .plain-button, .ghost-button {
+      min-height: 40px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .primary-button {
+      background: var(--strong);
+      color: white;
+    }
+
+    .plain-button {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+
+    .ghost-button {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid transparent;
+    }
+
+    .primary-button:hover, .plain-button:hover, .ghost-button:hover, .option-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(23, 36, 57, .10);
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .setup {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .setup-main, .setup-aside {
+      padding: 22px;
+    }
+
+    .setup-aside {
+      background: var(--panel-2);
+      border-left: 1px solid var(--line);
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .section-heading {
+      margin: 0 0 12px;
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 10px;
+    }
+
+    .category-button {
+      text-align: left;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      min-height: 78px;
+      padding: 12px;
+      color: var(--text);
+    }
+
+    .category-button.active {
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 1px var(--accent);
+      background: #eef8fb;
+    }
+
+    .category-button strong {
+      display: block;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .category-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .select-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .range-row {
+      display: grid;
+      gap: 7px;
+    }
+
+    .range-row label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    .quiz-shell {
+      display: grid;
+      gap: 14px;
+    }
+
+    .progress-card {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+      gap: 12px;
+    }
+
+    .progress-track {
+      height: 9px;
+      border-radius: 999px;
+      background: var(--panel-2);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: width .25s ease;
+    }
+
+    .question-card {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: var(--panel-2);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .chip.hot {
+      background: var(--warning-bg);
+      color: var(--warning);
+    }
+
+    .question-text {
+      font-size: clamp(19px, 2.4vw, 28px);
+      line-height: 1.28;
+      font-weight: 760;
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option-button {
+      width: 100%;
+      text-align: left;
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 11px;
+      align-items: start;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 14px;
+      line-height: 1.45;
+    }
+
+    .option-key {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--panel-2);
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .option-button.correct {
+      border-color: var(--success);
+      background: var(--success-bg);
+    }
+
+    .option-button.correct .option-key {
+      background: var(--success);
+      color: white;
+    }
+
+    .option-button.wrong {
+      border-color: var(--danger);
+      background: var(--danger-bg);
+    }
+
+    .option-button.wrong .option-key {
+      background: var(--danger);
+      color: white;
+    }
+
+    .option-button.dimmed {
+      opacity: .62;
+    }
+
+    .feedback {
+      display: none;
+      border-radius: var(--radius);
+      padding: 14px;
+      line-height: 1.55;
+      border: 1px solid;
+    }
+
+    .feedback.show { display: block; }
+    .feedback.correct {
+      background: var(--success-bg);
+      border-color: rgba(17, 115, 72, .25);
+      color: #0d5134;
+    }
+    .feedback.wrong {
+      background: var(--danger-bg);
+      border-color: rgba(180, 35, 53, .25);
+      color: #70202a;
+    }
+    .feedback.neutral {
+      background: var(--panel-2);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .study-answer {
+      display: none;
+      padding: 16px;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      line-height: 1.55;
+    }
+
+    .study-answer.show { display: block; }
+    .answer-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 7px;
+    }
+
+    .results {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .score-hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .score-number {
+      font-size: clamp(42px, 8vw, 78px);
+      font-weight: 850;
+      line-height: .95;
+      color: var(--strong);
+      letter-spacing: 0;
+    }
+
+    .score-copy h3 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .score-copy p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .breakdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    .breakdown-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: var(--panel);
+      display: grid;
+      gap: 8px;
+    }
+
+    .breakdown-name {
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .mini-track {
+      height: 7px;
+      background: var(--panel-2);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .mini-fill {
+      height: 100%;
+      background: var(--accent-2);
+      border-radius: inherit;
+    }
+
+    .review-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .review-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: var(--panel);
+    }
+
+    .review-item strong {
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .review-item p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .empty {
+      padding: 22px;
+      border: 1px dashed var(--line);
+      color: var(--muted);
+      border-radius: var(--radius);
+      text-align: center;
+      background: rgba(255,255,255,.5);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 920px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position: static; padding: 18px; }
+      .side-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .main { padding: 18px; }
+      .setup { grid-template-columns: 1fr; }
+      .setup-aside { border-left: 0; border-top: 1px solid var(--line); }
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .toolbar { justify-content: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .side-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .brand-mark { width: 38px; height: 38px; }
+      .category-grid { grid-template-columns: 1fr; }
+      .question-card, .results, .setup-main, .setup-aside { padding: 16px; }
+      .score-hero { align-items: flex-start; flex-direction: column; }
+      .option-button { grid-template-columns: 30px minmax(0, 1fr); padding: 12px; }
+      .option-key { width: 30px; height: 30px; }
+      .primary-button, .plain-button, .ghost-button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">NTT</div>
+        <div>
+          <h1>Interview Study App</h1>
+          <p>L2/L3 Production Support</p>
+        </div>
+      </div>
+
+      <section class="side-section">
+        <div class="side-title">Modo</div>
+        <div class="mode-list" id="modeList"></div>
+      </section>
+
+      <section class="side-section">
+        <div class="side-title">Tu avance</div>
+        <div class="side-stats">
+          <div class="stat">
+            <div class="stat-value" id="statTotal">0</div>
+            <div class="stat-label">Preguntas</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" id="statHot">0</div>
+            <div class="stat-label">Clave</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" id="statBest">0%</div>
+            <div class="stat-label">Mejor score</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" id="statSeen">0</div>
+            <div class="stat-label">Vistas</div>
+          </div>
+        </div>
+      </section>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="title-block">
+          <h2 id="pageTitle">Prepara tu entrevista con foco</h2>
+          <p id="pageSubtitle">Elige modo, filtra categorías y estudia con feedback inmediato o simulacro completo.</p>
+        </div>
+        <div class="toolbar">
+          <button class="plain-button" id="resetProgressButton" type="button">Reiniciar progreso</button>
+          <button class="primary-button" id="startButton" type="button">Comenzar</button>
+        </div>
+      </header>
+
+      <section id="screen"></section>
+    </main>
+  </div>
+
+  <script>
+    const ALL_QUESTIONS = [
+  // ── CI/CD & DevOps ──────────────────────────────────────────────
+  {
+    cat: "CI/CD & DevOps",
+    q: "¿Qué significa CI en el contexto de CI/CD pipelines?",
+    opts: ["Continuous Installation", "Continuous Integration", "Cloud Infrastructure", "Controlled Input"],
+    ans: 1,
+    exp: "CI = Continuous Integration. Es la práctica de hacer merges frecuentes al repositorio compartido para detectar problemas de integración temprano mediante builds y tests automatizados.",
+    tip: false
+  },
+  {
+    cat: "CI/CD & DevOps",
+    q: "¿Cuál de los siguientes es un archivo de configuración propio de Jenkins?",
+    opts: ["docker-compose.yml", "Jenkinsfile", "terraform.tfstate", ".gitlab-ci.yml"],
+    ans: 1,
+    exp: "Jenkinsfile es el archivo donde se define el pipeline de Jenkins usando sintaxis declarativa o scripted. Es la base del enfoque 'Pipeline as Code'.",
+    tip: false
+  },
+  {
+    cat: "CI/CD & DevOps",
+    q: "¿Cuál es la diferencia entre Continuous Delivery y Continuous Deployment?",
+    opts: [
+      "Son exactamente lo mismo, solo difieren en el nombre",
+      "Continuous Delivery requiere aprobación manual antes del deploy a producción; Continuous Deployment lo hace de forma automática al pasar el pipeline",
+      "Continuous Deployment es solo para entornos de desarrollo; Delivery es para producción",
+      "Continuous Delivery usa Jenkins; Continuous Deployment usa GitLab"
+    ],
+    ans: 1,
+    exp: "Continuous Delivery prepara y valida el código para producción automáticamente, pero el deploy requiere un trigger manual (aprobación humana). Continuous Deployment va un paso más: cada cambio que pasa el pipeline se despliega a producción de forma totalmente automática.",
+    tip: false
+  },
+  {
+    cat: "CI/CD & DevOps",
+    q: "En un pipeline de Jenkins, ¿qué ventaja ofrece la ejecución paralela de stages?",
+    opts: [
+      "Permite usar menos memoria en el servidor de Jenkins",
+      "Reduce el tiempo total del pipeline al ejecutar tareas independientes simultáneamente",
+      "Garantiza que los tests unitarios siempre pasen",
+      "Elimina la necesidad de un Jenkinsfile"
+    ],
+    ans: 1,
+    exp: "La ejecución paralela de stages en Jenkins permite que tareas independientes (por ejemplo, tests unitarios y análisis de código estático) se ejecuten al mismo tiempo, reduciendo significativamente el tiempo total del pipeline y acelerando el feedback al desarrollador.",
+    tip: true
+  },
+  {
+    cat: "CI/CD & DevOps",
+    q: "¿Qué es Terraform y para qué se usa en un contexto DevOps?",
+    opts: [
+      "Una herramienta para crear diagramas de arquitectura cloud",
+      "Un sistema de monitoreo de infraestructura en tiempo real",
+      "Una herramienta de Infrastructure as Code que permite provisionar y gestionar recursos cloud de forma declarativa",
+      "Un gestor de paquetes para proyectos Java"
+    ],
+    ans: 2,
+    exp: "Terraform es una herramienta de Infrastructure as Code (IaC) de HashiCorp. Permite definir recursos de cloud (EC2, S3, VPCs, IAM) en archivos declarativos HCL, y aprovisionar o modificar esa infraestructura de forma reproducible y versionada. Es fundamental en pipelines DevOps modernos.",
+    tip: true
+  },
+  // ── Git ──────────────────────────────────────────────────────────
+  {
+    cat: "Git",
+    q: "En GitFlow, ¿en qué rama se integran los feature branches antes de hacer un release?",
+    opts: ["main", "hotfix", "develop", "release"],
+    ans: 2,
+    exp: "En GitFlow, la rama 'develop' es la rama de integración donde se fusionan los feature branches. Solo después de estabilizar develop se crea una release branch.",
+    tip: false
+  },
+  {
+    cat: "Git",
+    q: "¿Para qué se usan las hotfix branches en GitFlow?",
+    opts: [
+      "Para desarrollar nuevas funcionalidades urgentes",
+      "Para aplicar correcciones urgentes directamente sobre main/master sin pasar por develop",
+      "Para hacer merge de varias feature branches a la vez",
+      "Para sincronizar el repositorio remoto con el local"
+    ],
+    ans: 1,
+    exp: "Las hotfix branches en GitFlow sirven para corregir bugs críticos en producción de forma urgente. Se crean desde main/master, se corrige el bug, y se mergean tanto a main como a develop para que la corrección no se pierda en el siguiente release.",
+    tip: false
+  },
+  {
+    cat: "Git",
+    q: "¿Qué hace 'git rebase' y por qué se prefiere sobre 'git merge' en algunos flujos de trabajo?",
+    opts: [
+      "Rebase elimina todos los commits anteriores del branch",
+      "Rebase reaplica los commits de tu branch sobre la punta del branch destino, generando un historial más lineal y limpio",
+      "Rebase es igual a merge pero más lento",
+      "Rebase solo funciona en repositorios privados"
+    ],
+    ans: 1,
+    exp: "Git rebase mueve o reaplica commits de un branch sobre otro, creando un historial de commits lineal sin 'merge commits' extra. Se prefiere en equipos que quieren un historial limpio y fácil de leer. Sin embargo, nunca se debe hacer rebase de ramas públicas compartidas.",
+    tip: true
+  },
+  // ── Linux ────────────────────────────────────────────────────────
+  {
+    cat: "Linux",
+    q: "¿Qué comando de Linux usarías para analizar el uso de CPU en tiempo real por proceso?",
+    opts: ["df -h", "netstat -tulnp", "top / htop", "journalctl -u"],
+    ans: 2,
+    exp: "'top' y 'htop' muestran los procesos activos ordenados por uso de CPU y memoria en tiempo real. Son los primeros comandos a usar al diagnosticar un servidor lento.",
+    tip: false
+  },
+  {
+    cat: "Linux",
+    q: "¿Cuál es la sintaxis correcta de un cron job que ejecuta un script todos los días a las 2 AM?",
+    opts: ["2 0 * * * /script.sh", "0 2 * * * /script.sh", "* * 2 * * /script.sh", "0 * 2 * * /script.sh"],
+    ans: 1,
+    exp: "La sintaxis CRON es: minuto hora día mes día_semana. Para las 2:00 AM diariamente: '0 2 * * *' — 0 minutos, hora 2, todos los días.",
+    tip: false
+  },
+  {
+    cat: "Linux",
+    q: "¿Qué hace el siguiente comando? grep 'ERROR' /var/log/app.log | awk '{print $1, $2}' | sort | uniq -c | sort -rn",
+    opts: [
+      "Elimina líneas con ERROR del log y las guarda en un archivo nuevo",
+      "Busca ERRORs, extrae fecha y hora, cuenta ocurrencias únicas y ordena de mayor a menor",
+      "Reinicia el servicio cuando detecta errores en el log",
+      "Lista todos los archivos de log que contienen la palabra ERROR"
+    ],
+    ans: 1,
+    exp: "Este pipeline: busca líneas con 'ERROR', extrae los dos primeros campos (timestamp), cuenta cuántas veces aparece cada combinación única y ordena de mayor a menor frecuencia. Muy útil para análisis de logs en producción.",
+    tip: false
+  },
+  {
+    cat: "Linux",
+    q: "¿Cuál es la diferencia entre 'ps aux' y 'top' al diagnosticar un servidor?",
+    opts: [
+      "ps aux muestra procesos de red; top muestra procesos de disco",
+      "ps aux toma una foto estática de procesos en ese momento; top muestra procesos en tiempo real y se actualiza periódicamente",
+      "Son exactamente lo mismo pero con diferente formato de salida",
+      "ps aux solo funciona como root; top puede usarlo cualquier usuario"
+    ],
+    ans: 1,
+    exp: "'ps aux' captura el estado de todos los procesos en un momento dado (snapshot estático). 'top' es interactivo y se refresca cada pocos segundos mostrando cambios en tiempo real. Para troubleshooting de rendimiento se prefiere 'top/htop'; para scripting y automatización, 'ps aux'.",
+    tip: true
+  },
+  {
+    cat: "Linux",
+    q: "Un servidor Linux reporta alta latencia. 'top' muestra CPU baja y RAM disponible. ¿Cuál es tu siguiente paso de diagnóstico?",
+    opts: [
+      "Reiniciar el servidor inmediatamente",
+      "Revisar I/O de disco con 'iostat -xz 1' y conectividad de red con 'ping' y 'traceroute'",
+      "Aumentar el tamaño del SWAP",
+      "Instalar más RAM"
+    ],
+    ans: 1,
+    exp: "Si CPU y RAM están bien, el cuello de botella puede ser I/O de disco (iostat -xz 1, iotop) o red (netstat, ss, ping, traceroute). También vale revisar inodes (df -i) y logs (journalctl -p err). El diagnóstico estructurado descarta causas sistemáticamente.",
+    tip: true
+  },
+  {
+    cat: "Linux",
+    q: "¿Qué significa que un proceso aparezca como 'zombie' en Linux?",
+    opts: [
+      "Que el proceso está consumiendo el 100% del CPU",
+      "Que el proceso terminó pero su entrada en la tabla de procesos no ha sido limpiada por el proceso padre",
+      "Que el proceso está en modo de espera de I/O",
+      "Que el proceso fue detenido con SIGSTOP"
+    ],
+    ans: 1,
+    exp: "Un proceso zombie completó su ejecución pero su registro permanece en la tabla de procesos porque el proceso padre no leyó su código de salida (wait()). No consumen CPU ni memoria significativa, pero si hay muchos pueden indicar un bug en el proceso padre. Se limpian cuando el padre termina o es reiniciado.",
+    tip: true
+  },
+  // ── Containers & Infra ──────────────────────────────────────────
+  {
+    cat: "Containers & Infra",
+    q: "¿Qué ventaja principal tiene Ansible sobre Puppet o Chef para gestión de configuraciones?",
+    opts: ["Usa Ruby DSL que es más potente", "Requiere un agente instalado en cada servidor", "Es agentless — se conecta por SSH sin instalar software en el host", "Solo funciona en entornos cloud"],
+    ans: 2,
+    exp: "Ansible es agentless: se conecta vía SSH (Linux) o WinRM (Windows) sin necesitar un agente instalado en los hosts. Esto simplifica enormemente el setup inicial y la gestión de inventarios.",
+    tip: false
+  },
+  {
+    cat: "Containers & Infra",
+    q: "¿Para qué sirve un Dockerfile multi-stage build?",
+    opts: [
+      "Para construir la imagen en múltiples servidores en paralelo",
+      "Para reducir el tamaño de la imagen final usando solo los artefactos necesarios de etapas previas",
+      "Para ejecutar múltiples contenedores dentro de una sola imagen",
+      "Para versionar la imagen con múltiples tags automáticamente"
+    ],
+    ans: 1,
+    exp: "Los multi-stage builds permiten usar una imagen grande para compilar (con SDK, dependencias de build) y copiar solo el artefacto final a una imagen base mínima. Resultado: imágenes más pequeñas, más seguras y con menor superficie de ataque.",
+    tip: false
+  },
+  {
+    cat: "Containers & Infra",
+    q: "¿Qué hace el comando 'docker exec -it <container_id> /bin/bash'?",
+    opts: [
+      "Crea un nuevo contenedor basado en la imagen especificada",
+      "Detiene el contenedor y lo reinicia en modo debug",
+      "Abre una terminal interactiva dentro de un contenedor que ya está corriendo",
+      "Exporta los logs del contenedor a un archivo"
+    ],
+    ans: 2,
+    exp: "'docker exec' ejecuta un comando dentro de un contenedor en ejecución. Con '-it' (interactive + tty) y '/bin/bash' obtienes una shell interactiva dentro del contenedor, lo que es esencial para troubleshooting en producción: revisar logs, configuraciones, y estado del proceso dentro del contenedor.",
+    tip: false
+  },
+  {
+    cat: "Containers & Infra",
+    q: "¿Cuál es la diferencia entre un volumen de Docker y un bind mount?",
+    opts: [
+      "Los volúmenes son temporales; los bind mounts son permanentes",
+      "Los volúmenes son gestionados por Docker y abstractos del filesystem host; los bind mounts mapean directamente un directorio del host al contenedor",
+      "Los bind mounts solo funcionan en Linux; los volúmenes en cualquier OS",
+      "No hay diferencia práctica entre ambos"
+    ],
+    ans: 1,
+    exp: "Los volúmenes de Docker son gestionados por Docker Engine (almacenados en /var/lib/docker/volumes), son portables y el método recomendado para datos persistentes. Los bind mounts mapean directamente un path del host al contenedor, lo que los hace dependientes de la estructura del filesystem del host pero útiles para desarrollo.",
+    tip: true
+  },
+  {
+    cat: "Containers & Infra",
+    q: "¿Qué es Apache Tomcat y cuándo se usa en producción?",
+    opts: [
+      "Es un servidor de base de datos para aplicaciones Java",
+      "Es un Java Servlet Container que despliega y ejecuta aplicaciones web Java (WAR files)",
+      "Es una herramienta de monitoreo para aplicaciones JVM",
+      "Es un servidor proxy reverso para balanceo de carga"
+    ],
+    ans: 1,
+    exp: "Apache Tomcat es un Java Servlet Container: implementa las especificaciones Java EE (Servlets, JSP) y permite desplegar aplicaciones web Java empaquetadas como WAR. En producción se monitorea el heap JVM, se analizan thread dumps, y se ajustan parámetros como Xmx/Xms para optimizar rendimiento.",
+    tip: false
+  },
+  // ── Incident Management ─────────────────────────────────────────
+  {
+    cat: "Incident Management",
+    q: "En gestión de incidentes ITIL, ¿cuál es la diferencia clave entre Incident Management y Problem Management?",
+    opts: [
+      "Incident Management documenta el problema; Problem Management lo resuelve",
+      "Incident Management restaura el servicio lo antes posible; Problem Management identifica y elimina la causa raíz",
+      "Son lo mismo, solo se diferencian por prioridad (P1 vs P2)",
+      "Problem Management es solo para incidentes de base de datos"
+    ],
+    ans: 1,
+    exp: "Incident Management busca restaurar el servicio rápidamente (el foco es la continuidad). Problem Management investiga la causa raíz de incidentes recurrentes para eliminarlos de forma permanente. Ambos son procesos distintos aunque relacionados.",
+    tip: false
+  },
+  {
+    cat: "Incident Management",
+    q: "Durante una investigación de outage en producción, ¿cuál debería ser tu primera acción al recibir la alerta?",
+    opts: [
+      "Comenzar a hacer cambios en producción para resolver el problema",
+      "Esperar 30 minutos para ver si se auto-resuelve",
+      "Detectar, confirmar el impacto, crear el ticket y notificar a stakeholders con un status inicial",
+      "Escalar inmediatamente al VP de Ingeniería"
+    ],
+    ans: 2,
+    exp: "El proceso correcto: 1) Confirmar el incidente vía alertas o reportes de usuarios, 2) Registrar en el sistema de tickets (ServiceNow/Jira), 3) Comunicar un status inicial a stakeholders. Solo entonces inicias el triage técnico. La comunicación temprana es crítica.",
+    tip: false
+  },
+  {
+    cat: "Incident Management",
+    q: "Un incidente P1 lleva 45 minutos sin resolverse. ¿Qué harías en paralelo mientras continúas el troubleshooting?",
+    opts: [
+      "Parar el troubleshooting y documentar todo antes de continuar",
+      "Nada — mantener el foco completo en la resolución técnica sin distracciones",
+      "Mantener comunicación regular con stakeholders con status updates, revisar si hay un workaround rápido y considerar escalación si el equipo actual está bloqueado",
+      "Cerrar el ticket y abrir uno nuevo para resetear el SLA"
+    ],
+    ans: 2,
+    exp: "Durante un P1 prolongado debes: 1) Enviar status updates periódicos a stakeholders (cada 15-30 min), 2) Evaluar si existe un workaround que restaure el servicio aunque sea parcialmente, 3) Escalar a L3 o vendor si el equipo está bloqueado. La comunicación continua y el paralelismo son fundamentales.",
+    tip: true
+  },
+  {
+    cat: "Incident Management",
+    q: "¿Qué elementos debe incluir un RCA (Root Cause Analysis) bien estructurado?",
+    opts: [
+      "Solo el nombre del ingeniero responsable y la fecha del incidente",
+      "Resumen del incidente, causa raíz, factores contribuyentes, resolución y acciones correctivas con responsables y fechas",
+      "Lista de todos los sistemas afectados sin análisis de causa",
+      "Únicamente el ticket de ServiceNow con el log de actividades"
+    ],
+    ans: 1,
+    exp: "Un RCA completo incluye: resumen del incidente (qué pasó, cuándo, impacto), causa raíz (falla técnica o de proceso), factores contribuyentes (qué empeoró el impacto), resolución aplicada, y acciones correctivas específicas con owner y fecha límite. El enfoque debe ser blameless — mejora del sistema, no culpar personas.",
+    tip: false
+  },
+  {
+    cat: "Incident Management",
+    q: "¿Cómo priorizas cuando tienes un P1 y dos P2 activos simultáneamente?",
+    opts: [
+      "Atiendes primero los P2 porque son más fáciles y así liberas tiempo para el P1",
+      "El P1 recibe tu atención completa; delegas los P2 a otros miembros del equipo y mantienes visibilidad de ambos",
+      "Cierras los P2 automáticamente para concentrarte en el P1",
+      "Escala todo al manager y esperas instrucciones"
+    ],
+    ans: 1,
+    exp: "P1 siempre tiene prioridad absoluta: lo lideras personalmente. Los P2 se delegan a otros ingenieros mientras tú te mantienes como punto de escalación. Debes mantener canales de comunicación separados por incidente y actualizar el ticketing en tiempo real para facilitar handoffs.",
+    tip: true
+  },
+  // ── Databases ────────────────────────────────────────────────────
+  {
+    cat: "Databases",
+    q: "¿Qué indica un alto uso de SWAP en un servidor Linux de base de datos?",
+    opts: [
+      "El disco duro está al 100% de capacidad",
+      "El sistema está usando disco como memoria RAM porque la RAM física está insuficiente — lo que degrada el rendimiento",
+      "El servidor tiene demasiadas conexiones de red abiertas",
+      "Los logs están ocupando demasiado espacio en disco"
+    ],
+    ans: 1,
+    exp: "Cuando el sistema usa SWAP intensivamente, significa que la RAM física es insuficiente y el OS usa disco como memoria extendida. El acceso a disco es órdenes de magnitud más lento que RAM, causando 'system thrashing' y degradación severa del rendimiento.",
+    tip: false
+  },
+  {
+    cat: "Databases",
+    q: "¿Qué es un deadlock en una base de datos y cómo se detecta?",
+    opts: [
+      "Cuando la base de datos está completamente apagada",
+      "Cuando dos o más transacciones se bloquean mutuamente esperando recursos que la otra tiene, quedando ninguna capaz de progresar",
+      "Cuando una consulta tarda más de 30 segundos en ejecutarse",
+      "Cuando se llenan los archivos de log de la base de datos"
+    ],
+    ans: 1,
+    exp: "Un deadlock ocurre cuando la transacción A bloquea el recurso X y espera el recurso Y, mientras la transacción B bloquea Y y espera X — ciclo de espera infinito. Los RDBMS lo detectan automáticamente y terminan una de las transacciones. Se identifican en los logs del motor (DB2, Oracle, SQL Server tienen logs de deadlock específicos).",
+    tip: true
+  },
+  {
+    cat: "Databases",
+    q: "¿Cuál de estas operaciones de DB2 LUW restaura una base de datos desde un backup?",
+    opts: ["db2 recover", "db2 restore database MYDB from /backup", "db2 import from backup", "db2 load restore"],
+    ans: 1,
+    exp: "En IBM DB2 LUW el comando para restaurar es 'db2 restore database NOMBRE from /ruta/backup'. Después de un restore completo, generalmente se ejecuta 'db2 rollforward' para aplicar los logs de transacciones y llevar la base de datos a un estado consistente más reciente.",
+    tip: false
+  },
+  // ── Monitoring ───────────────────────────────────────────────────
+  {
+    cat: "Monitoring",
+    q: "¿Cuál es la función principal de Grafana en un stack de observabilidad?",
+    opts: [
+      "Recolectar y almacenar métricas de los servidores",
+      "Ejecutar alertas automáticas por email cuando un servidor falla",
+      "Visualizar y correlacionar métricas, logs y trazas en dashboards en tiempo real",
+      "Provisionar infraestructura en cloud automáticamente"
+    ],
+    ans: 2,
+    exp: "Grafana es la plataforma de visualización: conecta con fuentes de datos como Prometheus (métricas), Loki (logs) y Jaeger (trazas) para crear dashboards operacionales. No recolecta datos — Prometheus hace eso; Grafana los muestra.",
+    tip: false
+  },
+  {
+    cat: "Monitoring",
+    q: "¿Cuál es la diferencia entre SLI, SLO y SLA en el contexto de production support?",
+    opts: [
+      "Son tres nombres distintos para lo mismo: el tiempo de respuesta de un servicio",
+      "SLI es la métrica medida (ej. latencia), SLO es el objetivo interno (ej. p99 < 200ms) y SLA es el acuerdo contractual con el cliente con consecuencias si se incumple",
+      "SLA es interno; SLO es el acuerdo con el cliente",
+      "Solo el SLA importa; SLI y SLO son conceptos teóricos sin uso práctico"
+    ],
+    ans: 1,
+    exp: "SLI (Service Level Indicator): la métrica real que mides (latencia, availability, error rate). SLO (Service Level Objective): el objetivo interno que defines para esa métrica (ej. 99.9% uptime). SLA (Service Level Agreement): el contrato formal con el cliente que incluye consecuencias económicas o penalidades si el servicio no alcanza los niveles acordados.",
+    tip: true
+  },
+  {
+    cat: "Monitoring",
+    q: "¿Qué herramienta del stack Prometheus/Grafana se encarga específicamente de la agregación de logs?",
+    opts: ["Alertmanager", "Loki", "Jaeger", "Prometheus Pushgateway"],
+    ans: 1,
+    exp: "Loki (de Grafana Labs) es el sistema de agregación de logs del stack. A diferencia de Elasticsearch, Loki no indexa el contenido de los logs sino solo las etiquetas (labels), lo que lo hace más eficiente en costo. Se consulta con LogQL y se integra directamente en dashboards de Grafana junto con métricas de Prometheus.",
+    tip: true
+  },
+  // ── Scripting ────────────────────────────────────────────────────
+  {
+    cat: "Scripting",
+    q: "¿Qué principio de scripting garantiza que un script pueda ejecutarse múltiples veces sin generar estados inconsistentes o duplicados?",
+    opts: ["Recursividad", "Idempotencia", "Polimorfismo", "Asincronía"],
+    ans: 1,
+    exp: "Idempotencia significa que ejecutar el script N veces produce el mismo resultado que ejecutarlo una vez. Es fundamental para scripts de producción: si el script falla a mitad y se re-ejecuta, no debe crear commits duplicados, archivos duplicados, etc.",
+    tip: false
+  },
+  {
+    cat: "Scripting",
+    q: "En un script de Bash de producción, ¿qué debe incluir el manejo de errores para ser considerado production-safe?",
+    opts: [
+      "Solo un mensaje de echo al final indicando si fue exitoso",
+      "Usar 'set -e' para salir ante errores, validaciones pre-vuelo, logging con timestamps, y mecanismo de rollback si un paso falla",
+      "Un bloque try-catch como en Python",
+      "No hace falta manejo de errores en Bash porque los errores se muestran automáticamente"
+    ],
+    ans: 1,
+    exp: "Un script Bash production-safe incluye: 'set -e' (exit on error) y 'set -u' (error en variables no definidas), validaciones pre-vuelo del estado del sistema, logging detallado con timestamps a archivo, y lógica de rollback que revierta cambios si algo falla. Esto es exactamente lo que implementaste en tu automatización de repos.",
+    tip: false
+  },
+  {
+    cat: "Scripting",
+    q: "¿Cuál sería una razón válida para usar Python en lugar de Bash para una tarea de automatización?",
+    opts: [
+      "Bash no puede leer archivos",
+      "Python es mejor cuando la lógica es compleja, necesitas manipular estructuras de datos, consumir APIs REST, o generar reportes, ya que ofrece librerías, manejo de errores robusto y mejor legibilidad",
+      "Python siempre es más rápido que Bash",
+      "Bash no puede ejecutarse en servidores Linux"
+    ],
+    ans: 1,
+    exp: "Bash es ideal para tareas simples de shell: ejecutar comandos, pipes, manipular archivos. Python es preferible cuando la lógica se vuelve compleja: llamadas a APIs REST, parsing de JSON/XML, manipulación de estructuras de datos, generación de reportes, o cuando necesitas librerías de terceros. Tu script de automatización de repos es un buen ejemplo de uso de Python para tarea compleja.",
+    tip: true
+  },
+  // ── Maven / Java ─────────────────────────────────────────────────
+  {
+    cat: "Maven / Java",
+    q: "¿Cuál es el archivo de configuración central de un proyecto Maven?",
+    opts: ["build.gradle", "package.json", "pom.xml", "Makefile"],
+    ans: 2,
+    exp: "pom.xml (Project Object Model) es el archivo de configuración central de Maven. Define dependencias, plugins, el ciclo de build (compile, test, package, deploy) y la información del proyecto.",
+    tip: false
+  },
+  {
+    cat: "Maven / Java",
+    q: "¿Qué hace la fase 'package' del ciclo de vida de Maven?",
+    opts: [
+      "Instala las dependencias del proyecto desde Maven Central",
+      "Compila el código fuente y crea el artefacto desplegable (JAR o WAR)",
+      "Despliega la aplicación al servidor de producción",
+      "Genera la documentación Javadoc del proyecto"
+    ],
+    ans: 1,
+    exp: "La fase 'package' de Maven compila el código (si no se ha hecho), ejecuta los tests unitarios y empaqueta el resultado en el formato definido en el pom.xml (JAR para librerías, WAR para aplicaciones web). Es el artefacto que luego Jenkins almacena en Nexus/Artifactory y despliega.",
+    tip: false
+  },
+  // ── Behavioral ───────────────────────────────────────────────────
+  {
+    cat: "Behavioral",
+    q: "Al responder una pregunta de reto complejo en una entrevista, ¿qué metodología estructurada es más recomendada?",
+    opts: ["PDCA (Plan-Do-Check-Act)", "STAR (Situation, Task, Action, Result)", "SMART (Specific, Measurable, Achievable, Relevant, Time-bound)", "RACI (Responsible, Accountable, Consulted, Informed)"],
+    ans: 1,
+    exp: "STAR es el framework estándar para preguntas behavioral: Situation (contexto), Task (tu responsabilidad), Action (lo que hiciste específicamente), Result (el impacto medible). Para NTT Data: el reto de automatización (3-4 horas → 15 minutos) es tu mejor ejemplo STAR.",
+    tip: false
+  },
+  {
+    cat: "Behavioral",
+    q: "Te preguntan: 'Tell me about a time you had a conflict with a teammate.' ¿Cuál es la mejor estructura para responder?",
+    opts: [
+      "Quejarte del compañero en detalle para mostrar que tenías razón",
+      "Decir que nunca has tenido conflictos porque trabajas bien con todos",
+      "Usar STAR: describir el desacuerdo técnico de forma objetiva, cómo buscaste alineación, la resolución colaborativa y lo que aprendiste",
+      "Cambiar el tema hacia tus logros técnicos"
+    ],
+    ans: 2,
+    exp: "Las preguntas de conflicto evalúan madurez profesional y trabajo en equipo. La respuesta ideal: 1) Describe un desacuerdo técnico legítimo (no personal), 2) Explica cómo escuchaste la perspectiva del otro, 3) Muestra cómo buscaron una solución juntos, 4) Destaca el resultado positivo y la lección aprendida. Evita culpar a otros.",
+    tip: true
+  },
+  {
+    cat: "Behavioral",
+    q: "¿Cómo responderías si el entrevistador te pregunta sobre una tecnología de la oferta que conoces poco (por ejemplo, Kubernetes)?",
+    opts: [
+      "Inventar experiencia que no tienes para no quedar mal",
+      "Ser honesto: mencionar tu conocimiento conceptual, lo que ya sabes de contextos relacionados (Docker, contenedores) y tu capacidad y disposición para aprender rápido",
+      "Cambiar el tema inmediatamente",
+      "Decir que no sabes nada y no agregar nada más"
+    ],
+    ans: 1,
+    exp: "La honestidad inteligente es la mejor estrategia: 'Tengo conocimiento conceptual de Kubernetes — entiendo que orquesta contenedores Docker, gestiona scaling y failover. En producción he trabajado extensamente con Docker. Kubernetes es una extensión natural de ese conocimiento y lo que no sepa lo voy a aprender rápido.' Esto muestra madurez y confianza.",
+    tip: true
+  },
+  // ── Preguntas de Situación Real ─────────────────────────────────
+  {
+    cat: "Situación Real",
+    q: "Un deploy en producción causa un aumento inmediato de errores 500 en la aplicación. ¿Cuál es tu primera acción?",
+    opts: [
+      "Revisar el código del deploy línea por línea para encontrar el bug",
+      "Ejecutar un rollback al release anterior para restaurar el servicio, luego investigar la causa en un ambiente de staging",
+      "Esperar 10 minutos para ver si los errores disminuyen solos",
+      "Reiniciar todos los servidores de aplicación"
+    ],
+    ans: 1,
+    exp: "En producción, la prioridad es restaurar el servicio. Si un deploy introdujo errores 500, el rollback inmediato al release anterior es la acción más segura y rápida. Una vez el servicio está estable, investigas la causa raíz en staging — nunca intentas arreglar un bug en producción bajo presión.",
+    tip: true
+  },
+  {
+    cat: "Situación Real",
+    q: "Un cliente reporta que su aplicación está 'lenta'. No hay alertas activas en tus dashboards. ¿Qué haces?",
+    opts: [
+      "Le dices al cliente que si no hay alertas, no hay problema",
+      "Abrir un ticket P1 inmediatamente sin investigar",
+      "Investigar activamente: revisar métricas de latencia (p95, p99), logs de errores, load balancer, conexiones de base de datos y validar la perspectiva del cliente con datos",
+      "Reiniciar el servidor de aplicación como primer paso"
+    ],
+    ans: 2,
+    exp: "La ausencia de alertas no significa que no haya problema — tus thresholds pueden estar mal configurados o el issue puede estar bajo el radar. El proceso: 1) Tomar en serio el reporte, 2) Revisar métricas granulares (latencia p95/p99, no solo average), 3) Revisar logs, DB connections, y comparar contra baseline. La percepción del cliente es válida aunque no haya alerta.",
+    tip: true
+  },
+  {
+    cat: "Situación Real",
+    q: "Te asignan a un cliente nuevo de NTT Data con un sistema legado del que nadie en el equipo tiene documentación. ¿Cómo empiezas?",
+    opts: [
+      "Propones reescribir todo el sistema desde cero",
+      "Esperas a que ocurra un incidente para aprender cómo funciona",
+      "Realizas un discovery estructurado: revisa logs, monitoreo existente, configuraciones, interviewing al equipo, y construyes documentación incremental mientras operas el sistema",
+      "Te niegas a trabajar con sistemas sin documentación"
+    ],
+    ans: 2,
+    exp: "El onboarding a sistemas legados es un escenario real en L2/L3. El enfoque correcto: 1) Revisar lo que existe (logs, configs, scripts legacy), 2) Hablar con quien sepa algo — aunque sea poco, 3) Construir documentación incremental desde el primer día, 4) Configurar monitoreo básico si no existe, 5) Actuar con cautela antes de hacer cambios. Este enfoque proactivo es exactamente lo que NTT Data busca.",
+    tip: true
+  },
+  {
+    cat: "Situación Real",
+    q: "Durante una guardia nocturna recibes una alerta de disco al 95% en un servidor de producción crítico. ¿Cuáles son tus primeros pasos?",
+    opts: [
+      "Ignorarlo hasta el día siguiente cuando esté el equipo completo",
+      "Eliminar archivos al azar para liberar espacio rápido",
+      "Identificar qué está consumiendo el espacio (du -sh, df -h, logs rotativos), aplicar la solución más segura (limpiar logs viejos, mover archivos) y notificar al equipo con el hallazgo",
+      "Reiniciar el servidor para liberar memoria temporal"
+    ],
+    ans: 2,
+    exp: "Proceso correcto: 1) 'df -h' para ver qué filesystem está lleno, 2) 'du -sh /*' y 'du -sh /var/log/*' para identificar el directorio culpable, 3) Limpiar logs viejos o archivos temporales con cuidado (nunca borrar sin identificar), 4) Si los logs son el problema, revisar si hay rotación configurada, 5) Notificar al equipo y documentar la acción. No reiniciar — eso no soluciona el espacio.",
+    tip: true
+  }
+];
+
+    const MODES = {
+      practice: {
+        label: "Práctica",
+        desc: "Feedback inmediato y explicación después de cada respuesta.",
+        title: "Práctica guiada",
+        subtitle: "Ideal para aprender rápido: respondes, ves la explicación y sigues."
+      },
+      exam: {
+        label: "Simulacro",
+        desc: "Sin feedback hasta el final, como entrevista técnica cronometrada.",
+        title: "Simulacro de entrevista",
+        subtitle: "Responde todo seguido y revisa tus errores al terminar."
+      },
+      study: {
+        label: "Repaso",
+        desc: "Tarjetas de estudio con respuesta y explicación a demanda.",
+        title: "Repaso tipo flashcard",
+        subtitle: "Lee la pregunta, piensa tu respuesta y revela la explicación."
+      },
+      hot: {
+        label: "Preguntas clave",
+        desc: "Solo las marcadas como más probables para entrevista real.",
+        title: "Preguntas de alta probabilidad",
+        subtitle: "Un circuito corto para practicar lo más preguntable del rol."
+      }
+    };
+
+    const STORAGE_KEY = "ntt-data-study-app-v1";
+    const categories = [...new Set(ALL_QUESTIONS.map(q => q.cat))];
+    const defaultState = {
+      mode: "practice",
+      selectedCategories: categories,
+      questionLimit: Math.min(20, ALL_QUESTIONS.length),
+      queue: [],
+      index: 0,
+      answers: [],
+      currentAnswered: false,
+      bestScore: 0,
+      seen: 0,
+      active: false,
+      showStudyAnswer: false
+    };
+
+    let state = loadState();
+
+    const screen = document.getElementById("screen");
+    const modeList = document.getElementById("modeList");
+    const pageTitle = document.getElementById("pageTitle");
+    const pageSubtitle = document.getElementById("pageSubtitle");
+    const startButton = document.getElementById("startButton");
+    const resetProgressButton = document.getElementById("resetProgressButton");
+
+    function loadState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        if (!saved) return structuredClone(defaultState);
+        return {
+          ...structuredClone(defaultState),
+          ...saved,
+          selectedCategories: Array.isArray(saved.selectedCategories) && saved.selectedCategories.length
+            ? saved.selectedCategories.filter(c => categories.includes(c))
+            : categories
+        };
+      } catch {
+        return structuredClone(defaultState);
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      updateStats();
+    }
+
+    function shuffle(items) {
+      const copy = [...items];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function getPool() {
+      const base = state.mode === "hot"
+        ? ALL_QUESTIONS.filter(q => q.tip)
+        : ALL_QUESTIONS.filter(q => state.selectedCategories.includes(q.cat));
+      return base.length ? base : ALL_QUESTIONS;
+    }
+
+    function getQuestionId(q) {
+      return ALL_QUESTIONS.indexOf(q);
+    }
+
+    function getQuestionById(id) {
+      return ALL_QUESTIONS[id];
+    }
+
+    function categoryCount(cat) {
+      return ALL_QUESTIONS.filter(q => q.cat === cat).length;
+    }
+
+    function categoryHotCount(cat) {
+      return ALL_QUESTIONS.filter(q => q.cat === cat && q.tip).length;
+    }
+
+    function renderModes() {
+      modeList.innerHTML = Object.entries(MODES).map(([key, mode]) => `
+        <button class="mode-button ${state.mode === key ? "active" : ""}" type="button" data-mode="${key}">
+          <strong>${mode.label}</strong>
+          <span>${mode.desc}</span>
+        </button>
+      `).join("");
+
+      modeList.querySelectorAll("button").forEach(button => {
+        button.addEventListener("click", () => {
+          state.mode = button.dataset.mode;
+          state.active = false;
+          saveState();
+          renderApp();
+        });
+      });
+    }
+
+    function updateStats() {
+      document.getElementById("statTotal").textContent = ALL_QUESTIONS.length;
+      document.getElementById("statHot").textContent = ALL_QUESTIONS.filter(q => q.tip).length;
+      document.getElementById("statBest").textContent = Math.round(state.bestScore || 0) + "%";
+      document.getElementById("statSeen").textContent = state.seen || 0;
+    }
+
+    function renderSetup() {
+      const mode = MODES[state.mode];
+      pageTitle.textContent = mode.title;
+      pageSubtitle.textContent = mode.subtitle;
+      startButton.textContent = state.active ? "Continuar" : "Comenzar";
+      startButton.style.display = "inline-flex";
+
+      const pool = getPool();
+      const limit = Math.min(state.questionLimit, pool.length);
+      state.questionLimit = limit || Math.min(20, ALL_QUESTIONS.length);
+
+      screen.innerHTML = `
+        <div class="panel setup">
+          <div class="setup-main">
+            <h3 class="section-heading">Categorías</h3>
+            <div class="select-row">
+              <button class="plain-button" type="button" id="selectAllButton">Todas</button>
+              <button class="plain-button" type="button" id="selectHotButton">Solo clave</button>
+              <button class="ghost-button" type="button" id="clearButton">Limpiar</button>
+            </div>
+            <div class="category-grid">
+              ${categories.map(cat => `
+                <button class="category-button ${state.selectedCategories.includes(cat) ? "active" : ""}" type="button" data-cat="${escapeAttr(cat)}">
+                  <strong>${escapeHtml(cat)}</strong>
+                  <span class="category-meta">
+                    <span>${categoryCount(cat)} preguntas</span>
+                    <span>${categoryHotCount(cat)} clave</span>
+                  </span>
+                </button>
+              `).join("")}
+            </div>
+          </div>
+          <aside class="setup-aside">
+            <h3 class="section-heading">Sesión</h3>
+            <div class="range-row">
+              <label for="limitRange">
+                <span>Preguntas</span>
+                <strong id="limitLabel">${limit}</strong>
+              </label>
+              <input id="limitRange" type="range" min="1" max="${Math.max(1, pool.length)}" value="${limit}">
+            </div>
+            <div class="empty">
+              ${pool.length} preguntas disponibles con el filtro actual.
+            </div>
+            <button class="primary-button" type="button" id="startSessionButton">Iniciar sesión</button>
+          </aside>
+        </div>
+      `;
+
+      document.getElementById("selectAllButton").addEventListener("click", () => {
+        state.selectedCategories = categories;
+        state.active = false;
+        saveState();
+        renderApp();
+      });
+
+      document.getElementById("selectHotButton").addEventListener("click", () => {
+        state.mode = "hot";
+        state.active = false;
+        saveState();
+        renderApp();
+      });
+
+      document.getElementById("clearButton").addEventListener("click", () => {
+        state.selectedCategories = [];
+        state.active = false;
+        saveState();
+        renderApp();
+      });
+
+      document.querySelectorAll(".category-button").forEach(button => {
+        button.addEventListener("click", () => {
+          const cat = button.dataset.cat;
+          const selected = new Set(state.selectedCategories);
+          selected.has(cat) ? selected.delete(cat) : selected.add(cat);
+          state.selectedCategories = [...selected];
+          state.mode = state.mode === "hot" ? "practice" : state.mode;
+          state.active = false;
+          saveState();
+          renderApp();
+        });
+      });
+
+      const range = document.getElementById("limitRange");
+      range.addEventListener("input", () => {
+        state.questionLimit = Number(range.value);
+        document.getElementById("limitLabel").textContent = range.value;
+        saveState();
+      });
+
+      document.getElementById("startSessionButton").addEventListener("click", startSession);
+    }
+
+    function startSession() {
+      const pool = getPool();
+      const selected = shuffle(pool).slice(0, Math.min(state.questionLimit, pool.length));
+      state.queue = selected.map(getQuestionId);
+      state.index = 0;
+      state.answers = [];
+      state.currentAnswered = false;
+      state.active = true;
+      state.showStudyAnswer = false;
+      saveState();
+      renderQuiz();
+    }
+
+    function renderQuiz() {
+      if (!state.queue.length || state.index >= state.queue.length) {
+        renderResults();
+        return;
+      }
+
+      const mode = MODES[state.mode];
+      const q = getQuestionById(state.queue[state.index]);
+      const currentAnswer = state.answers.find(a => a.id === state.queue[state.index]);
+      const progress = Math.round((state.index / state.queue.length) * 100);
+      const isStudy = state.mode === "study";
+
+      pageTitle.textContent = mode.title;
+      pageSubtitle.textContent = mode.subtitle;
+      startButton.style.display = "none";
+
+      screen.innerHTML = `
+        <div class="quiz-shell">
+          <div class="panel progress-card">
+            <div class="progress-row">
+              <span>Pregunta ${state.index + 1} de ${state.queue.length}</span>
+              <span>${state.answers.filter(a => a.correct).length} correctas</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" style="width:${progress}%"></div></div>
+          </div>
+
+          <article class="panel question-card">
+            <div class="chips">
+              <span class="chip">${escapeHtml(q.cat)}</span>
+              ${q.tip ? '<span class="chip hot">Entrevista real</span>' : ""}
+            </div>
+            <h3 class="question-text">${escapeHtml(q.q)}</h3>
+
+            ${isStudy ? renderStudy(q) : renderOptions(q, currentAnswer)}
+
+            <div id="feedback" class="feedback"></div>
+
+            <div class="actions">
+              <button class="plain-button" type="button" id="menuButton">Cambiar filtros</button>
+              <div class="toolbar">
+                ${state.index > 0 ? '<button class="plain-button" type="button" id="backButton">Anterior</button>' : ""}
+                <button class="primary-button" type="button" id="nextButton">${state.index === state.queue.length - 1 ? "Ver resultados" : "Siguiente"}</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      `;
+
+      if (isStudy) wireStudy(q);
+      else wireOptions(q, currentAnswer);
+
+      const nextButton = document.getElementById("nextButton");
+      nextButton.disabled = !isStudy && state.mode !== "exam" && !currentAnswer;
+      nextButton.addEventListener("click", nextQuestion);
+
+      const backButton = document.getElementById("backButton");
+      if (backButton) backButton.addEventListener("click", previousQuestion);
+
+      document.getElementById("menuButton").addEventListener("click", () => {
+        state.active = false;
+        saveState();
+        renderApp();
+      });
+    }
+
+    function renderStudy(q) {
+      return `
+        <div class="study-answer ${state.showStudyAnswer ? "show" : ""}" id="studyAnswer">
+          <div class="answer-label">Respuesta</div>
+          <strong>${escapeHtml(q.opts[q.ans])}</strong>
+          <p>${escapeHtml(q.exp)}</p>
+        </div>
+        <button class="plain-button" type="button" id="revealButton">${state.showStudyAnswer ? "Ocultar respuesta" : "Revelar respuesta"}</button>
+      `;
+    }
+
+    function wireStudy(q) {
+      document.getElementById("revealButton").addEventListener("click", () => {
+        state.showStudyAnswer = !state.showStudyAnswer;
+        saveState();
+        renderQuiz();
+      });
+      if (!state.answers.find(a => a.id === state.queue[state.index])) {
+        state.answers.push({ id: state.queue[state.index], selected: q.ans, correct: true, study: true });
+        state.seen += 1;
+        saveState();
+      }
+    }
+
+    function renderOptions(q, currentAnswer) {
+      return `
+        <div class="options">
+          ${q.opts.map((opt, i) => {
+            const answered = Boolean(currentAnswer);
+            const isCorrect = answered && i === q.ans;
+            const isWrong = answered && i === currentAnswer.selected && !currentAnswer.correct;
+            const dimmed = answered && !isCorrect && !isWrong;
+            return `
+              <button class="option-button ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""} ${dimmed ? "dimmed" : ""}" type="button" data-index="${i}" ${answered ? "disabled" : ""}>
+                <span class="option-key">${String.fromCharCode(65 + i)}</span>
+                <span>${escapeHtml(opt)}</span>
+              </button>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
+
+    function wireOptions(q, currentAnswer) {
+      document.querySelectorAll(".option-button").forEach(button => {
+        button.addEventListener("click", () => chooseAnswer(Number(button.dataset.index)));
+      });
+
+      if (currentAnswer && state.mode === "practice") {
+        showFeedback(q, currentAnswer.correct);
+      }
+    }
+
+    function chooseAnswer(selected) {
+      const id = state.queue[state.index];
+      const q = getQuestionById(id);
+      if (state.answers.find(a => a.id === id)) return;
+      const correct = selected === q.ans;
+      state.answers.push({ id, selected, correct });
+      state.seen += 1;
+      saveState();
+      renderQuiz();
+    }
+
+    function showFeedback(q, correct) {
+      const feedback = document.getElementById("feedback");
+      feedback.className = "feedback show " + (correct ? "correct" : "wrong");
+      feedback.innerHTML = `
+        <strong>${correct ? "Correcto." : "Casi."}</strong>
+        ${escapeHtml(q.exp)}
+      `;
+      document.getElementById("nextButton").disabled = false;
+    }
+
+    function nextQuestion() {
+      const isExam = state.mode === "exam";
+      const hasAnswer = state.answers.find(a => a.id === state.queue[state.index]);
+      if (!isExam && state.mode !== "study" && !hasAnswer) return;
+      if (isExam && !hasAnswer) {
+        chooseAnswer(-1);
+        return;
+      }
+      state.index += 1;
+      state.showStudyAnswer = false;
+      saveState();
+      renderQuiz();
+    }
+
+    function previousQuestion() {
+      state.index = Math.max(0, state.index - 1);
+      state.showStudyAnswer = false;
+      saveState();
+      renderQuiz();
+    }
+
+    function renderResults() {
+      const total = state.queue.length || 1;
+      const realAnswers = state.answers.filter(a => !a.study);
+      const correct = state.mode === "study"
+        ? total
+        : realAnswers.filter(a => a.correct).length;
+      const pct = state.mode === "study" ? 100 : Math.round((correct / total) * 100);
+      state.bestScore = Math.max(state.bestScore || 0, pct);
+      state.active = false;
+      saveState();
+
+      const title = pct >= 85 ? "Muy buen nivel" : pct >= 65 ? "Buen avance" : "Repaso recomendado";
+      const copy = pct >= 85
+        ? "Ya tienes una base fuerte para defender los temas clave del rol."
+        : pct >= 65
+          ? "Vas bien. Conviene repetir las categorías donde hubo más dudas."
+          : "Mejor concentrar una vuelta más en fundamentos y escenarios reales.";
+
+      pageTitle.textContent = "Resultados";
+      pageSubtitle.textContent = "Aquí tienes tu cierre de sesión y los puntos para repasar.";
+      startButton.style.display = "inline-flex";
+      startButton.textContent = "Nueva sesión";
+
+      const breakdown = buildBreakdown();
+      const misses = state.answers
+        .filter(a => !a.correct && !a.study)
+        .map(a => ({ ...a, question: getQuestionById(a.id) }));
+
+      screen.innerHTML = `
+        <div class="panel results">
+          <div class="score-hero">
+            <div class="score-number">${pct}%</div>
+            <div class="score-copy">
+              <h3>${title}</h3>
+              <p>${copy}</p>
+            </div>
+          </div>
+
+          <section>
+            <h3 class="section-heading">Por categoría</h3>
+            <div class="breakdown">
+              ${breakdown.map(item => `
+                <div class="breakdown-item">
+                  <div class="breakdown-name">${escapeHtml(item.cat)}</div>
+                  <div class="category-meta"><span>${item.correct}/${item.total}</span><span>${item.pct}%</span></div>
+                  <div class="mini-track"><div class="mini-fill" style="width:${item.pct}%"></div></div>
+                </div>
+              `).join("")}
+            </div>
+          </section>
+
+          <section>
+            <h3 class="section-heading">Errores para repasar</h3>
+            ${misses.length ? `
+              <div class="review-list">
+                ${misses.map(item => `
+                  <div class="review-item">
+                    <strong>${escapeHtml(item.question.q)}</strong>
+                    <div class="category-meta">
+                      <span>Tu respuesta: ${item.selected >= 0 ? escapeHtml(item.question.opts[item.selected]) : "Sin responder"}</span>
+                      <span>Correcta: ${escapeHtml(item.question.opts[item.question.ans])}</span>
+                    </div>
+                    <p>${escapeHtml(item.question.exp)}</p>
+                  </div>
+                `).join("")}
+              </div>
+            ` : '<div class="empty">Sin errores en esta sesión.</div>'}
+          </section>
+
+          <div class="actions">
+            <button class="plain-button" type="button" id="setupAgainButton">Cambiar filtros</button>
+            <button class="primary-button" type="button" id="retryButton">Repetir modo</button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("setupAgainButton").addEventListener("click", renderSetup);
+      document.getElementById("retryButton").addEventListener("click", startSession);
+    }
+
+    function buildBreakdown() {
+      const map = new Map();
+      state.answers.forEach(answer => {
+        const q = getQuestionById(answer.id);
+        if (!map.has(q.cat)) map.set(q.cat, { cat: q.cat, total: 0, correct: 0 });
+        const item = map.get(q.cat);
+        item.total += 1;
+        if (answer.correct) item.correct += 1;
+      });
+      return [...map.values()].map(item => ({
+        ...item,
+        pct: Math.round((item.correct / item.total) * 100)
+      }));
+    }
+
+    function renderApp() {
+      renderModes();
+      updateStats();
+      if (state.active && state.queue.length) renderQuiz();
+      else renderSetup();
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function escapeAttr(value) {
+      return escapeHtml(value);
+    }
+
+    startButton.addEventListener("click", () => {
+      if (state.active && state.queue.length) renderQuiz();
+      else startSession();
+    });
+
+    resetProgressButton.addEventListener("click", () => {
+      if (!confirm("¿Reiniciar progreso guardado y mejor score?")) return;
+      state = structuredClone(defaultState);
+      localStorage.removeItem(STORAGE_KEY);
+      renderApp();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!state.active || state.mode === "study") return;
+      const key = Number(event.key);
+      if (key >= 1 && key <= 4) {
+        const currentId = state.queue[state.index];
+        if (!state.answers.find(a => a.id === currentId)) chooseAnswer(key - 1);
+      }
+      if (event.key === "Enter") {
+        const nextButton = document.getElementById("nextButton");
+        if (nextButton && !nextButton.disabled) nextQuestion();
+      }
+    });
+
+    renderApp();
+  </script>
+</body>
+</html>
