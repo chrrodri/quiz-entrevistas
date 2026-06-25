@@ -475,6 +475,21 @@
       color: var(--text);
     }
 
+    .interview-tip {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: var(--radius);
+      background: #fff8e8;
+      border: 1px solid rgba(183, 107, 0, .24);
+      color: #6e4300;
+      line-height: 1.45;
+    }
+
+    .interview-tip strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
     .actions {
       display: flex;
       justify-content: space-between;
@@ -671,7 +686,7 @@
       <header class="topbar">
         <div class="title-block">
           <h2 id="pageTitle">Prepara tu entrevista con foco</h2>
-          <p id="pageSubtitle">Elige modo, filtra categorías y estudia con feedback inmediato o simulacro completo.</p>
+          <p id="pageSubtitle">Elige modo, filtra categorías y estudia con feedback inmediato, simulacro completo y recomendaciones para entrevista.</p>
         </div>
         <div class="toolbar">
           <button class="plain-button" id="resetProgressButton" type="button">Reiniciar progreso</button>
@@ -685,516 +700,3332 @@
 
   <script>
     const ALL_QUESTIONS = [
-  // ── CI/CD & DevOps ──────────────────────────────────────────────
-  {
-    cat: "CI/CD & DevOps",
-    q: "¿Qué significa CI en el contexto de CI/CD pipelines?",
-    opts: ["Continuous Installation", "Continuous Integration", "Cloud Infrastructure", "Controlled Input"],
-    ans: 1,
-    exp: "CI = Continuous Integration. Es la práctica de hacer merges frecuentes al repositorio compartido para detectar problemas de integración temprano mediante builds y tests automatizados.",
-    tip: false
-  },
-  {
-    cat: "CI/CD & DevOps",
-    q: "¿Cuál de los siguientes es un archivo de configuración propio de Jenkins?",
-    opts: ["docker-compose.yml", "Jenkinsfile", "terraform.tfstate", ".gitlab-ci.yml"],
-    ans: 1,
-    exp: "Jenkinsfile es el archivo donde se define el pipeline de Jenkins usando sintaxis declarativa o scripted. Es la base del enfoque 'Pipeline as Code'.",
-    tip: false
-  },
-  {
-    cat: "CI/CD & DevOps",
-    q: "¿Cuál es la diferencia entre Continuous Delivery y Continuous Deployment?",
-    opts: [
-      "Son exactamente lo mismo, solo difieren en el nombre",
-      "Continuous Delivery requiere aprobación manual antes del deploy a producción; Continuous Deployment lo hace de forma automática al pasar el pipeline",
-      "Continuous Deployment es solo para entornos de desarrollo; Delivery es para producción",
-      "Continuous Delivery usa Jenkins; Continuous Deployment usa GitLab"
-    ],
-    ans: 1,
-    exp: "Continuous Delivery prepara y valida el código para producción automáticamente, pero el deploy requiere un trigger manual (aprobación humana). Continuous Deployment va un paso más: cada cambio que pasa el pipeline se despliega a producción de forma totalmente automática.",
-    tip: false
-  },
-  {
-    cat: "CI/CD & DevOps",
-    q: "En un pipeline de Jenkins, ¿qué ventaja ofrece la ejecución paralela de stages?",
-    opts: [
-      "Permite usar menos memoria en el servidor de Jenkins",
-      "Reduce el tiempo total del pipeline al ejecutar tareas independientes simultáneamente",
-      "Garantiza que los tests unitarios siempre pasen",
-      "Elimina la necesidad de un Jenkinsfile"
-    ],
-    ans: 1,
-    exp: "La ejecución paralela de stages en Jenkins permite que tareas independientes (por ejemplo, tests unitarios y análisis de código estático) se ejecuten al mismo tiempo, reduciendo significativamente el tiempo total del pipeline y acelerando el feedback al desarrollador.",
-    tip: true
-  },
-  {
-    cat: "CI/CD & DevOps",
-    q: "¿Qué es Terraform y para qué se usa en un contexto DevOps?",
-    opts: [
-      "Una herramienta para crear diagramas de arquitectura cloud",
-      "Un sistema de monitoreo de infraestructura en tiempo real",
-      "Una herramienta de Infrastructure as Code que permite provisionar y gestionar recursos cloud de forma declarativa",
-      "Un gestor de paquetes para proyectos Java"
-    ],
-    ans: 2,
-    exp: "Terraform es una herramienta de Infrastructure as Code (IaC) de HashiCorp. Permite definir recursos de cloud (EC2, S3, VPCs, IAM) en archivos declarativos HCL, y aprovisionar o modificar esa infraestructura de forma reproducible y versionada. Es fundamental en pipelines DevOps modernos.",
-    tip: true
-  },
-  // ── Git ──────────────────────────────────────────────────────────
-  {
-    cat: "Git",
-    q: "En GitFlow, ¿en qué rama se integran los feature branches antes de hacer un release?",
-    opts: ["main", "hotfix", "develop", "release"],
-    ans: 2,
-    exp: "En GitFlow, la rama 'develop' es la rama de integración donde se fusionan los feature branches. Solo después de estabilizar develop se crea una release branch.",
-    tip: false
-  },
-  {
-    cat: "Git",
-    q: "¿Para qué se usan las hotfix branches en GitFlow?",
-    opts: [
-      "Para desarrollar nuevas funcionalidades urgentes",
-      "Para aplicar correcciones urgentes directamente sobre main/master sin pasar por develop",
-      "Para hacer merge de varias feature branches a la vez",
-      "Para sincronizar el repositorio remoto con el local"
-    ],
-    ans: 1,
-    exp: "Las hotfix branches en GitFlow sirven para corregir bugs críticos en producción de forma urgente. Se crean desde main/master, se corrige el bug, y se mergean tanto a main como a develop para que la corrección no se pierda en el siguiente release.",
-    tip: false
-  },
-  {
-    cat: "Git",
-    q: "¿Qué hace 'git rebase' y por qué se prefiere sobre 'git merge' en algunos flujos de trabajo?",
-    opts: [
-      "Rebase elimina todos los commits anteriores del branch",
-      "Rebase reaplica los commits de tu branch sobre la punta del branch destino, generando un historial más lineal y limpio",
-      "Rebase es igual a merge pero más lento",
-      "Rebase solo funciona en repositorios privados"
-    ],
-    ans: 1,
-    exp: "Git rebase mueve o reaplica commits de un branch sobre otro, creando un historial de commits lineal sin 'merge commits' extra. Se prefiere en equipos que quieren un historial limpio y fácil de leer. Sin embargo, nunca se debe hacer rebase de ramas públicas compartidas.",
-    tip: true
-  },
-  // ── Linux ────────────────────────────────────────────────────────
-  {
-    cat: "Linux",
-    q: "¿Qué comando de Linux usarías para analizar el uso de CPU en tiempo real por proceso?",
-    opts: ["df -h", "netstat -tulnp", "top / htop", "journalctl -u"],
-    ans: 2,
-    exp: "'top' y 'htop' muestran los procesos activos ordenados por uso de CPU y memoria en tiempo real. Son los primeros comandos a usar al diagnosticar un servidor lento.",
-    tip: false
-  },
-  {
-    cat: "Linux",
-    q: "¿Cuál es la sintaxis correcta de un cron job que ejecuta un script todos los días a las 2 AM?",
-    opts: ["2 0 * * * /script.sh", "0 2 * * * /script.sh", "* * 2 * * /script.sh", "0 * 2 * * /script.sh"],
-    ans: 1,
-    exp: "La sintaxis CRON es: minuto hora día mes día_semana. Para las 2:00 AM diariamente: '0 2 * * *' — 0 minutos, hora 2, todos los días.",
-    tip: false
-  },
-  {
-    cat: "Linux",
-    q: "¿Qué hace el siguiente comando? grep 'ERROR' /var/log/app.log | awk '{print $1, $2}' | sort | uniq -c | sort -rn",
-    opts: [
-      "Elimina líneas con ERROR del log y las guarda en un archivo nuevo",
-      "Busca ERRORs, extrae fecha y hora, cuenta ocurrencias únicas y ordena de mayor a menor",
-      "Reinicia el servicio cuando detecta errores en el log",
-      "Lista todos los archivos de log que contienen la palabra ERROR"
-    ],
-    ans: 1,
-    exp: "Este pipeline: busca líneas con 'ERROR', extrae los dos primeros campos (timestamp), cuenta cuántas veces aparece cada combinación única y ordena de mayor a menor frecuencia. Muy útil para análisis de logs en producción.",
-    tip: false
-  },
-  {
-    cat: "Linux",
-    q: "¿Cuál es la diferencia entre 'ps aux' y 'top' al diagnosticar un servidor?",
-    opts: [
-      "ps aux muestra procesos de red; top muestra procesos de disco",
-      "ps aux toma una foto estática de procesos en ese momento; top muestra procesos en tiempo real y se actualiza periódicamente",
-      "Son exactamente lo mismo pero con diferente formato de salida",
-      "ps aux solo funciona como root; top puede usarlo cualquier usuario"
-    ],
-    ans: 1,
-    exp: "'ps aux' captura el estado de todos los procesos en un momento dado (snapshot estático). 'top' es interactivo y se refresca cada pocos segundos mostrando cambios en tiempo real. Para troubleshooting de rendimiento se prefiere 'top/htop'; para scripting y automatización, 'ps aux'.",
-    tip: true
-  },
-  {
-    cat: "Linux",
-    q: "Un servidor Linux reporta alta latencia. 'top' muestra CPU baja y RAM disponible. ¿Cuál es tu siguiente paso de diagnóstico?",
-    opts: [
-      "Reiniciar el servidor inmediatamente",
-      "Revisar I/O de disco con 'iostat -xz 1' y conectividad de red con 'ping' y 'traceroute'",
-      "Aumentar el tamaño del SWAP",
-      "Instalar más RAM"
-    ],
-    ans: 1,
-    exp: "Si CPU y RAM están bien, el cuello de botella puede ser I/O de disco (iostat -xz 1, iotop) o red (netstat, ss, ping, traceroute). También vale revisar inodes (df -i) y logs (journalctl -p err). El diagnóstico estructurado descarta causas sistemáticamente.",
-    tip: true
-  },
-  {
-    cat: "Linux",
-    q: "¿Qué significa que un proceso aparezca como 'zombie' en Linux?",
-    opts: [
-      "Que el proceso está consumiendo el 100% del CPU",
-      "Que el proceso terminó pero su entrada en la tabla de procesos no ha sido limpiada por el proceso padre",
-      "Que el proceso está en modo de espera de I/O",
-      "Que el proceso fue detenido con SIGSTOP"
-    ],
-    ans: 1,
-    exp: "Un proceso zombie completó su ejecución pero su registro permanece en la tabla de procesos porque el proceso padre no leyó su código de salida (wait()). No consumen CPU ni memoria significativa, pero si hay muchos pueden indicar un bug en el proceso padre. Se limpian cuando el padre termina o es reiniciado.",
-    tip: true
-  },
-  // ── Containers & Infra ──────────────────────────────────────────
-  {
-    cat: "Containers & Infra",
-    q: "¿Qué ventaja principal tiene Ansible sobre Puppet o Chef para gestión de configuraciones?",
-    opts: ["Usa Ruby DSL que es más potente", "Requiere un agente instalado en cada servidor", "Es agentless — se conecta por SSH sin instalar software en el host", "Solo funciona en entornos cloud"],
-    ans: 2,
-    exp: "Ansible es agentless: se conecta vía SSH (Linux) o WinRM (Windows) sin necesitar un agente instalado en los hosts. Esto simplifica enormemente el setup inicial y la gestión de inventarios.",
-    tip: false
-  },
-  {
-    cat: "Containers & Infra",
-    q: "¿Para qué sirve un Dockerfile multi-stage build?",
-    opts: [
-      "Para construir la imagen en múltiples servidores en paralelo",
-      "Para reducir el tamaño de la imagen final usando solo los artefactos necesarios de etapas previas",
-      "Para ejecutar múltiples contenedores dentro de una sola imagen",
-      "Para versionar la imagen con múltiples tags automáticamente"
-    ],
-    ans: 1,
-    exp: "Los multi-stage builds permiten usar una imagen grande para compilar (con SDK, dependencias de build) y copiar solo el artefacto final a una imagen base mínima. Resultado: imágenes más pequeñas, más seguras y con menor superficie de ataque.",
-    tip: false
-  },
-  {
-    cat: "Containers & Infra",
-    q: "¿Qué hace el comando 'docker exec -it <container_id> /bin/bash'?",
-    opts: [
-      "Crea un nuevo contenedor basado en la imagen especificada",
-      "Detiene el contenedor y lo reinicia en modo debug",
-      "Abre una terminal interactiva dentro de un contenedor que ya está corriendo",
-      "Exporta los logs del contenedor a un archivo"
-    ],
-    ans: 2,
-    exp: "'docker exec' ejecuta un comando dentro de un contenedor en ejecución. Con '-it' (interactive + tty) y '/bin/bash' obtienes una shell interactiva dentro del contenedor, lo que es esencial para troubleshooting en producción: revisar logs, configuraciones, y estado del proceso dentro del contenedor.",
-    tip: false
-  },
-  {
-    cat: "Containers & Infra",
-    q: "¿Cuál es la diferencia entre un volumen de Docker y un bind mount?",
-    opts: [
-      "Los volúmenes son temporales; los bind mounts son permanentes",
-      "Los volúmenes son gestionados por Docker y abstractos del filesystem host; los bind mounts mapean directamente un directorio del host al contenedor",
-      "Los bind mounts solo funcionan en Linux; los volúmenes en cualquier OS",
-      "No hay diferencia práctica entre ambos"
-    ],
-    ans: 1,
-    exp: "Los volúmenes de Docker son gestionados por Docker Engine (almacenados en /var/lib/docker/volumes), son portables y el método recomendado para datos persistentes. Los bind mounts mapean directamente un path del host al contenedor, lo que los hace dependientes de la estructura del filesystem del host pero útiles para desarrollo.",
-    tip: true
-  },
-  {
-    cat: "Containers & Infra",
-    q: "¿Qué es Apache Tomcat y cuándo se usa en producción?",
-    opts: [
-      "Es un servidor de base de datos para aplicaciones Java",
-      "Es un Java Servlet Container que despliega y ejecuta aplicaciones web Java (WAR files)",
-      "Es una herramienta de monitoreo para aplicaciones JVM",
-      "Es un servidor proxy reverso para balanceo de carga"
-    ],
-    ans: 1,
-    exp: "Apache Tomcat es un Java Servlet Container: implementa las especificaciones Java EE (Servlets, JSP) y permite desplegar aplicaciones web Java empaquetadas como WAR. En producción se monitorea el heap JVM, se analizan thread dumps, y se ajustan parámetros como Xmx/Xms para optimizar rendimiento.",
-    tip: false
-  },
-  // ── Incident Management ─────────────────────────────────────────
-  {
-    cat: "Incident Management",
-    q: "En gestión de incidentes ITIL, ¿cuál es la diferencia clave entre Incident Management y Problem Management?",
-    opts: [
-      "Incident Management documenta el problema; Problem Management lo resuelve",
-      "Incident Management restaura el servicio lo antes posible; Problem Management identifica y elimina la causa raíz",
-      "Son lo mismo, solo se diferencian por prioridad (P1 vs P2)",
-      "Problem Management es solo para incidentes de base de datos"
-    ],
-    ans: 1,
-    exp: "Incident Management busca restaurar el servicio rápidamente (el foco es la continuidad). Problem Management investiga la causa raíz de incidentes recurrentes para eliminarlos de forma permanente. Ambos son procesos distintos aunque relacionados.",
-    tip: false
-  },
-  {
-    cat: "Incident Management",
-    q: "Durante una investigación de outage en producción, ¿cuál debería ser tu primera acción al recibir la alerta?",
-    opts: [
-      "Comenzar a hacer cambios en producción para resolver el problema",
-      "Esperar 30 minutos para ver si se auto-resuelve",
-      "Detectar, confirmar el impacto, crear el ticket y notificar a stakeholders con un status inicial",
-      "Escalar inmediatamente al VP de Ingeniería"
-    ],
-    ans: 2,
-    exp: "El proceso correcto: 1) Confirmar el incidente vía alertas o reportes de usuarios, 2) Registrar en el sistema de tickets (ServiceNow/Jira), 3) Comunicar un status inicial a stakeholders. Solo entonces inicias el triage técnico. La comunicación temprana es crítica.",
-    tip: false
-  },
-  {
-    cat: "Incident Management",
-    q: "Un incidente P1 lleva 45 minutos sin resolverse. ¿Qué harías en paralelo mientras continúas el troubleshooting?",
-    opts: [
-      "Parar el troubleshooting y documentar todo antes de continuar",
-      "Nada — mantener el foco completo en la resolución técnica sin distracciones",
-      "Mantener comunicación regular con stakeholders con status updates, revisar si hay un workaround rápido y considerar escalación si el equipo actual está bloqueado",
-      "Cerrar el ticket y abrir uno nuevo para resetear el SLA"
-    ],
-    ans: 2,
-    exp: "Durante un P1 prolongado debes: 1) Enviar status updates periódicos a stakeholders (cada 15-30 min), 2) Evaluar si existe un workaround que restaure el servicio aunque sea parcialmente, 3) Escalar a L3 o vendor si el equipo está bloqueado. La comunicación continua y el paralelismo son fundamentales.",
-    tip: true
-  },
-  {
-    cat: "Incident Management",
-    q: "¿Qué elementos debe incluir un RCA (Root Cause Analysis) bien estructurado?",
-    opts: [
-      "Solo el nombre del ingeniero responsable y la fecha del incidente",
-      "Resumen del incidente, causa raíz, factores contribuyentes, resolución y acciones correctivas con responsables y fechas",
-      "Lista de todos los sistemas afectados sin análisis de causa",
-      "Únicamente el ticket de ServiceNow con el log de actividades"
-    ],
-    ans: 1,
-    exp: "Un RCA completo incluye: resumen del incidente (qué pasó, cuándo, impacto), causa raíz (falla técnica o de proceso), factores contribuyentes (qué empeoró el impacto), resolución aplicada, y acciones correctivas específicas con owner y fecha límite. El enfoque debe ser blameless — mejora del sistema, no culpar personas.",
-    tip: false
-  },
-  {
-    cat: "Incident Management",
-    q: "¿Cómo priorizas cuando tienes un P1 y dos P2 activos simultáneamente?",
-    opts: [
-      "Atiendes primero los P2 porque son más fáciles y así liberas tiempo para el P1",
-      "El P1 recibe tu atención completa; delegas los P2 a otros miembros del equipo y mantienes visibilidad de ambos",
-      "Cierras los P2 automáticamente para concentrarte en el P1",
-      "Escala todo al manager y esperas instrucciones"
-    ],
-    ans: 1,
-    exp: "P1 siempre tiene prioridad absoluta: lo lideras personalmente. Los P2 se delegan a otros ingenieros mientras tú te mantienes como punto de escalación. Debes mantener canales de comunicación separados por incidente y actualizar el ticketing en tiempo real para facilitar handoffs.",
-    tip: true
-  },
-  // ── Databases ────────────────────────────────────────────────────
-  {
-    cat: "Databases",
-    q: "¿Qué indica un alto uso de SWAP en un servidor Linux de base de datos?",
-    opts: [
-      "El disco duro está al 100% de capacidad",
-      "El sistema está usando disco como memoria RAM porque la RAM física está insuficiente — lo que degrada el rendimiento",
-      "El servidor tiene demasiadas conexiones de red abiertas",
-      "Los logs están ocupando demasiado espacio en disco"
-    ],
-    ans: 1,
-    exp: "Cuando el sistema usa SWAP intensivamente, significa que la RAM física es insuficiente y el OS usa disco como memoria extendida. El acceso a disco es órdenes de magnitud más lento que RAM, causando 'system thrashing' y degradación severa del rendimiento.",
-    tip: false
-  },
-  {
-    cat: "Databases",
-    q: "¿Qué es un deadlock en una base de datos y cómo se detecta?",
-    opts: [
-      "Cuando la base de datos está completamente apagada",
-      "Cuando dos o más transacciones se bloquean mutuamente esperando recursos que la otra tiene, quedando ninguna capaz de progresar",
-      "Cuando una consulta tarda más de 30 segundos en ejecutarse",
-      "Cuando se llenan los archivos de log de la base de datos"
-    ],
-    ans: 1,
-    exp: "Un deadlock ocurre cuando la transacción A bloquea el recurso X y espera el recurso Y, mientras la transacción B bloquea Y y espera X — ciclo de espera infinito. Los RDBMS lo detectan automáticamente y terminan una de las transacciones. Se identifican en los logs del motor (DB2, Oracle, SQL Server tienen logs de deadlock específicos).",
-    tip: true
-  },
-  {
-    cat: "Databases",
-    q: "¿Cuál de estas operaciones de DB2 LUW restaura una base de datos desde un backup?",
-    opts: ["db2 recover", "db2 restore database MYDB from /backup", "db2 import from backup", "db2 load restore"],
-    ans: 1,
-    exp: "En IBM DB2 LUW el comando para restaurar es 'db2 restore database NOMBRE from /ruta/backup'. Después de un restore completo, generalmente se ejecuta 'db2 rollforward' para aplicar los logs de transacciones y llevar la base de datos a un estado consistente más reciente.",
-    tip: false
-  },
-  // ── Monitoring ───────────────────────────────────────────────────
-  {
-    cat: "Monitoring",
-    q: "¿Cuál es la función principal de Grafana en un stack de observabilidad?",
-    opts: [
-      "Recolectar y almacenar métricas de los servidores",
-      "Ejecutar alertas automáticas por email cuando un servidor falla",
-      "Visualizar y correlacionar métricas, logs y trazas en dashboards en tiempo real",
-      "Provisionar infraestructura en cloud automáticamente"
-    ],
-    ans: 2,
-    exp: "Grafana es la plataforma de visualización: conecta con fuentes de datos como Prometheus (métricas), Loki (logs) y Jaeger (trazas) para crear dashboards operacionales. No recolecta datos — Prometheus hace eso; Grafana los muestra.",
-    tip: false
-  },
-  {
-    cat: "Monitoring",
-    q: "¿Cuál es la diferencia entre SLI, SLO y SLA en el contexto de production support?",
-    opts: [
-      "Son tres nombres distintos para lo mismo: el tiempo de respuesta de un servicio",
-      "SLI es la métrica medida (ej. latencia), SLO es el objetivo interno (ej. p99 < 200ms) y SLA es el acuerdo contractual con el cliente con consecuencias si se incumple",
-      "SLA es interno; SLO es el acuerdo con el cliente",
-      "Solo el SLA importa; SLI y SLO son conceptos teóricos sin uso práctico"
-    ],
-    ans: 1,
-    exp: "SLI (Service Level Indicator): la métrica real que mides (latencia, availability, error rate). SLO (Service Level Objective): el objetivo interno que defines para esa métrica (ej. 99.9% uptime). SLA (Service Level Agreement): el contrato formal con el cliente que incluye consecuencias económicas o penalidades si el servicio no alcanza los niveles acordados.",
-    tip: true
-  },
-  {
-    cat: "Monitoring",
-    q: "¿Qué herramienta del stack Prometheus/Grafana se encarga específicamente de la agregación de logs?",
-    opts: ["Alertmanager", "Loki", "Jaeger", "Prometheus Pushgateway"],
-    ans: 1,
-    exp: "Loki (de Grafana Labs) es el sistema de agregación de logs del stack. A diferencia de Elasticsearch, Loki no indexa el contenido de los logs sino solo las etiquetas (labels), lo que lo hace más eficiente en costo. Se consulta con LogQL y se integra directamente en dashboards de Grafana junto con métricas de Prometheus.",
-    tip: true
-  },
-  // ── Scripting ────────────────────────────────────────────────────
-  {
-    cat: "Scripting",
-    q: "¿Qué principio de scripting garantiza que un script pueda ejecutarse múltiples veces sin generar estados inconsistentes o duplicados?",
-    opts: ["Recursividad", "Idempotencia", "Polimorfismo", "Asincronía"],
-    ans: 1,
-    exp: "Idempotencia significa que ejecutar el script N veces produce el mismo resultado que ejecutarlo una vez. Es fundamental para scripts de producción: si el script falla a mitad y se re-ejecuta, no debe crear commits duplicados, archivos duplicados, etc.",
-    tip: false
-  },
-  {
-    cat: "Scripting",
-    q: "En un script de Bash de producción, ¿qué debe incluir el manejo de errores para ser considerado production-safe?",
-    opts: [
-      "Solo un mensaje de echo al final indicando si fue exitoso",
-      "Usar 'set -e' para salir ante errores, validaciones pre-vuelo, logging con timestamps, y mecanismo de rollback si un paso falla",
-      "Un bloque try-catch como en Python",
-      "No hace falta manejo de errores en Bash porque los errores se muestran automáticamente"
-    ],
-    ans: 1,
-    exp: "Un script Bash production-safe incluye: 'set -e' (exit on error) y 'set -u' (error en variables no definidas), validaciones pre-vuelo del estado del sistema, logging detallado con timestamps a archivo, y lógica de rollback que revierta cambios si algo falla. Esto es exactamente lo que implementaste en tu automatización de repos.",
-    tip: false
-  },
-  {
-    cat: "Scripting",
-    q: "¿Cuál sería una razón válida para usar Python en lugar de Bash para una tarea de automatización?",
-    opts: [
-      "Bash no puede leer archivos",
-      "Python es mejor cuando la lógica es compleja, necesitas manipular estructuras de datos, consumir APIs REST, o generar reportes, ya que ofrece librerías, manejo de errores robusto y mejor legibilidad",
-      "Python siempre es más rápido que Bash",
-      "Bash no puede ejecutarse en servidores Linux"
-    ],
-    ans: 1,
-    exp: "Bash es ideal para tareas simples de shell: ejecutar comandos, pipes, manipular archivos. Python es preferible cuando la lógica se vuelve compleja: llamadas a APIs REST, parsing de JSON/XML, manipulación de estructuras de datos, generación de reportes, o cuando necesitas librerías de terceros. Tu script de automatización de repos es un buen ejemplo de uso de Python para tarea compleja.",
-    tip: true
-  },
-  // ── Maven / Java ─────────────────────────────────────────────────
-  {
-    cat: "Maven / Java",
-    q: "¿Cuál es el archivo de configuración central de un proyecto Maven?",
-    opts: ["build.gradle", "package.json", "pom.xml", "Makefile"],
-    ans: 2,
-    exp: "pom.xml (Project Object Model) es el archivo de configuración central de Maven. Define dependencias, plugins, el ciclo de build (compile, test, package, deploy) y la información del proyecto.",
-    tip: false
-  },
-  {
-    cat: "Maven / Java",
-    q: "¿Qué hace la fase 'package' del ciclo de vida de Maven?",
-    opts: [
-      "Instala las dependencias del proyecto desde Maven Central",
-      "Compila el código fuente y crea el artefacto desplegable (JAR o WAR)",
-      "Despliega la aplicación al servidor de producción",
-      "Genera la documentación Javadoc del proyecto"
-    ],
-    ans: 1,
-    exp: "La fase 'package' de Maven compila el código (si no se ha hecho), ejecuta los tests unitarios y empaqueta el resultado en el formato definido en el pom.xml (JAR para librerías, WAR para aplicaciones web). Es el artefacto que luego Jenkins almacena en Nexus/Artifactory y despliega.",
-    tip: false
-  },
-  // ── Behavioral ───────────────────────────────────────────────────
-  {
-    cat: "Behavioral",
-    q: "Al responder una pregunta de reto complejo en una entrevista, ¿qué metodología estructurada es más recomendada?",
-    opts: ["PDCA (Plan-Do-Check-Act)", "STAR (Situation, Task, Action, Result)", "SMART (Specific, Measurable, Achievable, Relevant, Time-bound)", "RACI (Responsible, Accountable, Consulted, Informed)"],
-    ans: 1,
-    exp: "STAR es el framework estándar para preguntas behavioral: Situation (contexto), Task (tu responsabilidad), Action (lo que hiciste específicamente), Result (el impacto medible). Para NTT Data: el reto de automatización (3-4 horas → 15 minutos) es tu mejor ejemplo STAR.",
-    tip: false
-  },
-  {
-    cat: "Behavioral",
-    q: "Te preguntan: 'Tell me about a time you had a conflict with a teammate.' ¿Cuál es la mejor estructura para responder?",
-    opts: [
-      "Quejarte del compañero en detalle para mostrar que tenías razón",
-      "Decir que nunca has tenido conflictos porque trabajas bien con todos",
-      "Usar STAR: describir el desacuerdo técnico de forma objetiva, cómo buscaste alineación, la resolución colaborativa y lo que aprendiste",
-      "Cambiar el tema hacia tus logros técnicos"
-    ],
-    ans: 2,
-    exp: "Las preguntas de conflicto evalúan madurez profesional y trabajo en equipo. La respuesta ideal: 1) Describe un desacuerdo técnico legítimo (no personal), 2) Explica cómo escuchaste la perspectiva del otro, 3) Muestra cómo buscaron una solución juntos, 4) Destaca el resultado positivo y la lección aprendida. Evita culpar a otros.",
-    tip: true
-  },
-  {
-    cat: "Behavioral",
-    q: "¿Cómo responderías si el entrevistador te pregunta sobre una tecnología de la oferta que conoces poco (por ejemplo, Kubernetes)?",
-    opts: [
-      "Inventar experiencia que no tienes para no quedar mal",
-      "Ser honesto: mencionar tu conocimiento conceptual, lo que ya sabes de contextos relacionados (Docker, contenedores) y tu capacidad y disposición para aprender rápido",
-      "Cambiar el tema inmediatamente",
-      "Decir que no sabes nada y no agregar nada más"
-    ],
-    ans: 1,
-    exp: "La honestidad inteligente es la mejor estrategia: 'Tengo conocimiento conceptual de Kubernetes — entiendo que orquesta contenedores Docker, gestiona scaling y failover. En producción he trabajado extensamente con Docker. Kubernetes es una extensión natural de ese conocimiento y lo que no sepa lo voy a aprender rápido.' Esto muestra madurez y confianza.",
-    tip: true
-  },
-  // ── Preguntas de Situación Real ─────────────────────────────────
-  {
-    cat: "Situación Real",
-    q: "Un deploy en producción causa un aumento inmediato de errores 500 en la aplicación. ¿Cuál es tu primera acción?",
-    opts: [
-      "Revisar el código del deploy línea por línea para encontrar el bug",
-      "Ejecutar un rollback al release anterior para restaurar el servicio, luego investigar la causa en un ambiente de staging",
-      "Esperar 10 minutos para ver si los errores disminuyen solos",
-      "Reiniciar todos los servidores de aplicación"
-    ],
-    ans: 1,
-    exp: "En producción, la prioridad es restaurar el servicio. Si un deploy introdujo errores 500, el rollback inmediato al release anterior es la acción más segura y rápida. Una vez el servicio está estable, investigas la causa raíz en staging — nunca intentas arreglar un bug en producción bajo presión.",
-    tip: true
-  },
-  {
-    cat: "Situación Real",
-    q: "Un cliente reporta que su aplicación está 'lenta'. No hay alertas activas en tus dashboards. ¿Qué haces?",
-    opts: [
-      "Le dices al cliente que si no hay alertas, no hay problema",
-      "Abrir un ticket P1 inmediatamente sin investigar",
-      "Investigar activamente: revisar métricas de latencia (p95, p99), logs de errores, load balancer, conexiones de base de datos y validar la perspectiva del cliente con datos",
-      "Reiniciar el servidor de aplicación como primer paso"
-    ],
-    ans: 2,
-    exp: "La ausencia de alertas no significa que no haya problema — tus thresholds pueden estar mal configurados o el issue puede estar bajo el radar. El proceso: 1) Tomar en serio el reporte, 2) Revisar métricas granulares (latencia p95/p99, no solo average), 3) Revisar logs, DB connections, y comparar contra baseline. La percepción del cliente es válida aunque no haya alerta.",
-    tip: true
-  },
-  {
-    cat: "Situación Real",
-    q: "Te asignan a un cliente nuevo de NTT Data con un sistema legado del que nadie en el equipo tiene documentación. ¿Cómo empiezas?",
-    opts: [
-      "Propones reescribir todo el sistema desde cero",
-      "Esperas a que ocurra un incidente para aprender cómo funciona",
-      "Realizas un discovery estructurado: revisa logs, monitoreo existente, configuraciones, interviewing al equipo, y construyes documentación incremental mientras operas el sistema",
-      "Te niegas a trabajar con sistemas sin documentación"
-    ],
-    ans: 2,
-    exp: "El onboarding a sistemas legados es un escenario real en L2/L3. El enfoque correcto: 1) Revisar lo que existe (logs, configs, scripts legacy), 2) Hablar con quien sepa algo — aunque sea poco, 3) Construir documentación incremental desde el primer día, 4) Configurar monitoreo básico si no existe, 5) Actuar con cautela antes de hacer cambios. Este enfoque proactivo es exactamente lo que NTT Data busca.",
-    tip: true
-  },
-  {
-    cat: "Situación Real",
-    q: "Durante una guardia nocturna recibes una alerta de disco al 95% en un servidor de producción crítico. ¿Cuáles son tus primeros pasos?",
-    opts: [
-      "Ignorarlo hasta el día siguiente cuando esté el equipo completo",
-      "Eliminar archivos al azar para liberar espacio rápido",
-      "Identificar qué está consumiendo el espacio (du -sh, df -h, logs rotativos), aplicar la solución más segura (limpiar logs viejos, mover archivos) y notificar al equipo con el hallazgo",
-      "Reiniciar el servidor para liberar memoria temporal"
-    ],
-    ans: 2,
-    exp: "Proceso correcto: 1) 'df -h' para ver qué filesystem está lleno, 2) 'du -sh /*' y 'du -sh /var/log/*' para identificar el directorio culpable, 3) Limpiar logs viejos o archivos temporales con cuidado (nunca borrar sin identificar), 4) Si los logs son el problema, revisar si hay rotación configurada, 5) Notificar al equipo y documentar la acción. No reiniciar — eso no soluciona el espacio.",
-    tip: true
-  }
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Qué significa CI en el contexto de CI/CD pipelines?",
+        "opts": [
+            "Continuous Installation",
+            "Continuous Integration",
+            "Cloud Infrastructure",
+            "Controlled Input"
+        ],
+        "ans": 1,
+        "exp": "CI = Continuous Integration. Es la práctica de hacer merges frecuentes al repositorio compartido para detectar problemas de integración temprano mediante builds y tests automatizados.",
+        "tip": false,
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion."
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Cuál de los siguientes es un archivo de configuración propio de Jenkins?",
+        "opts": [
+            "docker-compose.yml",
+            "Jenkinsfile",
+            "terraform.tfstate",
+            ".gitlab-ci.yml"
+        ],
+        "ans": 1,
+        "exp": "Jenkinsfile es el archivo donde se define el pipeline de Jenkins usando sintaxis declarativa o scripted. Es la base del enfoque 'Pipeline as Code'.",
+        "tip": false,
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion."
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Cuál es la diferencia entre Continuous Delivery y Continuous Deployment?",
+        "opts": [
+            "Son exactamente lo mismo, solo difieren en el nombre",
+            "Continuous Delivery requiere aprobación manual antes del deploy a producción; Continuous Deployment lo hace de forma automática al pasar el pipeline",
+            "Continuous Deployment es solo para entornos de desarrollo; Delivery es para producción",
+            "Continuous Delivery usa Jenkins; Continuous Deployment usa GitLab"
+        ],
+        "ans": 1,
+        "exp": "Continuous Delivery prepara y valida el código para producción automáticamente, pero el deploy requiere un trigger manual (aprobación humana). Continuous Deployment va un paso más: cada cambio que pasa el pipeline se despliega a producción de forma totalmente automática.",
+        "tip": false,
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion."
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "En un pipeline de Jenkins, ¿qué ventaja ofrece la ejecución paralela de stages?",
+        "opts": [
+            "Permite usar menos memoria en el servidor de Jenkins",
+            "Reduce el tiempo total del pipeline al ejecutar tareas independientes simultáneamente",
+            "Garantiza que los tests unitarios siempre pasen",
+            "Elimina la necesidad de un Jenkinsfile"
+        ],
+        "ans": 1,
+        "exp": "La ejecución paralela de stages en Jenkins permite que tareas independientes (por ejemplo, tests unitarios y análisis de código estático) se ejecuten al mismo tiempo, reduciendo significativamente el tiempo total del pipeline y acelerando el feedback al desarrollador.",
+        "tip": true,
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion."
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Qué es Terraform y para qué se usa en un contexto DevOps?",
+        "opts": [
+            "Una herramienta para crear diagramas de arquitectura cloud",
+            "Un sistema de monitoreo de infraestructura en tiempo real",
+            "Una herramienta de Infrastructure as Code que permite provisionar y gestionar recursos cloud de forma declarativa",
+            "Un gestor de paquetes para proyectos Java"
+        ],
+        "ans": 2,
+        "exp": "Terraform es una herramienta de Infrastructure as Code (IaC) de HashiCorp. Permite definir recursos de cloud (EC2, S3, VPCs, IAM) en archivos declarativos HCL, y aprovisionar o modificar esa infraestructura de forma reproducible y versionada. Es fundamental en pipelines DevOps modernos.",
+        "tip": true,
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion."
+    },
+    {
+        "cat": "Git",
+        "q": "En GitFlow, ¿en qué rama se integran los feature branches antes de hacer un release?",
+        "opts": [
+            "main",
+            "hotfix",
+            "develop",
+            "release"
+        ],
+        "ans": 2,
+        "exp": "En GitFlow, la rama 'develop' es la rama de integración donde se fusionan los feature branches. Solo después de estabilizar develop se crea una release branch.",
+        "tip": false,
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido."
+    },
+    {
+        "cat": "Git",
+        "q": "¿Para qué se usan las hotfix branches en GitFlow?",
+        "opts": [
+            "Para desarrollar nuevas funcionalidades urgentes",
+            "Para aplicar correcciones urgentes directamente sobre main/master sin pasar por develop",
+            "Para hacer merge de varias feature branches a la vez",
+            "Para sincronizar el repositorio remoto con el local"
+        ],
+        "ans": 1,
+        "exp": "Las hotfix branches en GitFlow sirven para corregir bugs críticos en producción de forma urgente. Se crean desde main/master, se corrige el bug, y se mergean tanto a main como a develop para que la corrección no se pierda en el siguiente release.",
+        "tip": false,
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido."
+    },
+    {
+        "cat": "Git",
+        "q": "¿Qué hace 'git rebase' y por qué se prefiere sobre 'git merge' en algunos flujos de trabajo?",
+        "opts": [
+            "Rebase elimina todos los commits anteriores del branch",
+            "Rebase reaplica los commits de tu branch sobre la punta del branch destino, generando un historial más lineal y limpio",
+            "Rebase es igual a merge pero más lento",
+            "Rebase solo funciona en repositorios privados"
+        ],
+        "ans": 1,
+        "exp": "Git rebase mueve o reaplica commits de un branch sobre otro, creando un historial de commits lineal sin 'merge commits' extra. Se prefiere en equipos que quieren un historial limpio y fácil de leer. Sin embargo, nunca se debe hacer rebase de ramas públicas compartidas.",
+        "tip": true,
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido."
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué comando de Linux usarías para analizar el uso de CPU en tiempo real por proceso?",
+        "opts": [
+            "df -h",
+            "netstat -tulnp",
+            "top / htop",
+            "journalctl -u"
+        ],
+        "ans": 2,
+        "exp": "'top' y 'htop' muestran los procesos activos ordenados por uso de CPU y memoria en tiempo real. Son los primeros comandos a usar al diagnosticar un servidor lento.",
+        "tip": false,
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo."
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Cuál es la sintaxis correcta de un cron job que ejecuta un script todos los días a las 2 AM?",
+        "opts": [
+            "2 0 * * * /script.sh",
+            "0 2 * * * /script.sh",
+            "* * 2 * * /script.sh",
+            "0 * 2 * * /script.sh"
+        ],
+        "ans": 1,
+        "exp": "La sintaxis CRON es: minuto hora día mes día_semana. Para las 2:00 AM diariamente: '0 2 * * *' — 0 minutos, hora 2, todos los días.",
+        "tip": false,
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo."
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué hace el siguiente comando? grep 'ERROR' /var/log/app.log | awk '{print $1, $2}' | sort | uniq -c | sort -rn",
+        "opts": [
+            "Elimina líneas con ERROR del log y las guarda en un archivo nuevo",
+            "Busca ERRORs, extrae fecha y hora, cuenta ocurrencias únicas y ordena de mayor a menor",
+            "Reinicia el servicio cuando detecta errores en el log",
+            "Lista todos los archivos de log que contienen la palabra ERROR"
+        ],
+        "ans": 1,
+        "exp": "Este pipeline: busca líneas con 'ERROR', extrae los dos primeros campos (timestamp), cuenta cuántas veces aparece cada combinación única y ordena de mayor a menor frecuencia. Muy útil para análisis de logs en producción.",
+        "tip": false,
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo."
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Cuál es la diferencia entre 'ps aux' y 'top' al diagnosticar un servidor?",
+        "opts": [
+            "ps aux muestra procesos de red; top muestra procesos de disco",
+            "ps aux toma una foto estática de procesos en ese momento; top muestra procesos en tiempo real y se actualiza periódicamente",
+            "Son exactamente lo mismo pero con diferente formato de salida",
+            "ps aux solo funciona como root; top puede usarlo cualquier usuario"
+        ],
+        "ans": 1,
+        "exp": "'ps aux' captura el estado de todos los procesos en un momento dado (snapshot estático). 'top' es interactivo y se refresca cada pocos segundos mostrando cambios en tiempo real. Para troubleshooting de rendimiento se prefiere 'top/htop'; para scripting y automatización, 'ps aux'.",
+        "tip": true,
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo."
+    },
+    {
+        "cat": "Linux",
+        "q": "Un servidor Linux reporta alta latencia. 'top' muestra CPU baja y RAM disponible. ¿Cuál es tu siguiente paso de diagnóstico?",
+        "opts": [
+            "Reiniciar el servidor inmediatamente",
+            "Revisar I/O de disco con 'iostat -xz 1' y conectividad de red con 'ping' y 'traceroute'",
+            "Aumentar el tamaño del SWAP",
+            "Instalar más RAM"
+        ],
+        "ans": 1,
+        "exp": "Si CPU y RAM están bien, el cuello de botella puede ser I/O de disco (iostat -xz 1, iotop) o red (netstat, ss, ping, traceroute). También vale revisar inodes (df -i) y logs (journalctl -p err). El diagnóstico estructurado descarta causas sistemáticamente.",
+        "tip": true,
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo."
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué significa que un proceso aparezca como 'zombie' en Linux?",
+        "opts": [
+            "Que el proceso está consumiendo el 100% del CPU",
+            "Que el proceso terminó pero su entrada en la tabla de procesos no ha sido limpiada por el proceso padre",
+            "Que el proceso está en modo de espera de I/O",
+            "Que el proceso fue detenido con SIGSTOP"
+        ],
+        "ans": 1,
+        "exp": "Un proceso zombie completó su ejecución pero su registro permanece en la tabla de procesos porque el proceso padre no leyó su código de salida (wait()). No consumen CPU ni memoria significativa, pero si hay muchos pueden indicar un bug en el proceso padre. Se limpian cuando el padre termina o es reiniciado.",
+        "tip": true,
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo."
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué ventaja principal tiene Ansible sobre Puppet o Chef para gestión de configuraciones?",
+        "opts": [
+            "Usa Ruby DSL que es más potente",
+            "Requiere un agente instalado en cada servidor",
+            "Es agentless — se conecta por SSH sin instalar software en el host",
+            "Solo funciona en entornos cloud"
+        ],
+        "ans": 2,
+        "exp": "Ansible es agentless: se conecta vía SSH (Linux) o WinRM (Windows) sin necesitar un agente instalado en los hosts. Esto simplifica enormemente el setup inicial y la gestión de inventarios.",
+        "tip": false,
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion."
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Para qué sirve un Dockerfile multi-stage build?",
+        "opts": [
+            "Para construir la imagen en múltiples servidores en paralelo",
+            "Para reducir el tamaño de la imagen final usando solo los artefactos necesarios de etapas previas",
+            "Para ejecutar múltiples contenedores dentro de una sola imagen",
+            "Para versionar la imagen con múltiples tags automáticamente"
+        ],
+        "ans": 1,
+        "exp": "Los multi-stage builds permiten usar una imagen grande para compilar (con SDK, dependencias de build) y copiar solo el artefacto final a una imagen base mínima. Resultado: imágenes más pequeñas, más seguras y con menor superficie de ataque.",
+        "tip": false,
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion."
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué hace el comando 'docker exec -it <container_id> /bin/bash'?",
+        "opts": [
+            "Crea un nuevo contenedor basado en la imagen especificada",
+            "Detiene el contenedor y lo reinicia en modo debug",
+            "Abre una terminal interactiva dentro de un contenedor que ya está corriendo",
+            "Exporta los logs del contenedor a un archivo"
+        ],
+        "ans": 2,
+        "exp": "'docker exec' ejecuta un comando dentro de un contenedor en ejecución. Con '-it' (interactive + tty) y '/bin/bash' obtienes una shell interactiva dentro del contenedor, lo que es esencial para troubleshooting en producción: revisar logs, configuraciones, y estado del proceso dentro del contenedor.",
+        "tip": false,
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion."
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Cuál es la diferencia entre un volumen de Docker y un bind mount?",
+        "opts": [
+            "Los volúmenes son temporales; los bind mounts son permanentes",
+            "Los volúmenes son gestionados por Docker y abstractos del filesystem host; los bind mounts mapean directamente un directorio del host al contenedor",
+            "Los bind mounts solo funcionan en Linux; los volúmenes en cualquier OS",
+            "No hay diferencia práctica entre ambos"
+        ],
+        "ans": 1,
+        "exp": "Los volúmenes de Docker son gestionados por Docker Engine (almacenados en /var/lib/docker/volumes), son portables y el método recomendado para datos persistentes. Los bind mounts mapean directamente un path del host al contenedor, lo que los hace dependientes de la estructura del filesystem del host pero útiles para desarrollo.",
+        "tip": true,
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion."
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué es Apache Tomcat y cuándo se usa en producción?",
+        "opts": [
+            "Es un servidor de base de datos para aplicaciones Java",
+            "Es un Java Servlet Container que despliega y ejecuta aplicaciones web Java (WAR files)",
+            "Es una herramienta de monitoreo para aplicaciones JVM",
+            "Es un servidor proxy reverso para balanceo de carga"
+        ],
+        "ans": 1,
+        "exp": "Apache Tomcat es un Java Servlet Container: implementa las especificaciones Java EE (Servlets, JSP) y permite desplegar aplicaciones web Java empaquetadas como WAR. En producción se monitorea el heap JVM, se analizan thread dumps, y se ajustan parámetros como Xmx/Xms para optimizar rendimiento.",
+        "tip": false,
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion."
+    },
+    {
+        "cat": "Incident Management",
+        "q": "En gestión de incidentes ITIL, ¿cuál es la diferencia clave entre Incident Management y Problem Management?",
+        "opts": [
+            "Incident Management documenta el problema; Problem Management lo resuelve",
+            "Incident Management restaura el servicio lo antes posible; Problem Management identifica y elimina la causa raíz",
+            "Son lo mismo, solo se diferencian por prioridad (P1 vs P2)",
+            "Problem Management es solo para incidentes de base de datos"
+        ],
+        "ans": 1,
+        "exp": "Incident Management busca restaurar el servicio rápidamente (el foco es la continuidad). Problem Management investiga la causa raíz de incidentes recurrentes para eliminarlos de forma permanente. Ambos son procesos distintos aunque relacionados.",
+        "tip": false,
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA."
+    },
+    {
+        "cat": "Incident Management",
+        "q": "Durante una investigación de outage en producción, ¿cuál debería ser tu primera acción al recibir la alerta?",
+        "opts": [
+            "Comenzar a hacer cambios en producción para resolver el problema",
+            "Esperar 30 minutos para ver si se auto-resuelve",
+            "Detectar, confirmar el impacto, crear el ticket y notificar a stakeholders con un status inicial",
+            "Escalar inmediatamente al VP de Ingeniería"
+        ],
+        "ans": 2,
+        "exp": "El proceso correcto: 1) Confirmar el incidente vía alertas o reportes de usuarios, 2) Registrar en el sistema de tickets (ServiceNow/Jira), 3) Comunicar un status inicial a stakeholders. Solo entonces inicias el triage técnico. La comunicación temprana es crítica.",
+        "tip": false,
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA."
+    },
+    {
+        "cat": "Incident Management",
+        "q": "Un incidente P1 lleva 45 minutos sin resolverse. ¿Qué harías en paralelo mientras continúas el troubleshooting?",
+        "opts": [
+            "Parar el troubleshooting y documentar todo antes de continuar",
+            "Nada — mantener el foco completo en la resolución técnica sin distracciones",
+            "Mantener comunicación regular con stakeholders con status updates, revisar si hay un workaround rápido y considerar escalación si el equipo actual está bloqueado",
+            "Cerrar el ticket y abrir uno nuevo para resetear el SLA"
+        ],
+        "ans": 2,
+        "exp": "Durante un P1 prolongado debes: 1) Enviar status updates periódicos a stakeholders (cada 15-30 min), 2) Evaluar si existe un workaround que restaure el servicio aunque sea parcialmente, 3) Escalar a L3 o vendor si el equipo está bloqueado. La comunicación continua y el paralelismo son fundamentales.",
+        "tip": true,
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA."
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Qué elementos debe incluir un RCA (Root Cause Analysis) bien estructurado?",
+        "opts": [
+            "Solo el nombre del ingeniero responsable y la fecha del incidente",
+            "Resumen del incidente, causa raíz, factores contribuyentes, resolución y acciones correctivas con responsables y fechas",
+            "Lista de todos los sistemas afectados sin análisis de causa",
+            "Únicamente el ticket de ServiceNow con el log de actividades"
+        ],
+        "ans": 1,
+        "exp": "Un RCA completo incluye: resumen del incidente (qué pasó, cuándo, impacto), causa raíz (falla técnica o de proceso), factores contribuyentes (qué empeoró el impacto), resolución aplicada, y acciones correctivas específicas con owner y fecha límite. El enfoque debe ser blameless — mejora del sistema, no culpar personas.",
+        "tip": false,
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA."
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Cómo priorizas cuando tienes un P1 y dos P2 activos simultáneamente?",
+        "opts": [
+            "Atiendes primero los P2 porque son más fáciles y así liberas tiempo para el P1",
+            "El P1 recibe tu atención completa; delegas los P2 a otros miembros del equipo y mantienes visibilidad de ambos",
+            "Cierras los P2 automáticamente para concentrarte en el P1",
+            "Escala todo al manager y esperas instrucciones"
+        ],
+        "ans": 1,
+        "exp": "P1 siempre tiene prioridad absoluta: lo lideras personalmente. Los P2 se delegan a otros ingenieros mientras tú te mantienes como punto de escalación. Debes mantener canales de comunicación separados por incidente y actualizar el ticketing en tiempo real para facilitar handoffs.",
+        "tip": true,
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA."
+    },
+    {
+        "cat": "Databases",
+        "q": "¿Qué indica un alto uso de SWAP en un servidor Linux de base de datos?",
+        "opts": [
+            "El disco duro está al 100% de capacidad",
+            "El sistema está usando disco como memoria RAM porque la RAM física está insuficiente — lo que degrada el rendimiento",
+            "El servidor tiene demasiadas conexiones de red abiertas",
+            "Los logs están ocupando demasiado espacio en disco"
+        ],
+        "ans": 1,
+        "exp": "Cuando el sistema usa SWAP intensivamente, significa que la RAM física es insuficiente y el OS usa disco como memoria extendida. El acceso a disco es órdenes de magnitud más lento que RAM, causando 'system thrashing' y degradación severa del rendimiento.",
+        "tip": false,
+        "reco": "En entrevista, responde con estructura, evidencia y criterio operativo."
+    },
+    {
+        "cat": "Databases",
+        "q": "¿Qué es un deadlock en una base de datos y cómo se detecta?",
+        "opts": [
+            "Cuando la base de datos está completamente apagada",
+            "Cuando dos o más transacciones se bloquean mutuamente esperando recursos que la otra tiene, quedando ninguna capaz de progresar",
+            "Cuando una consulta tarda más de 30 segundos en ejecutarse",
+            "Cuando se llenan los archivos de log de la base de datos"
+        ],
+        "ans": 1,
+        "exp": "Un deadlock ocurre cuando la transacción A bloquea el recurso X y espera el recurso Y, mientras la transacción B bloquea Y y espera X — ciclo de espera infinito. Los RDBMS lo detectan automáticamente y terminan una de las transacciones. Se identifican en los logs del motor (DB2, Oracle, SQL Server tienen logs de deadlock específicos).",
+        "tip": true,
+        "reco": "En entrevista, responde con estructura, evidencia y criterio operativo."
+    },
+    {
+        "cat": "Databases",
+        "q": "¿Cuál de estas operaciones de DB2 LUW restaura una base de datos desde un backup?",
+        "opts": [
+            "db2 recover",
+            "db2 restore database MYDB from /backup",
+            "db2 import from backup",
+            "db2 load restore"
+        ],
+        "ans": 1,
+        "exp": "En IBM DB2 LUW el comando para restaurar es 'db2 restore database NOMBRE from /ruta/backup'. Después de un restore completo, generalmente se ejecuta 'db2 rollforward' para aplicar los logs de transacciones y llevar la base de datos a un estado consistente más reciente.",
+        "tip": false,
+        "reco": "En entrevista, responde con estructura, evidencia y criterio operativo."
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Cuál es la función principal de Grafana en un stack de observabilidad?",
+        "opts": [
+            "Recolectar y almacenar métricas de los servidores",
+            "Ejecutar alertas automáticas por email cuando un servidor falla",
+            "Visualizar y correlacionar métricas, logs y trazas en dashboards en tiempo real",
+            "Provisionar infraestructura en cloud automáticamente"
+        ],
+        "ans": 2,
+        "exp": "Grafana es la plataforma de visualización: conecta con fuentes de datos como Prometheus (métricas), Loki (logs) y Jaeger (trazas) para crear dashboards operacionales. No recolecta datos — Prometheus hace eso; Grafana los muestra.",
+        "tip": false,
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles."
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Cuál es la diferencia entre SLI, SLO y SLA en el contexto de production support?",
+        "opts": [
+            "Son tres nombres distintos para lo mismo: el tiempo de respuesta de un servicio",
+            "SLI es la métrica medida (ej. latencia), SLO es el objetivo interno (ej. p99 < 200ms) y SLA es el acuerdo contractual con el cliente con consecuencias si se incumple",
+            "SLA es interno; SLO es el acuerdo con el cliente",
+            "Solo el SLA importa; SLI y SLO son conceptos teóricos sin uso práctico"
+        ],
+        "ans": 1,
+        "exp": "SLI (Service Level Indicator): la métrica real que mides (latencia, availability, error rate). SLO (Service Level Objective): el objetivo interno que defines para esa métrica (ej. 99.9% uptime). SLA (Service Level Agreement): el contrato formal con el cliente que incluye consecuencias económicas o penalidades si el servicio no alcanza los niveles acordados.",
+        "tip": true,
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles."
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué herramienta del stack Prometheus/Grafana se encarga específicamente de la agregación de logs?",
+        "opts": [
+            "Alertmanager",
+            "Loki",
+            "Jaeger",
+            "Prometheus Pushgateway"
+        ],
+        "ans": 1,
+        "exp": "Loki (de Grafana Labs) es el sistema de agregación de logs del stack. A diferencia de Elasticsearch, Loki no indexa el contenido de los logs sino solo las etiquetas (labels), lo que lo hace más eficiente en costo. Se consulta con LogQL y se integra directamente en dashboards de Grafana junto con métricas de Prometheus.",
+        "tip": true,
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles."
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Qué principio de scripting garantiza que un script pueda ejecutarse múltiples veces sin generar estados inconsistentes o duplicados?",
+        "opts": [
+            "Recursividad",
+            "Idempotencia",
+            "Polimorfismo",
+            "Asincronía"
+        ],
+        "ans": 1,
+        "exp": "Idempotencia significa que ejecutar el script N veces produce el mismo resultado que ejecutarlo una vez. Es fundamental para scripts de producción: si el script falla a mitad y se re-ejecuta, no debe crear commits duplicados, archivos duplicados, etc.",
+        "tip": false,
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback."
+    },
+    {
+        "cat": "Scripting",
+        "q": "En un script de Bash de producción, ¿qué debe incluir el manejo de errores para ser considerado production-safe?",
+        "opts": [
+            "Solo un mensaje de echo al final indicando si fue exitoso",
+            "Usar 'set -e' para salir ante errores, validaciones pre-vuelo, logging con timestamps, y mecanismo de rollback si un paso falla",
+            "Un bloque try-catch como en Python",
+            "No hace falta manejo de errores en Bash porque los errores se muestran automáticamente"
+        ],
+        "ans": 1,
+        "exp": "Un script Bash production-safe incluye: 'set -e' (exit on error) y 'set -u' (error en variables no definidas), validaciones pre-vuelo del estado del sistema, logging detallado con timestamps a archivo, y lógica de rollback que revierta cambios si algo falla. Esto es exactamente lo que implementaste en tu automatización de repos.",
+        "tip": false,
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback."
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Cuál sería una razón válida para usar Python en lugar de Bash para una tarea de automatización?",
+        "opts": [
+            "Bash no puede leer archivos",
+            "Python es mejor cuando la lógica es compleja, necesitas manipular estructuras de datos, consumir APIs REST, o generar reportes, ya que ofrece librerías, manejo de errores robusto y mejor legibilidad",
+            "Python siempre es más rápido que Bash",
+            "Bash no puede ejecutarse en servidores Linux"
+        ],
+        "ans": 1,
+        "exp": "Bash es ideal para tareas simples de shell: ejecutar comandos, pipes, manipular archivos. Python es preferible cuando la lógica se vuelve compleja: llamadas a APIs REST, parsing de JSON/XML, manipulación de estructuras de datos, generación de reportes, o cuando necesitas librerías de terceros. Tu script de automatización de repos es un buen ejemplo de uso de Python para tarea compleja.",
+        "tip": true,
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback."
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Cuál es el archivo de configuración central de un proyecto Maven?",
+        "opts": [
+            "build.gradle",
+            "package.json",
+            "pom.xml",
+            "Makefile"
+        ],
+        "ans": 2,
+        "exp": "pom.xml (Project Object Model) es el archivo de configuración central de Maven. Define dependencias, plugins, el ciclo de build (compile, test, package, deploy) y la información del proyecto.",
+        "tip": false,
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM."
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué hace la fase 'package' del ciclo de vida de Maven?",
+        "opts": [
+            "Instala las dependencias del proyecto desde Maven Central",
+            "Compila el código fuente y crea el artefacto desplegable (JAR o WAR)",
+            "Despliega la aplicación al servidor de producción",
+            "Genera la documentación Javadoc del proyecto"
+        ],
+        "ans": 1,
+        "exp": "La fase 'package' de Maven compila el código (si no se ha hecho), ejecuta los tests unitarios y empaqueta el resultado en el formato definido en el pom.xml (JAR para librerías, WAR para aplicaciones web). Es el artefacto que luego Jenkins almacena en Nexus/Artifactory y despliega.",
+        "tip": false,
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM."
+    },
+    {
+        "cat": "Behavioral",
+        "q": "Al responder una pregunta de reto complejo en una entrevista, ¿qué metodología estructurada es más recomendada?",
+        "opts": [
+            "PDCA (Plan-Do-Check-Act)",
+            "STAR (Situation, Task, Action, Result)",
+            "SMART (Specific, Measurable, Achievable, Relevant, Time-bound)",
+            "RACI (Responsible, Accountable, Consulted, Informed)"
+        ],
+        "ans": 1,
+        "exp": "STAR es el framework estándar para preguntas behavioral: Situation (contexto), Task (tu responsabilidad), Action (lo que hiciste específicamente), Result (el impacto medible). Para NTT Data: el reto de automatización (3-4 horas → 15 minutos) es tu mejor ejemplo STAR.",
+        "tip": false,
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible."
+    },
+    {
+        "cat": "Behavioral",
+        "q": "Te preguntan: 'Tell me about a time you had a conflict with a teammate.' ¿Cuál es la mejor estructura para responder?",
+        "opts": [
+            "Quejarte del compañero en detalle para mostrar que tenías razón",
+            "Decir que nunca has tenido conflictos porque trabajas bien con todos",
+            "Usar STAR: describir el desacuerdo técnico de forma objetiva, cómo buscaste alineación, la resolución colaborativa y lo que aprendiste",
+            "Cambiar el tema hacia tus logros técnicos"
+        ],
+        "ans": 2,
+        "exp": "Las preguntas de conflicto evalúan madurez profesional y trabajo en equipo. La respuesta ideal: 1) Describe un desacuerdo técnico legítimo (no personal), 2) Explica cómo escuchaste la perspectiva del otro, 3) Muestra cómo buscaron una solución juntos, 4) Destaca el resultado positivo y la lección aprendida. Evita culpar a otros.",
+        "tip": true,
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible."
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Cómo responderías si el entrevistador te pregunta sobre una tecnología de la oferta que conoces poco (por ejemplo, Kubernetes)?",
+        "opts": [
+            "Inventar experiencia que no tienes para no quedar mal",
+            "Ser honesto: mencionar tu conocimiento conceptual, lo que ya sabes de contextos relacionados (Docker, contenedores) y tu capacidad y disposición para aprender rápido",
+            "Cambiar el tema inmediatamente",
+            "Decir que no sabes nada y no agregar nada más"
+        ],
+        "ans": 1,
+        "exp": "La honestidad inteligente es la mejor estrategia: 'Tengo conocimiento conceptual de Kubernetes — entiendo que orquesta contenedores Docker, gestiona scaling y failover. En producción he trabajado extensamente con Docker. Kubernetes es una extensión natural de ese conocimiento y lo que no sepa lo voy a aprender rápido.' Esto muestra madurez y confianza.",
+        "tip": true,
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible."
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un deploy en producción causa un aumento inmediato de errores 500 en la aplicación. ¿Cuál es tu primera acción?",
+        "opts": [
+            "Revisar el código del deploy línea por línea para encontrar el bug",
+            "Ejecutar un rollback al release anterior para restaurar el servicio, luego investigar la causa en un ambiente de staging",
+            "Esperar 10 minutos para ver si los errores disminuyen solos",
+            "Reiniciar todos los servidores de aplicación"
+        ],
+        "ans": 1,
+        "exp": "En producción, la prioridad es restaurar el servicio. Si un deploy introdujo errores 500, el rollback inmediato al release anterior es la acción más segura y rápida. Una vez el servicio está estable, investigas la causa raíz en staging — nunca intentas arreglar un bug en producción bajo presión.",
+        "tip": true,
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje."
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un cliente reporta que su aplicación está 'lenta'. No hay alertas activas en tus dashboards. ¿Qué haces?",
+        "opts": [
+            "Le dices al cliente que si no hay alertas, no hay problema",
+            "Abrir un ticket P1 inmediatamente sin investigar",
+            "Investigar activamente: revisar métricas de latencia (p95, p99), logs de errores, load balancer, conexiones de base de datos y validar la perspectiva del cliente con datos",
+            "Reiniciar el servidor de aplicación como primer paso"
+        ],
+        "ans": 2,
+        "exp": "La ausencia de alertas no significa que no haya problema — tus thresholds pueden estar mal configurados o el issue puede estar bajo el radar. El proceso: 1) Tomar en serio el reporte, 2) Revisar métricas granulares (latencia p95/p99, no solo average), 3) Revisar logs, DB connections, y comparar contra baseline. La percepción del cliente es válida aunque no haya alerta.",
+        "tip": true,
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje."
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Te asignan a un cliente nuevo de NTT Data con un sistema legado del que nadie en el equipo tiene documentación. ¿Cómo empiezas?",
+        "opts": [
+            "Propones reescribir todo el sistema desde cero",
+            "Esperas a que ocurra un incidente para aprender cómo funciona",
+            "Realizas un discovery estructurado: revisa logs, monitoreo existente, configuraciones, interviewing al equipo, y construyes documentación incremental mientras operas el sistema",
+            "Te niegas a trabajar con sistemas sin documentación"
+        ],
+        "ans": 2,
+        "exp": "El onboarding a sistemas legados es un escenario real en L2/L3. El enfoque correcto: 1) Revisar lo que existe (logs, configs, scripts legacy), 2) Hablar con quien sepa algo — aunque sea poco, 3) Construir documentación incremental desde el primer día, 4) Configurar monitoreo básico si no existe, 5) Actuar con cautela antes de hacer cambios. Este enfoque proactivo es exactamente lo que NTT Data busca.",
+        "tip": true,
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje."
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Durante una guardia nocturna recibes una alerta de disco al 95% en un servidor de producción crítico. ¿Cuáles son tus primeros pasos?",
+        "opts": [
+            "Ignorarlo hasta el día siguiente cuando esté el equipo completo",
+            "Eliminar archivos al azar para liberar espacio rápido",
+            "Identificar qué está consumiendo el espacio (du -sh, df -h, logs rotativos), aplicar la solución más segura (limpiar logs viejos, mover archivos) y notificar al equipo con el hallazgo",
+            "Reiniciar el servidor para liberar memoria temporal"
+        ],
+        "ans": 2,
+        "exp": "Proceso correcto: 1) 'df -h' para ver qué filesystem está lleno, 2) 'du -sh /*' y 'du -sh /var/log/*' para identificar el directorio culpable, 3) Limpiar logs viejos o archivos temporales con cuidado (nunca borrar sin identificar), 4) Si los logs son el problema, revisar si hay rotación configurada, 5) Notificar al equipo y documentar la acción. No reiniciar — eso no soluciona el espacio.",
+        "tip": true,
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje."
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Qué objetivo tiene un quality gate en un pipeline CI/CD?",
+        "opts": [
+            "Detener cambios que no cumplen criterios mínimos como tests, cobertura o análisis estático",
+            "Acelerar el deploy saltándose validaciones",
+            "Crear ramas automáticamente por cada commit",
+            "Reemplazar la revisión de código humana"
+        ],
+        "ans": 0,
+        "exp": "Un quality gate evita promover código riesgoso. Puede validar tests, cobertura, vulnerabilidades, linters o políticas antes de avanzar a staging o producción.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Qué significa rollback automatizado en un despliegue?",
+        "opts": [
+            "Volver a una versión estable cuando el despliegue falla o degrada el servicio",
+            "Borrar los logs generados por el release",
+            "Recompilar la aplicación sin cambiar versión",
+            "Eliminar el ambiente de staging"
+        ],
+        "ans": 0,
+        "exp": "Rollback automatizado reduce el MTTR porque restaura servicio rápido cuando las señales de salud fallan.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Para qué sirve un artifact repository como Nexus o Artifactory?",
+        "opts": [
+            "Guardar y versionar artefactos construidos para que el despliegue sea reproducible",
+            "Sustituir Git como repositorio de código",
+            "Monitorear CPU de servidores Linux",
+            "Ejecutar consultas SQL en producción"
+        ],
+        "ans": 0,
+        "exp": "Un repositorio de artefactos separa build de deploy y permite desplegar exactamente el mismo binario en distintos entornos.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": false
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Cuál es una buena práctica para manejar secretos en un pipeline?",
+        "opts": [
+            "Usar un vault o credenciales protegidas del CI, nunca hardcodearlas en el repositorio",
+            "Guardarlos en comentarios del Jenkinsfile",
+            "Subirlos a Git para que todos los tengan",
+            "Imprimirlos en consola para debug"
+        ],
+        "ans": 0,
+        "exp": "Los secretos deben inyectarse de forma segura y evitar aparecer en logs. Git no es lugar para passwords, tokens o llaves privadas.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Qué problema resuelve separar build y deploy en un pipeline?",
+        "opts": [
+            "Evita recompilar por ambiente y permite promover el mismo artefacto validado",
+            "Hace que los tests sean innecesarios",
+            "Permite cambiar código directamente en producción",
+            "Elimina la necesidad de versionado"
+        ],
+        "ans": 0,
+        "exp": "Build una vez, deploy muchas veces. Esto mejora trazabilidad: sabes qué artefacto exacto pasó tests y llegó a producción.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Qué es un deployment canary?",
+        "opts": [
+            "Liberar una versión nueva a un subconjunto pequeño de tráfico antes de expandirla",
+            "Desplegar todos los cambios sin monitoreo",
+            "Crear una rama llamada canary",
+            "Ejecutar pruebas unitarias después de producción"
+        ],
+        "ans": 0,
+        "exp": "Canary reduce riesgo al exponer el cambio gradualmente y observar métricas antes de afectar a todos los usuarios.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Qué es blue-green deployment?",
+        "opts": [
+            "Mantener dos entornos similares y cambiar tráfico del entorno actual al nuevo cuando está validado",
+            "Tener dos ramas Git con colores distintos",
+            "Ejecutar deploy solo en horario nocturno",
+            "Usar dos lenguajes de programación en la misma app"
+        ],
+        "ans": 0,
+        "exp": "Blue-green permite rollback rápido moviendo tráfico de vuelta al entorno anterior si aparecen problemas.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Por qué conviene ejecutar pruebas automatizadas en cada pull request?",
+        "opts": [
+            "Detectan regresiones antes del merge y dan feedback temprano al equipo",
+            "Garantizan que nunca habrá bugs en producción",
+            "Reemplazan completamente pruebas manuales exploratorias",
+            "Evitan la necesidad de revisar código"
+        ],
+        "ans": 0,
+        "exp": "Las pruebas en PR bajan costo de corrección porque el problema se detecta antes de integrar.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": false
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Qué indica un pipeline flaky?",
+        "opts": [
+            "Que falla de forma intermitente sin cambios reales en el código",
+            "Que siempre falla por errores de compilación",
+            "Que no tiene etapas paralelas",
+            "Que despliega demasiado lento por diseño"
+        ],
+        "ans": 0,
+        "exp": "Un pipeline flaky destruye confianza. Hay que aislar tests inestables, dependencias externas, timeouts y datos compartidos.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Qué métrica ayuda a evaluar eficiencia DevOps?",
+        "opts": [
+            "Lead time for changes, frecuencia de despliegue, change failure rate y MTTR",
+            "Cantidad de colores en el dashboard",
+            "Número de reuniones del equipo",
+            "Tamaño del repositorio Git"
+        ],
+        "ans": 0,
+        "exp": "Las métricas DORA conectan proceso técnico con resultados operativos: velocidad, estabilidad y recuperación.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Qué ventaja tiene Pipeline as Code?",
+        "opts": [
+            "Versiona la definición del pipeline junto con el proyecto y facilita revisión y reproducibilidad",
+            "Evita que se necesiten agentes de CI",
+            "Hace que todos los deploys sean manuales",
+            "Impide ejecutar pruebas paralelas"
+        ],
+        "ans": 0,
+        "exp": "Pipeline as Code permite cambios auditables, revisados por PR y consistentes entre ambientes.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": false
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Qué es un environment promotion?",
+        "opts": [
+            "Mover un artefacto validado de dev a test, staging y producción con controles por ambiente",
+            "Copiar archivos manualmente por FTP sin registro",
+            "Hacer merge de main a develop",
+            "Crear un contenedor temporal para logs"
+        ],
+        "ans": 0,
+        "exp": "Promover artefactos mantiene trazabilidad y evita que cada ambiente construya algo diferente.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": false
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Qué debe pasar si falla una etapa crítica del pipeline?",
+        "opts": [
+            "El pipeline debe detenerse y reportar causa clara antes de promover el cambio",
+            "Debe continuar para no bloquear al equipo",
+            "Debe borrar automáticamente la rama",
+            "Debe desplegar a producción para probar ahí"
+        ],
+        "ans": 0,
+        "exp": "Fail fast evita propagar errores. El mensaje debe ayudar a corregir sin revisar logs interminables.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": false
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Qué es infraestructura inmutable?",
+        "opts": [
+            "Reemplazar servidores o imágenes en vez de modificarlos manualmente en caliente",
+            "Editar configuración manualmente en producción",
+            "Mantener servidores sin parches",
+            "Desactivar automatizaciones para evitar cambios"
+        ],
+        "ans": 0,
+        "exp": "Infraestructura inmutable reduce drift y hace más confiables los rollback y recreaciones.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "CI/CD & DevOps",
+        "q": "¿Cuál es una señal de buen pipeline para soporte L2/L3?",
+        "opts": [
+            "Logs claros, artefactos versionados, rollback documentado y gates visibles",
+            "Depender del conocimiento de una sola persona",
+            "No guardar historial para ahorrar espacio",
+            "Tener pasos manuales sin evidencia"
+        ],
+        "ans": 0,
+        "exp": "Para soporte, el pipeline debe explicar qué pasó, qué versión fue desplegada y cómo recuperar servicio.",
+        "reco": "En entrevista, conecta la respuesta con automatizacion, trazabilidad, gates de calidad y reduccion de riesgo en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Git",
+        "q": "¿Por qué no conviene hacer rebase sobre una rama pública compartida?",
+        "opts": [
+            "Porque reescribe historial y puede romper el trabajo de otros colaboradores",
+            "Porque borra el repositorio remoto completo",
+            "Porque convierte commits en archivos binarios",
+            "Porque desactiva los hooks de Git"
+        ],
+        "ans": 0,
+        "exp": "Rebase cambia hashes. En ramas compartidas puede causar conflictos y duplicidad a quienes ya basaron trabajo en esos commits.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": true
+    },
+    {
+        "cat": "Git",
+        "q": "¿Qué hace git cherry-pick?",
+        "opts": [
+            "Aplica un commit específico de otra rama sobre la rama actual",
+            "Fusiona automáticamente todos los branches",
+            "Elimina commits duplicados del remoto",
+            "Crea tags de release"
+        ],
+        "ans": 0,
+        "exp": "Cherry-pick es útil para mover una corrección puntual, por ejemplo de develop a una hotfix, sin traer todo el branch.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": false
+    },
+    {
+        "cat": "Git",
+        "q": "¿Qué diferencia hay entre git fetch y git pull?",
+        "opts": [
+            "fetch descarga referencias remotas sin mezclar; pull descarga y luego integra",
+            "fetch borra ramas locales; pull solo muestra logs",
+            "Son exactamente iguales",
+            "pull solo funciona con tags"
+        ],
+        "ans": 0,
+        "exp": "Fetch es más seguro para inspeccionar cambios antes de mezclarlos en tu rama.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": false
+    },
+    {
+        "cat": "Git",
+        "q": "¿Qué representa un merge conflict?",
+        "opts": [
+            "Git no puede decidir automáticamente cómo combinar cambios en las mismas líneas o zonas relacionadas",
+            "El servidor remoto está caído",
+            "La rama local no tiene permisos",
+            "El commit no tiene mensaje"
+        ],
+        "ans": 0,
+        "exp": "Un conflicto se resuelve entendiendo intención de ambos cambios, no aceptando ciegamente una versión.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": true
+    },
+    {
+        "cat": "Git",
+        "q": "¿Para qué sirve un tag de Git en releases?",
+        "opts": [
+            "Marcar una versión específica del código para poder auditarla o recuperarla",
+            "Crear una rama temporal para features",
+            "Resolver conflictos automáticamente",
+            "Ocultar commits sensibles"
+        ],
+        "ans": 0,
+        "exp": "Los tags ayudan a mapear versión desplegada con commit exacto, clave para soporte y rollback.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": false
+    },
+    {
+        "cat": "Git",
+        "q": "¿Qué es un pull request o merge request?",
+        "opts": [
+            "Un mecanismo para proponer cambios, revisar código y ejecutar validaciones antes de integrar",
+            "Una copia local del repositorio",
+            "Un comando para reiniciar servicios",
+            "Un backup de base de datos"
+        ],
+        "ans": 0,
+        "exp": "El PR es control de calidad colaborativo: conversación, checks, revisión y trazabilidad.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": false
+    },
+    {
+        "cat": "Git",
+        "q": "¿Qué indica git status?",
+        "opts": [
+            "El estado del working tree: cambios staged, unstaged, rama actual y sincronización básica",
+            "El uso de CPU del repositorio",
+            "La salud del servidor GitHub",
+            "La cobertura de tests"
+        ],
+        "ans": 0,
+        "exp": "git status es el primer comando para orientarte antes de cambiar, commitear o resolver conflictos.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": false
+    },
+    {
+        "cat": "Git",
+        "q": "¿Qué hace git stash?",
+        "opts": [
+            "Guarda temporalmente cambios no commiteados para limpiar el working tree",
+            "Elimina commits del historial remoto",
+            "Crea un release automático",
+            "Convierte cambios en un tag"
+        ],
+        "ans": 0,
+        "exp": "Stash sirve para cambiar de contexto sin perder trabajo, pero no debe ser almacenamiento permanente.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": false
+    },
+    {
+        "cat": "Git",
+        "q": "¿Qué es una rama release en GitFlow?",
+        "opts": [
+            "Una rama para estabilizar lo que saldrá a producción antes de mergear a main",
+            "Una rama para experimentar sin pruebas",
+            "Una rama creada desde un hotfix después del incidente",
+            "Una copia de respaldo de todos los repositorios"
+        ],
+        "ans": 0,
+        "exp": "Release branch permite bugs fixes finales y preparación de versión sin bloquear nuevos features en develop.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": false
+    },
+    {
+        "cat": "Git",
+        "q": "¿Qué es commit atomic?",
+        "opts": [
+            "Un commit pequeño y coherente que representa un cambio lógico completo",
+            "Un commit que modifica todos los archivos del proyecto",
+            "Un commit sin mensaje",
+            "Un commit creado automáticamente por Jenkins"
+        ],
+        "ans": 0,
+        "exp": "Commits atómicos facilitan review, revert y análisis de causa cuando algo falla.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": true
+    },
+    {
+        "cat": "Git",
+        "q": "¿Por qué son importantes los mensajes de commit claros?",
+        "opts": [
+            "Ayudan a entender intención, alcance y contexto histórico del cambio",
+            "Permiten que el código compile más rápido",
+            "Evitan la necesidad de tests",
+            "Ocultan errores de producción"
+        ],
+        "ans": 0,
+        "exp": "Un buen mensaje reduce tiempo de investigación cuando revisas cambios de un incidente.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": false
+    },
+    {
+        "cat": "Git",
+        "q": "¿Qué hace git revert?",
+        "opts": [
+            "Crea un nuevo commit que deshace cambios de un commit anterior",
+            "Borra historial remoto de forma permanente",
+            "Mueve tu rama a otro commit sin dejar rastro",
+            "Elimina todos los tags"
+        ],
+        "ans": 0,
+        "exp": "Revert es más seguro que reset en ramas compartidas porque conserva historial auditable.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": true
+    },
+    {
+        "cat": "Git",
+        "q": "¿Qué riesgo tiene commitear archivos generados o temporales?",
+        "opts": [
+            "Ensucia el historial y puede introducir cambios irrelevantes o secretos por accidente",
+            "Hace que Git deje de funcionar",
+            "Impide crear ramas",
+            "Obliga a usar SVN"
+        ],
+        "ans": 0,
+        "exp": "Un .gitignore correcto evita ruido y reduce riesgo de subir credenciales o builds pesados.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": false
+    },
+    {
+        "cat": "Git",
+        "q": "¿Qué es fast-forward merge?",
+        "opts": [
+            "Mover el puntero de la rama cuando no hay divergencia entre ramas",
+            "Resolver todos los conflictos con una IA",
+            "Crear un merge commit aunque no haga falta",
+            "Reescribir la historia del remoto"
+        ],
+        "ans": 0,
+        "exp": "Fast-forward mantiene historial lineal cuando la rama destino no avanzó por separado.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": false
+    },
+    {
+        "cat": "Git",
+        "q": "¿Qué deberías revisar antes de hacer push a una rama compartida?",
+        "opts": [
+            "status, diff, tests relevantes y que no haya secretos o archivos accidentales",
+            "Solo que el nombre de la rama sea corto",
+            "Que el equipo esté desconectado",
+            "Que producción esté en mantenimiento"
+        ],
+        "ans": 0,
+        "exp": "Una revisión local simple evita romper CI y reduce retrabajo del equipo.",
+        "reco": "En entrevista, explica el flujo de ramas y remata con como evitas romper el historial compartido.",
+        "tip": true
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué comando muestra espacio disponible por filesystem de forma legible?",
+        "opts": [
+            "df -h",
+            "du -sh /var/log",
+            "free -m",
+            "ps aux"
+        ],
+        "ans": 0,
+        "exp": "df -h muestra uso de disco por filesystem, útil para alertas de espacio.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": false
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué comando ayuda a encontrar directorios que consumen más espacio?",
+        "opts": [
+            "du -sh /ruta/*",
+            "chmod 777 /ruta",
+            "tail -f /ruta",
+            "kill -9 /ruta"
+        ],
+        "ans": 0,
+        "exp": "du resume tamaños por ruta. Es clave antes de borrar cualquier cosa.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": true
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué hace tail -f en un archivo de log?",
+        "opts": [
+            "Muestra nuevas líneas en tiempo real a medida que se escriben",
+            "Comprime el archivo automáticamente",
+            "Elimina líneas antiguas",
+            "Cambia permisos del log"
+        ],
+        "ans": 0,
+        "exp": "tail -f ayuda a observar comportamiento mientras reproduces un error o validas un restart.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": false
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Para qué sirve journalctl -u nombre_servicio?",
+        "opts": [
+            "Consultar logs de un servicio manejado por systemd",
+            "Crear usuarios del sistema",
+            "Listar puertos abiertos",
+            "Cambiar propietario de archivos"
+        ],
+        "ans": 0,
+        "exp": "journalctl permite revisar eventos, errores y reinicios de servicios systemd con filtros.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": false
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué diferencia hay entre kill y kill -9?",
+        "opts": [
+            "kill envía señal terminable por defecto; kill -9 fuerza terminación sin limpieza",
+            "kill -9 reinicia el proceso con más memoria",
+            "kill solo funciona con root; kill -9 con cualquier usuario",
+            "No hay diferencia"
+        ],
+        "ans": 0,
+        "exp": "SIGKILL debe ser último recurso porque no permite cleanup de recursos.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": true
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué comando revisa memoria disponible en Linux?",
+        "opts": [
+            "free -m o free -h",
+            "df -i",
+            "grep -R",
+            "crontab -l"
+        ],
+        "ans": 0,
+        "exp": "free muestra memoria usada, libre, buffers/cache y swap.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": false
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué significa load average?",
+        "opts": [
+            "Promedio de procesos ejecutándose o esperando CPU/I/O en intervalos de tiempo",
+            "Porcentaje exacto de RAM libre",
+            "Cantidad de usuarios conectados",
+            "Tamaño del disco raíz"
+        ],
+        "ans": 0,
+        "exp": "Load debe interpretarse según número de CPUs y contexto de I/O.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": true
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué comando lista puertos escuchando con procesos asociados?",
+        "opts": [
+            "ss -tulpen o netstat -tulnp",
+            "df -h",
+            "lsblk",
+            "uptime"
+        ],
+        "ans": 0,
+        "exp": "ss ayuda a validar si una app realmente escucha en el puerto esperado.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": true
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué hace chmod?",
+        "opts": [
+            "Cambia permisos de archivos o directorios",
+            "Cambia propietario de procesos",
+            "Muestra logs del kernel",
+            "Reinicia servicios"
+        ],
+        "ans": 0,
+        "exp": "chmod controla lectura, escritura y ejecución. Evita permisos amplios como 777 salvo casos justificados.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": false
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué hace chown?",
+        "opts": [
+            "Cambia propietario y grupo de archivos o directorios",
+            "Cambia permisos numéricos",
+            "Lista procesos por CPU",
+            "Monta discos automáticamente"
+        ],
+        "ans": 0,
+        "exp": "chown resuelve problemas de permisos cuando servicios corren con usuarios específicos.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": false
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué revisarías si un filesystem tiene inodes al 100%?",
+        "opts": [
+            "Muchos archivos pequeños aunque quede espacio en GB",
+            "CPU saturada por Java",
+            "Latencia de red externa",
+            "Versión de Git instalada"
+        ],
+        "ans": 0,
+        "exp": "df -i muestra inodes. Sin inodes libres no puedes crear archivos aunque haya espacio.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": true
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Para qué sirve lsof?",
+        "opts": [
+            "Ver archivos o sockets abiertos por procesos",
+            "Cambiar logs a formato JSON",
+            "Reparar particiones automáticamente",
+            "Crear usuarios temporales"
+        ],
+        "ans": 0,
+        "exp": "lsof ayuda a detectar archivos borrados aún abiertos o puertos usados por procesos.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": true
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué comando muestra últimos eventos del kernel?",
+        "opts": [
+            "dmesg",
+            "curl",
+            "awk",
+            "scp"
+        ],
+        "ans": 0,
+        "exp": "dmesg puede revelar errores de disco, red, OOM killer o hardware.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": false
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué es swap en Linux?",
+        "opts": [
+            "Espacio en disco usado como memoria virtual cuando RAM no alcanza",
+            "Un tipo de backup incremental",
+            "Un proceso zombie",
+            "Un puerto de red"
+        ],
+        "ans": 0,
+        "exp": "Swap alto sostenido suele indicar presión de memoria y puede degradar rendimiento.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": true
+    },
+    {
+        "cat": "Linux",
+        "q": "¿Qué significa exit code 0?",
+        "opts": [
+            "El comando terminó exitosamente",
+            "El comando falló por permisos",
+            "El proceso fue matado por SIGKILL",
+            "No hay información disponible"
+        ],
+        "ans": 0,
+        "exp": "Los exit codes permiten automatizar decisiones en scripts y pipelines.",
+        "reco": "En entrevista, responde con diagnostico ordenado: observar, medir, aislar causa y actuar con bajo riesgo.",
+        "tip": false
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué diferencia hay entre imagen y contenedor Docker?",
+        "opts": [
+            "La imagen es plantilla inmutable; el contenedor es una instancia en ejecución",
+            "La imagen corre procesos; el contenedor solo guarda texto",
+            "Son exactamente lo mismo",
+            "El contenedor existe solo en Docker Hub"
+        ],
+        "ans": 0,
+        "exp": "Imagen define filesystem y metadata. Contenedor agrega runtime, estado y procesos.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Por qué conviene usar imágenes base pequeñas?",
+        "opts": [
+            "Reducen superficie de ataque, tamaño de descarga y tiempo de arranque",
+            "Aumentan permisos root por defecto",
+            "Evitan necesidad de logs",
+            "Permiten correr sin kernel"
+        ],
+        "ans": 0,
+        "exp": "Imágenes pequeñas facilitan escaneo y despliegues más rápidos.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué hace HEALTHCHECK en Docker?",
+        "opts": [
+            "Define cómo verificar si el contenedor está saludable",
+            "Construye la imagen en varias etapas",
+            "Expone puertos al host automáticamente",
+            "Elimina contenedores detenidos"
+        ],
+        "ans": 0,
+        "exp": "Healthchecks ayudan a orquestadores a reiniciar o retirar instancias malas.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué es docker logs?",
+        "opts": [
+            "Comando para ver stdout/stderr de un contenedor",
+            "Comando para entrar a una shell root",
+            "Herramienta para crear volúmenes",
+            "Sistema de backup de imágenes"
+        ],
+        "ans": 0,
+        "exp": "Los contenedores deben escribir logs a stdout/stderr para que la plataforma los recolecte.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué es docker-compose?",
+        "opts": [
+            "Herramienta para definir y ejecutar aplicaciones multi-contenedor con YAML",
+            "Repositorio público de imágenes",
+            "Comando para compilar Java",
+            "Plugin de monitoreo JVM"
+        ],
+        "ans": 0,
+        "exp": "Compose es útil para desarrollo y entornos simples con dependencias como app, DB y cache.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué riesgo tiene correr contenedores como root?",
+        "opts": [
+            "Amplía impacto si hay escape o vulnerabilidad dentro del contenedor",
+            "Hace que el contenedor no pueda escribir logs",
+            "Impide usar variables de entorno",
+            "Hace más lento el build"
+        ],
+        "ans": 0,
+        "exp": "Usar usuarios no privilegiados reduce riesgo de seguridad.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué es Kubernetes a nivel conceptual?",
+        "opts": [
+            "Un orquestador que despliega, escala y recupera contenedores",
+            "Un reemplazo directo de Git",
+            "Un lenguaje de programación para pipelines",
+            "Un servidor web Java"
+        ],
+        "ans": 0,
+        "exp": "Aunque no seas experto, conecta Kubernetes con Docker, resiliencia y declarativos YAML.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué es un pod en Kubernetes?",
+        "opts": [
+            "La unidad mínima desplegable, con uno o más contenedores que comparten red y volumen",
+            "Un nodo físico del datacenter",
+            "Un repositorio de imágenes",
+            "Un tipo de firewall"
+        ],
+        "ans": 0,
+        "exp": "Pod no es lo mismo que contenedor: es la unidad que Kubernetes agenda.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué es un Deployment en Kubernetes?",
+        "opts": [
+            "Objeto que mantiene réplicas deseadas de pods y gestiona actualizaciones",
+            "Un archivo WAR de Java",
+            "Un dashboard de logs",
+            "Una clave SSH"
+        ],
+        "ans": 0,
+        "exp": "Deployment permite rollout, rollback y self-healing de aplicaciones stateless.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué es un ConfigMap?",
+        "opts": [
+            "Objeto para configuración no sensible consumida por pods",
+            "Objeto para guardar contraseñas cifradas",
+            "Servicio de balanceo externo",
+            "Imagen base de Docker"
+        ],
+        "ans": 0,
+        "exp": "ConfigMaps separan config de imagen. Secret se usa para datos sensibles.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué es un Secret en Kubernetes?",
+        "opts": [
+            "Objeto para datos sensibles como tokens o passwords, con controles de acceso",
+            "Archivo público de documentación",
+            "Variable temporal sin permisos",
+            "Log de auditoría"
+        ],
+        "ans": 0,
+        "exp": "No basta con Secret: hay que controlar RBAC, acceso y evitar imprimirlo en logs.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué significa infraestructura como código?",
+        "opts": [
+            "Definir infraestructura en archivos versionados y aplicarla de forma reproducible",
+            "Crear servidores manualmente desde consola",
+            "Documentar capturas de pantalla de cloud",
+            "Usar solamente scripts bash sin control"
+        ],
+        "ans": 0,
+        "exp": "IaC permite revisión por PR, rollback conceptual y consistencia entre ambientes.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué es drift de infraestructura?",
+        "opts": [
+            "Diferencia entre lo definido en código y lo que existe realmente en el ambiente",
+            "Aumento de CPU por contenedores",
+            "Error de sintaxis YAML",
+            "Cambio de nombre de una rama"
+        ],
+        "ans": 0,
+        "exp": "Drift aparece por cambios manuales. Detectarlo evita sorpresas en incidentes.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Para qué sirve un reverse proxy como Nginx?",
+        "opts": [
+            "Recibir tráfico y enrutarlo a servicios backend, manejando TLS, headers o balanceo",
+            "Compilar aplicaciones Java",
+            "Ejecutar consultas SQL",
+            "Crear contenedores Docker"
+        ],
+        "ans": 0,
+        "exp": "Reverse proxy suele ser punto clave para diagnosticar 502, TLS y routing.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Containers & Infra",
+        "q": "¿Qué es autoscaling?",
+        "opts": [
+            "Ajustar réplicas o recursos según métricas como CPU, memoria o tráfico",
+            "Reiniciar servidores cada hora",
+            "Crear backups cuando hay errores",
+            "Cambiar IPs manualmente"
+        ],
+        "ans": 0,
+        "exp": "Autoscaling ayuda con demanda variable, pero requiere métricas y límites bien definidos.",
+        "reco": "En entrevista, aterriza el concepto a despliegues reproducibles, seguridad de imagenes y troubleshooting en produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Qué significa MTTR?",
+        "opts": [
+            "Mean Time To Recovery o tiempo medio para restaurar el servicio",
+            "Maximum Ticket Transfer Rate",
+            "Manual Test Tracking Report",
+            "Metric Threshold Trigger Rule"
+        ],
+        "ans": 0,
+        "exp": "MTTR mide capacidad de recuperación. En incidentes, bajar MTTR suele importar más que encontrar la causa exacta al inicio.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": true
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Qué es un workaround?",
+        "opts": [
+            "Solución temporal para restaurar o reducir impacto mientras se resuelve la causa raíz",
+            "Cierre definitivo del problema sin evidencia",
+            "Cambio de prioridad del ticket",
+            "Una prueba unitaria fallida"
+        ],
+        "ans": 0,
+        "exp": "Workaround es válido si reduce impacto, pero debe documentarse y no sustituye RCA.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": false
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Qué debe contener una comunicación de incidente?",
+        "opts": [
+            "Impacto, estado actual, acciones en curso, ETA si existe y próximo update",
+            "Solo una disculpa genérica",
+            "Detalles internos irrelevantes del equipo",
+            "Hipótesis no verificadas como hechos"
+        ],
+        "ans": 0,
+        "exp": "Comunicar bien reduce ansiedad y alinea a stakeholders durante presión.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": true
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Qué es RCA?",
+        "opts": [
+            "Root Cause Analysis para identificar causa raíz y acciones preventivas",
+            "Reporte de consumo de RAM",
+            "Regla de control de acceso",
+            "Rollback continuo automático"
+        ],
+        "ans": 0,
+        "exp": "RCA debe separar causa inmediata, causa raíz y acciones correctivas.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": true
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Cuál es la prioridad durante un P1?",
+        "opts": [
+            "Restaurar servicio y reducir impacto antes de optimizar o refactorizar",
+            "Buscar culpables rápidamente",
+            "Hacer cambios grandes sin aprobación",
+            "Cerrar el ticket cuanto antes"
+        ],
+        "ans": 0,
+        "exp": "En P1 importa estabilizar, preservar evidencia y mantener comunicación.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": true
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Qué es un postmortem sin culpa?",
+        "opts": [
+            "Revisión enfocada en sistema, decisiones y mejoras, no en culpar personas",
+            "Documento para señalar quién causó el error",
+            "Reunión para evitar documentación",
+            "Reporte solo financiero"
+        ],
+        "ans": 0,
+        "exp": "Blameless postmortem promueve aprendizaje y revela fallas de proceso.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": true
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Qué es escalamiento funcional?",
+        "opts": [
+            "Involucrar a un equipo con expertise específico cuando el incidente lo requiere",
+            "Subir prioridad sin cambiar acciones",
+            "Pasar el ticket a cualquier persona",
+            "Reiniciar todos los servicios"
+        ],
+        "ans": 0,
+        "exp": "Escalar no es fallar: es usar el conocimiento correcto a tiempo.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": false
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Qué es escalamiento jerárquico?",
+        "opts": [
+            "Involucrar niveles de gestión para decisiones, prioridad o comunicación ejecutiva",
+            "Asignar el ticket a otro técnico igual",
+            "Cambiar de herramienta ITSM",
+            "Crear una rama Git urgente"
+        ],
+        "ans": 0,
+        "exp": "Se usa cuando hay impacto alto, bloqueos o decisiones de negocio.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": false
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Qué significa severidad de un incidente?",
+        "opts": [
+            "Nivel de impacto al negocio o servicio, no solo dificultad técnica",
+            "Cantidad de líneas en logs",
+            "Número de servidores del equipo",
+            "Tiempo que tarda Jenkins"
+        ],
+        "ans": 0,
+        "exp": "Severidad se define por usuarios afectados, criticidad y degradación.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": false
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Qué es un runbook?",
+        "opts": [
+            "Guía operativa con pasos para diagnosticar o resolver escenarios repetibles",
+            "Documento de arquitectura sin comandos",
+            "Lista de vacaciones del equipo",
+            "Dashboard de costos cloud"
+        ],
+        "ans": 0,
+        "exp": "Runbooks aceleran respuesta y reducen errores bajo presión.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": true
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Por qué registrar timeline durante un incidente?",
+        "opts": [
+            "Permite reconstruir eventos, decisiones y tiempos para RCA y comunicación",
+            "Hace que el sistema se recupere solo",
+            "Evita tener que mirar métricas",
+            "Sustituye los logs técnicos"
+        ],
+        "ans": 0,
+        "exp": "Un buen timeline es oro para aprendizaje posterior y auditoría.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": true
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Qué es un cambio de emergencia?",
+        "opts": [
+            "Cambio urgente para mitigar impacto, siguiendo control mínimo y registro posterior",
+            "Cambio sin autorización ni evidencia",
+            "Feature nuevo para el cliente",
+            "Refactor amplio en producción"
+        ],
+        "ans": 0,
+        "exp": "Incluso en emergencia hay que registrar qué se hizo, por qué y cómo revertirlo.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": true
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Qué hacer si no puedes resolver un incidente en tu nivel?",
+        "opts": [
+            "Escalar con contexto: impacto, evidencia, acciones realizadas y estado actual",
+            "Esperar hasta que alguien pregunte",
+            "Cerrarlo como no reproducible",
+            "Probar comandos aleatorios"
+        ],
+        "ans": 0,
+        "exp": "Escalar con contexto ahorra tiempo al siguiente nivel y muestra madurez.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": true
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Qué diferencia hay entre incidente y solicitud de servicio?",
+        "opts": [
+            "Incidente es interrupción o degradación; solicitud es petición estándar de usuario",
+            "Ambos son siempre P1",
+            "Solicitud siempre implica bug",
+            "Incidente nunca requiere comunicación"
+        ],
+        "ans": 0,
+        "exp": "Clasificar bien evita prioridades falsas y métricas contaminadas.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": false
+    },
+    {
+        "cat": "Incident Management",
+        "q": "¿Cuándo conviene congelar cambios durante un incidente mayor?",
+        "opts": [
+            "Cuando cambios no esenciales pueden aumentar ruido o riesgo mientras se estabiliza",
+            "Siempre que un developer esté ocupado",
+            "Solo si el dashboard es azul",
+            "Nunca, los cambios ayudan siempre"
+        ],
+        "ans": 0,
+        "exp": "Change freeze temporal reduce variables y facilita aislar causa.",
+        "reco": "En entrevista, prioriza restaurar servicio, comunicar estado y dejar evidencia para RCA.",
+        "tip": true
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué diferencia hay entre métrica y log?",
+        "opts": [
+            "Métrica es dato numérico temporal; log es evento detallado con contexto",
+            "Métrica siempre es texto libre; log siempre es número",
+            "Son lo mismo en Grafana",
+            "Log solo existe en Windows"
+        ],
+        "ans": 0,
+        "exp": "Métricas responden qué está pasando; logs ayudan a explicar por qué.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": false
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué es una alerta accionable?",
+        "opts": [
+            "Alerta que indica impacto o riesgo real y sugiere una acción concreta",
+            "Alerta que se dispara cada minuto aunque no haya impacto",
+            "Alerta sin dueño definido",
+            "Alerta basada solo en curiosidad técnica"
+        ],
+        "ans": 0,
+        "exp": "Alertas ruidosas causan fatiga. Una buena alerta tiene dueño, umbral y playbook.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": true
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Por qué p95 o p99 pueden ser mejores que promedio de latencia?",
+        "opts": [
+            "Muestran experiencia de usuarios lentos que el promedio puede ocultar",
+            "Siempre son más bajos que el promedio",
+            "Eliminan necesidad de logs",
+            "Solo aplican a bases de datos"
+        ],
+        "ans": 0,
+        "exp": "Promedios esconden colas. Percentiles revelan degradación en usuarios afectados.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": true
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué es error budget?",
+        "opts": [
+            "Margen aceptable de incumplimiento de SLO antes de reducir riesgo o cambios",
+            "Presupuesto financiero para comprar servidores",
+            "Cantidad de logs permitidos al día",
+            "Número máximo de dashboards"
+        ],
+        "ans": 0,
+        "exp": "Error budget equilibra velocidad de cambios con confiabilidad.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": true
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué es Prometheus?",
+        "opts": [
+            "Sistema de monitoreo que recolecta y almacena métricas time-series",
+            "Herramienta principal para logs de texto completo",
+            "Servidor de aplicaciones Java",
+            "Orquestador de contenedores"
+        ],
+        "ans": 0,
+        "exp": "Prometheus suele hacer scraping de endpoints y permite consultas PromQL.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": false
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué hace Alertmanager?",
+        "opts": [
+            "Gestiona alertas de Prometheus: agrupación, silencios y rutas de notificación",
+            "Recolecta logs de archivos",
+            "Construye imágenes Docker",
+            "Ejecuta deploys canary"
+        ],
+        "ans": 0,
+        "exp": "Alertmanager reduce ruido agrupando y enviando alertas al canal correcto.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": false
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué es un dashboard operacional útil?",
+        "opts": [
+            "Vista enfocada en señales clave de salud, impacto y diagnóstico inicial",
+            "Un panel con todas las métricas posibles",
+            "Un gráfico bonito sin dueño",
+            "Una página que solo muestra colores"
+        ],
+        "ans": 0,
+        "exp": "Dashboard útil responde: ¿hay impacto?, ¿dónde?, ¿desde cuándo?, ¿qué cambió?",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": true
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué significa observabilidad?",
+        "opts": [
+            "Capacidad de entender estado interno del sistema por métricas, logs y trazas",
+            "Tener muchas alertas de CPU",
+            "Reiniciar servicios automáticamente",
+            "Guardar screenshots de dashboards"
+        ],
+        "ans": 0,
+        "exp": "Observabilidad ayuda a investigar fallos no previstos, no solo alertas conocidas.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": true
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué es tracing distribuido?",
+        "opts": [
+            "Seguimiento de una petición a través de múltiples servicios",
+            "Monitoreo de disco local",
+            "Compresión de logs antiguos",
+            "Escaneo de vulnerabilidades"
+        ],
+        "ans": 0,
+        "exp": "Tracing ayuda a ubicar latencia o errores en arquitecturas microservicios.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": false
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué es cardinalidad alta en métricas?",
+        "opts": [
+            "Demasiadas combinaciones de labels, lo que aumenta costo y carga",
+            "Tener pocas alertas configuradas",
+            "Usar dashboards con colores intensos",
+            "Monitorear solo CPU"
+        ],
+        "ans": 0,
+        "exp": "Labels como user_id o request_id pueden explotar cardinalidad y afectar Prometheus.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": true
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué indica una alerta de saturation?",
+        "opts": [
+            "Un recurso se acerca al límite: CPU, memoria, conexiones, disco o threads",
+            "El usuario inició sesión correctamente",
+            "El build terminó sin errores",
+            "El certificado TLS fue renovado"
+        ],
+        "ans": 0,
+        "exp": "Saturación anticipa degradación antes de caída total.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": false
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué son golden signals?",
+        "opts": [
+            "Latencia, tráfico, errores y saturación",
+            "CPU, teclado, mouse y pantalla",
+            "Branches, tags, commits y merges",
+            "Build, package, deploy y clean"
+        ],
+        "ans": 0,
+        "exp": "Golden signals dan una vista rápida del comportamiento de servicios.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": true
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Por qué conviene anotar deploys en dashboards?",
+        "opts": [
+            "Permite correlacionar cambios con degradaciones o errores",
+            "Hace que Grafana ejecute rollback",
+            "Reduce automáticamente la latencia",
+            "Elimina necesidad de versionar código"
+        ],
+        "ans": 0,
+        "exp": "Una anotación de deploy acelera diagnóstico cuando algo empeora justo después.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": true
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué es synthetic monitoring?",
+        "opts": [
+            "Pruebas programadas que simulan comportamiento de usuario para validar disponibilidad",
+            "Logs generados por compilador",
+            "Monitoreo manual por screenshots",
+            "Backup de métricas antiguas"
+        ],
+        "ans": 0,
+        "exp": "Synthetics detectan problemas desde la perspectiva del usuario final.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": false
+    },
+    {
+        "cat": "Monitoring",
+        "q": "¿Qué revisarías primero ante aumento de errores 5xx?",
+        "opts": [
+            "Rate de errores, deploy reciente, logs de backend, dependencias y salud de infraestructura",
+            "Cambiar contraseña del usuario",
+            "Borrar dashboards antiguos",
+            "Aumentar tamaño de fuente en Grafana"
+        ],
+        "ans": 0,
+        "exp": "5xx suele apuntar a backend o dependencia; correlaciona con cambios y saturación.",
+        "reco": "En entrevista, habla en terminos de SLI, sintomas de usuario, alertas accionables y dashboards utiles.",
+        "tip": true
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Por qué usar set -u en Bash?",
+        "opts": [
+            "Falla si se usa una variable no definida, evitando errores silenciosos",
+            "Hace el script más rápido automáticamente",
+            "Convierte Bash en Python",
+            "Ignora todos los errores"
+        ],
+        "ans": 0,
+        "exp": "set -u detecta typos y variables faltantes antes de que generen cambios peligrosos.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": false
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Qué aporta set -o pipefail?",
+        "opts": [
+            "Hace que un pipeline falle si falla cualquier comando de la tubería",
+            "Oculta errores para limpiar logs",
+            "Ejecuta comandos en paralelo",
+            "Reintenta automáticamente todos los pasos"
+        ],
+        "ans": 0,
+        "exp": "Sin pipefail, un pipeline puede parecer exitoso aunque grep, awk u otro paso haya fallado.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": true
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Qué es una validación pre-vuelo?",
+        "opts": [
+            "Chequeo antes de ejecutar cambios: permisos, comandos, espacio, variables y estado esperado",
+            "Prueba que se hace después del incidente",
+            "Comentario decorativo en el script",
+            "Backup de logs antiguos"
+        ],
+        "ans": 0,
+        "exp": "Pre-flight checks evitan empezar una operación destinada a fallar a mitad.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": true
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Por qué registrar logs con timestamp en scripts?",
+        "opts": [
+            "Permite auditar qué pasó y cuándo durante automatizaciones o incidentes",
+            "Hace que Bash compile",
+            "Reduce consumo de CPU",
+            "Evita permisos root"
+        ],
+        "ans": 0,
+        "exp": "Timestamps ayudan a correlacionar scripts con métricas, logs de sistema y tickets.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": false
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Cuándo usarías trap en Bash?",
+        "opts": [
+            "Para ejecutar cleanup o rollback al recibir error o señal",
+            "Para hacer consultas SQL más rápidas",
+            "Para cifrar variables automáticamente",
+            "Para reemplazar cron"
+        ],
+        "ans": 0,
+        "exp": "trap permite limpiar temporales, liberar locks o registrar fallo antes de salir.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": true
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Qué es idempotencia en automatización?",
+        "opts": [
+            "Poder ejecutar varias veces sin generar duplicados ni estados inconsistentes",
+            "Ejecutar siempre con usuario root",
+            "Evitar logs para que sea limpio",
+            "Crear backups sin nombres"
+        ],
+        "ans": 0,
+        "exp": "Idempotencia es esencial cuando reintentas después de fallo parcial.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": true
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Qué ventaja tiene Python para consumir APIs REST?",
+        "opts": [
+            "Librerías, manejo JSON, errores y estructuras de datos más claras que Bash",
+            "Python no requiere red",
+            "Bash no puede ejecutar curl",
+            "Python evita autenticación"
+        ],
+        "ans": 0,
+        "exp": "Python facilita código mantenible cuando la lógica supera comandos simples.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": false
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Qué debe hacer un script con credenciales?",
+        "opts": [
+            "Leerlas de variables, vault o archivos protegidos, nunca hardcodearlas",
+            "Imprimirlas al inicio para debug",
+            "Guardarlas en Git",
+            "Mandarlas por email al equipo"
+        ],
+        "ans": 0,
+        "exp": "La gestión de secretos es parte de production-safe scripting.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": true
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Por qué usar shellcheck?",
+        "opts": [
+            "Detecta errores comunes y malas prácticas en scripts Bash",
+            "Ejecuta despliegues automáticos",
+            "Comprime logs de producción",
+            "Crea usuarios Linux"
+        ],
+        "ans": 0,
+        "exp": "Shellcheck encuentra quoting, variables no usadas y problemas de portabilidad.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": false
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Qué riesgo tiene no citar variables en Bash?",
+        "opts": [
+            "Word splitting y globbing pueden romper rutas con espacios o caracteres especiales",
+            "El script deja de tener permisos",
+            "Python no puede llamarlo",
+            "Los logs se borran"
+        ],
+        "ans": 0,
+        "exp": "Usa comillas alrededor de variables salvo casos intencionales.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": true
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Qué es dry-run?",
+        "opts": [
+            "Modo que muestra qué haría el script sin aplicar cambios reales",
+            "Modo que borra archivos temporales",
+            "Ejecución sin logs",
+            "Deploy directo a producción"
+        ],
+        "ans": 0,
+        "exp": "Dry-run reduce riesgo al validar impacto antes de tocar producción.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": true
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Qué es un lock file en automatización?",
+        "opts": [
+            "Mecanismo para evitar ejecuciones concurrentes peligrosas del mismo script",
+            "Archivo que guarda contraseñas en texto plano",
+            "Log comprimido de errores",
+            "Variable para cambiar color de consola"
+        ],
+        "ans": 0,
+        "exp": "Locks evitan condiciones de carrera, especialmente en cron jobs.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": false
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Qué salida debe tener un script usado por CI?",
+        "opts": [
+            "Exit codes claros y logs suficientes para diagnosticar fallos",
+            "Solo mensajes bonitos en colores",
+            "Siempre exit 0 para no bloquear",
+            "Ningún output para ahorrar espacio"
+        ],
+        "ans": 0,
+        "exp": "CI necesita saber si falló y por qué sin intervención manual extensa.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": false
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Cuándo dividirías un script grande en funciones?",
+        "opts": [
+            "Cuando hay pasos reutilizables o lógica que mejora legibilidad y pruebas",
+            "Nunca, Bash debe ser una línea",
+            "Solo si se ejecuta en Windows",
+            "Cuando el script no tiene variables"
+        ],
+        "ans": 0,
+        "exp": "Funciones pequeñas hacen más mantenible el troubleshooting.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": false
+    },
+    {
+        "cat": "Scripting",
+        "q": "¿Qué conviene hacer antes de un script que modifica muchos archivos?",
+        "opts": [
+            "Backup o plan de rollback, dry-run y limitar alcance con rutas verificadas",
+            "Ejecutarlo como root sin revisar",
+            "Desactivar logs para que sea rápido",
+            "Cambiar permisos a 777"
+        ],
+        "ans": 0,
+        "exp": "Las operaciones masivas necesitan límites claros y forma de recuperar.",
+        "reco": "En entrevista, destaca idempotencia, validaciones, logging, manejo de errores y rollback.",
+        "tip": true
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué hace mvn clean?",
+        "opts": [
+            "Elimina archivos generados del directorio target",
+            "Descarga logs de producción",
+            "Crea una rama Git limpia",
+            "Reinicia Tomcat"
+        ],
+        "ans": 0,
+        "exp": "clean fuerza una build desde cero removiendo artefactos previos.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": false
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué hace mvn test?",
+        "opts": [
+            "Ejecuta pruebas unitarias del proyecto",
+            "Empaqueta un WAR y lo despliega",
+            "Actualiza Java en el servidor",
+            "Borra dependencias de Maven Central"
+        ],
+        "ans": 0,
+        "exp": "mvn test valida comportamiento antes de empaquetar o desplegar.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": false
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué diferencia hay entre JAR y WAR?",
+        "opts": [
+            "JAR suele empaquetar librerías/apps Java; WAR empaqueta aplicaciones web para servlet container",
+            "WAR es siempre más rápido que JAR",
+            "JAR solo sirve en Windows",
+            "No hay diferencia"
+        ],
+        "ans": 0,
+        "exp": "WAR se despliega típicamente en Tomcat; JAR puede ejecutarse standalone según app.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": false
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué es dependency scope en Maven?",
+        "opts": [
+            "Define cuándo una dependencia aplica: compile, test, provided, runtime, etc.",
+            "Define el nombre de la rama Git",
+            "Indica uso de CPU en JVM",
+            "Cambia permisos Linux"
+        ],
+        "ans": 0,
+        "exp": "Scopes evitan empaquetar dependencias innecesarias o duplicadas.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": false
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué es un SNAPSHOT en Maven?",
+        "opts": [
+            "Versión en desarrollo que puede cambiar con nuevas builds",
+            "Versión final inmutable para producción",
+            "Backup de base de datos",
+            "Log de Tomcat"
+        ],
+        "ans": 0,
+        "exp": "Para producción conviene versiones release, no SNAPSHOT mutable.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": true
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué revisarías si una app Java tiene OutOfMemoryError?",
+        "opts": [
+            "Heap, dumps, patrones de memoria, cambios recientes y configuración Xmx",
+            "Solo reiniciar indefinidamente",
+            "Cambiar permisos del WAR",
+            "Borrar el pom.xml"
+        ],
+        "ans": 0,
+        "exp": "OOM requiere mitigación y análisis de causa: memoria, leak, carga o configuración.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": true
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué es thread dump?",
+        "opts": [
+            "Captura del estado de threads de una JVM en un momento dado",
+            "Backup del código fuente",
+            "Reporte de cobertura de tests",
+            "Log de red del firewall"
+        ],
+        "ans": 0,
+        "exp": "Thread dumps ayudan a diagnosticar deadlocks, bloqueos y saturación de threads.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": true
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué es garbage collection?",
+        "opts": [
+            "Proceso JVM que libera memoria de objetos no usados",
+            "Comando Linux para borrar logs",
+            "Plugin de Maven para limpiar target",
+            "Método para comprimir WAR"
+        ],
+        "ans": 0,
+        "exp": "GC excesivo puede causar latencia; hay que observar pausas y heap.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": false
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué significa HTTP 404 en una app web Java?",
+        "opts": [
+            "Recurso no encontrado o ruta no mapeada",
+            "Error interno del servidor",
+            "Autenticación exitosa",
+            "Base de datos caída siempre"
+        ],
+        "ans": 0,
+        "exp": "404 puede ser routing, contexto de aplicación o URL incorrecta.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": false
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué significa HTTP 500?",
+        "opts": [
+            "Error interno del servidor, revisar logs de aplicación y stacktrace",
+            "Usuario no autorizado",
+            "Archivo estático no encontrado",
+            "Redirección permanente"
+        ],
+        "ans": 0,
+        "exp": "500 exige mirar logs backend y correlacionar con request y cambios recientes.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": true
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Para qué sirve catalina.out en Tomcat?",
+        "opts": [
+            "Log común de salida de Tomcat y aplicaciones según configuración",
+            "Archivo de dependencias Maven",
+            "Descriptor de despliegue Kubernetes",
+            "Clave privada TLS"
+        ],
+        "ans": 0,
+        "exp": "catalina.out puede crecer mucho; revisa rotación y logs específicos de app.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": false
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué es connection pool?",
+        "opts": [
+            "Conjunto reutilizable de conexiones a base de datos",
+            "Lista de ramas Git abiertas",
+            "Cache de imágenes Docker",
+            "Grupo de usuarios Linux"
+        ],
+        "ans": 0,
+        "exp": "Pool saturado puede causar lentitud aunque CPU esté baja.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": true
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué revisarías ante lentitud en aplicación Java?",
+        "opts": [
+            "Latencia, GC, threads, pool DB, logs, dependencias externas y cambios recientes",
+            "Solo cambiar Xmx al máximo",
+            "Borrar target en producción",
+            "Reinstalar Maven"
+        ],
+        "ans": 0,
+        "exp": "Diagnóstico JVM combina métricas, logs y dependencias.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": true
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué es stacktrace?",
+        "opts": [
+            "Traza de llamadas que muestra dónde ocurrió una excepción",
+            "Dashboard de CPU",
+            "Archivo de configuración de Maven",
+            "Comando para abrir puertos"
+        ],
+        "ans": 0,
+        "exp": "Stacktrace orienta causa técnica, pero hay que correlacionarlo con impacto y request.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": false
+    },
+    {
+        "cat": "Maven / Java",
+        "q": "¿Qué conviene verificar antes de desplegar un WAR en Tomcat?",
+        "opts": [
+            "Versión Java, contexto, configuración, dependencias, backups y rollback",
+            "Solo que el nombre sea corto",
+            "Que Git tenga muchos commits",
+            "Que el servidor no tenga logs"
+        ],
+        "ans": 0,
+        "exp": "Prevalidar compatibilidad reduce fallos de arranque y downtime.",
+        "reco": "En entrevista, relaciona build, artefacto, despliegue y diagnostico JVM.",
+        "tip": true
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué es DNS?",
+        "opts": [
+            "Sistema que resuelve nombres de dominio a direcciones IP",
+            "Protocolo para compilar Java",
+            "Herramienta de GitFlow",
+            "Servicio de logs de Docker"
+        ],
+        "ans": 0,
+        "exp": "DNS incorrecto puede parecer caída de app aunque backend esté sano.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué diferencia hay entre ping y traceroute?",
+        "opts": [
+            "ping prueba alcance/latencia básica; traceroute muestra saltos hacia destino",
+            "ping borra paquetes; traceroute reinicia routers",
+            "Son idénticos",
+            "traceroute solo funciona con HTTP"
+        ],
+        "ans": 0,
+        "exp": "Úsalos para separar problema local, red intermedia o destino.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué indica un timeout de conexión?",
+        "opts": [
+            "No se estableció comunicación a tiempo; puede ser red, firewall, puerto o servicio caído",
+            "La contraseña es incorrecta siempre",
+            "El HTML tiene error de sintaxis",
+            "La CPU está al 100%"
+        ],
+        "ans": 0,
+        "exp": "Timeout requiere revisar ruta, puerto, firewall y salud del servicio.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué indica connection refused?",
+        "opts": [
+            "El host responde pero no hay servicio escuchando en ese puerto o lo rechaza",
+            "DNS no existe necesariamente",
+            "La red está completamente caída siempre",
+            "El navegador no soporta TLS"
+        ],
+        "ans": 0,
+        "exp": "Refused suele apuntar a servicio detenido, puerto incorrecto o bind equivocado.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué es un load balancer?",
+        "opts": [
+            "Componente que distribuye tráfico entre instancias saludables",
+            "Base de datos temporal",
+            "Repositorio de artefactos",
+            "Comando Linux para logs"
+        ],
+        "ans": 0,
+        "exp": "LB puede sacar nodos malos si healthchecks están bien definidos.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué es TLS?",
+        "opts": [
+            "Protocolo para cifrar comunicación y validar identidad del servidor",
+            "Sistema de colas de mensajes",
+            "Formato de log",
+            "Tipo de contenedor"
+        ],
+        "ans": 0,
+        "exp": "Errores TLS pueden ser certificado vencido, cadena incompleta o hostname mismatch.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué es CIDR?",
+        "opts": [
+            "Notación para rangos de IP, como 10.0.0.0/24",
+            "Archivo de Maven",
+            "Estado de un proceso Linux",
+            "Tipo de alerta Grafana"
+        ],
+        "ans": 0,
+        "exp": "CIDR ayuda a hablar de subnets, firewalls y reglas de acceso.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué es una subnet privada?",
+        "opts": [
+            "Red sin acceso directo desde internet, normalmente para backends o bases de datos",
+            "Red que no tiene IPs",
+            "Repositorio Git oculto",
+            "Contenedor sin logs"
+        ],
+        "ans": 0,
+        "exp": "Separar subnets públicas/privadas reduce exposición.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué es NAT Gateway?",
+        "opts": [
+            "Permite salida a internet desde subnets privadas sin exponer instancias directamente",
+            "Balancea tráfico HTTP externo",
+            "Compila artefactos Maven",
+            "Guarda secretos de Kubernetes"
+        ],
+        "ans": 0,
+        "exp": "NAT ayuda a actualizaciones o llamadas externas manteniendo recursos privados.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué es security group en cloud?",
+        "opts": [
+            "Firewall virtual que controla tráfico permitido a recursos",
+            "Grupo de usuarios de Git",
+            "Dashboard de seguridad de Jenkins",
+            "Backup cifrado"
+        ],
+        "ans": 0,
+        "exp": "Reglas demasiado abiertas aumentan riesgo; aplica mínimo privilegio.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué revisar si un servicio no responde desde fuera?",
+        "opts": [
+            "DNS, puerto, firewall/security group, load balancer, healthcheck y servicio backend",
+            "Solo reiniciar la base de datos",
+            "Cambiar nombre de rama Git",
+            "Borrar caché del IDE"
+        ],
+        "ans": 0,
+        "exp": "El diagnóstico de red va por capas para no asumir la causa.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué es alta disponibilidad?",
+        "opts": [
+            "Diseño para continuar operando ante fallas de instancia, zona o componente",
+            "Tener un servidor muy grande",
+            "No hacer deploys",
+            "Guardar logs por 30 días"
+        ],
+        "ans": 0,
+        "exp": "HA requiere redundancia, healthchecks y recuperación probada.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué es RTO?",
+        "opts": [
+            "Tiempo objetivo para recuperar un servicio después de una interrupción",
+            "Cantidad de requests por segundo",
+            "Tipo de alerta de CPU",
+            "Tiempo de compilación Maven"
+        ],
+        "ans": 0,
+        "exp": "RTO ayuda a priorizar estrategia de recuperación.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué es RPO?",
+        "opts": [
+            "Cantidad máxima aceptable de pérdida de datos medida en tiempo",
+            "Tiempo que tarda un deploy",
+            "Número de pods mínimos",
+            "Porcentaje de CPU libre"
+        ],
+        "ans": 0,
+        "exp": "RPO guía frecuencia de backups y replicación.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Cloud & Networking",
+        "q": "¿Qué revisar ante certificado vencido en producción?",
+        "opts": [
+            "Renovar certificado, validar cadena, desplegar sin romper TLS y documentar prevención",
+            "Desactivar HTTPS permanentemente",
+            "Ignorar la alerta si backend responde",
+            "Cambiar puerto a 22"
+        ],
+        "ans": 0,
+        "exp": "Certificados vencidos impactan usuarios aunque la app esté sana.",
+        "reco": "En entrevista, explica red, seguridad y disponibilidad con ejemplos simples de produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué hace SELECT COUNT(*) en una tabla grande?",
+        "opts": [
+            "Cuenta filas, pero puede ser costoso según motor, índices y tamaño",
+            "Borra filas duplicadas",
+            "Crea un índice automático",
+            "Reinicia conexiones"
+        ],
+        "ans": 0,
+        "exp": "En producción evita consultas pesadas sin entender plan y carga.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué es un índice en base de datos?",
+        "opts": [
+            "Estructura que acelera búsquedas a costo de espacio y mantenimiento en escrituras",
+            "Backup completo de la tabla",
+            "Usuario con permisos admin",
+            "Log de errores SQL"
+        ],
+        "ans": 0,
+        "exp": "Índices ayudan lecturas, pero demasiados pueden afectar inserts/updates.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué es un query plan?",
+        "opts": [
+            "Plan del motor para ejecutar una consulta, útil para detectar scans o joins costosos",
+            "Lista de usuarios conectados",
+            "Script de backup",
+            "Archivo de configuración de Tomcat"
+        ],
+        "ans": 0,
+        "exp": "EXPLAIN ayuda a optimizar sin adivinar.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué es una transacción?",
+        "opts": [
+            "Unidad de trabajo que se confirma o revierte de forma consistente",
+            "Consulta que siempre es SELECT",
+            "Backup incremental",
+            "Conexión HTTP persistente"
+        ],
+        "ans": 0,
+        "exp": "Transacciones protegen consistencia, especialmente en cambios múltiples.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué significa ACID?",
+        "opts": [
+            "Atomicidad, Consistencia, Aislamiento y Durabilidad",
+            "Availability, Cache, Index, Debug",
+            "Access, Control, Identity, DNS",
+            "Alert, Correlate, Investigate, Deploy"
+        ],
+        "ans": 0,
+        "exp": "ACID describe garantías clave de transacciones confiables.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué es un deadlock?",
+        "opts": [
+            "Dos o más transacciones bloquean recursos entre sí y ninguna avanza",
+            "Servidor sin memoria RAM",
+            "Consulta sin índice necesariamente",
+            "Usuario sin permisos SELECT"
+        ],
+        "ans": 0,
+        "exp": "Deadlocks requieren revisar orden de locks, transacciones largas y retry seguro.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué es connection pool en contexto DB?",
+        "opts": [
+            "Conjunto de conexiones reutilizadas por la aplicación para evitar abrir una por request",
+            "Backup de conexiones antiguas",
+            "Tabla temporal de usuarios",
+            "Índice compuesto"
+        ],
+        "ans": 0,
+        "exp": "Pool agotado causa timeouts aunque la DB no esté caída.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué revisar ante queries lentas?",
+        "opts": [
+            "Plan de ejecución, índices, cardinalidad, locks, volumen y cambios recientes",
+            "Solo reiniciar la app",
+            "Borrar todos los índices",
+            "Aumentar logs sin límite"
+        ],
+        "ans": 0,
+        "exp": "Optimización SQL debe basarse en evidencia, no intuición.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué es lock en base de datos?",
+        "opts": [
+            "Mecanismo para controlar acceso concurrente a datos",
+            "Archivo que cifra backups",
+            "Puerto abierto del servidor",
+            "Proceso zombie"
+        ],
+        "ans": 0,
+        "exp": "Locks prolongados pueden bloquear usuarios y generar timeouts.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Por qué son críticos los backups probados?",
+        "opts": [
+            "Un backup no restaurado/verificado puede no servir cuando ocurre un desastre",
+            "Reducen CPU automáticamente",
+            "Evitan crear índices",
+            "Sustituyen monitoreo"
+        ],
+        "ans": 0,
+        "exp": "La prueba real es restaurar. Backup sin restore test es una promesa.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué es replicación?",
+        "opts": [
+            "Mantener copias de datos en otro nodo para disponibilidad, lectura o DR",
+            "Duplicar commits Git",
+            "Copiar logs a stdout",
+            "Ejecutar el mismo cron dos veces"
+        ],
+        "ans": 0,
+        "exp": "Replicación puede tener lag; hay que monitorearlo.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué es SQL injection?",
+        "opts": [
+            "Vulnerabilidad donde input no confiable altera consultas SQL",
+            "Error normal de timeout",
+            "Tipo de índice compuesto",
+            "Método de backup"
+        ],
+        "ans": 0,
+        "exp": "Prevención: queries parametrizadas, validación y mínimo privilegio.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué hacer antes de ejecutar UPDATE/DELETE en producción?",
+        "opts": [
+            "Validar WHERE con SELECT, backup/rollback, transacción y aprobación si aplica",
+            "Ejecutarlo rápido para ahorrar tiempo",
+            "Quitar el WHERE para cubrir todo",
+            "Cerrar monitoreo para evitar alertas"
+        ],
+        "ans": 0,
+        "exp": "Cambios de datos en prod requieren máximo cuidado y evidencia.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué es migración de esquema?",
+        "opts": [
+            "Cambio versionado en estructura de BD como tablas, columnas o índices",
+            "Deploy de frontend",
+            "Rotación de logs",
+            "Escaneo antivirus"
+        ],
+        "ans": 0,
+        "exp": "Migraciones deben ser reversibles o tener plan de rollback y compatibilidad.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": false
+    },
+    {
+        "cat": "Database & SQL",
+        "q": "¿Qué indica replication lag?",
+        "opts": [
+            "La réplica está atrasada respecto al primario",
+            "La app no compila",
+            "El firewall bloquea HTTP",
+            "El disco no tiene inodes"
+        ],
+        "ans": 0,
+        "exp": "Lag puede afectar lecturas, failover y consistencia percibida.",
+        "reco": "En entrevista, piensa en datos, indices, locks, backups y riesgo antes de tocar produccion.",
+        "tip": true
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué es principio de mínimo privilegio?",
+        "opts": [
+            "Dar solo permisos necesarios para una tarea o servicio",
+            "Dar admin a todos para evitar bloqueos",
+            "Eliminar autenticación interna",
+            "Guardar passwords en texto claro"
+        ],
+        "ans": 0,
+        "exp": "Mínimo privilegio reduce impacto de credenciales comprometidas.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": true
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué es rotación de secretos?",
+        "opts": [
+            "Cambiar tokens/passwords periódicamente o tras sospecha de exposición",
+            "Mover archivos de log a otra carpeta",
+            "Actualizar versión Maven",
+            "Reiniciar pods cada noche"
+        ],
+        "ans": 0,
+        "exp": "Rotar secretos limita tiempo útil de una credencial filtrada.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": false
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué hacer si se subió un secreto a Git?",
+        "opts": [
+            "Revocarlo/rotarlo inmediatamente, limpiar exposición y revisar accesos",
+            "Solo borrar el commit local",
+            "Cambiar el nombre del archivo",
+            "Ignorarlo si el repo es privado"
+        ],
+        "ans": 0,
+        "exp": "Una vez en Git, asume exposición. Borrar no basta.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": true
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué es MFA?",
+        "opts": [
+            "Autenticación multifactor para agregar una capa extra además de password",
+            "Sistema de métricas de Grafana",
+            "Tipo de rollback",
+            "Formato de logs"
+        ],
+        "ans": 0,
+        "exp": "MFA reduce riesgo de robo de credenciales.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": false
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué es RBAC?",
+        "opts": [
+            "Control de acceso basado en roles",
+            "Backup remoto automático",
+            "Build reproducible con cache",
+            "Reporte básico de alertas"
+        ],
+        "ans": 0,
+        "exp": "RBAC permite permisos consistentes por función y evita accesos manuales excesivos.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": false
+    },
+    {
+        "cat": "Security",
+        "q": "¿Por qué no usar chmod 777 como solución rápida?",
+        "opts": [
+            "Da permisos totales y puede exponer escritura/ejecución innecesaria",
+            "Hace que el disco se llene",
+            "Impide leer archivos",
+            "Borra propietarios"
+        ],
+        "ans": 0,
+        "exp": "Soluciona causa de permisos, no abras todo el sistema.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": true
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué es patch management?",
+        "opts": [
+            "Proceso de aplicar actualizaciones de seguridad de forma controlada",
+            "Crear ramas hotfix únicamente",
+            "Compilar Java con Maven",
+            "Borrar logs viejos"
+        ],
+        "ans": 0,
+        "exp": "Parches reducen vulnerabilidades, pero requieren prueba y ventana adecuada.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": false
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué es hardening?",
+        "opts": [
+            "Reducir superficie de ataque mediante configuración segura",
+            "Aumentar recursos de CPU",
+            "Comprimir artefactos",
+            "Crear más dashboards"
+        ],
+        "ans": 0,
+        "exp": "Hardening incluye permisos, servicios mínimos, configuración TLS y auditoría.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": true
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué es audit log?",
+        "opts": [
+            "Registro de acciones relevantes para trazabilidad y cumplimiento",
+            "Archivo temporal sin valor",
+            "Salida de un comando ping",
+            "Build artifact de Maven"
+        ],
+        "ans": 0,
+        "exp": "Auditoría ayuda a saber quién hizo qué, cuándo y desde dónde.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": false
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué es vulnerability scanning?",
+        "opts": [
+            "Analizar imágenes, dependencias o hosts para detectar CVEs y riesgos",
+            "Revisar estilo CSS",
+            "Ejecutar tests unitarios únicamente",
+            "Medir latencia p99"
+        ],
+        "ans": 0,
+        "exp": "Escaneo debe integrarse al pipeline con criterios claros.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": false
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué es una CVE?",
+        "opts": [
+            "Identificador público de una vulnerabilidad conocida",
+            "Comando para ver CPU",
+            "Formato de tag Git",
+            "Tipo de pod Kubernetes"
+        ],
+        "ans": 0,
+        "exp": "CVE permite rastrear impacto y parche asociado.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": false
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué es secreto en contexto DevOps?",
+        "opts": [
+            "Dato sensible como password, token, API key, certificado o llave privada",
+            "Cualquier variable de entorno pública",
+            "Nombre de una rama protegida",
+            "Dashboard oculto"
+        ],
+        "ans": 0,
+        "exp": "Trata secretos como material de alto riesgo: no logs, no Git, acceso mínimo.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": true
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué práctica mejora seguridad en imágenes Docker?",
+        "opts": [
+            "Escanear vulnerabilidades, usar base mínima, usuario no root y fijar versiones",
+            "Instalar todas las herramientas posibles",
+            "Usar latest siempre",
+            "Ejecutar como root para evitar permisos"
+        ],
+        "ans": 0,
+        "exp": "Seguridad de contenedores empieza en el build.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": true
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué es una política de ramas protegidas?",
+        "opts": [
+            "Reglas que exigen reviews/checks antes de mergear a ramas críticas",
+            "Archivo de contraseñas cifradas",
+            "Firewall de Kubernetes",
+            "Backup de Git"
+        ],
+        "ans": 0,
+        "exp": "Protege main/develop contra cambios sin validación.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": false
+    },
+    {
+        "cat": "Security",
+        "q": "¿Qué responder si te preguntan por seguridad y no eres especialista?",
+        "opts": [
+            "Explicar prácticas operativas que sí aplicas: secretos, permisos, parches, logs y escalamiento",
+            "Inventar certificaciones",
+            "Decir que seguridad no es responsabilidad de soporte",
+            "Cambiar de tema a Git"
+        ],
+        "ans": 0,
+        "exp": "Honestidad inteligente: muestra criterio y colaboración con equipos de seguridad.",
+        "reco": "En entrevista, no vendas seguridad como teoria: habla de secretos, permisos minimos, parches y auditoria.",
+        "tip": true
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Cuál es la mejor forma de responder una pregunta sobre un error que cometiste?",
+        "opts": [
+            "Usar STAR, asumir responsabilidad, explicar corrección y aprendizaje",
+            "Negar que hayas cometido errores",
+            "Culpar a otro equipo",
+            "Dar detalles confidenciales del cliente"
+        ],
+        "ans": 0,
+        "exp": "Los entrevistadores buscan ownership y aprendizaje, no perfección.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": true
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Cómo responderías a '¿por qué quieres este rol?'",
+        "opts": [
+            "Conectar experiencia, motivación por soporte/operación y aprendizaje en entornos reales",
+            "Decir solo que necesitas trabajo",
+            "Hablar mal de tu empleo anterior",
+            "Responder que cualquier rol sirve"
+        ],
+        "ans": 0,
+        "exp": "Muestra intención: producción, incidentes, automatización y crecimiento técnico.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": true
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Qué conviene mostrar en una respuesta STAR?",
+        "opts": [
+            "Acciones concretas tuyas y resultado medible",
+            "Una historia muy larga sin cierre",
+            "Solo contexto y nada de resultado",
+            "Opiniones generales del equipo"
+        ],
+        "ans": 0,
+        "exp": "STAR funciona cuando el entrevistador ve tu contribución específica.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": false
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Cómo hablar de una tecnología que conoces poco?",
+        "opts": [
+            "Ser honesto, mencionar fundamentos relacionados y plan de aprendizaje rápido",
+            "Inventar experiencia de producción",
+            "Decir que no te interesa",
+            "Responder solo no sé"
+        ],
+        "ans": 0,
+        "exp": "Honestidad con puente técnico transmite confianza.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": true
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Qué evitar al hablar de conflictos de equipo?",
+        "opts": [
+            "Culpar, ridiculizar o convertirlo en ataque personal",
+            "Mencionar hechos objetivos",
+            "Explicar cómo escuchaste",
+            "Contar el resultado positivo"
+        ],
+        "ans": 0,
+        "exp": "La madurez se ve en cómo manejas desacuerdos técnicos.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": true
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Cómo responder sobre trabajo bajo presión?",
+        "opts": [
+            "Dar ejemplo concreto de priorización, comunicación y ejecución calmada",
+            "Decir que nunca sientes presión",
+            "Contar que improvisas sin avisar",
+            "Decir que solo trabajas bien sin incidentes"
+        ],
+        "ans": 0,
+        "exp": "Producción requiere calma, método y comunicación.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": true
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Qué tipo de ejemplo conviene para liderazgo sin cargo formal?",
+        "opts": [
+            "Una situación donde coordinaste, documentaste o desbloqueaste al equipo",
+            "Solo mencionar tu título",
+            "Decir que liderazgo es cosa del manager",
+            "Hablar de tareas individuales sin impacto"
+        ],
+        "ans": 0,
+        "exp": "Liderazgo en soporte puede ser ordenar caos y ayudar a otros a ejecutar.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": false
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Cómo responder si te preguntan por disponibilidad para guardias?",
+        "opts": [
+            "Mostrar disposición realista, responsabilidad y necesidad de procesos/runbooks",
+            "Prometer disponibilidad imposible",
+            "Decir que ignoras alertas nocturnas",
+            "Evitar la pregunta"
+        ],
+        "ans": 0,
+        "exp": "La guardia responsable incluye límites sanos, handoff y documentación.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": false
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Qué muestra una buena respuesta sobre aprendizaje rápido?",
+        "opts": [
+            "Ejemplo de cómo aprendiste una tecnología y aplicaste resultado en poco tiempo",
+            "Lista de cursos sin aplicación",
+            "Decir que aprendes todo en una noche",
+            "Hablar de memoria fotográfica"
+        ],
+        "ans": 0,
+        "exp": "Aprendizaje vale más cuando se transforma en entrega o mejora.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": false
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Cómo responder sobre comunicación con cliente molesto?",
+        "opts": [
+            "Validar impacto, explicar acciones, evitar tecnicismos innecesarios y comprometer updates",
+            "Decirle que espere sin explicación",
+            "Culpar al cliente",
+            "Usar jerga para terminar rápido"
+        ],
+        "ans": 0,
+        "exp": "Cliente necesita claridad y confianza, no solo detalles técnicos.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": true
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Qué hacer si no entiendes una pregunta técnica en entrevista?",
+        "opts": [
+            "Pedir aclaración, pensar en voz alta y estructurar supuestos",
+            "Responder al azar inmediatamente",
+            "Quedarte en silencio sin explicar",
+            "Cambiar de tema"
+        ],
+        "ans": 0,
+        "exp": "Pensar en voz alta muestra método incluso si no sabes todo.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": true
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Qué conviene preguntar al final de la entrevista?",
+        "opts": [
+            "Sobre stack, tipo de incidentes, guardias, procesos, expectativas y éxito en 90 días",
+            "Nada, para salir rápido",
+            "Preguntar solo salario si ya lo hablaron",
+            "Preguntar cosas fáciles de la web"
+        ],
+        "ans": 0,
+        "exp": "Tus preguntas también demuestran criterio operativo.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": true
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Qué significa ownership en soporte?",
+        "opts": [
+            "Hacerte cargo del seguimiento hasta resolución o handoff claro",
+            "Resolver todo solo sin pedir ayuda",
+            "Tomar culpa por todo",
+            "Cerrar tickets rápido sin validar"
+        ],
+        "ans": 0,
+        "exp": "Ownership no es hacerlo todo; es no soltar el problema sin contexto.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": true
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Cómo contar logros técnicos de forma convincente?",
+        "opts": [
+            "Con problema, acción, herramienta y métrica de impacto",
+            "Con una lista de tecnologías sin historia",
+            "Diciendo que fue fácil",
+            "Omitiendo resultados"
+        ],
+        "ans": 0,
+        "exp": "Impacto medible convierte una tarea en logro.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": false
+    },
+    {
+        "cat": "Behavioral",
+        "q": "¿Qué tono conviene mantener en entrevista técnica?",
+        "opts": [
+            "Seguro, honesto, colaborativo y orientado a producción",
+            "Arrogante para demostrar seniority",
+            "Defensivo ante dudas",
+            "Extremadamente informal todo el tiempo"
+        ],
+        "ans": 0,
+        "exp": "El tono también evalúa si serías confiable en incidentes.",
+        "reco": "En entrevista, usa STAR: contexto breve, tu responsabilidad, acciones concretas y resultado medible.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Una app devuelve 502 desde el proxy. ¿Qué revisas primero?",
+        "opts": [
+            "Upstreams/backend vivos, puertos, logs del proxy, healthchecks y cambios recientes",
+            "Cambiar base de datos sin evidencia",
+            "Borrar caché del navegador únicamente",
+            "Reinstalar Git"
+        ],
+        "ans": 0,
+        "exp": "502 suele ser proxy no pudiendo hablar correctamente con backend.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Después de un deploy sube la latencia p99 pero no el promedio. ¿Qué significa?",
+        "opts": [
+            "Una parte de usuarios está experimentando lentitud severa aunque el promedio lo oculte",
+            "No hay problema porque promedio está bien",
+            "Grafana está roto siempre",
+            "Solo afecta a desarrolladores"
+        ],
+        "ans": 0,
+        "exp": "Percentiles altos son señal importante de experiencia degradada.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un cron dejó de ejecutarse. ¿Qué revisas?",
+        "opts": [
+            "crontab, logs, permisos, rutas absolutas, variables de entorno y exit codes",
+            "Solo reiniciar el servidor",
+            "Cambiar contraseña del usuario",
+            "Borrar el script"
+        ],
+        "ans": 0,
+        "exp": "Cron corre con entorno limitado; muchas fallas son path/permisos.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un contenedor se reinicia constantemente. ¿Qué haces?",
+        "opts": [
+            "Revisar logs, exit code, healthcheck, recursos, config y cambios recientes",
+            "Entrar al contenedor aunque no esté corriendo",
+            "Aumentar réplicas sin mirar causa",
+            "Borrar la imagen en producción"
+        ],
+        "ans": 0,
+        "exp": "CrashLoop requiere causa: error app, config, dependencia o recursos.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un usuario reporta error intermitente. ¿Cómo lo investigas?",
+        "opts": [
+            "Buscar patrón por tiempo, usuario, endpoint, nodo, logs, trazas y métricas",
+            "Cerrarlo porque no es reproducible",
+            "Reiniciar todo de inmediato",
+            "Pedir que no use la app"
+        ],
+        "ans": 0,
+        "exp": "Intermitente no significa falso; significa que necesitas correlación.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "El disco se llena por logs. ¿Qué solución sostenible propones?",
+        "opts": [
+            "Limpiar seguro, habilitar rotación, revisar nivel de logging y alertas tempranas",
+            "Borrar logs manualmente cada día para siempre",
+            "Aumentar disco sin revisar causa",
+            "Desactivar todos los logs"
+        ],
+        "ans": 0,
+        "exp": "Mitiga hoy y prevén recurrencia con logrotate/retención.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Una base de datos tiene muchas conexiones abiertas. ¿Qué revisas?",
+        "opts": [
+            "Pool de conexiones, leaks, queries lentas, timeouts y cambios de carga",
+            "Borrar usuarios activos",
+            "Reiniciar sin avisar siempre",
+            "Cambiar DNS"
+        ],
+        "ans": 0,
+        "exp": "Conexiones agotadas suelen ser síntoma de app, pool o consultas bloqueadas.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un deploy requiere aprobación manual. ¿Qué validas antes de aprobar?",
+        "opts": [
+            "Checks verdes, artefacto correcto, ventana, plan de rollback, impacto y comunicación",
+            "Solo que el botón esté disponible",
+            "Que el equipo tenga prisa",
+            "Que el branch tenga nombre bonito"
+        ],
+        "ans": 0,
+        "exp": "Aprobar deploy es asumir riesgo controlado.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un servicio externo del que dependes está fallando. ¿Qué haces?",
+        "opts": [
+            "Confirmar impacto, activar fallback si existe, comunicar dependencia y monitorear recuperación",
+            "Cambiar código en producción sin plan",
+            "Culpar al proveedor y cerrar ticket",
+            "Ignorar porque no es tu sistema"
+        ],
+        "ans": 0,
+        "exp": "Aunque causa sea externa, tú gestionas impacto y comunicación.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Una alerta se dispara muchas veces sin impacto real. ¿Qué propones?",
+        "opts": [
+            "Ajustar umbral, agrupar, definir dueño y hacerla accionable",
+            "Eliminar todas las alertas",
+            "Ignorar siempre el canal",
+            "Subir prioridad de todas"
+        ],
+        "ans": 0,
+        "exp": "Reducir ruido mejora respuesta a alertas reales.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Se detecta una vulnerabilidad crítica en una dependencia. ¿Cómo procedes?",
+        "opts": [
+            "Evaluar exposición, parche, prueba, despliegue controlado y comunicación de riesgo",
+            "Actualizar en producción sin tests",
+            "Ignorar hasta el próximo release anual",
+            "Borrar la dependencia aunque compile falle"
+        ],
+        "ans": 0,
+        "exp": "Seguridad crítica requiere velocidad con control.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un cambio manual en producción corrigió un incidente. ¿Qué sigue?",
+        "opts": [
+            "Documentar, versionar el cambio en IaC/config y crear acción preventiva",
+            "Dejarlo solo en el servidor",
+            "No contarlo para evitar preguntas",
+            "Borrar evidencia"
+        ],
+        "ans": 0,
+        "exp": "Cambios manuales deben volver al código para evitar drift.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un nodo está fuera del load balancer. ¿Qué revisas?",
+        "opts": [
+            "Healthcheck, app local, puerto, logs, recursos y configuración del LB",
+            "Solo reiniciar el LB",
+            "Cambiar IP del cliente",
+            "Borrar certificados"
+        ],
+        "ans": 0,
+        "exp": "El LB retira nodos por salud o conectividad; revisa ambos lados.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Producción falla pero staging está bien. ¿Qué comparas?",
+        "opts": [
+            "Versiones, configuración, datos, secretos, infraestructura, tráfico y dependencias",
+            "Solo el color del dashboard",
+            "Cantidad de commits locales",
+            "Nombre de usuarios Linux"
+        ],
+        "ans": 0,
+        "exp": "Diferencias de entorno explican muchos bugs no reproducibles.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Te piden ejecutar un comando destructivo en producción. ¿Qué haces?",
+        "opts": [
+            "Confirmar objetivo, alcance, backup/rollback, aprobación y ejecutar con límites seguros",
+            "Ejecutarlo rápido porque lo pidieron",
+            "Pegar comandos sin entender",
+            "Usar comodines amplios sin validar"
+        ],
+        "ans": 0,
+        "exp": "En producción, cuestionar riesgo es profesionalismo, no lentitud.",
+        "reco": "En entrevista, muestra calma operativa: impacto, mitigacion, comunicacion y aprendizaje.",
+        "tip": true
+    }
 ];
 
     const MODES = {
       practice: {
         label: "Práctica",
-        desc: "Feedback inmediato y explicación después de cada respuesta.",
+        desc: "Feedback inmediato, explicación y recomendación de entrevista.",
         title: "Práctica guiada",
-        subtitle: "Ideal para aprender rápido: respondes, ves la explicación y sigues."
+        subtitle: "Ideal para aprender rápido: respondes, ves la explicación, la recomendación y sigues."
       },
       exam: {
         label: "Simulacro",
@@ -1363,7 +4194,7 @@
             <div class="empty">
               ${pool.length} preguntas disponibles con el filtro actual.
             </div>
-            <button class="primary-button" type="button" id="startSessionButton">Iniciar sesión</button>
+            <button class="primary-button" type="button" id="startSessionButton">Iniciar Quiz</button>
           </aside>
         </div>
       `;
@@ -1496,6 +4327,7 @@
           <div class="answer-label">Respuesta</div>
           <strong>${escapeHtml(q.opts[q.ans])}</strong>
           <p>${escapeHtml(q.exp)}</p>
+          ${q.reco ? `<div class="interview-tip"><strong>Recomendación de entrevista</strong>${escapeHtml(q.reco)}</div>` : ""}
         </div>
         <button class="plain-button" type="button" id="revealButton">${state.showStudyAnswer ? "Ocultar respuesta" : "Revelar respuesta"}</button>
       `;
@@ -1560,6 +4392,7 @@
       feedback.innerHTML = `
         <strong>${correct ? "Correcto." : "Casi."}</strong>
         ${escapeHtml(q.exp)}
+        ${q.reco ? `<div class="interview-tip"><strong>Recomendación de entrevista</strong>${escapeHtml(q.reco)}</div>` : ""}
       `;
       document.getElementById("nextButton").disabled = false;
     }
@@ -1648,6 +4481,7 @@
                       <span>Correcta: ${escapeHtml(item.question.opts[item.question.ans])}</span>
                     </div>
                     <p>${escapeHtml(item.question.exp)}</p>
+                    ${item.question.reco ? `<div class="interview-tip"><strong>Recomendación de entrevista</strong>${escapeHtml(item.question.reco)}</div>` : ""}
                   </div>
                 `).join("")}
               </div>
