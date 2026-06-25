@@ -84,8 +84,7 @@ pipeline {
                                 export AWS_DEFAULT_REGION=us-east-1
 
                                 aws s3 cp index.html \
-                                s3://chrrodri-$APP_NAME/index.html \
-                                --delete
+                                s3://chrrodri-$APP_NAME/index.html 
 
                                 aws cloudfront create-invalidation \
                                     --distribution-id $AWS_DIST_ID \
