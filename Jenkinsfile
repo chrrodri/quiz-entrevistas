@@ -29,13 +29,13 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
         AWS_DEFAULT_REGION    = 'us-east-1'
-        AWS_DIST_ID           = 'EXQFDTZHUNARC'
-        AWS_CLOUDFRONT_URL    = 'd2vvwri7fg9lu3.cloudfront.net'
+        AWS_DIST_ID           = 'EY11WN9Y0SH7C'
+        AWS_CLOUDFRONT_URL    = 'dr9700dq0dlpo.cloudfront.net'
 
     }
 
     stages {
-        stage('BUILD') {
+/*         stage('BUILD') {
              stages {
                  stage('Package') {
                     agent {
@@ -62,7 +62,7 @@ pipeline {
                     }
                 } 
             }
-        }
+        } */
         
          stage('DEPLOY') {
             stages {
@@ -83,7 +83,7 @@ pipeline {
                             sh '''
                                 export AWS_DEFAULT_REGION=us-east-1
 
-                                aws s3 sync build/ \
+                                aws s3 sync index.html \
                                 s3://chrrodri-$APP_NAME \
                                 --delete
 
