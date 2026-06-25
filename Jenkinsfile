@@ -79,12 +79,12 @@ pipeline {
                             string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'),
                             string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')
                         ]) {
-                            sh 'echo "Publish to Cloudfront"' 
+                            sh 'echo "Publish to Cloudfront..."' 
                             sh '''
                                 export AWS_DEFAULT_REGION=us-east-1
 
-                                aws s3 sync index.html \
-                                s3://chrrodri-$APP_NAME \
+                                aws s3 cp index.html \
+                                s3://chrrodri-$APP_NAME/index.html \
                                 --delete
 
                                 aws cloudfront create-invalidation \
