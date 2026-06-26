@@ -4409,6 +4409,1266 @@
         "exp": "Conecta NTT DATA con entornos enterprise, clientes, producción, mejora continua y colaboración cross-functional.",
         "reco": "En entrevista, responde en primera persona con STAR: contexto de Oracle/IBM, tu accion concreta, herramienta usada y resultado operativo.",
         "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "En un entorno GxP validado, ¿por qué no debes aplicar un fix directo en producción sin proceso de cambio?",
+        "opts": [
+            "Porque puede romper trazabilidad, validación, compliance y control de impacto del sistema clínico",
+            "Porque Git no permite cambios directos",
+            "Porque los usuarios clínicos nunca reportan errores",
+            "Porque GxP solo aplica a redes, no aplicaciones"
+        ],
+        "ans": 0,
+        "exp": "GxP exige control documental, evaluación de impacto, aprobación y evidencia. Incluso un cambio pequeño puede afectar datos clínicos o reportes regulatorios.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué significa trabajar con una plataforma clínica GxP-compliant?",
+        "opts": [
+            "Operar bajo procesos controlados, trazables y documentados para proteger integridad de datos y cumplimiento regulatorio",
+            "Trabajar sin documentación para moverse más rápido",
+            "Hacer releases sin validación si son urgentes",
+            "Evitar todo tipo de automatización"
+        ],
+        "ans": 0,
+        "exp": "GxP se enfoca en calidad, trazabilidad, integridad de datos y evidencia de que el sistema funciona como debe.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué principio de data integrity es más relevante en sistemas clínicos?",
+        "opts": [
+            "ALCOA+: datos atribuibles, legibles, contemporáneos, originales, exactos y completos",
+            "DRY: no repetir código",
+            "KISS: mantener diseño simple",
+            "CAP: consistencia, disponibilidad y partición"
+        ],
+        "ans": 0,
+        "exp": "ALCOA+ ayuda a explicar por qué auditoría, timestamps, ownership y trazabilidad importan tanto en clinical platforms.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué debes revisar antes de liberar un fix en una plataforma clínica validada?",
+        "opts": [
+            "Ticket, impacto, aprobación, pruebas, evidencia, rollback, documentación y ventana de release",
+            "Solo que compile localmente",
+            "Que el cambio sea pequeño y parezca seguro",
+            "Que el usuario lo haya pedido por chat"
+        ],
+        "ans": 0,
+        "exp": "El cambio debe ser trazable de punta a punta: requerimiento, implementación, validación, aprobación y release.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Cómo deberías manejar un ticket L2/L3 asignado en esta posición?",
+        "opts": [
+            "Tomar ownership, reproducir, analizar logs/código, coordinar equipos, proponer fix, validar y cerrar con evidencia",
+            "Esperar a que otro equipo lo tome",
+            "Cerrar si no se reproduce al primer intento",
+            "Escalar sin contexto para ahorrar tiempo"
+        ],
+        "ans": 0,
+        "exp": "El rol pide llevar tickets hasta closure, con comunicación clara y respeto a SLA/OLA.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué diferencia hay entre SLA y OLA?",
+        "opts": [
+            "SLA es compromiso de servicio con negocio/cliente; OLA es acuerdo operativo interno entre equipos",
+            "SLA es para DevOps y OLA para usuarios finales",
+            "Son nombres distintos para el mismo reporte",
+            "OLA solo aplica a bases de datos"
+        ],
+        "ans": 0,
+        "exp": "SLA/OLA definen expectativas de respuesta y resolución. En soporte debes saber comunicar riesgo de incumplimiento temprano.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué harías si un reporte de Crystal Reports genera datos incorrectos para un equipo clínico?",
+        "opts": [
+            "Validar input, query, filtros, fuente de datos, cambios recientes, impacto clínico y corregir con evidencia documentada",
+            "Regenerar el reporte hasta que parezca correcto",
+            "Cambiar datos manualmente en producción",
+            "Cerrar el ticket si el reporte abre"
+        ],
+        "ans": 0,
+        "exp": "En reporting clínico, exactitud importa tanto como disponibilidad. Debes preservar evidencia y evitar modificaciones manuales no controladas.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Cuál es una buena forma de explicar experiencia con reporting tools como Crystal Reports, MicroStrategy o BusinessObjects?",
+        "opts": [
+            "Como herramientas que consumen datos estructurados para reportes críticos, donde validas queries, filtros, permisos y consistencia",
+            "Como herramientas para administrar contenedores",
+            "Como reemplazo de bases de datos",
+            "Como editores de código Java"
+        ],
+        "ans": 0,
+        "exp": "Aunque no domines todas, conecta reporting con SQL, datos, usuarios de negocio, permisos y validación.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué es ETL en el contexto de clinical platforms?",
+        "opts": [
+            "Extract, Transform, Load: mover datos desde fuentes hacia destinos aplicando transformaciones y controles",
+            "Error Tracking Log",
+            "Enterprise Ticket Lifecycle",
+            "External Test Library"
+        ],
+        "ans": 0,
+        "exp": "ETL en clínica puede alimentar reportes, integraciones y data pipelines. Debes pensar en calidad, reconciliación y fallos parciales.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué debes revisar si falla un proceso ETL inbound nocturno?",
+        "opts": [
+            "Logs, lote afectado, fuente, transformaciones, credenciales, conectividad, datos rechazados, reintento y downstream impact",
+            "Solo reiniciar todos los servidores",
+            "Borrar registros rechazados para limpiar el error",
+            "Cambiar el SLA sin avisar"
+        ],
+        "ans": 0,
+        "exp": "El análisis debe separar falla técnica, falla de datos y falla de dependencia externa.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué significa inbound integration?",
+        "opts": [
+            "Datos que entran a la plataforma desde un sistema externo",
+            "Datos exportados hacia otro sistema",
+            "Un deploy de frontend",
+            "Un backup manual"
+        ],
+        "ans": 0,
+        "exp": "Inbound requiere validación de formato, autenticación, mapping, deduplicación y manejo de errores.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": false
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué significa outbound integration?",
+        "opts": [
+            "Datos que salen de la plataforma hacia sistemas externos o consumidores downstream",
+            "Logs internos de aplicación",
+            "Queries locales de desarrollo",
+            "Un branch release"
+        ],
+        "ans": 0,
+        "exp": "Outbound requiere confirmar entrega, formato, seguridad, retries y comunicación a sistemas dependientes.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": false
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Cómo manejarías una integración que procesa archivos parcialmente?",
+        "opts": [
+            "Detener propagación si hay riesgo, identificar registros exitosos/fallidos, reconciliar, documentar y reintentar de forma controlada",
+            "Marcar todo como exitoso para cumplir SLA",
+            "Borrar el archivo fuente",
+            "Reprocesar infinitamente sin control"
+        ],
+        "ans": 0,
+        "exp": "Los fallos parciales son peligrosos: necesitas idempotencia, reconciliación y evidencia.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué hace valioso a JIRA en soporte de clinical platforms?",
+        "opts": [
+            "Trazar tickets, Stories, Epics, prioridades, evidencias, decisiones y avance hasta cierre",
+            "Reemplazar pruebas funcionales",
+            "Guardar contraseñas de producción",
+            "Ejecutar ETLs automáticamente"
+        ],
+        "ans": 0,
+        "exp": "JIRA es parte del control operativo y del historial de decisiones.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": false
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué debe incluir una KBA efectiva para soporte?",
+        "opts": [
+            "Síntomas, impacto, causa conocida, pasos de diagnóstico, solución, validación y cuándo escalar",
+            "Solo una captura de pantalla",
+            "Un texto genérico sin pasos",
+            "Credenciales para producción"
+        ],
+        "ans": 0,
+        "exp": "KBAs reducen tiempo de resolución y ayudan a que L1/L2 resuelvan casos repetibles.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Cómo liderarías una outage call de una aplicación clínica?",
+        "opts": [
+            "Abrir timeline, confirmar impacto, asignar owners, revisar evidencias, comunicar updates y conducir hacia mitigación",
+            "Permitir que todos hablen sin estructura",
+            "Buscar culpables al inicio",
+            "Esperar hasta tener RCA completo para comunicar"
+        ],
+        "ans": 0,
+        "exp": "Una outage call necesita ritmo, claridad y decisiones. Primero se restaura servicio; luego RCA.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué comunicación enviarías ante una interrupción no planeada?",
+        "opts": [
+            "Impacto, sistemas afectados, hora de inicio, acciones en curso, workaround si existe y próximo update",
+            "Detalles internos sin validar",
+            "Promesas de solución sin evidencia",
+            "Silencio hasta resolver todo"
+        ],
+        "ans": 0,
+        "exp": "La comunicación en clinical platforms debe ser rápida, precisa y responsable.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué es change management en SaaS validado GxP?",
+        "opts": [
+            "Proceso controlado para evaluar, aprobar, implementar, validar y documentar cambios",
+            "Hacer cambios rápidos sin avisar",
+            "Actualizar producción desde una laptop",
+            "Cerrar tickets al moverlos de estado"
+        ],
+        "ans": 0,
+        "exp": "Change management protege compliance y continuidad. No es burocracia vacía; es control de riesgo.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué harías si negocio pide una mejora urgente que no cabe en el release actual?",
+        "opts": [
+            "Crear backlog item/Story, evaluar prioridad, impacto, compliance, esfuerzo y negociar release o workaround",
+            "Meter el cambio sin ticket",
+            "Prometer fecha sin análisis",
+            "Rechazarlo sin entender impacto"
+        ],
+        "ans": 0,
+        "exp": "El rol pide convertir necesidades en Stories/Epics y ejecutarlas por prioridad de negocio.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué significa BizDevOps en esta vacante?",
+        "opts": [
+            "Colaboración continua entre negocio/producto, desarrollo y operaciones para entregar y soportar valor end to end",
+            "Un equipo separado que solo hace monitoreo",
+            "Un reemplazo de ITIL",
+            "Un framework solo para documentación"
+        ],
+        "ans": 0,
+        "exp": "BizDevOps combina ownership de producto, entrega, soporte, releases y mejora continua.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Por qué es importante trabajar con programación, bioestadística, data management y clinical sciences?",
+        "opts": [
+            "Porque los issues clínicos mezclan datos, proceso científico, reporting y operación técnica",
+            "Porque todos hacen exactamente la misma tarea",
+            "Porque soporte no necesita entender usuarios",
+            "Porque elimina la necesidad de SLA"
+        ],
+        "ans": 0,
+        "exp": "La colaboración multi-funcional ayuda a interpretar impacto real y priorizar correctamente.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué harías si no conoces un clinical data management system específico?",
+        "opts": [
+            "Ser honesto, mapear conceptos conocidos de datos, integraciones, SQL y soporte, y aprender el flujo del sistema",
+            "Inventar experiencia avanzada",
+            "Evitar tocar el ticket",
+            "Decir que todos los sistemas clínicos son iguales"
+        ],
+        "ans": 0,
+        "exp": "La vacante valora aprendizaje continuo; usa tu experiencia en sistemas enterprise para acortar curva.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué debes cuidar al hacer dry run del código de una aplicación?",
+        "opts": [
+            "Entender flujo, inputs, validaciones, dependencias y posibles efectos sin modificar datos productivos",
+            "Ejecutar cambios en producción sin control",
+            "Ignorar logs porque el código dice todo",
+            "Hacer pruebas con datos reales sensibles sin permiso"
+        ],
+        "ans": 0,
+        "exp": "Dry run ayuda a reproducir lógica y encontrar causa, pero debe proteger datos y ambiente.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué indica que un problema de reporte puede ser de permisos?",
+        "opts": [
+            "El reporte funciona para algunos usuarios o roles, pero falla o muestra menos datos para otros",
+            "Todos los usuarios ven exactamente el mismo error 500",
+            "La base de datos está apagada siempre",
+            "El navegador no tiene internet"
+        ],
+        "ans": 0,
+        "exp": "En reporting, permisos y row-level security pueden explicar diferencias entre usuarios.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué harías si un usuario clínico reporta datos faltantes en un dashboard?",
+        "opts": [
+            "Validar fuente, refresh, filtros, ETL, permisos, fecha de corte, errores de carga y reconciliación",
+            "Decir que espere al próximo mes",
+            "Editar el dashboard sin investigar",
+            "Cambiar credenciales del usuario"
+        ],
+        "ans": 0,
+        "exp": "Datos faltantes requieren distinguir visualización, pipeline, permisos y origen.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Por qué BitBucket es relevante en day-to-day delivery?",
+        "opts": [
+            "Permite versionar cambios, revisar pull requests y mantener trazabilidad del código liberado",
+            "Sirve para monitorear CPU",
+            "Reemplaza Confluence",
+            "Es un sistema de tickets clínicos"
+        ],
+        "ans": 0,
+        "exp": "BitBucket conecta código, revisión, ramas y releases.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": false
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Cuál es una buena respuesta a 'How do you manage fast-changing programs with minimal supervision?'",
+        "opts": [
+            "Priorizo por impacto/SLA, mantengo comunicación, documento decisiones, pido claridad cuando hay riesgo y ejecuto con ownership",
+            "Espero instrucciones detalladas para cada paso",
+            "Cambio prioridades sin avisar",
+            "Trabajo sin documentar para ir más rápido"
+        ],
+        "ans": 0,
+        "exp": "Self-driven no significa aislado: significa avanzar con criterio y visibilidad.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué debes hacer si un fix requiere cambio de código en una aplicación clínica?",
+        "opts": [
+            "Crear/actualizar ticket, branch, pruebas, revisión, evidencia, release controlado y documentación",
+            "Editar código directo en servidor",
+            "Enviar el fix por correo",
+            "Cerrar el incidente sin deploy"
+        ],
+        "ans": 0,
+        "exp": "El rol pide entregar fixes por cambios de código cuando haga falta, siguiendo SDLC.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué significa 'defined timelines' en soporte?",
+        "opts": [
+            "Responder y resolver dentro de tiempos acordados por prioridad, SLA/OLA e impacto",
+            "Resolver todo cuando haya tiempo libre",
+            "Dar la misma prioridad a todos los tickets",
+            "Cerrar tickets sin validar para cumplir métrica"
+        ],
+        "ans": 0,
+        "exp": "Cumplir timeline requiere priorizar, comunicar bloqueos y escalar temprano.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": false
+    },
+    {
+        "cat": "GxP Clinical Platforms",
+        "q": "¿Qué métrica revisarías para detectar tickets que están en riesgo de SLA?",
+        "opts": [
+            "Edad del ticket, prioridad, tiempo sin update, owner, estado, bloqueos y fecha objetivo",
+            "Cantidad de comentarios sociales",
+            "Tamaño del archivo adjunto",
+            "Color del avatar del usuario"
+        ],
+        "ans": 0,
+        "exp": "Monitorear queues proactivamente evita sorpresas de SLA.",
+        "reco": "En entrevista, conecta tu respuesta con compliance GxP, trazabilidad, SDLC/ITIL, SLA/OLA, documentacion y cero improvisacion en cambios validados.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué significa diseñar infraestructura robusta para sistemas críticos?",
+        "opts": [
+            "Crear soluciones escalables, observables, seguras y tolerantes a fallos con recuperación probada",
+            "Elegir el servidor más grande posible",
+            "Evitar monitoreo para reducir ruido",
+            "Depender de intervención manual siempre"
+        ],
+        "ans": 0,
+        "exp": "Robustez combina arquitectura, operación, automatización y pruebas de recuperación.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué es pensamiento sistémico en confiabilidad?",
+        "opts": [
+            "Entender cómo cambios en una parte afectan servicios, dependencias, usuarios, datos y operación completa",
+            "Optimizar un componente sin mirar impacto",
+            "Mirar solo CPU de un servidor",
+            "Evitar hablar con desarrollo"
+        ],
+        "ans": 0,
+        "exp": "Ciena enfatiza sistemas interconectados; debes anticipar efectos laterales.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué señales monitorearías para salud de sistema?",
+        "opts": [
+            "Latencia, errores, tráfico, saturación, disponibilidad, logs, colas, DB y dependencias externas",
+            "Solo espacio en disco una vez al mes",
+            "Número de commits diarios",
+            "Cantidad de usuarios en Jira"
+        ],
+        "ans": 0,
+        "exp": "Las señales deben indicar impacto real y dar pistas accionables.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué significa monitoreo proactivo?",
+        "opts": [
+            "Detectar degradaciones y patrones antes de que usuarios sufran impacto mayor",
+            "Esperar a que el cliente reporte",
+            "Apagar alertas fuera de horario",
+            "Revisar dashboards solo después del incidente"
+        ],
+        "ans": 0,
+        "exp": "Proactividad es identificar riesgo temprano con métricas, alertas y automatización.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué harías durante una interrupción de servicio crítica?",
+        "opts": [
+            "Confirmar impacto, liderar incidente, asignar acciones, mitigar, comunicar y preservar evidencia para RCA",
+            "Investigar causa raíz completa antes de mitigar",
+            "Hacer cambios grandes sin coordinación",
+            "Esperar a que desarrollo llegue"
+        ],
+        "ans": 0,
+        "exp": "El objetivo inicial es minimizar downtime y restaurar servicio con control.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué diferencia hay entre mitigación y solución permanente?",
+        "opts": [
+            "Mitigación reduce impacto ahora; solución permanente elimina o reduce la causa raíz a largo plazo",
+            "Son exactamente lo mismo",
+            "Mitigación solo aplica a bases de datos",
+            "Solución permanente siempre se hace durante el P1"
+        ],
+        "ans": 0,
+        "exp": "SRE separa restaurar servicio de prevenir recurrencia.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué debe contener un RCA sólido?",
+        "opts": [
+            "Timeline, impacto, causa raíz, factores contribuyentes, detección, respuesta y acciones preventivas con owners",
+            "Culpable principal y una disculpa",
+            "Solo logs sin análisis",
+            "Una lista de cambios no priorizados"
+        ],
+        "ans": 0,
+        "exp": "RCA debe convertir incidente en mejoras concretas.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué tipo de automatización aporta más valor operativo?",
+        "opts": [
+            "La que elimina tareas repetitivas, reduce errores manuales y acelera respuesta o prevención",
+            "Automatizar por moda aunque aumente riesgo",
+            "Scripts sin logging ni control",
+            "Automatización que solo funciona en tu laptop"
+        ],
+        "ans": 0,
+        "exp": "Automatizar debe mejorar confiabilidad, no esconder complejidad.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué características debe tener un script de operación confiable?",
+        "opts": [
+            "Idempotencia, validaciones, logging, manejo de errores, dry-run y rollback si aplica",
+            "Solo un comando largo copiado de chat",
+            "Sin logs para ser rápido",
+            "Permisos root permanentes"
+        ],
+        "ans": 0,
+        "exp": "Scripts operativos son parte de producción; deben tratarse como software.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Cómo colaborarías con desarrollo para mejorar confiabilidad?",
+        "opts": [
+            "Compartiendo métricas, incidentes, patrones de fallos, SLOs y cambios de diseño preventivos",
+            "Solo reportando bugs sin contexto",
+            "Evitando hablar de operación",
+            "Pidiendo que no hagan releases"
+        ],
+        "ans": 0,
+        "exp": "La confiabilidad se diseña con dev y operación juntos, no al final.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué es performance optimization?",
+        "opts": [
+            "Identificar cuellos de botella con datos y mejorar latencia, throughput o uso de recursos sin romper estabilidad",
+            "Aumentar CPU siempre",
+            "Eliminar logs críticos",
+            "Cambiar todo el sistema en un solo release"
+        ],
+        "ans": 0,
+        "exp": "Optimizar exige medición antes/después y entender tradeoffs.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué revisarías ante saturación de CPU en un servicio crítico?",
+        "opts": [
+            "Procesos, cambios recientes, tráfico, threads, queries, autoscaling, límites y errores asociados",
+            "Solo reiniciar y cerrar ticket",
+            "Cambiar DNS",
+            "Borrar índices de base de datos"
+        ],
+        "ans": 0,
+        "exp": "CPU alta es síntoma; necesitas encontrar causa e impacto.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué revisarías ante aumento de latencia sin aumento de errores?",
+        "opts": [
+            "Percentiles, dependencias, DB, colas, red, GC, pool de conexiones y cambios recientes",
+            "Nada porque no hay errores",
+            "Solo el promedio",
+            "Solo reiniciar navegador"
+        ],
+        "ans": 0,
+        "exp": "La latencia puede degradar experiencia antes de que aparezcan errores.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué es resiliencia en sistemas distribuidos?",
+        "opts": [
+            "Capacidad de continuar o recuperarse ante fallas parciales de componentes o dependencias",
+            "Tener una sola instancia poderosa",
+            "Evitar monitorear dependencias",
+            "No hacer releases"
+        ],
+        "ans": 0,
+        "exp": "Resiliencia requiere timeouts, retries controlados, circuit breakers, redundancia y degradación elegante.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué riesgo tienen retries mal diseñados?",
+        "opts": [
+            "Pueden amplificar carga y empeorar una falla de dependencia",
+            "Siempre arreglan cualquier problema",
+            "Eliminan necesidad de timeouts",
+            "Solo afectan logs"
+        ],
+        "ans": 0,
+        "exp": "Retries deben tener backoff, límite y awareness de idempotencia.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué es circuit breaker?",
+        "opts": [
+            "Patrón que corta temporalmente llamadas a una dependencia fallando para proteger el sistema",
+            "Comando para reiniciar servidores",
+            "Firewall físico obligatorio",
+            "Tipo de índice SQL"
+        ],
+        "ans": 0,
+        "exp": "Circuit breaker evita cascadas de falla y permite recuperación controlada.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": false
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué significa capacidad predictiva en operaciones?",
+        "opts": [
+            "Usar tendencias y patrones de métricas para anticipar saturación o fallos",
+            "Adivinar sin datos",
+            "Esperar reportes de usuarios",
+            "Hacer upgrades sin análisis"
+        ],
+        "ans": 0,
+        "exp": "La vacante valora interpretar datos para prevenir problemas futuros.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué documentación es útil para troubleshooting eficiente?",
+        "opts": [
+            "Arquitectura, runbooks, dependencias, dashboards, procedimientos de rollback, owners y FAQs",
+            "Solo diagramas bonitos sin pasos",
+            "Documentos sin actualizar",
+            "Contraseñas en texto plano"
+        ],
+        "ans": 0,
+        "exp": "Documentación debe acelerar diagnóstico y handoff.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué significa ownership mindset en Ciena?",
+        "opts": [
+            "Identificar riesgos antes del impacto, proponer mejoras y seguir problemas hasta resolución sostenible",
+            "Esperar siempre instrucciones",
+            "Resolver solo lo asignado aunque veas riesgo claro",
+            "Evitar proponer mejoras"
+        ],
+        "ans": 0,
+        "exp": "Ownership es actuar por confiabilidad del sistema, no solo por ticket.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Cómo evaluarías el impacto de un cambio en un sistema interconectado?",
+        "opts": [
+            "Mapeando dependencias, usuarios, datos, APIs, fallbacks, monitoreo, rollback y ventanas de riesgo",
+            "Mirando solo el componente modificado",
+            "Asumiendo que no afecta a nadie",
+            "Haciendo deploy primero y revisando después"
+        ],
+        "ans": 0,
+        "exp": "Pensamiento sistémico reduce incidentes por efectos secundarios.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué es una plataforma altamente disponible?",
+        "opts": [
+            "Sistema diseñado para minimizar downtime mediante redundancia, failover, healthchecks y operación controlada",
+            "Un sistema que nunca requiere mantenimiento",
+            "Un servidor sin backups",
+            "Un sistema sin monitoreo"
+        ],
+        "ans": 0,
+        "exp": "HA no es promesa absoluta; es diseño y operación para tolerar fallas.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": false
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué debes revisar en una arquitectura cloud para confiabilidad?",
+        "opts": [
+            "Zonas, balanceo, autoscaling, backups, IAM, redes, observabilidad, límites y DR",
+            "Solo costo mensual",
+            "Nombre de instancias",
+            "Tema visual del portal"
+        ],
+        "ans": 0,
+        "exp": "Cloud reliability mezcla arquitectura, seguridad, operación y límites de servicio.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué relación tienen CI/CD y confiabilidad?",
+        "opts": [
+            "Pipelines con pruebas, gates, rollback y despliegue controlado reducen fallos y MTTR",
+            "CI/CD solo aumenta velocidad sin control",
+            "No tiene relación con producción",
+            "CI/CD reemplaza monitoreo"
+        ],
+        "ans": 0,
+        "exp": "Una entrega confiable necesita automatización con seguridad operacional.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": false
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué harías si una automatización falla a mitad de una operación?",
+        "opts": [
+            "Detener, revisar logs, evaluar estado parcial, aplicar rollback o reintento idempotente y documentar",
+            "Ejecutarla varias veces sin revisar",
+            "Borrar logs para limpiar",
+            "Cambiar producción manualmente sin registro"
+        ],
+        "ans": 0,
+        "exp": "Automatización debe prever fallos parciales y recuperación.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué significa interpretar métricas con contexto?",
+        "opts": [
+            "Comparar contra baseline, releases, tráfico, eventos y dependencias antes de concluir",
+            "Mirar un número aislado",
+            "Asumir que toda alerta es falsa",
+            "Usar solo promedios"
+        ],
+        "ans": 0,
+        "exp": "Métricas sin contexto llevan a diagnósticos erróneos.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué ventaja tiene integrar mejores prácticas de reliability en diseño de software?",
+        "opts": [
+            "Previene incidentes antes de que lleguen a operación",
+            "Hace innecesarias las pruebas",
+            "Elimina todo costo cloud",
+            "Evita comunicación entre equipos"
+        ],
+        "ans": 0,
+        "exp": "Reliability se construye desde diseño: timeouts, observabilidad, errores claros y degradación.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué debes hacer si detectas un riesgo antes de impacto a usuarios?",
+        "opts": [
+            "Crear evidencia, comunicar riesgo, proponer acción preventiva y priorizar con stakeholders",
+            "Ignorarlo porque no hay ticket",
+            "Esperar a que falle",
+            "Hacer cambio no aprobado"
+        ],
+        "ans": 0,
+        "exp": "La vacante valora identificar problemas antes de user impact.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Cómo responderías a una pregunta sobre trabajar bajo presión?",
+        "opts": [
+            "Con ejemplo donde mantuviste calma, priorizaste impacto, coordinaste acciones y comunicaste updates",
+            "Diciendo que nunca hay presión",
+            "Culpando a usuarios",
+            "Hablando solo de herramientas"
+        ],
+        "ans": 0,
+        "exp": "Ciena menciona calma metodica en presión; prepara un STAR de incidente real.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Qué papel juega ServiceNow en operaciones si aparece en la vacante?",
+        "opts": [
+            "Gestionar incidentes, cambios, problemas, SLAs y trazabilidad operativa",
+            "Reemplazar bases de datos",
+            "Compilar código Java",
+            "Crear dashboards de red únicamente"
+        ],
+        "ans": 0,
+        "exp": "Aunque no sea tu herramienta principal, conecta ServiceNow con ITIL y control de tickets.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": false
+    },
+    {
+        "cat": "Ciena Reliability / SRE",
+        "q": "¿Cómo conectarías Oracle, Mulesoft u Oracle Integration Cloud con confiabilidad?",
+        "opts": [
+            "Como integraciones críticas donde debes monitorear flujos, errores, retries, seguridad y dependencias",
+            "Como herramientas sin impacto operativo",
+            "Como reemplazo de Linux",
+            "Como lenguajes frontend"
+        ],
+        "ans": 0,
+        "exp": "Las integraciones suelen ser puntos de falla; reliability debe cubrirlas explícitamente.",
+        "reco": "En entrevista, muestra pensamiento sistemico: confiabilidad, metricas, automatizacion, resiliencia, impacto de cambios y mejora permanente.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Una plataforma clínica validada tiene un bug que afecta un reporte usado por clinical sciences. ¿Qué haces primero?",
+        "opts": [
+            "Confirmar impacto y alcance, preservar evidencia, abrir/actualizar ticket, validar datos afectados y coordinar mitigación controlada",
+            "Editar el reporte directo en producción",
+            "Decir que no es técnico porque es del negocio",
+            "Esperar al siguiente release sin comunicar"
+        ],
+        "ans": 0,
+        "exp": "En sistemas clínicos, impacto de datos y trazabilidad son prioridad desde el inicio.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un ETL outbound falló después de procesar 60% de registros. ¿Cuál es el enfoque correcto?",
+        "opts": [
+            "Identificar procesados/no procesados, evitar duplicados, reconciliar, comunicar downstream impact y reintentar de forma idempotente",
+            "Reprocesar todo sin revisar duplicados",
+            "Marcar el job como exitoso",
+            "Borrar registros incompletos sin aprobación"
+        ],
+        "ans": 0,
+        "exp": "Los fallos parciales exigen control de estado e idempotencia.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un usuario VIP reporta que un dashboard clínico no actualizó datos del día. No hay alerta. ¿Qué haces?",
+        "opts": [
+            "Investigar refresh, pipeline, fuente, permisos, filtros, logs y comparar con baseline antes de descartar",
+            "Responder que sin alerta no hay problema",
+            "Reiniciar toda la plataforma",
+            "Cambiar los datos manualmente"
+        ],
+        "ans": 0,
+        "exp": "La ausencia de alerta no invalida el reporte de usuario.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Durante una outage call todos hablan a la vez y no hay avance. ¿Cómo lideras?",
+        "opts": [
+            "Defines impacto, roles, próximos pasos, tiempos de update, canal único y decisiones documentadas",
+            "Dejas que la conversación siga libremente",
+            "Cuelgas hasta tener RCA",
+            "Buscas culpable para ordenar la llamada"
+        ],
+        "ans": 0,
+        "exp": "La llamada necesita estructura para reducir MTTR.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Una alerta de latencia sube tras un deploy de integración. ¿Qué correlaciones revisas?",
+        "opts": [
+            "Versión desplegada, endpoints afectados, dependencia externa, retries, errores, colas y rollback posible",
+            "Solo CPU del servidor",
+            "Cantidad de comentarios en Jira",
+            "Nombre del branch"
+        ],
+        "ans": 0,
+        "exp": "Integraciones pueden generar latencia por dependencia, formato, retry o carga.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un ticket P2 lleva mucho tiempo sin update y se acerca al SLA. ¿Qué haces?",
+        "opts": [
+            "Actualizar estado, identificar bloqueo, escalar si hace falta, comunicar ETA/riesgo y priorizar siguiente acción",
+            "Esperar a resolver antes de comentar",
+            "Cerrarlo para no incumplir",
+            "Cambiar prioridad sin avisar"
+        ],
+        "ans": 0,
+        "exp": "SLA se gestiona con acción y comunicación, no solo resolución final.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un vendor dice que el problema no es suyo, pero tus logs muestran timeouts hacia su API. ¿Qué haces?",
+        "opts": [
+            "Compartes evidencia concreta, timestamps, correlation IDs, impacto y mantienes workaround/seguimiento",
+            "Aceptas la respuesta y cierras",
+            "Culpas al vendor en comunicación ejecutiva",
+            "Cambias código sin validar"
+        ],
+        "ans": 0,
+        "exp": "Con vendors, evidencia clara acelera resolución y evita discusiones vagas.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un cambio pequeño en una plataforma validada requiere saltarse aprobación para cumplir fecha. ¿Qué respondes?",
+        "opts": [
+            "No saltaría control; propondría cambio de emergencia documentado o workaround aprobado según riesgo",
+            "Acepto porque el cambio es pequeño",
+            "Lo hago y documento después si alguien pregunta",
+            "Pido credenciales de otro usuario"
+        ],
+        "ans": 0,
+        "exp": "Compliance se rompe muchas veces por 'cambios pequeños'.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un sistema distribuido empieza con errores intermitentes en una sola región cloud. ¿Cómo investigas?",
+        "opts": [
+            "Comparas región sana vs afectada: métricas, red, dependencias, despliegue, capacidad, logs y healthchecks",
+            "Reinicias todas las regiones",
+            "Ignoras porque es intermitente",
+            "Culpar al usuario local"
+        ],
+        "ans": 0,
+        "exp": "Comparación entre bueno/malo acelera aislamiento de causa.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Una automatización de limpieza borró más archivos de los esperados. ¿Qué haces?",
+        "opts": [
+            "Detener job, evaluar impacto, restaurar backup si aplica, comunicar, preservar logs y corregir guardrails",
+            "Ocultar logs",
+            "Volver a ejecutar para completar",
+            "Cambiar permisos a 777"
+        ],
+        "ans": 0,
+        "exp": "Incidente de automatización requiere contención y prevención: dry-run, límites y confirmaciones.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Una base de datos responde lento y afecta reportes clínicos. ¿Qué revisas?",
+        "opts": [
+            "Queries, locks, índices, plan, carga ETL/reporting, pool, I/O y cambios recientes",
+            "Solo reiniciar el dashboard",
+            "Cambiar filtros de usuario",
+            "Borrar reportes viejos"
+        ],
+        "ans": 0,
+        "exp": "Reporting lento puede venir de DB, ETL, permisos o volumen.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Una release salió bien técnicamente pero usuarios no entienden el cambio. ¿Qué faltó?",
+        "opts": [
+            "Comunicación, release notes, KBA, entrenamiento o engagement con stakeholders",
+            "Más CPU",
+            "Un rollback inmediato siempre",
+            "Menos documentación"
+        ],
+        "ans": 0,
+        "exp": "En plataformas usadas por negocio, adopción y comunicación también son parte del éxito.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": false
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un incidente se resolvió reiniciando un servicio, pero vuelve cada semana. ¿Qué debes hacer?",
+        "opts": [
+            "Abrir problem/RCA, buscar causa raíz, patrón, métricas y acción permanente",
+            "Seguir reiniciando semanalmente",
+            "Cerrar cada incidente como resuelto definitivo",
+            "Desactivar alerta"
+        ],
+        "ans": 0,
+        "exp": "Reinicio puede ser workaround, no solución.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un equipo de desarrollo pide acceso admin permanente para investigar producción. ¿Cómo respondes?",
+        "opts": [
+            "Aplicar mínimo privilegio, acceso temporal aprobado, auditoría y alternativa segura de logs/diagnóstico",
+            "Dar admin para acelerar",
+            "Compartir credenciales existentes",
+            "Desactivar auditoría"
+        ],
+        "ans": 0,
+        "exp": "Seguridad y compliance requieren control de acceso incluso bajo presión.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un dashboard muestra disponibilidad 100%, pero usuarios reportan errores en una funcionalidad específica. ¿Qué significa?",
+        "opts": [
+            "El monitoreo no cubre ese journey; necesitas métricas sintéticas o funcionales más específicas",
+            "Los usuarios están equivocados",
+            "El dashboard prueba todo el sistema",
+            "No hay nada que hacer"
+        ],
+        "ans": 0,
+        "exp": "Disponibilidad técnica no siempre equivale a experiencia funcional.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un backlog tiene muchos tickets de enhancement y varios incidentes. ¿Cómo priorizas?",
+        "opts": [
+            "Impacto al negocio, SLA, riesgo compliance, severidad, dependencias y valor del producto con Product/DevOps",
+            "Por el ticket más fácil primero siempre",
+            "Por quien grite más fuerte",
+            "Por orden alfabético"
+        ],
+        "ans": 0,
+        "exp": "BizDevOps requiere priorización transparente entre soporte y mejora.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un pipeline de release falla en pruebas de validación GxP. ¿Qué haces?",
+        "opts": [
+            "Detener release, revisar evidencia, corregir causa, repetir validación y documentar decisión",
+            "Forzar deploy porque el build compiló",
+            "Eliminar la prueba fallida",
+            "Cambiar resultado manualmente"
+        ],
+        "ans": 0,
+        "exp": "En validado, una prueba fallida es señal de control, no un obstáculo a ignorar.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un sistema crítico depende de una API externa sin timeout adecuado. ¿Qué riesgo ves?",
+        "opts": [
+            "Bloqueo de threads, latencia en cascada y agotamiento de recursos ante falla externa",
+            "Ningún riesgo si la API normalmente funciona",
+            "Solo afecta logs",
+            "Mejora disponibilidad automáticamente"
+        ],
+        "ans": 0,
+        "exp": "Timeouts y circuit breakers protegen sistemas distribuidos.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Tu manager pide una mejora de resiliencia pero no hay incidente abierto. ¿Cómo justificas prioridad?",
+        "opts": [
+            "Con métricas, tendencias, riesgo, impacto potencial, costo de no hacerlo y alineación con reliability goals",
+            "Diciendo que es interesante técnicamente",
+            "Esperando a que falle",
+            "Ocultándolo en otro ticket"
+        ],
+        "ans": 0,
+        "exp": "Prevención se vende con evidencia de riesgo y valor.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Una cola de mensajes crece lentamente durante horas. ¿Qué indica y qué haces?",
+        "opts": [
+            "Posible consumidor lento/fallando; revisar rate de entrada/salida, errores, capacidad y downstream antes de caída",
+            "Nada hasta que llegue a cero",
+            "Borrar la cola",
+            "Aumentar productores"
+        ],
+        "ans": 0,
+        "exp": "Backlog creciente es señal temprana de saturación o falla downstream.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un cambio en permisos hace que algunos usuarios pierdan acceso a reportes. ¿Qué revisas?",
+        "opts": [
+            "Roles, grupos, row-level security, auditoría de cambio, usuarios afectados y rollback controlado",
+            "Solo navegador del usuario",
+            "Reiniciar base de datos",
+            "Cambiar contraseña de todos"
+        ],
+        "ans": 0,
+        "exp": "Permisos en reporting requieren diagnóstico por rol y evidencia.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Una dependencia cloud alcanza límite de cuota durante pico de tráfico. ¿Qué haces?",
+        "opts": [
+            "Mitigar impacto, escalar cuota/capacidad, revisar autoscaling, alertas preventivas y forecast",
+            "Culpar al proveedor y esperar",
+            "Apagar monitoreo",
+            "Reducir logs sin analizar"
+        ],
+        "ans": 0,
+        "exp": "Límites cloud son parte de diseño de confiabilidad.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un reporte regulatorio fue generado con una versión anterior de datos. ¿Qué haces?",
+        "opts": [
+            "Evaluar impacto, notificar stakeholders, preservar evidencia, regenerar bajo control y documentar CAPA si aplica",
+            "Sobrescribir archivo sin avisar",
+            "Decir que no importa si el formato está bien",
+            "Borrar el reporte viejo sin registro"
+        ],
+        "ans": 0,
+        "exp": "En contextos GxP, exactitud y trazabilidad del dato son críticas.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un incidente mayor termina. ¿Qué acciones siguen?",
+        "opts": [
+            "Postmortem/RCA, acciones preventivas, KBA/runbook, ajustes de monitoreo y seguimiento de owners",
+            "Olvidarlo si ya funciona",
+            "Cerrar todos los tickets sin aprendizaje",
+            "Borrar timeline"
+        ],
+        "ans": 0,
+        "exp": "Después del incidente se reduce recurrencia.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Una mejora requiere coordinación entre Product, DevOps y soporte. ¿Cómo la gestionas?",
+        "opts": [
+            "Definir objetivo, Story/Epic, criterios de aceptación, riesgos, plan de release, owners y comunicación",
+            "Trabajarla sin avisar hasta terminar",
+            "Pedir que un solo equipo decida todo",
+            "No documentar para evitar burocracia"
+        ],
+        "ans": 0,
+        "exp": "BizDevOps funciona con claridad de valor, riesgo y ejecución.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un job ETL falla por datos inválidos enviados por sistema externo. ¿Cuál es la respuesta madura?",
+        "opts": [
+            "Separar falla técnica de calidad de datos, compartir registros rechazados, acordar corrección y proteger reintentos",
+            "Modificar datos externos sin autorización",
+            "Desactivar validaciones",
+            "Aceptar datos inválidos para cumplir horario"
+        ],
+        "ans": 0,
+        "exp": "Validaciones protegen calidad de datos; no son errores que deban eliminarse sin análisis.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un usuario pide cerrar un ticket aunque no validó la solución. ¿Qué haces?",
+        "opts": [
+            "Pedir confirmación o evidencia razonable, documentar estado y cerrar según proceso si corresponde",
+            "Cerrar sin nota",
+            "Dejarlo abierto indefinidamente sin update",
+            "Eliminar comentarios"
+        ],
+        "ans": 0,
+        "exp": "Closure debe tener validación o criterio documentado.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": false
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un sistema tiene demasiadas alertas no accionables. ¿Qué mejora propones?",
+        "opts": [
+            "Reducir ruido, agrupar, ajustar umbrales, asignar owners y enlazar runbooks",
+            "Desactivar todo monitoreo",
+            "Enviar todas a más personas",
+            "Subir severidad a todas"
+        ],
+        "ans": 0,
+        "exp": "Menos ruido mejora respuesta a incidentes reales.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Un deployment afecta solo a usuarios con cierto rol clínico. ¿Qué hipótesis revisas?",
+        "opts": [
+            "Permisos, feature flags, configuración por rol, datos específicos, cache y cambios recientes",
+            "Que todos los usuarios están equivocados",
+            "Que la red global cayó",
+            "Que el build no se desplegó"
+        ],
+        "ans": 0,
+        "exp": "Impacto segmentado da pista: rol, data, config o path funcional.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
+    },
+    {
+        "cat": "Situación Real",
+        "q": "Una acción manual resolvió un outage en Ciena-like infrastructure. ¿Qué debes hacer después?",
+        "opts": [
+            "Convertirla en runbook o automatización segura, con validaciones y monitoreo",
+            "Dejarla en memoria personal",
+            "Evitar documentar para mantener flexibilidad",
+            "Repetirla manualmente para siempre"
+        ],
+        "ans": 0,
+        "exp": "La mejora continua transforma aprendizaje en operación repetible.",
+        "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
+        "tip": true
     }
 ];
 
@@ -4587,7 +5847,7 @@
             <div class="empty">
               ${pool.length} preguntas disponibles con el filtro actual.
             </div>
-            <button class="primary-button" type="button" id="startSessionButton">Iniciar sesión</button>
+            <button class="primary-button" type="button" id="startSessionButton">Iniciar Quiz</button>
           </aside>
         </div>
       `;
