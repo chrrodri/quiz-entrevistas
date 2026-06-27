@@ -5669,6 +5669,342 @@
         "exp": "La mejora continua transforma aprendizaje en operación repetible.",
         "reco": "En entrevista, responde con calma operativa: impacto, contencion, comunicacion, evidencia, causa raiz y prevencion.",
         "tip": true
+    },
+    {
+        "cat": "Oracle EBS Support",
+        "q": "¿Qué es Oracle E-Business Suite (EBS) y cómo se diferencia de Oracle Fusion Cloud?",
+        "opts": [
+            "EBS es una suite ERP on-premise modular con aplicaciones como Financials, SCM y HCM; Fusion Cloud es su sucesor SaaS nativo en la nube con arquitectura moderna",
+            "Son exactamente lo mismo pero con diferente nombre comercial",
+            "EBS es solo un servidor de base de datos; Fusion es solo frontend",
+            "EBS solo funciona en Windows; Fusion solo en Linux"
+        ],
+        "ans": 0,
+        "exp": "Oracle EBS es una plataforma ERP on-premise muy extendida en empresas enterprise. Conocer la diferencia con Fusion muestra madurez técnica y visión de roadmap para el cliente.",
+        "reco": "En entrevista, conecta tu respuesta con módulos específicos que hayas soportado (AP, AR, GL, INV, OM) y menciona arquitectura técnica: Forms, OAF, concurrent programs.",
+        "tip": true
+    },
+    {
+        "cat": "Oracle EBS Support",
+        "q": "Un usuario reporta que un Concurrent Program en Oracle EBS terminó con status 'Error'. ¿Cuál es tu primer paso de diagnóstico?",
+        "opts": [
+            "Revisar el log y output del Concurrent Request desde el Concurrent Manager para identificar el mensaje de error exacto",
+            "Reiniciar el servidor de aplicaciones inmediatamente",
+            "Borrar y volver a enviar el Concurrent Request sin revisar logs",
+            "Escalar directamente a Oracle Support sin investigar"
+        ],
+        "ans": 0,
+        "exp": "En Oracle EBS los Concurrent Programs generan un log detallado accesible desde View Log en el Concurrent Manager. Ese log contiene el error específico, stack trace y contexto de ejecución necesario para el diagnóstico.",
+        "reco": "En entrevista, muestra que conoces el flujo: Requests → View Log → identificar error → buscar en metalink/MOS → aplicar workaround o patch.",
+        "tip": true
+    },
+    {
+        "cat": "Oracle EBS Support",
+        "q": "¿Qué es el Concurrent Manager en Oracle EBS y por qué es crítico para operaciones?",
+        "opts": [
+            "Es el componente que gestiona la ejecución de procesos batch (reports, interfaces, purgas) en segundo plano; su disponibilidad afecta directamente procesos de negocio críticos",
+            "Es una herramienta de monitoreo de base de datos",
+            "Es el módulo de contabilidad general de EBS",
+            "Es el servidor web que sirve las páginas de EBS"
+        ],
+        "ans": 0,
+        "exp": "El Concurrent Manager controla la ejecución de todos los procesos background en EBS: interfaces de importación, reportes financieros, purgas. Si falla o se congestiona, procesos clave como cierres contables o importaciones de inventario se detienen.",
+        "reco": "En entrevista, menciona que puedes monitorear Concurrent Managers desde SysAdmin, verificar workers activos, y diagnosticar Internal Manager caídos.",
+        "tip": true
+    },
+    {
+        "cat": "Oracle EBS Support",
+        "q": "¿Qué es un patch en Oracle EBS (via OPatch/adpatch) y qué precauciones tomas antes de aplicarlo?",
+        "opts": [
+            "Un parche de Oracle aplicado con adpatch/OPatch para corregir bugs o agregar funcionalidad; antes de aplicar se valida en ambiente inferior, se hace backup, se revisa el readme y se planifica ventana",
+            "Es una actualización automática que no requiere intervención",
+            "Es solo un archivo de configuración sin impacto en base de datos",
+            "Se aplica siempre directamente en producción para ahorrar tiempo"
+        ],
+        "ans": 0,
+        "exp": "Los patches en Oracle EBS pueden modificar objetos de base de datos, forms, concurrent programs y configuraciones. Siempre deben probarse en desarrollo/QA primero, con backup del sistema y plan de rollback documentado.",
+        "reco": "En entrevista, menciona el proceso: analizar notas de patch en MOS, probar en dev/QA, validar con usuarios, aplicar en prod en ventana de mantenimiento y confirmar correctiva.",
+        "tip": true
+    },
+    {
+        "cat": "Oracle EBS Support",
+        "q": "Un usuario de Oracle EBS Financials no puede completar una factura en Accounts Payable porque recibe un error de validación. ¿Cómo abordas el ticket?",
+        "opts": [
+            "Reproducir el error con los mismos datos, revisar el mensaje exacto, validar setups del módulo AP (términos de pago, suppliers, period status), revisar logs y buscar en MOS si es un bug conocido",
+            "Crear un nuevo usuario para que pruebe otra vez",
+            "Desactivar las validaciones del módulo AP permanentemente",
+            "Cerrar el ticket porque es responsabilidad del usuario"
+        ],
+        "ans": 0,
+        "exp": "Los errores en AP pueden ser por setups incompletos (supplier, payment terms), períodos cerrados, validaciones de Oracle o bugs de la versión. El proceso correcto es reproducir, diagnosticar y buscar en My Oracle Support (MOS) antes de escalar.",
+        "reco": "En entrevista, muestra conocimiento de módulos: AP, AR, GL, INV. Menciona que validas Period Status, setups de OU y permisos de usuario.",
+        "tip": true
+    },
+    {
+        "cat": "Oracle EBS Support",
+        "q": "¿Qué es My Oracle Support (MOS) y cómo lo usas en soporte L2/L3?",
+        "opts": [
+            "Es el portal de soporte de Oracle con Knowledge Base, Service Requests, patches y alertas; se usa para buscar soluciones a bugs conocidos, abrir SRs y descargar parches",
+            "Es un módulo interno de EBS para administrar usuarios",
+            "Es la herramienta de monitoreo de infraestructura de Oracle",
+            "Es un repositorio solo para documentación interna del cliente"
+        ],
+        "ans": 0,
+        "exp": "MOS (support.oracle.com) es la fuente principal para soporte Oracle: KBAs, notas técnicas, patches, SRs y alertas de producto. En L2/L3 lo usas para buscar error messages, identificar bugs conocidos y aplicar soluciones documentadas.",
+        "reco": "En entrevista, menciona tu experiencia abriendo SRs, buscando Doc IDs y descargando patches desde MOS.",
+        "tip": true
+    },
+    {
+        "cat": "Oracle EBS Support",
+        "q": "¿Cómo diagnosticarías un problema de performance lenta en Oracle EBS para usuarios específicos?",
+        "opts": [
+            "Revisar queries lentas en la base de datos, estadísticas de objetos, profile options de usuario, sesiones activas, network y comparar comportamiento entre usuarios afectados y no afectados",
+            "Reiniciar el servidor de aplicaciones como primer paso",
+            "Aumentar RAM del servidor de base de datos sin análisis previo",
+            "Pedir al usuario que use un navegador diferente únicamente"
+        ],
+        "ans": 0,
+        "exp": "Performance en EBS puede venir de: estadísticas de DB desactualizadas, queries no optimizadas, profile options incorrectos, personalizaciones mal programadas o problemas de red. El diagnóstico requiere correlación entre capa de aplicación y DB.",
+        "reco": "En entrevista, menciona herramientas: AWR, ADDM, SQL Monitor en Oracle DB, y revisión de profile options como FND_DIAGNOSTICS.",
+        "tip": true
+    },
+    {
+        "cat": "Oracle EBS Support",
+        "q": "¿Qué son los Profile Options en Oracle EBS y por qué son importantes en soporte?",
+        "opts": [
+            "Son parámetros de configuración que controlan el comportamiento del sistema a nivel de sitio, aplicación, responsabilidad o usuario; errores en su configuración causan muchos tickets de soporte",
+            "Son logs de acceso del sistema",
+            "Son los roles de seguridad de los usuarios",
+            "Son los reportes estándar de Oracle EBS"
+        ],
+        "ans": 0,
+        "exp": "Los Profile Options definen comportamiento funcional: valores por defecto, límites, funcionalidades habilitadas. En soporte es común que tickets sobre comportamientos inesperados se resuelvan ajustando profile options a nivel correcto (Site/App/Responsibility/User).",
+        "reco": "En entrevista, menciona que puedes navegar a System → Profile → System para revisar y modificar profile options con el nivel adecuado.",
+        "tip": true
+    },
+    {
+        "cat": "Oracle EBS Support",
+        "q": "Un Concurrent Manager en EBS aparece como Inactive/No Manager. ¿Qué pasos tomas?",
+        "opts": [
+            "Verificar si el servicio FNDLIBR está corriendo en el servidor de apps, revisar logs del Internal Manager, reiniciar el Concurrent Manager Manager desde SysAdmin si aplica y verificar la conexión a BD",
+            "Reiniciar el servidor de base de datos completo",
+            "Borrar todos los requests pendientes sin revisar causa",
+            "Aumentar el número de workers sin investigar"
+        ],
+        "ans": 0,
+        "exp": "Un Concurrent Manager inactivo suele indicar que el proceso FNDLIBR no está corriendo, hay problemas de conectividad a BD, o el Internal Manager falló. El proceso: verificar proceso en OS → revisar logs de Internal Manager → reiniciar desde SysAdmin → verificar.",
+        "reco": "En entrevista, menciona el flujo de recuperación y la importancia de no reiniciar sin revisar logs primero para evitar perder evidencia.",
+        "tip": true
+    },
+    {
+        "cat": "Oracle EBS Support",
+        "q": "¿Qué es una Responsibility en Oracle EBS y cómo afecta al soporte de usuarios?",
+        "opts": [
+            "Es un conjunto de menús, funciones y acceso a datos asignado a un usuario; muchos tickets de soporte se deben a responsabilidades incorrectas o permisos faltantes",
+            "Es el nombre del servidor de aplicaciones",
+            "Es un tipo de reporte financiero de Oracle",
+            "Es una configuración de base de datos para particionamiento"
+        ],
+        "ans": 0,
+        "exp": "Las Responsibilities en EBS controlan qué ve y puede hacer un usuario. Tickets como 'no veo el menú X' o 'no puedo aprobar' frecuentemente se resuelven revisando qué Responsibility tiene asignada el usuario y si tiene las funciones y valores de datos correctos.",
+        "reco": "En entrevista, muestra que entiendes la jerarquía: Usuario → Responsibility → Menu → Function → Data Access.",
+        "tip": false
+    },
+    {
+        "cat": "Oracle EBS Support",
+        "q": "¿Cómo usarías SQL y las tablas base de Oracle EBS para investigar un problema de datos?",
+        "opts": [
+            "Consultando directamente tablas como AP_INVOICES_ALL, AR_CUSTOMERS, MTL_SYSTEM_ITEMS con contexto de OU/org_id para validar estado de datos y correlacionar con el error reportado",
+            "Modificando datos directamente en tablas base sin validar impacto",
+            "Usando solo la interfaz gráfica de EBS sin acceso a BD",
+            "Pidiendo que el usuario vuelva a ingresar datos sin investigar"
+        ],
+        "ans": 0,
+        "exp": "En soporte EBS L2/L3 es común consultar tablas base (no vistas _V) para validar datos, identificar registros huérfanos o inconsistencias. Siempre se hace con SELECT, nunca DML directo sin aprobación y backup.",
+        "reco": "En entrevista, menciona tablas clave por módulo: AP_INVOICES_ALL, AR_CASH_RECEIPTS_ALL, GL_JE_HEADERS, MTL_TRANSACTIONS_TEMP, PO_HEADERS_ALL.",
+        "tip": true
+    },
+    {
+        "cat": "Oracle EBS Support",
+        "q": "¿Qué es AutoInvoice en Oracle Receivables (AR) y qué problemas comunes genera en soporte?",
+        "opts": [
+            "Es el proceso que importa transacciones externas para crear facturas en AR; problemas comunes incluyen registros rechazados por datos faltantes, OU incorrecta o validaciones de cliente",
+            "Es un backup automático de facturas",
+            "Es una función para aprobar facturas de proveedores",
+            "Es el proceso de cierre de período en AR"
+        ],
+        "ans": 0,
+        "exp": "AutoInvoice es crítico para integraciones con sistemas externos que alimentan AR. Los registros rechazados quedan en RA_INTERFACE_ERRORS con el motivo. El soporte implica revisar la tabla de errores, corregir datos en las tablas de interfaz y re-ejecutar.",
+        "reco": "En entrevista, menciona las tablas de interfaz: RA_INTERFACE_LINES_ALL, RA_INTERFACE_SALESCREDITS_ALL y la tabla de errores RA_INTERFACE_ERRORS_ALL.",
+        "tip": true
+    },
+    {
+        "cat": "Application Support Eng II",
+        "q": "¿Qué diferencia el rol de Application Support Engineer II respecto a un Tier 1 helpdesk?",
+        "opts": [
+            "Un Application Support Engineer II investiga causas raíz, analiza logs y código, ejecuta diagnósticos técnicos profundos y colabora con desarrollo; Tier 1 atiende solicitudes estándar de usuario",
+            "Son el mismo rol pero con diferente salario",
+            "Tier 1 tiene más responsabilidades técnicas que un App Support Engineer II",
+            "App Support Engineer II solo gestiona tickets sin análisis técnico"
+        ],
+        "ans": 0,
+        "exp": "El Application Support Engineer II opera en L2/L3: troubleshooting técnico, análisis de logs, configuración de aplicaciones, colaboración con QA y desarrollo, y participación en resolución de incidentes complejos.",
+        "reco": "En entrevista, diferencia L1 (reset passwords, how-to), L2 (diagnóstico técnico, workarounds), L3 (bugs, código, escalación a producto).",
+        "tip": true
+    },
+    {
+        "cat": "Application Support Eng II",
+        "q": "Un cliente enterprise reporta que su aplicación SaaS no carga correctamente. ¿Cuál es el proceso de triage inicial?",
+        "opts": [
+            "Confirmar si es problema del cliente o plataforma, revisar status de servicios, reproducir en ambiente de soporte, revisar logs, correlacionar con cambios recientes y comunicar estado inicial",
+            "Pedir al cliente que espere hasta mañana",
+            "Reiniciar todos los servicios de la plataforma sin investigar",
+            "Cerrar el ticket si no hay otros reportes similares"
+        ],
+        "ans": 0,
+        "exp": "El triage en soporte SaaS enterprise requiere separar problema de configuración de cliente vs. problema de plataforma, verificar status page, reproducir el problema y comunicar timeline claro al cliente mientras se investiga.",
+        "reco": "En entrevista, menciona el flujo STAR: Situation (qué reporta el cliente), Triage (verifica scope), Action (logs, reproducción, impacto), Result (comunicación y solución).",
+        "tip": true
+    },
+    {
+        "cat": "Application Support Eng II",
+        "q": "¿Cómo manejarías una escalación de un cliente que está en producción con un bug crítico sin workaround?",
+        "opts": [
+            "Confirmar impacto, crear hotfix bridge con desarrollo, comunicar updates regulares al cliente con ETA, documentar en ticket y no perder ownership hasta resolver",
+            "Decirle al cliente que espere el próximo release",
+            "Dar acceso de base de datos al cliente para que investigue",
+            "Cerrar el ticket y abrir uno nuevo para reiniciar SLA"
+        ],
+        "ans": 0,
+        "exp": "Un bug crítico sin workaround en producción requiere manejo de crisis: comunicación frecuente con el cliente, bridge directo entre soporte y desarrollo, y ownership claro hasta la resolución o hotfix.",
+        "reco": "En entrevista, menciona la importancia de no desaparecer del cliente: updates cada 30-60 min aunque no haya novedades, y gestionar expectativas con honestidad.",
+        "tip": true
+    },
+    {
+        "cat": "Application Support Eng II",
+        "q": "¿Qué es una Knowledge Base Article (KBA) y cuándo deberías crear una nueva?",
+        "opts": [
+            "Es un artículo documentado con síntomas, causa y solución de un problema; deberías crear uno cuando resuelves un problema que podría repetirse y no existe documentación previa",
+            "Es un reporte ejecutivo para stakeholders",
+            "Es un script de deploy",
+            "Es solo útil para equipos de Tier 1, no para soporte técnico"
+        ],
+        "ans": 0,
+        "exp": "Las KBAs reducen tiempo de resolución de tickets repetibles y permiten escalar conocimiento. En Application Support L2/L3, crear KBAs después de resolver problemas nuevos es una práctica de mejora continua y transferencia de conocimiento.",
+        "reco": "En entrevista, menciona que una buena KBA incluye: síntomas exactos, versión afectada, causa, pasos de diagnóstico, solución y cuándo escalar.",
+        "tip": false
+    },
+    {
+        "cat": "Application Support Eng II",
+        "q": "¿Cómo comunicarías el impacto técnico de un bug a un stakeholder de negocio no técnico?",
+        "opts": [
+            "Traducir el problema técnico a impacto de negocio: qué procesos se afectan, cuántos usuarios, qué datos están en riesgo, cuánto tiempo se estima la solución y qué pueden hacer mientras tanto",
+            "Enviar el stacktrace completo por email",
+            "Decir que es un problema técnico sin dar más contexto",
+            "Esperar a resolver antes de comunicar nada"
+        ],
+        "ans": 0,
+        "exp": "La comunicación en soporte enterprise requiere traducir lo técnico al lenguaje del negocio. Los stakeholders no técnicos necesitan entender impacto, riesgo, ETA y opciones de mitigación, no el detalle técnico.",
+        "reco": "En entrevista, da un ejemplo de cómo comunicaste un incidente: 'El módulo de pagos no procesa transacciones desde las 10am, afecta X usuarios, trabajamos en solución, ETA 2 horas, workaround: usar método alternativo Y'.",
+        "tip": true
+    },
+    {
+        "cat": "Application Support Eng II",
+        "q": "¿Qué técnicas usas para reproducir un problema intermitente que el cliente reporta pero no puedes replicar?",
+        "opts": [
+            "Pedir logs detallados con timestamps, recopilar detalles exactos del contexto (datos, usuario, hora, versión, navegador), habilitar debug logging en ambiente de soporte, correlacionar con métricas y revisar si hay patrón",
+            "Cerrar el ticket como no reproducible",
+            "Pedir al cliente que grabe su pantalla una sola vez",
+            "Reproducirlo en producción directamente con datos reales"
+        ],
+        "ans": 0,
+        "exp": "Los errores intermitentes requieren captura de contexto extenso: logs completos, datos exactos, condiciones de red, carga del sistema y variaciones entre casos que fallan vs. los que funcionan. El patrón suele revelar la causa.",
+        "reco": "En entrevista, menciona que intermitente no significa no reproducible: significa que aún no tienes suficiente contexto para reproducirlo de forma controlada.",
+        "tip": true
+    },
+    {
+        "cat": "Application Support Eng II",
+        "q": "¿Qué revisarías primero si una API REST utilizada por la aplicación devuelve errores 503 esporádicos?",
+        "opts": [
+            "Disponibilidad del servicio backend, rate limits, timeouts configurados, logs del API gateway, dependency health y si coincide con picos de carga",
+            "Cambiar contraseñas de usuarios",
+            "Reiniciar el servidor de base de datos",
+            "Desactivar la integración con la API"
+        ],
+        "ans": 0,
+        "exp": "Un 503 indica que el servicio no puede manejar la petición: puede ser sobrecarga, mantenimiento, rate limiting o dependencias caídas. Hay que correlacionar con métricas de carga, health checks del backend y logs del gateway.",
+        "reco": "En entrevista, menciona que el diagnóstico de APIs requiere revisar ambos lados: cliente (request, headers, auth) y servidor (capacity, health, dependencies).",
+        "tip": true
+    },
+    {
+        "cat": "Application Support Eng II",
+        "q": "¿Qué herramientas o técnicas usas para analizar logs de una aplicación con alto volumen de tráfico?",
+        "opts": [
+            "Filtrar por correlation ID o request ID, usar grep/awk para patrones específicos, acotar ventana de tiempo, buscar errores y warnings, y correlacionar con timestamps de las quejas del usuario",
+            "Leer todos los logs línea por línea sin filtrar",
+            "Eliminar logs antiguos para facilitar lectura",
+            "Solo revisar los últimos 10 logs sin contexto"
+        ],
+        "ans": 0,
+        "exp": "En aplicaciones de alto volumen, leer logs sin filtrar es inviable. Las mejores prácticas incluyen: filtrar por correlation ID, acotar timeframe exacto, buscar patrones de error y cruzar con métricas de la misma ventana de tiempo.",
+        "reco": "En entrevista, menciona herramientas que hayas usado: ELK, Splunk, Datadog, CloudWatch, o comandos Linux como grep, awk, sed para análisis local.",
+        "tip": false
+    },
+    {
+        "cat": "Application Support Eng II",
+        "q": "¿Cómo priorizas tickets cuando recibes varios simultáneamente con diferente urgencia?",
+        "opts": [
+            "Clasificar por impacto al negocio (usuarios afectados, criticidad del proceso), severidad del error, riesgo de SLA y escalar los que superen tu nivel mientras atiendes los demás en paralelo",
+            "Atender por orden de llegada sin importar impacto",
+            "Elegir el más fácil de resolver primero",
+            "Ignorar los que no tengan SLA definido"
+        ],
+        "ans": 0,
+        "exp": "La priorización en soporte L2 debe combinar: impacto al negocio del cliente, tipo de error (producción vs. test), riesgo de SLA, y capacidad del equipo para atender en paralelo o delegar.",
+        "reco": "En entrevista, menciona que mantienes visibilidad de todos los tickets activos, comunicas estado regularmente y no dejas ninguno sin update aunque estés en otro.",
+        "tip": true
+    },
+    {
+        "cat": "Application Support Eng II",
+        "q": "¿Qué significa 'shift-left' en el contexto de Application Support?",
+        "opts": [
+            "Involucrar al equipo de soporte antes del release (UAT, documentación, KBAs, runbooks) para reducir tickets post-lanzamiento y mejorar la calidad del despliegue",
+            "Hacer que los desarrolladores atiendan tickets de soporte",
+            "Mover toda la documentación al repositorio de Git",
+            "Reducir el número de releases anuales"
+        ],
+        "ans": 0,
+        "exp": "Shift-left en soporte significa participar en fases previas del desarrollo: revisar release notes, crear documentación antes del lanzamiento, entrenar al equipo con cambios y anticipar preguntas frecuentes de usuarios.",
+        "reco": "En entrevista, muestra que has participado en UAT, revisado documentación de releases o colaborado con dev para entender cambios antes de llegar a producción.",
+        "tip": true
+    },
+    {
+        "cat": "Application Support Eng II",
+        "q": "¿Cómo colaborarías con el equipo de QA cuando encuentras un bug en producción que no fue detectado en testing?",
+        "opts": [
+            "Documentar el bug con pasos exactos de reproducción, datos, versión, logs y expected vs actual behavior; colaborar con QA para crear un test case que prevenga regresión futura",
+            "Culpar a QA por no encontrarlo antes",
+            "Resolver el bug sin documentarlo para ahorrar tiempo",
+            "Pedir a QA que repita todos los tests desde cero"
+        ],
+        "ans": 0,
+        "exp": "La colaboración soporte-QA es clave para cerrar gaps: soporte aporta contexto de producción real que QA no siempre replica en testing. Un buen bug report permite a QA crear tests de regresión y mejorar cobertura.",
+        "reco": "En entrevista, menciona elementos de un buen bug report: environment, version, steps to reproduce, expected vs actual, logs, impacto y frequency.",
+        "tip": false
+    },
+    {
+        "cat": "Application Support Eng II",
+        "q": "¿Qué harías si detectas que un problema de soporte es causado por una configuración incorrecta realizada por el propio cliente?",
+        "opts": [
+            "Documentar la causa raíz, mostrar al cliente la configuración correcta vs la que tenían, aplicar el fix con aprobación, crear KBA y sugerir mejoras al proceso de configuración para evitar recurrencia",
+            "Decirle al cliente que es su culpa y cerrar el ticket",
+            "Cambiar la configuración sin explicar ni documentar",
+            "Escalar a desarrollo aunque no sea un bug de producto"
+        ],
+        "ans": 0,
+        "exp": "En soporte enterprise, la causa raíz puede ser del cliente. El enfoque debe ser educativo y constructivo: mostrar la diferencia, corregir con su aprobación, documentar para futuro y sugerir controles que prevengan el mismo error.",
+        "reco": "En entrevista, muestra empatía: los clientes no siempre conocen todas las configuraciones. Tu rol es resolver Y transferir conocimiento.",
+        "tip": true
     }
 ];
 
@@ -5847,7 +6183,7 @@
             <div class="empty">
               ${pool.length} preguntas disponibles con el filtro actual.
             </div>
-            <button class="primary-button" type="button" id="startSessionButton">Iniciar Quiz</button>
+            <button class="primary-button" type="button" id="startSessionButton">Iniciar sesión</button>
           </aside>
         </div>
       `;
