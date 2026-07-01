@@ -6785,13 +6785,88 @@
       "Application Support Eng II": ["triage inicial", "reproducción controlada", "análisis de logs", "SLA", "escalamiento L3", "known error database", "problem management", "cambio de emergencia", "validación post-fix", "comunicación al cliente", "monitoreo proactivo", "automatización de tareas", "capacity planning", "gestión de accesos", "observabilidad", "runbook", "RCA", "guardias on-call"]
     };
 
+    const SUPPLEMENT_ANSWER_STYLE = {
+      "CI/CD & DevOps": topic => `Integrar ${topic} como una etapa versionada del pipeline, con criterios de aceptación, evidencia y una ruta de reversión probada.`,
+      "Git": topic => `Usar ${topic} preservando un historial comprensible: partir de una rama actualizada, revisar el diff y validar antes de publicar cambios compartidos.`,
+      "Linux": topic => `Diagnosticar ${topic} desde el estado observable del sistema —comandos, logs y métricas— y aplicar el cambio mínimo reversible con privilegios limitados.`,
+      "Containers & Infra": topic => `Definir ${topic} en configuración versionada, probarlo con una imagen inmutable y verificar su comportamiento durante arranque, fallo y terminación.`,
+      "Incident Management": topic => `Gestionar ${topic} con un responsable explícito, decisiones registradas, comunicación por impacto y acciones de seguimiento con fecha y dueño.`,
+      "Databases": topic => `Evaluar ${topic} con datos representativos y evidencia del motor, protegiendo consistencia, concurrencia y capacidad de recuperación antes de cambiar producción.`,
+      "Monitoring": topic => `Diseñar ${topic} alrededor de una señal vinculada al impacto del usuario, con umbral accionable, contexto de diagnóstico y control del ruido.`,
+      "Scripting": topic => `Implementar ${topic} con entradas validadas, errores explícitos, salida útil para diagnóstico y comportamiento idempotente ante reejecuciones.`,
+      "Maven / Java": topic => `Configurar ${topic} en el POM versionado, fijar versiones y comprobar el resultado desde un entorno limpio para asegurar un build reproducible.`,
+      "Behavioral": topic => `Explicar ${topic} con un caso STAR concreto, haciendo visible tu decisión, el desacuerdo o restricción y un resultado medible.`,
+      "Cloud & Networking": topic => `Diseñar ${topic} con aislamiento por defecto, mínimo privilegio, redundancia acorde al riesgo y métricas que confirmen disponibilidad y flujo de tráfico.`,
+      "Database & SQL": topic => `Resolver ${topic} con SQL parametrizado y basado en conjuntos; comprobar cardinalidades y plan de ejecución con un volumen parecido al productivo.`,
+      "Security": topic => `Aplicar ${topic} reduciendo exposición por defecto, centralizando la política y conservando evidencia auditable de accesos, excepciones y rotación.`,
+      "Tu CV / Experiencia": topic => `Presentar ${topic} con contexto breve, una contribución personal verificable y métricas de impacto, evitando atribuirte resultados de todo el equipo.`,
+      "Oracle EBS Support": topic => `Abordar ${topic} con herramientas soportadas de EBS, respaldo previo, trazabilidad del cambio y validación funcional y técnica posterior.`,
+      "Application Support Eng II": topic => `Tratar ${topic} con triage por impacto, evidencia reproducible, mitigación segura y escalamiento acompañado de logs, línea de tiempo e hipótesis comprobadas.`
+    };
+
+    const SUPPLEMENT_DISTRACTOR_STYLE = {
+      "Behavioral": topic => [
+        `Responder sobre ${topic} solo con cualidades personales, sin una situación ni resultado verificable.`,
+        `Describir ${topic} atribuyendo el éxito al equipo sin aclarar tu contribución individual.`,
+        `Evitar métricas y centrar la respuesta de ${topic} en opiniones sobre otras personas.`
+      ],
+      "Git": topic => [
+        `Forzar ${topic} directamente sobre la rama protegida y corregir después cualquier pérdida de historial.`,
+        `Aplicar ${topic} sin revisar el diff porque Git siempre puede reconstruir la intención del cambio.`,
+        `Usar ${topic} sobre trabajo compartido sin avisar ni volver a ejecutar las pruebas.`
+      ],
+      "Databases": topic => [
+        `Cambiar ${topic} en producción basándose solo en una consulta rápida con pocos registros.`,
+        `Resolver ${topic} reiniciando la base antes de identificar sesiones, transacciones o plan de ejecución.`,
+        `Aplicar ${topic} con DML manual sin transacción controlada ni punto de recuperación.`
+      ],
+      "Database & SQL": topic => [
+        `Resolver ${topic} concatenando parámetros y agregando más hardware sin revisar el plan SQL.`,
+        `Validar ${topic} solo con una fila, ignorando distribución de datos y cardinalidad.`,
+        `Optimizar ${topic} mediante hints permanentes antes de medir estadísticas y costo real.`
+      ],
+      "Security": topic => [
+        `Implementar ${topic} mediante una cuenta compartida con privilegios amplios para evitar bloqueos.`,
+        `Considerar resuelto ${topic} si no aparece en los logs, aunque no exista auditoría.`,
+        `Posponer ${topic} hasta después del despliegue sin registrar aceptación del riesgo.`
+      ],
+      "default": topic => [
+        `Gestionar ${topic} manualmente en producción y documentar el resultado únicamente si ocurre un fallo.`,
+        `Activar ${topic} para todos los entornos a la vez, sin prueba previa ni mecanismo de reversión.`,
+        `Dar por resuelto ${topic} cuando la ejecución termina, sin validar comportamiento ni impacto.`
+      ]
+    };
+
+    const SUPPLEMENT_DOMAIN_CRITERIA = {
+      "CI/CD & DevOps": ["un pipeline reproducible, gates automáticos y artefactos trazables", "probar la promoción y el rollback sin reconstruir el artefacto", "separar aprobación, despliegue y verificación con evidencia por release"],
+      "Git": ["un diff revisado, commits enfocados y una rama protegida", "reconstruir el cambio desde un clon limpio y ejecutar las pruebas", "mantener la operación reversible y evitar reescribir historial ya compartido"],
+      "Linux": ["estado de systemd, journal, consumo de recursos y conectividad", "reproducir el síntoma y confirmar la mejora con comandos y logs", "cambiar una sola variable, limitar privilegios y preparar reversión"],
+      "Containers & Infra": ["manifiestos versionados, imágenes identificables y configuración externa", "ejecutar pruebas de salud, carga y terminación controlada", "declarar recursos, aislamiento y persistencia en vez de ajustar contenedores manualmente"],
+      "Incident Management": ["impacto confirmado, línea de tiempo y decisiones registradas", "comprobar la mitigación con la señal que detectó el incidente", "asignar responsable, siguiente actualización y acciones con dueño y fecha"],
+      "Databases": ["plan de ejecución, waits, bloqueos y distribución real de datos", "medir consistencia, latencia y costo de escritura con carga representativa", "usar una transacción controlada, respaldo verificable y cambio reversible"],
+      "Monitoring": ["una señal de usuario, línea base y umbral asociado al SLO", "provocar una condición conocida y confirmar alerta, contexto y recuperación", "eliminar alertas no accionables y añadir runbook, dueño y ventana de evaluación"],
+      "Scripting": ["entradas tipadas, códigos de salida y logs sin datos sensibles", "ejecutar casos válidos, fallos y reintentos sin producir efectos duplicados", "usar quoting, traps, timeout y limpieza segura de temporales"],
+      "Maven / Java": ["POM y lock de versiones, árbol de dependencias y repositorio confiable", "compilar y probar desde caché vacía con el Maven Wrapper", "separar unitarias e integración y publicar un artefacto identificable"],
+      "Behavioral": ["situación específica, decisión personal y resultado cuantificado", "distinguir tu contribución de la del equipo y explicar el aprendizaje", "mostrar alternativas consideradas, criterio elegido y efecto posterior"],
+      "Cloud & Networking": ["diagrama de flujo, CIDR, rutas, identidades y límites de servicio", "probar conectividad permitida y denegada, fallo zonal y recuperación", "restringir exposición por defecto y administrar excepciones como código"],
+      "Database & SQL": ["plan estimado y real, cardinalidades, estadísticas y bind variables", "comparar tiempo, lecturas lógicas y filas procesadas con datos representativos", "preferir operaciones por conjuntos, transacción corta y SQL parametrizado"],
+      "Security": ["modelo de amenazas, clasificación del dato y registro de accesos", "demostrar que el acceso indebido se bloquea y que la acción legítima queda auditada", "aplicar mínimo privilegio, credenciales de corta vida y excepción con caducidad"],
+      "Tu CV / Experiencia": ["alcance, acción propia, tecnología y métrica antes/después", "responder preguntas de seguimiento sin exagerar responsabilidades", "conectar el ejemplo con la vacante y cerrar con un aprendizaje transferible"],
+      "Oracle EBS Support": ["concurrent request, FND logs, contexto funcional y cambios recientes", "repetir el flujo afectado y validar tanto datos como resultado funcional", "usar utilidades soportadas, respaldo y aprobación en vez de DML directo"],
+      "Application Support Eng II": ["impacto, versión, evidencia reproducible y cambio correlacionado", "confirmar la mitigación desde el flujo del usuario y el monitoreo", "escalar con hipótesis, logs, línea de tiempo y acciones ya descartadas"]
+    };
+
+    function buildDistinctCorrectAnswer(cat, topic, index) {
+      if (index % 4 === 0) return SUPPLEMENT_ANSWER_STYLE[cat](topic);
+      if (index % 4 === 1) return `Para decidir sobre ${topic}, primero revisa ${SUPPLEMENT_DOMAIN_CRITERIA[cat][0]}.`;
+      if (index % 4 === 2) return `La implementación de ${topic} está lista para producción cuando permite ${SUPPLEMENT_DOMAIN_CRITERIA[cat][1]}.`;
+      return `Para controlar ${topic}, el plan debe priorizar ${SUPPLEMENT_DOMAIN_CRITERIA[cat][2]}.`;
+    }
+
     function makeSupplementQuestion(cat, topic, index) {
-      const correct = `Aplicar ${topic} con criterios documentados, validación automatizada y evidencia observable.`;
-      const distractors = [
-        `Evitar ${topic} y resolver cada caso manualmente en producción.`,
-        `Implementar ${topic} sin revisión, métricas ni control de cambios.`,
-        `Confiar únicamente en la memoria del operador para gestionar ${topic}.`
-      ];
+      const correct = buildDistinctCorrectAnswer(cat, topic, index);
+      const distractorBuilder = SUPPLEMENT_DISTRACTOR_STYLE[cat] || SUPPLEMENT_DISTRACTOR_STYLE.default;
+      const distractors = distractorBuilder(topic);
       const ans = index % 4;
       const opts = [...distractors];
       opts.splice(ans, 0, correct);
@@ -6800,7 +6875,7 @@
         q: `En ${cat}, ¿cuál es el enfoque más sólido para gestionar ${topic} en un entorno de producción?`,
         opts,
         ans,
-        exp: `${topic} debe implementarse de forma repetible, revisable y medible. La automatización y la evidencia reducen errores y aceleran el diagnóstico.`,
+        exp: `${correct} La respuesta correcta combina una práctica propia de ${cat} con controles que permiten comprobar el resultado y recuperarse si algo falla.`,
         tip: index % 4 === 0,
         reco: `En entrevista, explica un caso concreto de ${topic}, el riesgo que controlaste y cómo mediste el resultado.`
       };
