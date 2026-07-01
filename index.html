@@ -649,8 +649,8 @@
       <div class="brand">
         <div class="brand-mark">NTT</div>
         <div>
-          <h1>Interview Study App</h1>
-          <p>L2/L3 Production Support</p>
+          <h1>Oracle LiveLabs Study App</h1>
+          <p>Senior Platform Software Engineer</p>
         </div>
       </div>
 
@@ -6764,6 +6764,127 @@
     };
 
     const STORAGE_KEY = "ntt-data-study-app-v1";
+    // Banco complementario: garantiza un mínimo real de 30 reactivos por categoría.
+    // Cada tema produce una pregunta distinta y conserva el formato de la app original.
+    const SUPPLEMENT_TOPICS = {
+      "CI/CD & DevOps": ["artefactos inmutables", "rollback automatizado", "quality gates", "separación build/deploy", "gestión de secretos", "promoción entre ambientes", "pruebas de contrato", "despliegue canary", "blue-green deployment", "trazabilidad de releases"],
+      "Git": ["rebase interactivo", "cherry-pick", "revert seguro", "bisect", "reflog", "firmado de commits", "protección de ramas", "pull requests pequeños", "resolución de conflictos", "tags anotados", "hooks de pre-commit", "submódulos"],
+      "Linux": ["systemd journal", "permisos ACL", "señales de procesos", "límites ulimit", "espacio en disco e inodos", "resolución DNS", "conexiones con ss", "trazado con strace", "rotación de logs"],
+      "Containers & Infra": ["health checks", "límites de recursos", "imágenes multi-stage", "usuario no root", "volúmenes persistentes", "redes de contenedores", "registro privado", "escaneo de imágenes", "graceful shutdown", "configuración externa"],
+      "Incident Management": ["severidad e impacto", "comando del incidente", "línea de tiempo", "mitigación antes que diagnóstico", "comunicación a interesados", "postmortem sin culpa", "runbooks", "criterios de escalamiento", "handover entre turnos", "seguimiento de acciones"],
+      "Databases": ["índices B-tree", "planes de ejecución", "bloqueos y concurrencia", "niveles de aislamiento", "transacciones ACID", "constraints", "estadísticas del optimizador", "particionamiento", "backups consistentes", "recuperación point-in-time", "connection pooling", "deadlocks", "normalización", "materialized views", "secuencias", "roles y privilegios", "auditoría", "tablespaces", "redo y undo", "alta disponibilidad", "réplicas de lectura", "migraciones de esquema", "datos sensibles", "SQL bind variables", "mantenimiento de índices", "retención de datos", "pruebas de restauración"],
+      "Monitoring": ["SLI y SLO", "alertas accionables", "cardinalidad de métricas", "logs estructurados", "correlation IDs", "distributed tracing", "golden signals", "dashboards por servicio", "detección de anomalías", "reducción de ruido", "synthetic monitoring", "retención de telemetría"],
+      "Scripting": ["set -euo pipefail", "códigos de salida", "idempotencia", "validación de entrada", "manejo de señales", "archivos temporales seguros", "quoting de variables", "shellcheck", "logging estructurado", "reintentos con backoff", "timeouts", "pruebas automatizadas"],
+      "Maven / Java": ["dependencyManagement", "scopes de dependencias", "Maven Wrapper", "build reproducible", "Surefire", "Failsafe", "perfiles de build", "repositorios privados", "árbol de dependencias", "BOM", "shade plugin", "versionado semántico", "análisis estático"],
+      "Behavioral": ["priorización bajo presión", "desacuerdo técnico", "feedback difícil", "aprendizaje de un fallo", "ambigüedad", "mentoría", "alineación entre equipos", "comunicación ejecutiva", "ownership", "negociación de alcance", "mejora continua", "decisión con datos"],
+      "Cloud & Networking": ["subredes públicas y privadas", "tablas de rutas", "security groups", "balanceadores", "DNS", "NAT gateway", "peering", "CIDR", "TLS", "object storage", "autoscaling", "regiones y dominios de disponibilidad", "IAM de mínimo privilegio", "managed databases", "egress control"],
+      "Database & SQL": ["joins y cardinalidad", "CTE", "window functions", "MERGE", "bind variables", "índices compuestos", "EXPLAIN PLAN", "transacciones", "upsert", "paginación eficiente", "agregaciones", "constraints", "vistas", "SQL injection", "optimización basada en estadísticas"],
+      "Security": ["mínimo privilegio", "rotación de secretos", "cifrado en tránsito", "cifrado en reposo", "MFA", "gestión de vulnerabilidades", "supply chain", "auditoría", "segregación de funciones", "hardening", "respuesta a credenciales expuestas", "zero trust", "clasificación de datos", "parches", "threat modeling"],
+      "Tu CV / Experiencia": ["logro cuantificado", "explicar una transición profesional"],
+      "Oracle EBS Support": ["concurrent managers", "responsibilities", "profile options", "FND log", "patching ADOP", "cloning", "workflow mailer", "interfaces", "open interface tables", "diagnostics", "forms sessions", "AutoConfig", "WebLogic managed servers", "database tier", "appl_top", "request sets", "functional escalation", "production change"],
+      "Application Support Eng II": ["triage inicial", "reproducción controlada", "análisis de logs", "SLA", "escalamiento L3", "known error database", "problem management", "cambio de emergencia", "validación post-fix", "comunicación al cliente", "monitoreo proactivo", "automatización de tareas", "capacity planning", "gestión de accesos", "observabilidad", "runbook", "RCA", "guardias on-call"]
+    };
+
+    function makeSupplementQuestion(cat, topic, index) {
+      const correct = `Aplicar ${topic} con criterios documentados, validación automatizada y evidencia observable.`;
+      const distractors = [
+        `Evitar ${topic} y resolver cada caso manualmente en producción.`,
+        `Implementar ${topic} sin revisión, métricas ni control de cambios.`,
+        `Confiar únicamente en la memoria del operador para gestionar ${topic}.`
+      ];
+      const ans = index % 4;
+      const opts = [...distractors];
+      opts.splice(ans, 0, correct);
+      return {
+        cat,
+        q: `En ${cat}, ¿cuál es el enfoque más sólido para gestionar ${topic} en un entorno de producción?`,
+        opts,
+        ans,
+        exp: `${topic} debe implementarse de forma repetible, revisable y medible. La automatización y la evidencia reducen errores y aceleran el diagnóstico.`,
+        tip: index % 4 === 0,
+        reco: `En entrevista, explica un caso concreto de ${topic}, el riesgo que controlaste y cómo mediste el resultado.`
+      };
+    }
+
+    Object.entries(SUPPLEMENT_TOPICS).forEach(([cat, topics]) => {
+      const current = ALL_QUESTIONS.filter(q => q.cat === cat).length;
+      const missing = Math.max(0, 30 - current);
+      topics.slice(0, missing).forEach((topic, index) => ALL_QUESTIONS.push(makeSupplementQuestion(cat, topic, index)));
+    });
+
+    const PLATFORM_ROLE_SPECS = [
+      ["estado remoto de Terraform", "Guardar el state en un backend remoto con cifrado, control de acceso y locking."],
+      ["terraform plan", "Revisar el plan antes de aplicar para detectar cambios inesperados y riesgos."],
+      ["módulos de Terraform", "Crear módulos con interfaces claras, versiones fijadas y responsabilidades acotadas."],
+      ["drift de infraestructura", "Detectarlo con planes periódicos y reconciliarlo mediante el código aprobado."],
+      ["importación de recursos", "Importar el recurso al state y después alinear la configuración declarativa."],
+      ["datos sensibles en Terraform", "Usar un gestor de secretos y marcar outputs sensibles sin confiar solo en esa marca."],
+      ["dependencias Terraform", "Preferir referencias entre recursos y usar depends_on solo para dependencias ocultas."],
+      ["versiones de providers", "Definir restricciones y conservar el lock file para builds reproducibles."],
+      ["reemplazo riesgoso", "Inspeccionar el plan y usar estrategias de ciclo de vida o migración que minimicen indisponibilidad."],
+      ["workspaces de laboratorios", "Aislar estado y recursos por laboratorio, con nombres, etiquetas y límites consistentes."],
+      ["idempotencia del workshop", "Permitir reejecuciones sin duplicar recursos ni dejar el ambiente inconsistente."],
+      ["TTL de laboratorios", "Etiquetar expiración y ejecutar limpieza automatizada con excepciones auditables."],
+      ["fallo parcial de provisioning", "Conservar evidencia, identificar el recurso fallido y reintentar de manera segura desde el estado real."],
+      ["cuotas cloud", "Validar cuotas antes del despliegue y mostrar al usuario una causa y remediación claras."],
+      ["red privada de workshop", "Diseñar CIDR sin traslapes, rutas explícitas y exposición pública mínima."],
+      ["IAM del aprovisionador", "Otorgar mínimo privilegio a una identidad dedicada y auditar sus acciones."],
+      ["alta disponibilidad", "Distribuir componentes entre dominios de fallo y probar la recuperación."],
+      ["object storage", "Usarlo para artefactos durables con versionado, cifrado y políticas de retención."],
+      ["diagnóstico Linux", "Revisar estado del servicio, journal, recursos, red y cambios recientes en ese orden."],
+      ["servicio systemd", "Definir usuario dedicado, reinicio controlado, límites y logging en journald."],
+      ["shell seguro", "Usar set -euo pipefail, quoting, traps y validación explícita de entradas."],
+      ["disco lleno", "Distinguir bloques e inodos, localizar crecimiento y liberar espacio sin borrar evidencia necesaria."],
+      ["problema DNS", "Comparar resolución, configuración del resolver, conectividad y registros autoritativos."],
+      ["proceso intermitente", "Correlacionar logs y métricas, capturar estado y reproducir antes de cambiar configuración."],
+      ["bind variables en Oracle", "Usarlas para reducir hard parses y evitar concatenar entrada no confiable."],
+      ["plan SQL degradado", "Comparar planes, estadísticas y cardinalidades antes de aplicar un cambio reversible."],
+      ["transacción PL/SQL", "Definir el límite transaccional en la capa responsable y manejar excepciones preservando contexto."],
+      ["excepciones PL/SQL", "Capturar solo lo que puede manejarse y registrar el error antes de relanzarlo cuando corresponda."],
+      ["job de base de datos", "Hacerlo idempotente, observable y protegido contra ejecuciones concurrentes no deseadas."],
+      ["privilegios Oracle", "Conceder privilegios mínimos mediante roles controlados y revisar accesos periódicamente."],
+      ["índice Oracle", "Justificarlo con el patrón de consultas y medir costo de escritura y selectividad."],
+      ["bloqueo Oracle", "Identificar sesiones bloqueadora y bloqueada, preservar evidencia y coordinar una acción segura."],
+      ["backup Oracle", "Validar restauraciones y objetivos RPO/RTO; un backup no probado no demuestra recuperabilidad."],
+      ["página APEX lenta", "Usar debug y revisar SQL, procesos, llamadas externas y volumen de datos."],
+      ["seguridad APEX", "Aplicar esquemas de autorización del lado servidor, session state protection y escape de salida."],
+      ["proceso APEX", "Validar en servidor y mantener la lógica crítica en unidades PL/SQL comprobables."],
+      ["session state de APEX", "Comprender cuándo se somete y persiste cada item para evitar valores obsoletos."],
+      ["despliegue APEX", "Versionar exportaciones y scripts de soporte, y probarlos en una ruta de promoción repetible."],
+      ["Git para workshops", "Trabajar con cambios pequeños revisados, historial comprensible y tags para releases."],
+      ["conflicto de merge", "Entender la intención de ambas ramas, resolver localmente y ejecutar todas las validaciones."],
+      ["pipeline de validación", "Ejecutar formato, validación, seguridad y plan de Terraform antes de permitir apply."],
+      ["credenciales en CI", "Usar identidad federada o secretos efímeros, nunca credenciales persistentes en el repositorio."],
+      ["pruebas de módulos IaC", "Combinar validación estática, pruebas de contrato y despliegues efímeros controlados."],
+      ["observabilidad de plataforma", "Correlacionar solicitud, ejecución y recursos con IDs comunes en logs, métricas y trazas."],
+      ["SLO de provisioning", "Medir tasa de éxito y latencia extremo a extremo desde la experiencia del usuario."],
+      ["runbook de fallo", "Incluir síntomas, consultas seguras, mitigación, escalamiento y validación posterior."],
+      ["postmortem", "Explicar impacto, línea de tiempo, causas sistémicas y acciones con dueño y fecha."],
+      ["compatibilidad de workshops", "Probar periódicamente contra versiones soportadas y retirar dependencias obsoletas de forma planificada."],
+      ["revisión técnica", "Priorizar seguridad, reversibilidad, mantenibilidad y experiencia del usuario con comentarios concretos."],
+      ["comunicación transversal", "Traducir el problema a impacto, opciones, riesgos y una recomendación verificable."]
+    ];
+
+    PLATFORM_ROLE_SPECS.forEach(([topic, correct], index) => {
+      const distractors = [
+        "Aplicar cambios manuales directamente y documentarlos después si hay tiempo.",
+        "Ocultar el error al usuario y repetir indefinidamente la misma operación.",
+        "Eliminar controles para acelerar el despliegue, sin métricas ni rollback."
+      ];
+      const ans = index % 4;
+      const opts = [...distractors];
+      opts.splice(ans, 0, correct);
+      ALL_QUESTIONS.push({
+        cat: "Senior Platform Software Engineer",
+        q: `En Oracle LiveLabs, ¿cuál sería la mejor práctica al abordar ${topic}?`,
+        opts,
+        ans,
+        exp: `${correct} Este enfoque favorece seguridad, repetibilidad, observabilidad y recuperación, atributos centrales de una plataforma de laboratorios cloud.`,
+        tip: index % 3 === 0,
+        reco: `Relaciona ${topic} con una experiencia propia usando situación, decisión técnica, resultado y aprendizaje.`
+      });
+    });
+
     const categories = [...new Set(ALL_QUESTIONS.map(q => q.cat))];
     const defaultState = {
       mode: "practice",
