@@ -649,8 +649,8 @@
       <div class="brand">
         <div class="brand-mark">NTT</div>
         <div>
-          <h1>Oracle LiveLabs Study App</h1>
-          <p>Senior Platform Software Engineer</p>
+          <h1>Oracle Retail Study App</h1>
+          <p>Senior Retail Application Engineer</p>
         </div>
       </div>
 
@@ -6763,7 +6763,7 @@
       }
     };
 
-    const STORAGE_KEY = "ntt-data-study-app-v1";
+    const STORAGE_KEY = "oracle-retail-study-app-v2";
     // Banco complementario: garantiza un mínimo real de 30 reactivos por categoría.
     // Cada tema produce una pregunta distinta y conserva el formato de la app original.
     const SUPPLEMENT_TOPICS = {
@@ -6960,10 +6960,105 @@
       });
     });
 
+    const RETAIL_ROLE_SPECS = [
+      ["Oracle Retail", "Durante una instalación de RMS, ¿qué debe validarse antes de ejecutar scripts de esquema?", "La matriz de certificación, prerequisitos, versión de base, parámetros y respaldo recuperable del ambiente."],
+      ["Oracle Retail", "Un batch nocturno de RMS termina tarde y afecta la apertura de tiendas. ¿Cuál es el primer análisis?", "Construir la ruta crítica con tiempos por job, dependencias, waits de base de datos y volumen procesado."],
+      ["Oracle Retail", "¿Cuál es la forma segura de corregir datos inconsistentes en una aplicación Oracle Retail?", "Reproducir la causa, usar una corrección soportada y aprobada, respaldar los datos y validar el flujo funcional completo."],
+      ["Oracle Retail", "ReSA muestra diferencias entre ventas de tienda y totales financieros. ¿Cómo iniciarías el diagnóstico?", "Rastrear una transacción desde la interfaz de entrada hasta sus totales, errores, estados y procesos de conciliación."],
+      ["Oracle Retail", "RPM no publica una promoción a todas las tiendas. ¿Qué evidencia es más útil?", "El estado de la promoción, jerarquías y zonas, errores de publicación, mensajes de integración y tiendas afectadas."],
+      ["Oracle Retail", "ReIM no logra hacer match de una factura. ¿Qué revisarías primero?", "Tolerancias configuradas, recepción, orden, impuestos, moneda y mensajes de excepción del proceso de matching."],
+      ["Oracle Retail", "Allocation genera cantidades inesperadas. ¿Qué enfoque evita conclusiones prematuras?", "Validar inventario fuente, reglas, jerarquías, demanda y redondeos con un caso pequeño reproducible."],
+      ["Oracle Retail", "¿Qué información debe acompañar un escalamiento funcional de Oracle Retail?", "Pasos, datos de ejemplo anonimizados, resultado esperado y real, módulo, versión, logs y cambio reciente."],
+      ["Oracle Retail", "¿Cuál es la mejor práctica al actualizar un ambiente Retail con varios módulos integrados?", "Usar una secuencia documentada por dependencias, respaldos, pruebas de interfaces y criterios de rollback."],
+      ["Oracle Retail", "Después de un go-live, ¿cómo priorizarías defectos del cliente?", "Por impacto operativo y financiero, número de usuarios, existencia de workaround y riesgo de integridad de datos."],
+      ["WebLogic", "Un Managed Server queda en estado FAILED después de un despliegue. ¿Qué revisarías primero?", "Deployment logs, causa raíz encadenada, datasource/JMS requeridos, memoria y compatibilidad del artefacto."],
+      ["WebLogic", "¿Para qué sirve Node Manager en un dominio WebLogic?", "Para controlar y reiniciar servidores de forma remota y apoyar recuperación automatizada bajo una configuración segura."],
+      ["WebLogic", "¿Qué diferencia práctica existe entre Admin Server y Managed Servers?", "Admin Server gestiona la configuración del dominio; los Managed Servers ejecutan las aplicaciones y servicios."],
+      ["WebLogic", "Una aplicación pierde conexiones JDBC bajo carga. ¿Qué métricas del datasource son esenciales?", "Conexiones activas y disponibles, espera por conexión, leaks, fallos de prueba y capacidad máxima."],
+      ["WebLogic", "¿Cómo debe configurarse una prueba de conexión de un datasource?", "Con una consulta ligera válida para Oracle y pruebas periódicas o al reservar, equilibrando detección y costo."],
+      ["WebLogic", "Mensajes JMS se acumulan sin consumirse. ¿Cuál es el diagnóstico más completo?", "Revisar consumers, estado del destino, transacciones, errores, selectors, cuotas y conexión con el persistent store."],
+      ["WebLogic", "¿Qué aporta un cluster WebLogic?", "Distribución de carga y continuidad mediante varios servidores, siempre que sesiones y dependencias estén diseñadas para ello."],
+      ["WebLogic", "¿Cómo aplicarías un parche crítico al stack WebLogic?", "Confirmar inventario y prerequisitos, respaldar, probar en un clon, aplicar por etapas y ejecutar validación y rollback ensayado."],
+      ["WebLogic", "Una aplicación funciona por HTTP pero falla por HTTPS. ¿Qué revisarías?", "Cadena de certificados, hostname, trust stores, protocolos, ciphers, fecha y terminación TLS en el balanceador."],
+      ["WebLogic", "¿Qué evidencia ayuda a diagnosticar un posible thread starvation?", "Thread dumps correlacionados, hogging y stuck threads, colas de ejecución, latencia de dependencias y carga."],
+      ["SOA", "Una composite SOA tiene instancias en estado faulted. ¿Qué acción es correcta?", "Clasificar el fault, preservar payload e ID de correlación, corregir la causa y recuperar solo instancias seguras."],
+      ["SOA", "¿Cuándo no debe reintentarse automáticamente un mensaje?", "Cuando la operación no es idempotente o el error es funcional y repetirla puede duplicar efectos."],
+      ["SOA", "¿Qué debe verificarse al cambiar un endpoint de servicio?", "Contrato, DNS/TLS, credenciales, timeouts, políticas, conectividad y una transacción sintética extremo a extremo."],
+      ["SOA", "¿Cómo reducirías el crecimiento de dehydration store sin perder trazabilidad necesaria?", "Aplicando políticas soportadas de purga y retención, midiendo backlog y probando recuperación antes del cambio."],
+      ["Kubernetes", "Un pod entra en CrashLoopBackOff. ¿Cuál es la secuencia inicial de diagnóstico?", "Describe del pod, eventos, logs actuales y previos, exit code, configuración, probes y límites de recursos."],
+      ["Kubernetes", "¿Qué diferencia hay entre readiness y liveness probes?", "Readiness decide si el pod recibe tráfico; liveness decide si el contenedor debe reiniciarse."],
+      ["Kubernetes", "Una aplicación fue OOMKilled. ¿Qué debes hacer antes de aumentar memoria?", "Comparar uso y límite, revisar heap y leaks, observar el patrón de carga y confirmar la causa en eventos."],
+      ["Kubernetes", "¿Cómo se entrega configuración no sensible y sensible a un pod?", "ConfigMaps para configuración no sensible y Secrets protegidos por RBAC, cifrado y rotación para datos sensibles."],
+      ["Kubernetes", "¿Qué permite un rolling update seguro?", "Probes fiables, capacidad disponible, estrategia maxSurge/maxUnavailable y compatibilidad entre versiones coexistentes."],
+      ["Kubernetes", "¿Qué revisarías si un Service no alcanza sus pods?", "Selectors y endpoints, readiness, puertos targetPort, NetworkPolicies, DNS y escucha real del proceso."],
+      ["Docker", "¿Por qué ejecutar un contenedor como usuario no root?", "Reduce el impacto de una vulnerabilidad al limitar privilegios dentro del contenedor y sobre el host."],
+      ["Docker", "¿Qué mejora aporta un build multi-stage?", "Separa compilación y runtime para producir una imagen menor, con menos herramientas y superficie de ataque."],
+      ["GitLab", "¿Qué controles pondrías antes de desplegar a producción desde GitLab?", "Pipeline exitoso, artefacto inmutable, escaneo, aprobación, ventana, plan de rollback y ambiente protegido."],
+      ["Cloud", "¿Cuándo usar Object Storage para una aplicación Retail?", "Para artefactos y archivos durables no montados como filesystem, con versionado, cifrado, lifecycle y acceso controlado."],
+      ["Linux", "Un filesystem está al 100 %, pero du muestra poco uso. ¿Qué revisarías?", "Inodos y archivos borrados aún abiertos por procesos, además de mounts y reservas del filesystem."],
+      ["Linux", "¿Cómo identificarías qué proceso escucha en un puerto?", "Usaría ss o lsof con privilegios adecuados y correlacionaría PID, servicio systemd y comando ejecutado."],
+      ["Linux", "Load average es alto pero CPU está ociosa. ¿Qué hipótesis gana fuerza?", "Procesos esperando I/O o en estado no interrumpible; deben revisarse iostat, vmstat y estados de proceso."],
+      ["Linux", "¿Qué contiene un buen servicio systemd para una aplicación?", "Usuario dedicado, dependencias, variables externas, límites, política de reinicio, timeouts y logging consistente."],
+      ["Linux", "¿Cómo investigarías una resolución DNS intermitente?", "Compararía resolvers, tiempos y respuestas, revisararía resolv.conf, caché, red y registros autoritativos."],
+      ["Linux", "¿Cuándo usarías strace?", "Cuando necesite observar system calls de un proceso para localizar fallos de archivos, red, permisos o esperas."],
+      ["Oracle Database", "Una consulta se vuelve lenta tras crecer la tabla. ¿Qué compararías?", "Planes real y anterior, cardinalidades, estadísticas, distribución de datos, índices, binds y waits."],
+      ["Oracle Database", "¿Por qué son importantes las bind variables?", "Reducen hard parses y riesgo de inyección, aunque deben vigilarse planes cuando los valores tienen distribuciones muy distintas."],
+      ["Oracle Database", "¿Qué indica ORA-00060?", "Oracle detectó un deadlock; debe analizarse el trace para corregir el orden de bloqueos o diseño transaccional."],
+      ["Oracle Database", "¿Cómo diagnosticarías sesiones bloqueadas?", "Identificaría bloqueador y bloqueados, SQL, objeto, duración y transacción antes de coordinar cualquier kill."],
+      ["Oracle Database", "¿Qué hace confiable a un backup?", "Una restauración probada que cumple RPO/RTO, con logs, cifrado, retención y acceso verificados."],
+      ["Oracle Database", "¿Cuándo puede ayudar un índice compuesto?", "Cuando sus columnas y orden corresponden a filtros y joins frecuentes con selectividad útil, validado por el plan."],
+      ["PL/SQL", "¿Cómo debe manejar excepciones una rutina PL/SQL?", "Capturar solo errores tratables, conservar contexto, limpiar lo necesario y relanzar cuando el caller debe decidir."],
+      ["PL/SQL", "¿Por qué evitar COMMIT dentro de procedimientos reutilizables?", "Porque rompe el control transaccional del caller; el límite de la transacción debe definirse en la capa responsable."],
+      ["PL/SQL", "¿Qué ventaja ofrecen BULK COLLECT y FORALL?", "Reducen cambios de contexto entre SQL y PL/SQL para lotes, controlando memoria y manejo de errores."],
+      ["Performance", "¿Cómo separar un problema de aplicación de uno de infraestructura?", "Correlacionar latencia por capa, recursos, errores y una prueba controlada, evitando decidir solo por síntomas."],
+      ["Performance", "¿Qué datos necesitas antes de ajustar JVM heap?", "GC logs, uso de heap y metaspace, pausas, allocation rate, thread dumps, carga y límites del contenedor."],
+      ["Performance", "¿Qué revela una prueba de carga útil?", "Capacidad, latencia percentil, errores y cuello de botella bajo un modelo de uso representativo con criterios previos."],
+      ["Automation", "¿Qué propiedades debe tener un script operativo seguro?", "Idempotencia, validación, dry-run cuando aplique, logs, códigos de salida, timeout y protección de secretos."],
+      ["Automation", "¿Cómo manejarías reintentos en una automatización?", "Solo para fallos transitorios, con límite, exponential backoff y jitter, preservando idempotencia."],
+      ["Support", "Durante un P1 post–go-live, ¿qué debe ocurrir primero?", "Establecer comando del incidente, confirmar impacto, estabilizar el servicio y comunicar antes de buscar una corrección perfecta."],
+      ["Support", "¿Qué hace útil un handover de guardia?", "Estado actual, impacto, línea de tiempo, acciones realizadas, riesgos, siguiente paso, contactos y enlaces a evidencia."],
+      ["Support", "¿Qué diferencia hay entre mitigación y causa raíz?", "La mitigación reduce impacto ahora; la causa raíz explica condiciones sistémicas y se aborda después con evidencia."],
+      ["Leadership", "Como senior, ¿cómo orientarías a un ingeniero sin quitarle ownership?", "Acordaría resultado y límites, haría preguntas, revisaría decisiones críticas y dejaría que ejecute y explique."],
+      ["Leadership", "Dos equipos discrepan sobre la causa de un fallo. ¿Cómo avanzarías?", "Convertiría hipótesis en pruebas cortas con señales observables, responsables y un criterio común de decisión."],
+      ["Documentation", "¿Qué debe contener una guía de servicio publicada para clientes internos?", "Alcance, prerequisitos, solicitud, SLA, responsabilidades, límites, troubleshooting y ruta de escalamiento."]
+    ];
+
+    const RETAIL_DISTRACTORS = {
+      technical: [
+        "Reiniciar todos los componentes y cerrar el incidente si el síntoma desaparece.",
+        "Cambiar varios parámetros a la vez para aumentar la probabilidad de resolverlo.",
+        "Aplicar directamente en producción una solución encontrada para otra versión."
+      ],
+      process: [
+        "Esperar a tener la causa raíz completa antes de comunicar o mitigar.",
+        "Escalar sin logs ni pasos de reproducción para ahorrar tiempo.",
+        "Resolver manualmente y omitir documentación para evitar trabajo adicional."
+      ]
+    };
+
+    RETAIL_ROLE_SPECS.forEach(([area, question, correct], index) => {
+      const distractors = ["Support", "Leadership", "Documentation"].includes(area)
+        ? RETAIL_DISTRACTORS.process
+        : RETAIL_DISTRACTORS.technical;
+      const ans = index % 4;
+      const opts = [...distractors];
+      opts.splice(ans, 0, correct);
+      ALL_QUESTIONS.push({
+        cat: "Senior Retail Application Engineer",
+        q: question,
+        opts,
+        ans,
+        exp: `${correct} La decisión debe confirmarse con evidencia del ambiente y mantenerse reversible, especialmente durante soporte productivo.`,
+        tip: index % 3 === 0,
+        reco: `En entrevista, conecta este escenario de ${area} con una experiencia real: diagnóstico, decisión, comunicación y resultado medible.`
+      });
+    });
+
     const categories = [...new Set(ALL_QUESTIONS.map(q => q.cat))];
+    const TARGET_ROLE = "Senior Retail Application Engineer";
     const defaultState = {
       mode: "practice",
-      selectedCategories: categories,
+      selectedCategories: [TARGET_ROLE],
       questionLimit: Math.min(20, ALL_QUESTIONS.length),
       queue: [],
       optionOrders: {},
