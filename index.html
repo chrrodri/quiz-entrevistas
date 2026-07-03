@@ -6008,814 +6008,520 @@
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo funciona una integración típica en Oracle Integration Cloud de principio a fin?",
+        "q": "¿Qué es Oracle Integration Cloud (OIC)?",
         "opts": [
-            "Un trigger recibe un evento o ejecuta un horario; OIC valida y transforma los datos, invoca uno o más sistemas mediante conexiones y registra el resultado para monitoreo",
-            "OIC copia automáticamente todas las bases de datos conectadas sin configurar flujos",
-            "El usuario debe mover manualmente cada mensaje entre los sistemas",
-            "OIC únicamente crea reportes y no intercambia datos"
+            "Una plataforma iPaaS de Oracle para conectar aplicaciones, automatizar intercambios de datos y coordinar procesos",
+            "Una base de datos instalada en una laptop",
+            "Un lenguaje de programación",
+            "Un sistema operativo para servidores"
         ],
         "ans": 0,
-        "exp": "Una integración tiene un punto de entrada (trigger), acciones de orquestación y uno o más invokes. Entre ellos puede mapear datos, tomar decisiones, repetir operaciones y manejar errores. Cada instancia queda disponible para seguimiento y diagnóstico.",
-        "reco": "Piensa en OIC como un coordinador: recibe, transforma, enruta, entrega y deja trazabilidad de cada operación.",
+        "exp": "OIC es Integration Platform as a Service: Oracle administra la plataforma en la nube y tú diseñas los flujos que comunican sistemas diferentes.",
+        "reco": "Quédate primero con esta idea: OIC actúa como puente y coordinador entre aplicaciones.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cuáles son los elementos fundamentales que se configuran para construir una integración en OIC?",
+        "q": "¿Qué problema principal resuelve OIC?",
         "opts": [
-            "Connections, Integrations, Adapters, Data Mapper, Lookups, Packages y herramientas de Monitoring",
-            "Solamente tablas, índices y procedimientos almacenados",
-            "Máquinas virtuales, balanceadores y discos físicos administrados por el desarrollador",
-            "Únicamente páginas web y hojas de estilo"
+            "Evita construir cada conexión desde cero y centraliza la lógica, transformación y monitoreo de las integraciones",
+            "Reemplaza todas las aplicaciones de una empresa",
+            "Elimina la necesidad de proteger credenciales",
+            "Convierte cualquier archivo en una base de datos"
         ],
         "ans": 0,
-        "exp": "Las Connections guardan la configuración de acceso; los Adapters entienden cada aplicación; las Integrations definen el flujo; el Mapper transforma mensajes; los Lookups traducen valores; los Packages agrupan artefactos y Monitoring muestra su ejecución.",
-        "reco": "Memoriza la relación: Adapter define la capacidad, Connection configura el endpoint e Integration utiliza esa conexión dentro del flujo.",
+        "exp": "Sin una plataforma de integración, cada sistema suele conectarse directamente con muchos otros, creando dependencias difíciles de mantener. OIC ofrece un punto administrado para integrar.",
+        "reco": "Imagina una central de conexiones en vez de muchos cables cruzados entre aplicaciones.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué diferencia existe entre un Adapter, una Connection y una Integration en OIC?",
+        "q": "¿Qué significa que OIC sea una plataforma low-code?",
         "opts": [
-            "El Adapter aporta el conector; la Connection guarda endpoint, seguridad y credenciales; la Integration combina conexiones, mapeos y lógica para resolver un proceso",
-            "Son tres nombres para exactamente el mismo objeto",
-            "El Adapter almacena datos, la Connection crea reportes y la Integration administra usuarios",
-            "La Connection reemplaza por completo al Adapter y al flujo de integración"
+            "Que gran parte del flujo se construye visualmente, aunque todavía requiere comprender datos, APIs, seguridad y lógica",
+            "Que nunca se necesita conocimiento técnico",
+            "Que OIC escribe cualquier solución sin configuración",
+            "Que solo funciona para usuarios sin experiencia"
         ],
         "ans": 0,
-        "exp": "El Adapter es la plantilla tecnológica para hablar con REST, ERP Cloud, Salesforce, FTP u otro sistema. Una Connection es una instancia configurada de ese adaptador. La Integration utiliza una o varias conexiones para ejecutar el caso de negocio.",
-        "reco": "Ejemplo: REST Adapter → conexión al API de clientes → integración que recibe una orden y crea el cliente.",
+        "exp": "Low-code reduce el código manual mediante diseñadores, adaptadores y mapeos visuales. No elimina la necesidad de diseñar correctamente la integración.",
+        "reco": "Low-code significa menos código, no menos criterio técnico.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Para qué sirve el Connectivity Agent de Oracle Integration Cloud?",
+        "q": "¿Cómo funciona una integración típica de principio a fin?",
         "opts": [
-            "Permite que OIC acceda de forma segura a aplicaciones y bases de datos dentro de una red privada u on-premise sin exponerlas directamente a Internet",
-            "Convierte automáticamente cualquier aplicación antigua en una aplicación SaaS",
-            "Sustituye todos los adaptadores y elimina la necesidad de conexiones",
-            "Solo sirve para diseñar pantallas en Visual Builder"
+            "Un trigger inicia el flujo; OIC recibe datos, los valida o transforma, invoca otros sistemas y registra el resultado",
+            "OIC copia todas las bases de datos automáticamente",
+            "Un usuario mueve cada mensaje manualmente",
+            "El sistema destino diseña el flujo por sí solo"
         ],
         "ans": 0,
-        "exp": "El Connectivity Agent se instala en la red privada y establece comunicación saliente segura con OIC. Así, la nube puede invocar recursos internos sin abrir conexiones entrantes públicas hacia la organización.",
-        "reco": "Asocia el agente con integraciones híbridas: OIC en la nube conectando ERP, bases de datos o servicios dentro del data center.",
+        "exp": "El flujo básico es entrada, procesamiento y salida. Puede incluir decisiones, ciclos, llamadas a varias aplicaciones y manejo de errores.",
+        "reco": "Memoriza la secuencia: recibir → transformar → decidir → enviar → monitorear.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué información ofrece el monitoreo de OIC para comprender una ejecución?",
+        "q": "¿Qué es un trigger en una integración OIC?",
         "opts": [
-            "Estado y duración de la instancia, pasos recorridos, errores, actividad de endpoints y Business Identifiers usados para localizar la transacción",
-            "Solo indica si el servidor está encendido o apagado",
-            "Muestra únicamente el código fuente de los sistemas conectados",
-            "No conserva ninguna trazabilidad de las integraciones"
+            "El evento o punto de entrada que inicia una instancia de la integración",
+            "El sistema que siempre recibe el resultado final",
+            "Una copia de seguridad del flujo",
+            "Una pantalla para administrar usuarios"
         ],
         "ans": 0,
-        "exp": "Monitoring permite observar instancias, tiempos, errores y mensajes rastreables. Los Business Identifiers agregan claves de negocio, como número de orden o cliente, para buscar una operación sin conocer su identificador técnico.",
-        "reco": "Para troubleshooting sigue la ruta: localizar por identificador de negocio, revisar el paso fallido, entender el fault y decidir entre corregir datos, reintentar o cambiar el flujo.",
+        "exp": "Un trigger puede ser una llamada REST, la llegada de un archivo, un evento de una aplicación o un horario programado.",
+        "reco": "Pregunta siempre: ¿qué inicia el proceso? Esa respuesta identifica el trigger.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué papel cumplen los Packages y la activación de una integración en OIC?",
+        "q": "¿Qué es un invoke en OIC?",
         "opts": [
-            "Los Packages agrupan artefactos relacionados para organizarlos y transportarlos; activar una integración publica una versión configurada para que pueda recibir o procesar mensajes",
-            "Los Packages comprimen logs y la activación borra versiones anteriores",
-            "Activar significa editar directamente el flujo que está ejecutándose",
-            "Los Packages solo contienen usuarios y permisos"
+            "Una llamada que la integración realiza a otro sistema para consultar, crear o actualizar información",
+            "El evento que obligatoriamente inicia el flujo",
+            "Una contraseña temporal",
+            "Una herramienta para dibujar pantallas"
         ],
         "ans": 0,
-        "exp": "Los Packages ayudan a administrar una solución compuesta por varias integraciones. Después de configurar y probar conexiones y flujo, se activa una versión; los cambios posteriores se realizan de forma controlada y requieren una nueva activación.",
-        "reco": "Relaciona Packages con organización y promoción entre ambientes, y activación con el ciclo diseñar → probar → publicar → monitorear.",
+        "exp": "Mientras el trigger recibe el evento inicial, un invoke permite que OIC llame a un sistema destino o a un servicio intermedio.",
+        "reco": "Trigger entra a OIC; invoke sale de OIC hacia otra aplicación.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es Oracle Integration Cloud (OIC) y cuál es su propósito principal?",
+        "q": "¿Qué es un Adapter en OIC?",
         "opts": [
-            "Plataforma iPaaS de Oracle que permite conectar aplicaciones SaaS, on-premise y custom mediante adaptadores, flujos de integración y automatización de procesos con mínimo código",
-            "Un servidor de base de datos Oracle en la nube",
-            "Un editor de código para desarrollar aplicaciones NetSuite",
-            "Una herramienta de monitoreo de infraestructura cloud"
+            "Un conector preconstruido que conoce cómo comunicarse con una tecnología o aplicación específica",
+            "Una instancia de ejecución fallida",
+            "Una tabla para traducir códigos",
+            "Un usuario con permisos administrativos"
         ],
         "ans": 0,
-        "exp": "OIC (Oracle Integration Cloud) es la plataforma de integración como servicio de Oracle. Permite crear integraciones entre sistemas heterogéneos mediante adaptadores pre-construidos, mapeos visuales y orquestaciones, reduciendo la necesidad de código personalizado.",
-        "reco": "En entrevista, menciona los componentes clave de OIC: Integration (flujos), Process Automation (BPEL/Workflow), Visual Builder y B2B. Diferencia OIC Gen2 vs Gen3.",
+        "exp": "Los adaptadores simplifican protocolos, operaciones, autenticación y estructuras propias de aplicaciones como REST, FTP, ERP Cloud o bases de datos.",
+        "reco": "Piensa en el Adapter como el tipo de enchufe compatible con cada sistema.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cuáles son los principales patrones de integración disponibles en OIC?",
+        "q": "¿Qué es una Connection en OIC?",
         "opts": [
-            "App Driven Orchestration, Scheduled Orchestration, Basic Routing y File Transfer; cada uno optimizado para diferentes casos de uso como eventos en tiempo real, procesos batch, routing simple y transferencia de archivos",
-            "Solo existe un patrón universal para todos los casos de integración",
-            "OIC solo soporta integraciones punto a punto sin orquestación",
-            "Los patrones son: SQL, REST, SOAP y FTP sin distinción de orquestación"
+            "La configuración concreta de un Adapter con endpoint, seguridad y credenciales para acceder a un sistema",
+            "El diagrama completo del proceso",
+            "Una pregunta de monitoreo",
+            "Una copia del archivo de entrada"
         ],
         "ans": 0,
-        "exp": "OIC ofrece múltiples patrones: App Driven Orchestration (eventos disparados por aplicaciones), Scheduled Orchestration (batch/cron), Basic Routing (routing simple sin lógica compleja) y File Transfer (mover archivos entre sistemas). Elegir el patrón correcto es decisión de arquitectura clave.",
-        "reco": "En entrevista, conecta el patrón con el caso de uso: alta frecuencia de eventos → App Driven; jobs nocturnos → Scheduled; simple transformación → Basic Routing.",
+        "exp": "El Adapter define la capacidad general; la Connection indica a qué instancia conectarse y cómo autenticarse.",
+        "reco": "Adapter REST es el tipo; conexión API de Clientes es la configuración real.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es un Adapter en OIC y cuál es su ventaja respecto a una conexión REST directa?",
+        "q": "¿Qué es una Integration en OIC?",
         "opts": [
-            "Un adaptador es un conector pre-construido para un sistema específico (NetSuite, SAP, Salesforce) que abstrae la autenticación, descubre operaciones y reduce el código de integración; una conexión REST genérica requiere configurar manualmente headers, auth y parsing",
-            "Un Adapter y una conexión REST son exactamente lo mismo en OIC",
-            "Los Adapters solo funcionan con sistemas Oracle; REST se usa para todo lo demás",
-            "Un Adapter es más lento que REST porque agrega una capa extra sin beneficio"
+            "El flujo que combina trigger, invokes, mapeos y lógica para ejecutar un caso de negocio",
+            "Una credencial almacenada",
+            "Un servidor físico administrado por el desarrollador",
+            "Una licencia de usuario"
         ],
         "ans": 0,
-        "exp": "Los adaptadores OIC encapsulan la complejidad de conectar con sistemas específicos: autenticación, descubrimiento de objetos y operaciones, validación de esquemas. Esto acelera el desarrollo y reduce errores. El adaptador de NetSuite, por ejemplo, descubre automáticamente records y operaciones disponibles.",
-        "reco": "En entrevista, menciona adaptadores que hayas usado: NetSuite, Oracle EBS, Salesforce, ServiceNow, FTP, REST, SOAP. Explica qué configuraciones son clave en cada uno.",
+        "exp": "La Integration representa la solución ejecutable: por ejemplo, recibir una orden, transformar sus datos y crearla en un ERP.",
+        "reco": "Nombra tus integraciones según la acción de negocio, no solo según la tecnología.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es el Data Mapper en OIC y qué transformaciones avanzadas soporta?",
+        "q": "¿Para qué sirve el Data Mapper?",
         "opts": [
-            "La herramienta visual de mapeo de OIC que soporta XPath, XSLT, funciones de cadena/fecha/número, condicionales, lookups y JavaScript para transformaciones complejas entre esquemas de origen y destino",
-            "Una herramienta solo para renombrar campos entre dos sistemas",
-            "Un componente que solo puede copiar campos del mismo tipo de dato",
-            "Una interfaz que reemplaza completamente a XSLT sin usar expresiones"
+            "Para relacionar y transformar campos del mensaje de origen al formato esperado por el destino",
+            "Para cambiar permisos de usuarios",
+            "Para instalar el Connectivity Agent",
+            "Para crear máquinas virtuales"
         ],
         "ans": 0,
-        "exp": "El Data Mapper de OIC es visual pero poderoso: soporta XPath 2.0, XSLT, funciones de transformación incorporadas, condicionales, loops sobre arrays y lookups contra tablas de referencia. Para transformaciones muy complejas se puede usar JavaScript inline.",
-        "reco": "En entrevista, menciona casos donde usaste funciones avanzadas: concat, substring, format-dateTime, conditional mapping con if/then/else, y manejo de arrays con for-each.",
+        "exp": "Dos aplicaciones pueden nombrar y estructurar sus datos de forma distinta. El mapper convierte, calcula y organiza los valores entre ambos esquemas.",
+        "reco": "Ejemplo: customerName del origen puede mapearse a PartyName en el destino.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo implementarías procesamiento paralelo en OIC para manejar alto volumen de registros?",
+        "q": "¿Qué es un Lookup en OIC?",
         "opts": [
-            "Usando el patrón de Parallel action en el orquestador para dividir la carga, combinado con For Each paralelo, chunking del payload y coordinación con scope variables para agregar resultados",
-            "OIC no soporta procesamiento paralelo; todo debe ser secuencial",
-            "Creando múltiples integraciones idénticas y ejecutándolas manualmente al mismo tiempo",
-            "Solo aumentando el timeout del flow para que procese más registros"
+            "Una tabla de equivalencias que traduce valores entre sistemas sin escribir muchas condiciones",
+            "Un registro de contraseñas",
+            "Una herramienta de despliegue",
+            "Un tipo de trigger exclusivo de archivos"
         ],
         "ans": 0,
-        "exp": "OIC soporta procesamiento paralelo mediante: Parallel action (ramas que se ejecutan simultáneamente), For Each con concurrencia habilitada, y patrones de divide-and-conquer donde se parte el payload en chunks. Esto es crítico para integraciones de alto volumen donde la secuencialidad sería demasiado lenta.",
-        "reco": "En entrevista, menciona los tradeoffs: paralelismo aumenta throughput pero requiere gestión cuidadosa de errores parciales, locks y orden de procesamiento cuando importa la secuencia.",
+        "exp": "Un sistema puede usar MX y otro MEX para México. Un Lookup centraliza esa correspondencia y facilita mantenerla.",
+        "reco": "Usa Lookups para códigos de país, estados, unidades o cualquier catálogo equivalente.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué estrategia de manejo de errores implementarías en una integración OIC productiva?",
+        "q": "¿Para qué sirve una acción Switch?",
         "opts": [
-            "Combinar global fault handler, scope-level handlers para diferentes tipos de error, retry logic con backoff exponencial, dead letter queue, alertas por email y logging detallado de payload + contexto en cada error",
-            "Dejar que los errores se propaguen sin capturarlos para no complicar el flujo",
-            "Reintentar infinitamente sin límite hasta que funcione",
-            "Solo registrar el error en logs sin notificar ni reencolar"
+            "Para dirigir la ejecución por caminos diferentes según una condición",
+            "Para encender y apagar la instancia de OIC",
+            "Para reemplazar todas las conexiones",
+            "Para comprimir archivos automáticamente"
         ],
         "ans": 0,
-        "exp": "Una estrategia robusta de errores en OIC incluye: fault handlers globales y por scope, reintentos con backoff para errores transitorios, dead letter queue para errores permanentes, notificaciones a on-call, logging completo del payload fallido y contexto, y dashboards de monitoreo de errores.",
-        "reco": "En entrevista, distingue entre errores recuperables (timeout de red → retry) y no recuperables (datos inválidos → DLQ + notificación). Menciona la consola de errores de OIC.",
+        "exp": "Switch implementa decisiones: si el importe supera cierto valor sigue una ruta; si no, utiliza otra.",
+        "reco": "Diseña condiciones mutuamente claras y contempla siempre una ruta Otherwise.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cuáles son los métodos de autenticación más comunes en OIC al conectar con APIs externas?",
+        "q": "¿Para qué sirve For Each?",
         "opts": [
-            "Basic Auth, OAuth 2.0 (Authorization Code, Client Credentials, JWT Bearer), API Key, Certificate-based (mTLS) y SAML; la elección depende de los requerimientos de seguridad y capacidades del sistema externo",
-            "OIC solo soporta usuario y contraseña para todas las conexiones",
-            "Solo se puede usar OAuth 2.0 con cualquier sistema externo",
-            "OIC no maneja autenticación; eso se gestiona fuera de la integración"
+            "Para repetir acciones sobre cada elemento de una colección, como las líneas de una orden",
+            "Para activar varias versiones a la vez",
+            "Para crear usuarios",
+            "Para cambiar el endpoint de una conexión"
         ],
         "ans": 0,
-        "exp": "OIC soporta múltiples métodos de autenticación según el adaptador y el sistema destino. OAuth 2.0 con Client Credentials es el más común para APIs machine-to-machine. JWT Bearer es común con APIs Oracle. mTLS se usa para integraciones de alta seguridad financiera o bancaria.",
-        "reco": "En entrevista, menciona que las credenciales en OIC se gestionan en Connections y se almacenan cifradas. Habla de la importancia de rotar tokens y usar secrets management.",
+        "exp": "Cuando un mensaje contiene una lista, For Each permite procesar cada registro. Debes considerar volumen, errores parciales y orden.",
+        "reco": "No uses ciclos sin pensar en límites: muchas iteraciones pueden afectar rendimiento.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es NetSuite SuiteTalk y cómo se integra con OIC?",
+        "q": "¿Cuál es la diferencia entre una integración App Driven y una Scheduled?",
         "opts": [
-            "SuiteTalk es la API de NetSuite que expone operaciones SOAP y REST para crear, leer, actualizar y eliminar records; en OIC se usa el adaptador de NetSuite que abstrae SuiteTalk y permite seleccionar operaciones y objetos visualmente",
-            "SuiteTalk es el IDE de NetSuite para escribir SuiteScript",
-            "SuiteTalk solo soporta consultas de lectura sin modificaciones",
-            "SuiteTalk y OIC no son compatibles; se necesita middleware adicional"
+            "App Driven responde a una llamada o evento; Scheduled comienza en horarios o intervalos configurados",
+            "App Driven solo procesa archivos y Scheduled solo APIs",
+            "No existe ninguna diferencia",
+            "Scheduled siempre necesita intervención manual"
         ],
         "ans": 0,
-        "exp": "SuiteTalk es la plataforma de APIs web de NetSuite. Expone un WSDL SOAP y endpoints REST que permiten operar sobre todos los record types de NetSuite. El adaptador de OIC para NetSuite usa SuiteTalk bajo el capó, simplificando la configuración de conexión y descubrimiento de operaciones.",
-        "reco": "En entrevista, menciona operaciones comunes: getList, search, upsert, delete. Habla de Token-Based Authentication (TBA) como el método recomendado para conectar OIC con NetSuite.",
+        "exp": "App Driven es útil para solicitudes cercanas al tiempo real. Scheduled sirve para procesos batch, conciliaciones o cargas periódicas.",
+        "reco": "Pregunta si el negocio necesita respuesta inmediata o procesamiento periódico.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo manejarías grandes volúmenes de datos en una integración OIC para evitar timeouts y problemas de memoria?",
+        "q": "¿Cuál es la diferencia entre procesamiento síncrono y asíncrono?",
         "opts": [
-            "Implementar paginación en las llamadas a APIs, procesamiento por chunks/batches, uso del Stage File action para archivos grandes, evitar cargar payloads completos en variables y usar Scheduled integrations con ventanas de tiempo controladas",
-            "Cargar todos los datos en una sola llamada y procesar en memoria",
-            "Aumentar el timeout de OIC a valores muy altos como 24 horas",
-            "Dividir manualmente los datos antes de ejecutar la integración"
+            "En el síncrono quien llama espera una respuesta; en el asíncrono el trabajo puede continuar después sin mantener la espera",
+            "Síncrono significa programado y asíncrono significa manual",
+            "Asíncrono no permite errores",
+            "Son exactamente iguales"
         ],
         "ans": 0,
-        "exp": "El procesamiento de alto volumen en OIC requiere: paginación en APIs que la soportan (NetSuite search con pagingInfo, REST con offset/limit), Stage File para archivos CSV/JSON grandes que no caben en memoria, batching de requests, y estrategias de checkpoint para poder reanudar en caso de error parcial.",
-        "reco": "En entrevista, menciona el límite de payload de OIC (10MB por defecto) y cómo lo abordas: Stage File action, chunking, y streaming donde sea posible.",
+        "exp": "La elección depende del tiempo de proceso y de si el consumidor necesita una respuesta inmediata. Los procesos largos suelen beneficiarse de un diseño asíncrono.",
+        "reco": "No mantengas esperando a un cliente durante un proceso largo si basta con confirmar la recepción.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es el Stage File Action en OIC y cuándo lo usas?",
+        "q": "¿Qué función cumple el Connectivity Agent?",
         "opts": [
-            "Es una acción de OIC que permite leer, escribir, zip/unzip y procesar archivos grandes en storage temporal del servidor sin cargarlos completamente en memoria; se usa para integraciones de archivos CSV, XML o JSON de gran tamaño",
-            "Es una acción para desplegar integraciones a un ambiente staging",
-            "Es solo para mover archivos entre servidores FTP",
-            "Es equivalente a una variable de scope pero para strings"
+            "Conecta OIC de forma segura con aplicaciones y bases de datos dentro de una red privada u on-premise",
+            "Diseña automáticamente todos los mapeos",
+            "Sustituye las credenciales de cada aplicación",
+            "Solo crea reportes de uso"
         ],
         "ans": 0,
-        "exp": "Stage File es crítico para integraciones de archivos grandes. Permite operaciones como Read File, Write File, List Files, Zip/Unzip sin saturar la memoria del motor de OIC. Se combina con For Each para procesar registros del archivo de forma iterativa sin cargar todo el archivo en una variable.",
-        "reco": "En entrevista, da un ejemplo concreto: procesamiento de CSV diario de inventario con 500k registros usando Stage File + For Each + batch upsert a NetSuite.",
+        "exp": "El agente se instala cerca de los sistemas privados y mantiene comunicación saliente con OIC, evitando exponer directamente esos recursos a Internet.",
+        "reco": "Asocia Connectivity Agent con escenarios híbridos: nube más data center.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo implementarías una integración de NetSuite → OIC → Sistema externo que deba ser idempotente?",
+        "q": "¿Dónde se instala normalmente el Connectivity Agent?",
         "opts": [
-            "Incluir un identificador único (InternalID o ExternalID de NetSuite) en cada mensaje, verificar en el sistema destino si el registro ya existe antes de crear, usar upsert en lugar de insert, y registrar registros procesados para deduplicación",
-            "Ejecutar la integración solo una vez y asumir que no habrá duplicados",
-            "Generar un nuevo ID en OIC para cada ejecución independientemente",
-            "Idempotencia no es necesaria si la integración corre en horario fijo"
+            "En una máquina de la red privada que tenga acceso a los sistemas internos y salida segura hacia OIC",
+            "Dentro del navegador de cada usuario",
+            "En cada teléfono móvil",
+            "Obligatoriamente dentro de la base de datos"
         ],
         "ans": 0,
-        "exp": "La idempotencia es crítica en integraciones: si un mensaje se procesa dos veces, el resultado debe ser el mismo. En NetSuite se usa ExternalID como clave de deduplicación. La operación upsert (insert or update) basada en un identificador único garantiza idempotencia. También puedes mantener una tabla de control de registros procesados.",
-        "reco": "En entrevista, menciona el ExternalID de NetSuite como mecanismo clave de idempotencia y describe cómo lo has usado en integraciones reales para prevenir duplicados.",
+        "exp": "La máquina debe cumplir requisitos, tener conectividad estable y llegar tanto a OIC como a los endpoints internos necesarios.",
+        "reco": "Antes de instalar, valida DNS, firewall, proxy, certificados y alta disponibilidad.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cuál es la diferencia entre una integración síncrona y asíncrona en OIC?",
+        "q": "¿Por qué el Connectivity Agent no debe verse como una base de datos?",
         "opts": [
-            "Síncrona: el caller espera la respuesta antes de continuar, adecuada para transacciones en tiempo real que necesitan confirmación inmediata; Asíncrona: el caller recibe acknowledgment inmediato y la integración procesa en background, adecuada para alto volumen o procesos largos",
-            "Síncrona es siempre más rápida que asíncrona en todos los escenarios",
-            "Asíncrona solo aplica a integraciones de archivos; síncrona para APIs",
-            "No hay diferencia real; OIC siempre procesa de la misma forma"
+            "Porque transporta solicitudes entre OIC y recursos privados; no está diseñado para almacenar permanentemente los datos del negocio",
+            "Porque solo acepta imágenes",
+            "Porque reemplaza al sistema origen",
+            "Porque crea tablas únicamente los fines de semana"
         ],
         "ans": 0,
-        "exp": "La elección entre síncrono y asíncrono es una decisión de arquitectura clave. Síncrono es ideal para validaciones en tiempo real (crear orden → validar → responder éxito/error). Asíncrono es necesario cuando el proceso tarda más de lo que el caller puede esperar (ETL nocturno, sincronización batch).",
-        "reco": "En entrevista, menciona el timeout de OIC para integrations síncronas (~120 segundos) como limitación que guía la decisión de arquitectura hacia asíncrono en procesos largos.",
+        "exp": "El agente facilita conectividad. Los datos siguen perteneciendo a las aplicaciones origen y destino, y OIC coordina su intercambio.",
+        "reco": "Distingue conectividad, procesamiento y almacenamiento: son responsabilidades diferentes.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo monitorearías y diagnosticarías un error en una integración OIC en producción?",
+        "q": "¿Qué es una instancia de integración?",
         "opts": [
-            "Desde la consola de OIC: revisar Instances del integration con status Failed, abrir la instancia fallida para ver el activity trail, inspeccionar el payload de request/response en cada paso, revisar el fault detail y correlacionar con logs de sistema externo",
-            "Reiniciar el servidor de OIC y esperar que el error desaparezca",
-            "Revisar solo los logs de la base de datos sin mirar OIC",
-            "Desactivar la integración y crear una nueva para evitar el error"
+            "Una ejecución específica de un flujo, iniciada por un evento o por un horario",
+            "Una nueva cuenta de OIC",
+            "Un Adapter sin configurar",
+            "Un archivo de instalación del agente"
         ],
         "ans": 0,
-        "exp": "OIC provee la consola de monitoreo donde cada instancia de integración tiene un activity trail completo: cada acción ejecutada, tiempo, payload in/out y errores con detalle. Esto permite diagnóstico preciso sin necesidad de logs adicionales en la mayoría de casos.",
-        "reco": "En entrevista, menciona que también puedes habilitar el tracking de variables en el mapper para ver valores intermedios, y que las integraciones fallidas pueden resubmitearse desde la consola.",
+        "exp": "Cada vez que el flujo se ejecuta se crea una instancia con estado, tiempos y detalles que pueden revisarse en monitoreo.",
+        "reco": "El diseño es la receta; cada instancia es una preparación concreta de esa receta.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es Oracle Data Integrator (ODI) y cómo difiere de OIC?",
+        "q": "¿Qué estados básicos conviene reconocer al monitorear?",
         "opts": [
-            "ODI es una herramienta ETL de Oracle optimizada para transformaciones masivas de datos entre bases de datos usando el patrón E-LT (extrae, carga primero, transforma en destino); OIC está optimizado para integraciones de aplicaciones en tiempo real o near-real-time",
-            "ODI y OIC son exactamente lo mismo con diferente nombre",
-            "ODI es solo para proyectos on-premise; OIC para cloud únicamente",
-            "ODI reemplaza completamente a OIC en todos los casos de uso"
+            "Completada, en ejecución y con error, además de estados de recuperación o espera según el flujo",
+            "Solo activa e inactiva",
+            "Únicamente nueva y eliminada",
+            "Pública y privada"
         ],
         "ans": 0,
-        "exp": "ODI usa el patrón E-LT donde las transformaciones ocurren en el motor de la base de datos destino, siendo más eficiente para grandes volúmenes de datos. OIC es mejor para integración de aplicaciones, eventos en tiempo real y orquestación. Se usan frecuentemente juntos: OIC para eventos de negocio, ODI para cargas batch masivas.",
-        "reco": "En entrevista, menciona cuándo elegirías cada uno: ODI para migraciones masivas o data warehousing; OIC para sincronización de órdenes o clientes entre aplicaciones.",
+        "exp": "El estado ayuda a saber si una transacción terminó, sigue trabajando o necesita atención. Después se revisan sus actividades y mensajes.",
+        "reco": "Empieza el diagnóstico por estado, duración e identificador de negocio.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es NetSuite SuiteScript y cuándo lo usas en el contexto de integraciones?",
+        "q": "¿Qué son los Business Identifiers?",
         "opts": [
-            "SuiteScript es el framework de JavaScript server-side de NetSuite para customizaciones; en integraciones se usa para crear RESTlets (endpoints REST custom), Scheduled Scripts para preparar datos, o User Event Scripts para disparar webhooks cuando cambia un record",
-            "SuiteScript es solo para reportes y no tiene relación con integraciones",
-            "SuiteScript reemplaza a OIC para todas las integraciones con NetSuite",
-            "SuiteScript es el mismo lenguaje que JavaScript pero solo funciona en el browser de NetSuite"
+            "Campos de negocio elegidos para buscar y rastrear instancias, como número de orden o identificador de cliente",
+            "Contraseñas visibles para soporte",
+            "Nombres internos de servidores",
+            "Versiones del navegador"
         ],
         "ans": 0,
-        "exp": "SuiteScript es fundamental en el toolkit de integración con NetSuite. Los RESTlets permiten crear APIs custom más eficientes que SuiteTalk para casos específicos. Los Scheduled Scripts pueden preparar y exponer datos para que OIC los consuma. Los User Event Scripts pueden disparar integraciones cuando un record es creado/modificado.",
-        "reco": "En entrevista, menciona los tipos de scripts más usados en integración: RESTlet (Script Type 10.1/2.0), Scheduled Script, User Event Script y Map/Reduce para procesamiento de grandes volúmenes.",
+        "exp": "Permiten localizar una ejecución usando información que el negocio reconoce, sin depender de un identificador técnico de OIC.",
+        "reco": "Configúralos desde el diseño; cuando exista un incidente agradecerás poder buscar por orden o factura.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo implementarías seguridad en el transporte de datos entre sistemas usando OIC?",
+        "q": "¿Cuál es el primer paso razonable cuando una integración falla?",
         "opts": [
-            "HTTPS/TLS para tráfico en tránsito, certificados mutuos (mTLS) para autenticación bidireccional, cifrado de campos sensibles con funciones de OIC, gestión de credenciales en el Connections vault de OIC y no loggear datos sensibles en el activity trail",
-            "Enviar datos en texto plano y confiar en la seguridad de la red corporativa",
-            "Solo usar HTTP sin TLS en ambientes internos",
-            "Guardar credenciales en el código hardcodeadas para simplificar"
+            "Localizar la instancia, revisar el mensaje de error y el paso exacto donde ocurrió antes de decidir una acción",
+            "Reintentar indefinidamente sin leer el error",
+            "Borrar la integración",
+            "Cambiar todas las contraseñas"
         ],
         "ans": 0,
-        "exp": "La seguridad en OIC incluye: TLS obligatorio para todas las conexiones, OAuth para autenticación, vault de OIC para credenciales cifradas (no expuestas en código), mTLS para alta seguridad, y control de qué campos se incluyen en el activity trail para no exponer datos sensibles como SSN, tarjetas o contraseñas.",
-        "reco": "En entrevista, menciona el principio de mínimo privilegio en las credenciales de servicio: la cuenta de servicio de OIC en NetSuite solo debe tener permisos para las operaciones que la integración necesita.",
+        "exp": "Un error puede venir de datos inválidos, autenticación, red, límites o indisponibilidad del destino. El mensaje y el contexto orientan el diagnóstico.",
+        "reco": "Diagnostica antes de corregir: qué falló, dónde, cuándo, con qué datos y si es repetible.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es Token-Based Authentication (TBA) en NetSuite y por qué es el método recomendado para integraciones?",
+        "q": "¿Qué diferencia hay entre un error transitorio y uno permanente?",
         "opts": [
-            "TBA permite que una aplicación acceda a NetSuite usando tokens (Consumer Key/Secret + Token ID/Secret) sin exponer credenciales de usuario real; es más seguro que usuario/contraseña porque los tokens son revocables, tienen scope limitado y no caducan automáticamente",
-            "TBA es menos seguro que usuario/contraseña porque expone más credenciales",
-            "TBA solo funciona para integraciones internas dentro de NetSuite",
-            "TBA requiere que el usuario esté logueado en NetSuite durante la integración"
+            "El transitorio puede desaparecer al reintentar, como un timeout; el permanente requiere corregir datos o configuración, como un campo obligatorio ausente",
+            "El transitorio nunca se registra",
+            "El permanente siempre se resuelve solo",
+            "No existe diferencia práctica"
         ],
         "ans": 0,
-        "exp": "TBA (Token-Based Authentication) es el estándar de Oracle para integración con NetSuite porque: no requiere usuario humano activo, los tokens son revocables sin cambiar contraseñas, tienen permisos basados en la Integration Role del usuario asociado, y son auditables. SuiteTalk y RESTlets lo soportan.",
-        "reco": "En entrevista, describe el proceso de configuración de TBA: crear Integration Record en NetSuite, generar Token ID/Secret para el usuario de servicio, configurar en OIC Connections.",
+        "exp": "Clasificar el error evita reintentos inútiles. Las fallas de red pueden recuperarse; los datos inválidos seguirán fallando hasta corregirse.",
+        "reco": "Reintenta con límite y espera progresiva solo cuando la causa pueda ser temporal.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo diseñarías el manejo de reintentos en OIC para errores transitorios de red?",
+        "q": "¿Para qué sirve un Fault Handler?",
         "opts": [
-            "Configurar retry policy en el invoke adapter con número de reintentos, intervalo de espera progresivo (backoff exponencial), y manejar el caso donde todos los reintentos fallan con un fault handler que envía a dead letter queue y notifica al equipo",
-            "No reintentando nunca para evitar duplicados",
-            "Reintentando infinitamente sin backoff hasta que funcione",
-            "Usando un cron job externo para relanzar manualmente las integraciones fallidas"
+            "Para capturar fallas y definir acciones controladas como registrar contexto, notificar, responder o compensar",
+            "Para ocultar todos los errores",
+            "Para cambiar el tipo de Adapter",
+            "Para almacenar credenciales sin cifrar"
         ],
         "ans": 0,
-        "exp": "Los reintentos con backoff exponencial son la práctica correcta para errores transitorios (timeouts, 503 temporales). OIC permite configurar retry en los adapters. El backoff exponencial (esperar 1s, luego 2s, luego 4s) evita sobrecargar el sistema destino. Después de N reintentos fallidos, el mensaje debe ir a DLQ.",
-        "reco": "En entrevista, distingue errores que SÍ merecen retry (timeouts, 503, errores de red) de los que NO (400 Bad Request, datos inválidos, 401 Unauthorized — esos no mejorarán con retry).",
+        "exp": "Un manejador de errores evita que el flujo termine sin contexto y permite aplicar una respuesta adecuada según la falla.",
+        "reco": "Un buen Fault Handler conserva información útil sin exponer secretos ni datos sensibles.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es Boomi y en qué se diferencia de OIC para tomar decisiones de arquitectura?",
+        "q": "¿Por qué no conviene registrar contraseñas, tokens o datos sensibles en mensajes de diagnóstico?",
         "opts": [
-            "Boomi es una plataforma iPaaS de Dell Technologies con fortaleza en conectores pre-built y facilidad de uso para usuarios no técnicos; OIC tiene ventaja en ecosistemas Oracle (EBS, NetSuite, Fusion); la elección depende del stack tecnológico del cliente y sus requisitos",
-            "Boomi y OIC son exactamente iguales con diferentes logos",
-            "Boomi solo funciona en ambientes Microsoft; OIC solo en Oracle Cloud",
-            "Siempre se debe elegir OIC sobre Boomi independientemente del caso"
+            "Porque los registros pueden ser consultados por operadores y aumentar el riesgo de exposición de información",
+            "Porque OIC no admite texto",
+            "Porque impide activar la integración en todos los casos",
+            "Porque los tokens nunca se utilizan en conexiones"
         ],
         "ans": 0,
-        "exp": "Boomi, MuleSoft, Celigo, Workato y OIC compiten en el espacio iPaaS. Las diferencias clave: OIC tiene adaptadores nativos superiores para Oracle (NetSuite, EBS, Fusion); Boomi tiene una curva de aprendizaje más baja; MuleSoft ofrece más control y extensibilidad; Celigo está especializado en e-commerce/NetSuite. La elección depende del stack del cliente.",
-        "reco": "En entrevista, muestra que puedes evaluar opciones objetivamente y recomendar basado en el caso de uso del cliente, no por preferencia personal.",
+        "exp": "El monitoreo necesita contexto suficiente, pero debe aplicar minimización, enmascaramiento y controles de acceso.",
+        "reco": "Registra identificadores y contexto; evita secretos y payloads completos si contienen información sensible.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo documentarías una integración OIC para garantizar mantenibilidad por otro desarrollador?",
+        "q": "¿Cómo se administran normalmente las credenciales de un sistema conectado?",
         "opts": [
-            "Documentar especificación técnica (sistemas, endpoints, mapeos, transformaciones, manejo de errores), comentarios en el flujo de OIC, naming conventions claras, casos de prueba con datos de ejemplo, diagrama de flujo y procedimientos de troubleshooting",
-            "Dejarlo sin documentación porque el código se explica solo",
-            "Solo documentar en la memoria del desarrollador original",
-            "Crear documentación genérica sin detalles específicos de la integración"
+            "Dentro de la Connection mediante las políticas de seguridad soportadas, con acceso controlado y rotación",
+            "Escribiéndolas en el nombre de la integración",
+            "Enviándolas dentro de cada payload",
+            "Publicándolas en la documentación"
         ],
         "ans": 0,
-        "exp": "La documentación de integraciones debe cubrir: propósito de negocio, sistemas involucrados, diagrama de flujo, mapeo de campos (source → target con transformaciones), manejo de errores, dependencias, cómo ejecutar pruebas, y procedimientos de troubleshooting. Una integración sin documentación es un riesgo operativo.",
-        "reco": "En entrevista, menciona que OIC permite agregar notas en cada action del flujo. La documentación técnica suele vivir en Confluence o SharePoint con el diseño funcional y técnico.",
-        "tip": false
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Qué estrategia usarías para migrar una integración de un ambiente de desarrollo a producción en OIC?",
-        "opts": [
-            "Exportar el integration package (IAR file), validar en ambiente de test/QA, ajustar Connection parameters por ambiente usando environment-specific configs, importar y activar en producción durante ventana de mantenimiento con plan de rollback",
-            "Desarrollar directamente en producción para ahorrar tiempo",
-            "Copiar manualmente las configuraciones campo por campo entre ambientes",
-            "No existe migración en OIC; hay que recrear todo en cada ambiente"
-        ],
-        "ans": 0,
-        "exp": "OIC permite exportar integraciones como archivos IAR (Integration Archive) que contienen el flujo completo. Las Connection parameters se configuran por ambiente (DEV, QA, PROD tienen endpoints y credenciales diferentes). Es importante también migrar los Lookups, Certificates y Connection dependencies.",
-        "reco": "En entrevista, menciona la importancia de separar las configuraciones de ambiente de la lógica de integración usando Connection references, y de tener un pipeline CI/CD para automatizar el deployment.",
+        "exp": "Las conexiones centralizan endpoint y autenticación. La política exacta puede ser OAuth, Basic, certificados u otra compatible con el adaptador.",
+        "reco": "Usa el método más seguro que soporte el sistema y planifica la rotación de credenciales.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es un Lookup en OIC y para qué lo usarías?",
+        "q": "¿Por qué se prueban las Connections antes de diseñar todo el flujo?",
         "opts": [
-            "Una tabla de traducción de valores que mapea códigos de un sistema a los del otro; se usa cuando dos sistemas usan nomenclaturas diferentes para el mismo concepto (ej: status 'OPEN' en NetSuite = 'ACT' en el sistema ERP externo)",
-            "Un sinónimo de una consulta SQL en OIC",
-            "Una forma de buscar records en la base de datos de OIC",
-            "Un tipo de adapter para búsquedas en motores de texto"
+            "Para confirmar endpoint, red, autenticación y permisos, separando problemas de conectividad de problemas de lógica",
+            "Para activar automáticamente la integración",
+            "Para crear todos los mapeos",
+            "Para eliminar la necesidad de pruebas posteriores"
         ],
         "ans": 0,
-        "exp": "Los Lookups de OIC son tablas de traducción mantenidas en la plataforma. Son más mantenibles que el hardcodeo en el mapper porque pueden actualizarse sin modificar la integración. Casos típicos: traducción de códigos de país, estados de pedido, unidades de medida, centros de costo entre sistemas.",
-        "reco": "En entrevista, menciona que los Lookups se pueden exportar/importar como CSV, lo que facilita su mantenimiento por parte del equipo funcional sin necesidad de un desarrollador.",
-        "tip": false
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo abordarías el troubleshooting de una integración OIC que procesa datos incorrectos sin dar error explícito?",
-        "opts": [
-            "Habilitar tracking de variables en el mapper para inspeccionar valores intermedios, revisar el activity trail de instancias específicas, comparar payload de entrada con salida en cada paso, validar lógica de transformación con datos de prueba y revisar si hay lookups desactualizados",
-            "Reiniciar la integración y asumir que los datos eran temporalmente incorrectos",
-            "Contactar al soporte de Oracle sin investigar internamente",
-            "Borrar y recrear la integración desde cero"
-        ],
-        "ans": 0,
-        "exp": "Los bugs silenciosos (datos incorrectos sin error) son los más difíciles. La estrategia: usar variable tracking en el mapper para ver valores en cada transformación, reproducir con el mismo payload de la instancia fallida, revisar si hay condiciones de borde en el mapper (campos nulos, tipos de dato inesperados) y validar lookups y condicionales.",
-        "reco": "En entrevista, menciona que OIC permite descargar el payload completo de una instancia fallida para reproducirlo localmente en el mapper de pruebas.",
+        "exp": "Una prueba de conexión exitosa reduce incertidumbre, aunque no garantiza que todas las operaciones o datos funcionen correctamente.",
+        "reco": "Valida primero el acceso; después prueba operaciones y finalmente el flujo completo.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo manejarías la transformación de fechas entre sistemas con diferentes zonas horarias en OIC?",
+        "q": "¿Qué significa activar una integración?",
         "opts": [
-            "Convertir siempre a UTC como zona horaria canónica en el mapper, documentar las zonas horarias de cada sistema, usar funciones XPath de fecha como adjust-dateTime-to-timezone, y validar los casos extremos de cambio de día y horario de verano",
-            "Ignorar las zonas horarias porque la diferencia es mínima",
-            "Usar siempre la hora local del servidor de OIC",
-            "Dejar que cada sistema maneje su propia zona horaria sin conversión"
+            "Publicar una versión configurada para que pueda recibir eventos o ejecutarse según su programación",
+            "Editar el flujo mientras procesa mensajes",
+            "Eliminar todas las instancias anteriores",
+            "Instalar OIC en cada sistema destino"
         ],
         "ans": 0,
-        "exp": "Las diferencias de zona horaria son una fuente común de bugs en integraciones. La práctica recomendada es: convertir a UTC en el punto de entrada, procesar en UTC y convertir a la zona horaria destino en el punto de salida. OIC/XPath provee funciones como adjust-dateTime-to-timezone y format-dateTime para esto.",
-        "reco": "En entrevista, menciona casos reales donde esto causó problemas: facturas con fecha incorrecta, órdenes con fechas de vencimiento desplazadas un día, o reportes que no cuadraban entre sistemas.",
+        "exp": "El diseño no atiende tráfico hasta activarse. Los cambios se gestionan mediante versiones y activaciones controladas.",
+        "reco": "Sigue el ciclo diseñar → configurar → probar → activar → monitorear.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué patrones de diseño usarías para crear integraciones OIC reutilizables y mantenibles?",
+        "q": "¿Para qué sirven los Packages?",
         "opts": [
-            "Encapsular lógica común en integraciones de librería invocables (sub-flows), usar naming conventions estrictas, externalizar configuraciones en lookups y properties, separar transformación de routing, y documentar interfaces claramente",
-            "Copiar y pegar código entre integraciones para rapidez",
-            "Crear una integración gigante que maneje todos los casos posibles",
-            "Evitar reutilización porque cada integración debe ser independiente"
+            "Para agrupar integraciones y artefactos relacionados, facilitando organización y transporte entre ambientes",
+            "Para guardar contraseñas en texto plano",
+            "Para reemplazar el monitoreo",
+            "Para ejecutar cada mensaje dos veces"
         ],
         "ans": 0,
-        "exp": "En OIC, las integraciones de tipo 'Reusable' pueden ser invocadas como sub-flows desde otras integraciones, permitiendo centralizar lógica común como validaciones, transformaciones estándar o notificaciones de error. Esto reduce duplicación y facilita el mantenimiento.",
-        "reco": "En entrevista, menciona que has creado sub-flows reutilizables para: manejo estándar de errores, logging centralizado, validación de esquema de entrada, o llamadas a APIs de autenticación compartidas.",
+        "exp": "Una solución puede incluir varias integraciones. Los Packages ayudan a tratarlas como una unidad lógica durante mantenimiento y promoción.",
+        "reco": "Agrupa por solución o dominio de negocio, no por conveniencia momentánea.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es MuleSoft Anypoint Platform y cuándo lo recomendarías sobre OIC?",
+        "q": "¿Por qué se usan ambientes separados de desarrollo, pruebas y producción?",
         "opts": [
-            "MuleSoft es una plataforma de integración y API management de Salesforce con mayor flexibilidad y control para API-led connectivity; es preferible cuando el cliente ya usa Salesforce, necesita API management sofisticado o requiere customizaciones que OIC no permite",
-            "MuleSoft solo es útil para integraciones con Salesforce",
-            "MuleSoft es inferior a OIC en todos los casos de uso",
-            "MuleSoft y OIC son herramientas que nunca se comparan porque sirven propósitos completamente distintos"
+            "Para construir y validar cambios sin afectar las operaciones reales antes de promoverlos de forma controlada",
+            "Porque cada pregunta necesita un ambiente",
+            "Para evitar documentar integraciones",
+            "Porque producción no admite conexiones"
         ],
         "ans": 0,
-        "exp": "MuleSoft destaca en: API-led connectivity (System, Process, Experience APIs), control total sobre el código de integración con DataWeave, API Manager para gobernanza, y ecosistema Salesforce. OIC tiene ventaja cuando el stack es principalmente Oracle. Conocer ambas plataformas permite recomendar la correcta según el contexto del cliente.",
-        "reco": "En entrevista, muestra que puedes evaluar plataformas objetivamente. Menciona que has trabajado con múltiples iPaaS y sabes cuándo cada una aporta más valor.",
-        "tip": false
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo implementarías una integración de eventos en tiempo real usando OIC con NetSuite?",
-        "opts": [
-            "Configurar un NetSuite SuiteScript User Event o a NetSuite Saved Search con scheduler, que dispare llamadas HTTP a un endpoint de OIC (trigger) cuando ocurren cambios en records específicos, y procesar esos eventos en el flujo de OIC",
-            "Hacer polling de NetSuite cada segundo para detectar cambios",
-            "OIC no puede recibir eventos de NetSuite; solo puede consultar periódicamente",
-            "Usar solo el adapter de NetSuite sin scripts adicionales"
-        ],
-        "ans": 0,
-        "exp": "Para integración en tiempo real con NetSuite: opción 1 (push) - SuiteScript User Event Script llama al endpoint de OIC cuando se crea/modifica un record; opción 2 (near-real-time pull) - OIC hace polling frecuente de NetSuite buscando records modificados desde la última ejecución. Push es más eficiente pero requiere SuiteScript. El polling con Scheduled integration es más simple.",
-        "reco": "En entrevista, menciona las ventajas y desventajas de push vs pull: push es más eficiente y en tiempo real, pero requiere mantenimiento de SuiteScript; pull es más simple pero hay latencia y puede generar carga innecesaria.",
+        "exp": "La separación reduce riesgo y permite probar configuración, datos, permisos y rendimiento antes del go-live.",
+        "reco": "Nunca conviertas producción en tu ambiente de pruebas.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Qué son los Business Identifiers en OIC y por qué son importantes?",
+        "q": "¿Qué debería incluir una prueba básica de integración?",
         "opts": [
-            "Son campos del payload que se configuran para tracking en el activity trail, permitiendo buscar instancias de integración por ID de negocio (ej: número de orden, ID de cliente) en lugar de solo por el ID interno de OIC",
-            "Son identificadores internos de OIC sin relación con datos de negocio",
-            "Son solo para auditoría y no afectan el funcionamiento de la integración",
-            "Son campos requeridos que OIC genera automáticamente sin configuración"
+            "Caso exitoso, datos inválidos, sistema destino no disponible, duplicados y verificación del resultado en ambos extremos",
+            "Solo comprobar que el diseñador abre",
+            "Probar únicamente un dato ideal",
+            "Activar directamente y esperar tickets"
         ],
         "ans": 0,
-        "exp": "Los Business Identifiers permiten rastrear instancias de integración por valores de negocio significativos (OrderID, CustomerID, TransactionNumber). Esto es invaluable en soporte: cuando un usuario dice 'la orden #12345 no llegó', puedes buscar directamente esa instancia en el monitoreo de OIC en lugar de revisar logs genéricos.",
-        "reco": "En entrevista, muestra que usas Business Identifiers en todas tus integraciones productivas porque hacen el troubleshooting dramáticamente más eficiente para el equipo de soporte.",
+        "exp": "Las pruebas deben cubrir la ruta feliz y los fallos previsibles. También deben confirmar que el destino recibió exactamente lo esperado.",
+        "reco": "Prepara datos de prueba y resultados esperados antes de ejecutar.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo diseñarías la arquitectura de una integración bidireccional entre NetSuite y un sistema ERP externo?",
+        "q": "¿Qué significa que una integración sea idempotente?",
         "opts": [
-            "Definir el sistema de registro para cada entidad (quien es la fuente de verdad), implementar flows separados para cada dirección, usar ExternalID para deduplicación, manejar conflictos con timestamps o versionado, y diseñar el manejo de errores en ambas direcciones",
-            "Sincronizar todos los campos en ambas direcciones siempre",
-            "Usar una sola integración bidireccional con lógica condicional en el mismo flujo",
-            "Sincronizar solo de NetSuite hacia afuera, nunca en la dirección inversa"
+            "Que procesar nuevamente el mismo evento no crea efectos duplicados no deseados",
+            "Que siempre termina en menos de un segundo",
+            "Que no necesita autenticación",
+            "Que solo admite archivos XML"
         ],
         "ans": 0,
-        "exp": "Las integraciones bidireccionales requieren diseño cuidadoso para evitar loops infinitos (A actualiza B, B notifica a A, A actualiza B...). La solución típica: definir sistema de registro por entidad, usar flags o timestamps para detectar el origen del cambio, e implementar idempotencia con ExternalID. Esto es uno de los escenarios más complejos en integración.",
-        "reco": "En entrevista, menciona el problema del 'loop de sincronización' y cómo lo resuelves: campo de control, comparación de timestamps, o supresión de eventos cuando el cambio provino de la integración.",
+        "exp": "Los reintentos son normales. Un identificador único, una validación previa o una operación upsert pueden impedir órdenes o pagos duplicados.",
+        "reco": "Diseña pensando que un mensaje podría llegar más de una vez.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo usarías la función de Schedule Parameters en una integración Scheduled de OIC?",
+        "q": "¿Qué práctica ayuda a manejar grandes volúmenes?",
         "opts": [
-            "Para parametrizar la integración con valores configurables por ejecución (fecha de corte, ambiente, límite de registros) que el operador puede modificar al ejecutar manualmente o configurar en el schedule sin cambiar el código de la integración",
-            "Los Schedule Parameters son solo para configurar la frecuencia de ejecución",
-            "No sirven para pasar datos a la integración; solo para metadata",
-            "Son parámetros hardcodeados que no pueden cambiarse entre ejecuciones"
+            "Procesar por páginas o lotes, limitar concurrencia y evitar cargar innecesariamente todo el contenido en memoria",
+            "Enviar siempre todo en un único mensaje",
+            "Reintentar sin límite",
+            "Duplicar cada registro para acelerar"
         ],
         "ans": 0,
-        "exp": "Los Schedule Parameters en OIC permiten externalizar configuración: fecha desde/hasta para procesar, límite de registros por batch, ambiente destino, o flags de modo debug. Esto hace la integración flexible y operable sin necesidad de modificar el flujo.",
-        "reco": "En entrevista, da un ejemplo: una integración de reconciliación financiera que acepta parámetros de fecha_inicio y fecha_fin para poder reejecutarse en un rango específico sin modificar el código.",
-        "tip": false
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es Celigo y para qué escenarios lo elegirías sobre OIC?",
-        "opts": [
-            "Celigo es una plataforma iPaaS especializada en integraciones para NetSuite y e-commerce (Shopify, Amazon, Magento); es preferible cuando el cliente usa NetSuite con múltiples tiendas online o sistemas de e-commerce que Celigo tiene conectores nativos muy optimizados",
-            "Celigo es una herramienta de reportes para NetSuite sin capacidades de integración",
-            "Celigo es siempre superior a OIC para cualquier tipo de integración",
-            "Celigo solo sirve para integraciones con Salesforce"
-        ],
-        "ans": 0,
-        "exp": "Celigo está especializado en el ecosistema NetSuite + e-commerce. Sus FlowGroups y conectores nativos para plataformas de comercio electrónico hacen que sea significativamente más rápido de implementar para integraciones NetSuite-Shopify, NetSuite-Amazon o NetSuite-WooCommerce que OIC o MuleSoft genéricos.",
-        "reco": "En entrevista, muestra conocimiento del ecosistema de herramientas: no todo debe hacerse con OIC. Mencionar que conoces Celigo, Boomi y MuleSoft demuestra amplitud de criterio.",
+        "exp": "El volumen exige respetar límites de OIC y de los sistemas conectados. Paginación, batch y control de concurrencia reducen fallos.",
+        "reco": "Prueba con un volumen representativo, no solo con tres registros.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo estimarías el esfuerzo de desarrollo de una nueva integración OIC?",
+        "q": "¿Qué documentación mínima conviene mantener?",
         "opts": [
-            "Analizar complejidad de sistemas a conectar, disponibilidad y calidad de APIs, número de mapeos y transformaciones, requisitos de manejo de errores, volumen de datos, complejidad de reglas de negocio, necesidad de SuiteScript, testing requerido y buffer para imprevistos",
-            "Siempre usar el mismo estimado de 2 días para cualquier integración",
-            "Estimar sin revisar la API del sistema destino",
-            "Dar un estimado solo basado en el número de campos a mapear"
+            "Objetivo, sistemas, trigger, flujo, mapeos, seguridad, errores, responsables, despliegue y procedimiento de soporte",
+            "Solo el nombre del desarrollador",
+            "Únicamente capturas de pantalla sin contexto",
+            "Ninguna, porque el flujo es visual"
         ],
         "ans": 0,
-        "exp": "Una estimación precisa requiere: revisar las APIs disponibles (¿hay adaptador o hay que usar REST genérico?), entender la calidad de la documentación, cuantificar la complejidad de transformaciones, identificar casos edge, sumar tiempo de testing y documentación, y agregar un buffer del 20-30% para imprevistos típicos de integración.",
-        "reco": "En entrevista, menciona que una de tus primeras preguntas al recibir un requerimiento es revisar la documentación de la API del sistema destino. La calidad de esa documentación impacta significativamente el estimado.",
-        "tip": false
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es un RESTlet en NetSuite y cuándo lo creas en lugar de usar SuiteTalk directamente?",
-        "opts": [
-            "Un RESTlet es un script SuiteScript que expone un endpoint REST custom en NetSuite; se crea cuando necesitas lógica de negocio específica, búsquedas complejas no soportadas por SuiteTalk estándar, o una API más eficiente que el WSDL genérico",
-            "Un RESTlet reemplaza completamente a SuiteTalk para todas las operaciones",
-            "Los RESTlets solo se usan para lecturas, nunca para escrituras",
-            "Un RESTlet es lo mismo que un REST endpoint externo sin relación con NetSuite"
-        ],
-        "ans": 0,
-        "exp": "Los RESTlets son endpoints REST personalizados dentro de NetSuite. Son preferibles cuando: necesitas lógica de negocio compleja antes de devolver datos, quieres una respuesta más eficiente (solo los campos necesarios), necesitas operaciones atómicas multi-record, o cuando SuiteTalk tiene limitaciones de rendimiento para tu caso de uso.",
-        "reco": "En entrevista, menciona que los RESTlets usan TBA para autenticación y que puedes hacer GET/POST/PUT/DELETE según lo que implementes en el script.",
+        "exp": "El diseñador visual no explica por sí solo decisiones, dependencias, operación ni recuperación. La documentación permite mantener la solución.",
+        "reco": "Escribe para la persona que atenderá un incidente a las dos de la mañana.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo optimizarías una integración OIC que tarda demasiado tiempo en ejecutarse?",
+        "q": "¿Cuál es una buena primera práctica para aprender OIC sin experiencia?",
         "opts": [
-            "Identificar el bottleneck con el activity trail (qué paso tarda más), aplicar paginación y batching, eliminar llamadas redundantes, evaluar paralelismo para pasos independientes, optimizar queries en sistemas origen, y considerar un patrón asíncrono si el timeout es el problema",
-            "Solo aumentar el timeout de la integración",
-            "Reducir el número de logs para ir más rápido",
-            "Migrar a otro iPaaS sin analizar la causa"
+            "Construir un flujo pequeño REST a REST, observar cada instancia y después añadir mapeo, condición y manejo de errores",
+            "Comenzar con una migración masiva crítica",
+            "Memorizar todos los adaptadores sin practicar",
+            "Probar directamente en producción"
         ],
         "ans": 0,
-        "exp": "La optimización de performance en OIC requiere análisis: el activity trail muestra el tiempo en cada paso. Causas comunes de lentitud: queries sin índices en el sistema fuente, APIs externas lentas, procesamiento secuencial que podría ser paralelo, payloads innecesariamente grandes, o demasiadas llamadas pequeñas que podrían agruparse en batch.",
-        "reco": "En entrevista, menciona el principio de 'chatty vs chunky': es mejor hacer pocas llamadas con más datos (chunky) que muchas llamadas pequeñas (chatty) cuando la latencia de red es un factor.",
+        "exp": "Un ejercicio pequeño permite comprender trigger, invoke, conexión, mapper, activación y monitoreo sin demasiadas variables simultáneas.",
+        "reco": "Aprende por capas: conexión, flujo simple, transformación, decisiones, errores y operación.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo mentorizarías a un desarrollador junior en prácticas de integración con OIC?",
+        "q": "¿Qué preguntas debes responder antes de diseñar una integración?",
         "opts": [
-            "Enseñar patrones de diseño y mejores prácticas desde el inicio (naming conventions, manejo de errores, idempotencia), hacer code review de sus integraciones, asignar tareas incrementales de complejidad creciente, explicar el porqué de cada decisión y fomentar que documente",
-            "Dejar que el junior aprenda solo sin guía para desarrollar independencia",
-            "Solo mostrarle la documentación oficial de Oracle sin ejemplos prácticos",
-            "Asignarle solo tareas de testing sin desarrollo hasta que tenga 2 años de experiencia"
+            "Qué la inicia, qué datos entran, qué sistema recibe, qué respuesta se espera, qué volumen existe y qué ocurre si algo falla",
+            "Solo qué color tendrá el diagrama",
+            "Únicamente quién compró la licencia",
+            "Cuántos usuarios usan el navegador"
         ],
         "ans": 0,
-        "exp": "El mentoring efectivo en integración combina: pair programming en las primeras integraciones, code review con explicaciones detalladas, escalada gradual de complejidad, y enseñar a pescar (cómo investigar en la consola de OIC, dónde encontrar documentación, cómo leer el activity trail). La documentación de práctica interna que creas como mentor también beneficia al equipo.",
-        "reco": "En entrevista, menciona experiencias concretas de mentoring: cuántos juniors has mentoreado, qué metodología usas y qué resultados lograste.",
-        "tip": false
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es SDLC en el contexto de desarrollo de integraciones y cómo lo aplicas?",
-        "opts": [
-            "Software Development Lifecycle: análisis de requerimientos, diseño técnico, desarrollo, unit testing, QA testing, UAT con el cliente, deployment a producción y mantenimiento; en integraciones incluye también el diseño de la arquitectura de conexión y el plan de rollback",
-            "SDLC es solo el proceso de desarrollo sin fases de testing",
-            "En integraciones no aplica SDLC porque son más simples que aplicaciones",
-            "SDLC solo aplica a desarrollo de software, no a integraciones"
-        ],
-        "ans": 0,
-        "exp": "SDLC en integraciones incluye fases adicionales específicas: descubrimiento de APIs disponibles, diseño de mapeos con el analista funcional, validación de transformaciones con datos reales antes de desarrollo, pruebas de volumen y performance, y el plan de cutover (cómo hacer el go-live sin impactar operaciones).",
-        "reco": "En entrevista, menciona que las integraciones tienen un impacto de negocio inmediato cuando van a producción: un error puede generar datos incorrectos en múltiples sistemas, por lo que el proceso de testing y validación es crítico.",
+        "exp": "Los requisitos funcionales y no funcionales determinan el patrón, seguridad, frecuencia, manejo de errores y capacidad necesarios.",
+        "reco": "Un buen diseño empieza entendiendo el proceso de negocio, no arrastrando componentes.",
         "tip": true
     },
     {
         "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo manejarías una situación donde el cliente quiere un cambio urgente en una integración productiva?",
+        "q": "¿Qué opción resume mejor el papel de OIC dentro de una arquitectura empresarial?",
         "opts": [
-            "Evaluar el impacto y riesgo del cambio, implementar en ambiente de desarrollo primero, probar con datos representativos, comunicar el riesgo y obtener aprobación del cliente, coordinar ventana de deploy, tener plan de rollback listo y monitorear después del cambio",
-            "Hacer el cambio directamente en producción para agilizar",
-            "Rechazar el cambio porque las integraciones productivas no deben tocarse",
-            "Hacer el cambio sin testing para cumplir la urgencia"
+            "Coordina el intercambio confiable y observable de información entre sistemas sin convertirse necesariamente en el dueño de esos datos",
+            "Reemplaza todos los sistemas origen y destino",
+            "Es únicamente una herramienta de reportes",
+            "Debe almacenar permanentemente cada dato de la empresa"
         ],
         "ans": 0,
-        "exp": "Los cambios urgentes en integraciones productivas son de alto riesgo porque pueden impactar todos los sistemas conectados. Incluso en urgencia, hay un proceso mínimo: entender qué cambió, probar en el ambiente más cercano a producción disponible, obtener aprobación documentada y monitorear activamente después del deploy.",
-        "reco": "En entrevista, muestra madurez: la urgencia no elimina el riesgo; lo que cambia es el tiempo disponible para mitigarlo. Menciona que comunicas el riesgo claramente antes de proceder.",
-        "tip": true
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es Workato y en qué casos es una mejor opción que OIC?",
-        "opts": [
-            "Workato es una plataforma de automatización e integración orientada a negocios (más low-code/no-code); es mejor cuando los usuarios de negocio necesitan crear o modificar integraciones sin un desarrollador, o cuando el cliente valora la velocidad de implementación sobre control técnico profundo",
-            "Workato es solo para integraciones con aplicaciones de recursos humanos",
-            "Workato siempre es inferior a OIC porque tiene menos capacidades técnicas",
-            "Workato y OIC no pueden coexistir en el mismo cliente"
-        ],
-        "ans": 0,
-        "exp": "Workato compite en el espacio low-code/no-code de automatización, similar a Zapier pero enterprise. Sus Recipes (flujos) son más accesibles para usuarios no técnicos. Es ideal cuando el cliente quiere autonomía para crear automatizaciones simples sin depender del equipo de TI. OIC es mejor para integraciones complejas que requieren transformaciones avanzadas y alto volumen.",
-        "reco": "En entrevista, mostrar conocimiento de Workato, Snaplogic y otros iPaaS demuestra amplitud de criterio para recomendar la herramienta correcta según el cliente.",
-        "tip": false
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo utilizarías XSLT en OIC para una transformación que el mapper visual no puede manejar?",
-        "opts": [
-            "Usando el componente de XSLT embebido en el Data Mapper cuando la transformación requiere lógica que las funciones visuales no cubren (ej: transformaciones recursivas, grouping complejo, generación dinámica de estructura XML)",
-            "XSLT no está disponible en OIC; todo debe hacerse visualmente",
-            "XSLT solo sirve para transformar HTML, no para datos de integración",
-            "Se debe abandonar OIC y usar un servidor XSLT externo en estos casos"
-        ],
-        "ans": 0,
-        "exp": "OIC permite insertar XSLT custom en el mapper cuando las funciones visuales no son suficientes. Casos de uso: generación dinámica de XML donde la estructura varía según datos, transformaciones de agrupación/agregación complejas, o conversiones específicas de formato. El XSLT se incrusta directamente en el mapper y se ejecuta en el motor de OIC.",
-        "reco": "En entrevista, menciona que dominar XSLT te permite resolver transformaciones que otros desarrolladores juniors delegan externamente, siendo un diferenciador técnico en el rol.",
-        "tip": true
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Qué consideraciones de escalabilidad debes tener al diseñar integraciones OIC de alto volumen?",
-        "opts": [
-            "Diseñar para procesamiento paralelo desde el inicio, usar patrones de chunking y paginación, evitar dependencias secuenciales innecesarias, considerar el impacto de la integración en los sistemas destino (rate limits, governor limits de NetSuite), y monitorear con alertas de capacidad",
-            "La escalabilidad no aplica a integraciones porque procesan pocos datos",
-            "Solo aumentar el tamaño del servidor de OIC cuando hay problemas de volumen",
-            "Diseñar para el volumen actual y escalar cuando surjan problemas"
-        ],
-        "ans": 0,
-        "exp": "NetSuite tiene governor limits: límites de concurrencia de API calls, límites de tiempo de script, y límites de tamaño de request. Al diseñar integraciones de alto volumen, debes respetar estos límites: usar concurrency throttling, implementar circuit breaker cuando NetSuite devuelve errores de límite, y diseñar para reintentar con backoff cuando alcanzas rate limits.",
-        "reco": "En entrevista, menciona los governor limits de NetSuite como una restricción de diseño importante: 15 concurrent API calls por default, límites de tamaño de respuesta en SuiteQL, y cómo los has manejado en proyectos reales.",
-        "tip": true
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es SuiteQL en NetSuite y cuándo lo usas en el contexto de OIC?",
-        "opts": [
-            "SuiteQL es el lenguaje de consulta SQL de NetSuite que permite queries más complejas que las Saved Searches; en OIC se usa con el adapter de NetSuite para ejecutar queries eficientes de lectura en lugar de múltiples llamadas a API individuales",
-            "SuiteQL es el mismo que SQL estándar sin diferencias",
-            "SuiteQL solo funciona en el UI de NetSuite, no desde APIs externas",
-            "SuiteQL reemplaza a SuiteTalk para todas las operaciones de lectura y escritura"
-        ],
-        "ans": 0,
-        "exp": "SuiteQL es el engine de consultas de NetSuite que usa sintaxis SQL familiar. En OIC, puedes ejecutar SuiteQL queries a través del adapter de NetSuite para obtener datos con joins, filtros complejos y aggregations que serían imposibles o muy ineficientes con múltiples llamadas getList. Es especialmente útil para integraciones de reportes y reconciliación.",
-        "reco": "En entrevista, menciona que SuiteQL tiene algunas diferencias con SQL estándar: no soporta todos los tipos de joins, tiene funciones propias de NetSuite y sus tablas son los record types de NetSuite (transaction, customer, item, etc.).",
-        "tip": true
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es el patrón de integración Publish-Subscribe (Pub/Sub) y cómo lo implementarías con OIC?",
-        "opts": [
-            "Un publisher envía mensajes a un topic/canal sin saber quién los consume; múltiples subscribers reciben los mensajes de forma independiente; en OIC se implementa usando Oracle Streaming (Kafka compatible) como broker, con integraciones OIC como publishers y/o subscribers",
-            "Pub/Sub es lo mismo que una integración punto a punto en OIC",
-            "OIC no soporta el patrón Pub/Sub; solo puede hacer integraciones directas",
-            "Pub/Sub en OIC requiere crear múltiples integraciones que se llamen entre sí en cadena"
-        ],
-        "ans": 0,
-        "exp": "El patrón Pub/Sub desacopla sistemas: el publisher no necesita conocer ni esperar a los subscribers. Oracle Integration Cloud se integra con Oracle Streaming (compatible con Kafka) para implementar este patrón. Es ideal cuando múltiples sistemas deben reaccionar al mismo evento (ej: nueva orden de NetSuite → warehouse, ERP, notificación al cliente).",
-        "reco": "En entrevista, menciona cuándo Pub/Sub es la arquitectura correcta: múltiples consumidores del mismo evento, necesidad de desacoplamiento, o cuando los subscribers pueden estar temporalmente offline.",
-        "tip": true
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo presentarías una solución de integración técnica compleja a un ejecutivo no técnico?",
-        "opts": [
-            "Usar analogías de negocio, diagrama de flujo simple sin jargon técnico, enfocarse en el valor de negocio (qué problema resuelve, qué riesgo elimina, qué ahorro genera), cuantificar el impacto y reservar los detalles técnicos para el apéndice o una sesión separada",
-            "Presentar todos los detalles técnicos de XSLT, XPath y adapters",
-            "Evitar los diagramas porque confunden a los no técnicos",
-            "Leer la especificación técnica completa en la presentación ejecutiva"
-        ],
-        "ans": 0,
-        "exp": "La comunicación con stakeholders no técnicos es una habilidad crítica para un Integration Developer senior. Los ejecutivos necesitan entender: qué problema resuelve, cuánto cuesta, cuánto tiempo tarda, qué riesgos hay y cuál es el retorno. Los detalles de implementación son para el equipo técnico.",
-        "reco": "En entrevista, da un ejemplo de cómo presentaste una integración compleja a un cliente no técnico: qué analogía usaste, cómo cuantificaste el valor y cómo manejaste preguntas sobre el costo.",
-        "tip": true
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo diseñarías una estrategia de testing completa para una integración OIC antes del go-live?",
-        "opts": [
-            "Unit testing de cada transformación con datos variados, integration testing con sistemas reales en QA, testing de volumen con carga representativa de producción, testing de error handling con escenarios de falla simulados, UAT con usuarios clave del cliente, y testing de performance bajo carga",
-            "Solo ejecutar la integración una vez y verificar que no da error",
-            "Testing en producción directamente porque los ambientes de QA no son fiables",
-            "Dejar el testing al cliente después del go-live"
-        ],
-        "ans": 0,
-        "exp": "Las integraciones requieren testing exhaustivo porque conectan múltiples sistemas. Los casos de prueba deben incluir: happy path, datos nulos/vacíos, caracteres especiales, volúmenes máximos, fallos del sistema destino, timeouts, reintentos, y datos duplicados. El testing de regresión es especialmente importante cuando se modifica una integración existente.",
-        "reco": "En entrevista, menciona que documentas los casos de prueba y los resultados como entregable. Esto sirve para auditoría, UAT con el cliente y como base para futuros tests de regresión.",
-        "tip": true
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Qué son los Oracle Integration Accelerators y cómo te benefician en proyectos?",
-        "opts": [
-            "Son integraciones pre-construidas y parcialmente configuradas que Oracle provee para casos de uso comunes (NetSuite-EBS, NetSuite-Salesforce); reducen el tiempo de implementación al proveer la estructura base de mapeos y flujos que se adaptan al cliente específico",
-            "Son herramientas que aceleran el servidor de OIC automáticamente",
-            "Son scripts que Oracle ejecuta por ti sin necesidad de configuración",
-            "Son plantillas de documentación sin funcionalidad técnica"
-        ],
-        "ans": 0,
-        "exp": "Oracle y sus partners publican Accelerators en el OIC Marketplace: integraciones parcialmente construidas para casos de uso frecuentes. Un Accelerator de NetSuite→Salesforce, por ejemplo, puede tener el 60-70% del mapeo estándar ya configurado. El desarrollador personaliza y completa los gaps específicos del cliente, reduciendo tiempo de proyecto.",
-        "reco": "En entrevista, menciona que evalúas si existe un Accelerator relevante antes de empezar desde cero. Muestra eficiencia y conocimiento del ecosistema de Oracle.",
-        "tip": false
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo manejarías un conflicto técnico con el Integration Architect sobre el diseño de una integración?",
-        "opts": [
-            "Presentar tu perspectiva técnica con datos y ejemplos concretos, escuchar los argumentos del arquitecto, buscar un diseño que combine lo mejor de ambas perspectivas, y aceptar la decisión final del arquitecto cuando no hay consenso documentando los tradeoffs",
-            "Implementar tu diseño sin consultar al arquitecto",
-            "Escalar al cliente antes de resolver el conflicto internamente",
-            "Evitar expresar desacuerdos para no generar conflicto"
-        ],
-        "ans": 0,
-        "exp": "Los desacuerdos técnicos son saludables cuando se resuelven constructivamente. La clave es: argumentar con datos no con opiniones, estar abierto a cambiar de opinión ante mejores argumentos, y documentar la decisión final con sus tradeoffs independientemente de cuál diseño se elige. El arquitecto tiene la visión global del proyecto; el desarrollador tiene el detalle de implementación.",
-        "reco": "En entrevista, da un ejemplo de desacuerdo técnico que tuviste, cómo lo manejaste y cuál fue el resultado. Muestra madurez y capacidad de colaboración.",
-        "tip": true
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es Oracle APEX y cómo podría complementar una solución de integración OIC/NetSuite?",
-        "opts": [
-            "Oracle APEX es un framework de desarrollo low-code para crear aplicaciones web en Oracle Database; complementa OIC/NetSuite construyendo interfaces de administración, dashboards de monitoreo de integración, formularios de excepción o portales de data entry que alimentan las integraciones",
-            "Oracle APEX reemplaza a OIC para todas las integraciones",
-            "Oracle APEX es solo para reportes sin interacción con integraciones",
-            "Oracle APEX no puede comunicarse con APIs externas ni con OIC"
-        ],
-        "ans": 0,
-        "exp": "Oracle APEX se integra naturalmente con el ecosistema Oracle. En el contexto de integraciones, APEX puede proveer: pantallas de administración para que el negocio configure parámetros de integración, dashboards que consumen datos de múltiples sistemas vía OIC, gestión de excepciones de integración (records rechazados que necesitan revisión humana), y formularios de data entry que disparan integraciones.",
-        "reco": "En entrevista, si mencionas APEX, conecta su uso con el caso de negocio: qué problema del cliente resuelve que OIC o NetSuite solos no pueden resolver.",
-        "tip": false
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "Situación: una integración crítica NetSuite→ERP falla a las 2am impactando el cierre de inventario. ¿Cómo respondes?",
-        "opts": [
-            "Revisar la consola de monitoreo de OIC para identificar la instancia fallida, analizar el activity trail y el error detallado, determinar si es recuperable con un resubmit o requiere corrección, comunicar el impacto y ETA al equipo, resolver o escalar con contexto completo",
-            "Esperar hasta la mañana para revisar porque es fuera de horario",
-            "Reiniciar OIC completo sin investigar el error específico",
-            "Cerrar el incidente y dejarlo para el siguiente día hábil"
-        ],
-        "ans": 0,
-        "exp": "Un fallo en integración crítica fuera de horario requiere: acceso a la consola de monitoreo de OIC (desde móvil si es necesario), identificación rápida del error específico (no asumir), determinar si el resubmit es seguro o si requiere corrección previa, y comunicación inmediata al equipo con el estado y la acción tomada. La trazabilidad de la acción tomada es importante.",
-        "reco": "En entrevista, menciona la importancia de tener acceso de emergencia a OIC configurado, runbooks de troubleshooting para fallos comunes, y procedimientos de escalación claros para integraciones críticas.",
-        "tip": true
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Qué es la arquitectura API-led connectivity y cómo se aplica en proyectos de integración con OIC?",
-        "opts": [
-            "Una arquitectura de tres capas: System APIs (conectan con sistemas backend), Process APIs (orquestan lógica de negocio) y Experience APIs (optimizadas para consumidores específicos como móvil o web); en OIC se implementa con integraciones separadas por capa para máxima reutilización",
-            "API-led connectivity es solo un término de marketing de MuleSoft sin aplicación real",
-            "En OIC todo se hace en una sola integración sin capas",
-            "API-led connectivity requiere MuleSoft obligatoriamente; OIC no puede implementarla"
-        ],
-        "ans": 0,
-        "exp": "API-led connectivity es popularizada por MuleSoft pero es un principio de arquitectura aplicable con cualquier iPaaS incluyendo OIC. En OIC: System APIs serían integraciones que encapsulan la conexión con NetSuite, EBS o Salesforce; Process APIs orquestarían el flujo de negocio; Experience APIs exponen endpoints optimizados para móvil o UI. Esto maximiza la reutilización.",
-        "reco": "En entrevista, mostrar que entiendes API-led connectivity independientemente de la herramienta demuestra madurez de arquitectura de integración.",
-        "tip": true
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo gestionarías las versiones de una integración OIC cuando necesitas hacer cambios breaking en el contrato de la API?",
-        "opts": [
-            "Mantener la versión anterior activa mientras se migran los consumidores a la nueva versión, crear la nueva integración con versión en el nombre/endpoint, coordinar con todos los sistemas dependientes para la migración, y establecer una fecha de deprecación de la versión anterior",
-            "Cambiar la integración directamente afectando a todos los consumidores de inmediato",
-            "No versionar nunca; los cambios siempre deben ser compatibles hacia atrás",
-            "Crear una nueva integración con otro nombre sin seguimiento de versiones"
-        ],
-        "ans": 0,
-        "exp": "El versionamiento de APIs e integraciones es crítico cuando múltiples sistemas dependen de ellas. Estrategia: mantener v1 funcionando mientras v2 se desarrolla y los consumidores migran, usar semantic versioning, comunicar breaking changes con anticipación y tener fecha clara de sunset para la versión anterior.",
-        "reco": "En entrevista, menciona que incluyes la versión en el nombre de la integración y en el endpoint desde el inicio del proyecto, no como una decisión posterior.",
-        "tip": false
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Qué harías si descubres que una integración en producción está causando duplicados en NetSuite?",
-        "opts": [
-            "Pausar la integración de inmediato para evitar más duplicados, cuantificar los registros duplicados existentes, identificar la causa raíz (falta de idempotencia, retry sin deduplicación, race condition), desarrollar el fix, limpiar duplicados con plan aprobado y reactivar con validación",
-            "Continuar ejecutando la integración y limpiar duplicados manualmente cada día",
-            "Borrar todos los registros del sistema y reimportar desde cero",
-            "Escalar a Oracle sin investigar internamente primero"
-        ],
-        "ans": 0,
-        "exp": "Los duplicados en producción son críticos porque afectan transacciones reales (facturas dobles, inventario incorrecto, pagos duplicados). La respuesta requiere: contención inmediata (pausar), cuantificar el daño, fix técnico, plan de limpieza aprobado por el negocio, y prevención (agregar ExternalID y lógica de upsert para evitar recurrencia).",
-        "reco": "En entrevista, menciona que la limpieza de duplicados en NetSuite requiere coordinación con el cliente: ellos deben aprobar qué registros eliminar porque pueden tener implicaciones contables o de inventario.",
-        "tip": true
-    },
-    {
-        "cat": "Oracle Integration Cloud",
-        "q": "¿Cómo contribuirías al crecimiento de la práctica de integración más allá de tu proyecto actual?",
-        "opts": [
-            "Documentar patrones y lecciones aprendidas en una base de conocimiento compartida, crear plantillas reutilizables de integraciones comunes, presentar casos de estudio en sesiones internas, mentorear a desarrolladores junior, y proponer mejoras a los procesos y herramientas de la práctica",
-            "Enfocarse solo en el proyecto actual sin compartir conocimiento",
-            "Esperar a que la empresa te pida formalmente antes de contribuir",
-            "Guardar el conocimiento adquirido para tener ventaja competitiva interna"
-        ],
-        "ans": 0,
-        "exp": "La descripción del rol menciona explícitamente contribuir a la práctica de integración: mentoring, desarrollo de colateral y líderes de prácticas. Esto significa que el rol espera que compartas conocimiento, crees estándares y eleves el nivel del equipo, no solo ejecutes proyectos individuales.",
-        "reco": "En entrevista, menciona contribuciones concretas que hayas hecho a la práctica de tu equipo actual: frameworks, plantillas, sesiones de training, documentación de mejores prácticas o estándares de naming que implementaste.",
+        "exp": "OIC integra y orquesta. Las aplicaciones conectadas normalmente siguen siendo los sistemas de registro responsables de sus propios datos.",
+        "reco": "Distingue sistema de integración de sistema de registro.",
         "tip": true
     }
 ];
