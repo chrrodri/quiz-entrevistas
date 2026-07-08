@@ -56,12 +56,56 @@ add(W,"Una instancia SOA falla al invocar un endpoint. ¿Qué evidencia reunirí
 add(W,"¿Qué debe comprobarse al configurar SSL?","Cadena de confianza, hostname/SAN, vigencia, keystore/truststore, protocolo y cipher compatibles.","La conectividad TCP no demuestra que el handshake TLS sea válido.",["Solo que exista un archivo .jks.","Que el certificado sea autofirmado.","Que HTTP siga habilitado."],true);
 add(W,"¿Qué valida una prueba real de failover?","Continuidad del flujo, sesiones/transacciones según diseño, retiro del nodo y recuperación observable.","Ver un segundo servidor RUNNING no prueba el comportamiento durante la falla.",["Que ambos nodos tengan el mismo nombre.","Que Admin Server siga abierto.","Que el log no contenga warnings."]);
 
-const L="Linux & Text Processing";
+const L="Linux Troubleshooting & Operacion";
 const cmd=[
 ["Contar líneas que contienen ERROR en app.log","grep -c 'ERROR' app.log","grep -c cuenta líneas coincidentes."],["Contar todas las ocurrencias de ERROR, incluso varias por línea","grep -o 'ERROR' app.log | wc -l","grep -o emite una coincidencia por línea y wc las cuenta."],["Seguir un log aunque sea rotado","tail -F app.log","-F reabre por nombre cuando el archivo se reemplaza."],["Mostrar líneas 10 a 20","sed -n '10,20p' archivo","-n suprime salida automática y p imprime el rango."],["Reemplazar todas las apariciones de foo por bar","sed 's/foo/bar/g' archivo","La bandera g sustituye todas las coincidencias de cada línea."],["Imprimir el último campo de cada línea","awk '{print $NF}' archivo","NF es el número de campos y $NF referencia el último."],["Sumar la tercera columna","awk '{s+=$3} END{print s}' archivo","Se acumula por registro y se imprime en END."],["Extraer el tercer campo delimitado por :","cut -d: -f3 archivo","-d define delimitador y -f selecciona campo."],["Obtener valores únicos y su frecuencia","sort archivo | uniq -c","uniq agrupa adyacentes; por eso primero se ordena."],["Mostrar los cinco valores más frecuentes de la primera columna","awk '{print $1}' archivo | sort | uniq -c | sort -nr | head -5","El pipeline extrae, agrupa, cuenta y ordena."],["Ver conexiones TCP y procesos asociados","ss -lntp","ss muestra sockets; l escucha, n evita resolver, t limita TCP y p muestra proceso."],["Buscar archivos .log modificados en las últimas 24 horas","find /opt/app -type f -name '*.log' -mtime -1","-mtime -1 selecciona archivos modificados hace menos de un día."],["Ver uso de bloques e inodos","df -h; df -i","Un filesystem puede fallar por bloques o por agotamiento de inodos."],["Buscar recursivamente timeouts con número de línea","grep -Rni 'timeout' /opt/app/logs","R recorre, n numera e i ignora mayúsculas."],["Procesar nombres de archivo con espacios de forma segura","find . -type f -print0 | xargs -0 comando","NUL preserva espacios, newlines y caracteres especiales."]];
 cmd.forEach((x,i)=>add(L,"¿Qué comando usarías para "+x[0]+"?",x[1],x[2],["cat archivo | wc -w","sed 'p' archivo","find . | grep archivo"],i%4===0));
 add(L,"Un proceso consume CPU de forma intermitente. ¿Qué enfoque tomarías?","Correlacionar top/pidstat con timestamps, logs, thread dumps o strace y cambios recientes.","La captura durante el evento es más útil que reiniciar sin evidencia.",["Ejecutar kill -9 inmediatamente.","Borrar logs para liberar I/O.","Aumentar prioridad con nice -20."],true);
 add(L,"¿Qué diferencia práctica existe entre SIGTERM y SIGKILL?","SIGTERM permite terminación ordenada; SIGKILL no puede capturarse y detiene inmediatamente.","Debe preferirse TERM y reservar KILL para procesos que no responden.",["SIGKILL permite cleanup y TERM no.","Son equivalentes.","SIGTERM reinicia el proceso."],true);
+[
+["el servidor esta lento y sospechas CPU alta","top -c","Muestra consumo de CPU por proceso en tiempo real; con -c ves el comando completo para identificar la aplicacion.",true],
+["ver historico reciente de CPU por core","mpstat -P ALL 1 5","Permite distinguir saturacion global, un core caliente, iowait o steal time en virtualizacion.",true],
+["identificar los procesos que mas CPU consumen","ps -eo pid,ppid,pcpu,pmem,etime,cmd --sort=-pcpu | head -15","Ordena procesos por CPU y agrega tiempo de ejecucion para separar picos de procesos persistentes.",true],
+["analizar CPU de un proceso especifico","pidstat -p PID 1 10","Mide CPU del PID por intervalos; util para capturar comportamiento intermitente."],
+["revisar memoria disponible y swap","free -h","Muestra memoria usada, libre, buffers/cache y swap; no confundas cache con memoria perdida.",true],
+["ver procesos que mas memoria consumen","ps -eo pid,ppid,pmem,rss,vsz,cmd --sort=-pmem | head -15","Ayuda a encontrar procesos con mayor RSS antes de tocar limites o reiniciar.",true],
+["confirmar si el kernel mato procesos por memoria","dmesg -T | grep -i -E 'oom|killed process'","Busca eventos OOMKilled a nivel sistema; clave cuando una app desaparece sin log propio.",true],
+["ver presion de memoria por proceso en detalle","cat /proc/PID/status","Expone VmRSS, VmSize, threads, estado y senales para un proceso concreto."],
+["revisar espacio en filesystems","df -h","Detecta filesystems llenos por bloques, causa comun de fallos de logs, deploys y base de datos.",true],
+["revisar agotamiento de inodos","df -i","Un disco puede tener espacio libre pero fallar si se agotaron los inodos por demasiados archivos pequenos.",true],
+["encontrar directorios que ocupan mas espacio","du -xh /ruta | sort -h | tail -20","Ubica consumo por directorio sin cruzar otros filesystems cuando usas -x."],
+["encontrar archivos grandes recientes","find /ruta -type f -size +500M -mtime -7 -ls","Encuentra archivos grandes creados o modificados recientemente para explicar crecimiento de disco."],
+["listar archivos borrados que aun ocupan espacio","lsof +L1","Detecta archivos eliminados pero retenidos por procesos; liberar requiere cerrar o reiniciar el proceso correcto.",true],
+["diagnosticar I/O alto de disco","iostat -xz 1 5","Muestra utilizacion, latencia y cola de discos; ayuda a separar CPU alta de espera por I/O.",true],
+["ver que proceso esta generando I/O","iotop -oPa","Muestra procesos con lectura/escritura activa; requiere permisos elevados en muchos sistemas."],
+["ver puertos escuchando y proceso duenio","ss -lntp","Lista puertos TCP en escucha y proceso asociado; util cuando una app no levanta por puerto ocupado.",true],
+["ver conexiones hacia un puerto especifico","ss -antp | grep ':1521'","Ayuda a validar sesiones TCP hacia Oracle, estados ESTAB/TIME-WAIT/SYN-SENT y proceso relacionado."],
+["probar conectividad TCP a un host y puerto","nc -vz host 1521","Valida si el puerto responde desde ese servidor; no prueba autenticacion ni salud de aplicacion.",true],
+["probar ruta HTTP o API con detalle TLS","curl -vk https://host:puerto/health","Muestra handshake TLS, certificado, codigo HTTP y respuesta; muy util para APIs y health checks.",true],
+["validar resolucion DNS usando configuracion del sistema","getent hosts nombre.host","Usa NSS como lo haria la aplicacion; mejor que asumir solo /etc/hosts o DNS externo."],
+["ver servidores DNS configurados","cat /etc/resolv.conf","Confirma nameservers, search domains y opciones que afectan resolucion."],
+["trazar ruta de red hacia un host","traceroute host","Ayuda a ubicar saltos o perdida de ruta; en algunas redes ICMP/UDP puede estar filtrado."],
+["ver reglas de firewall activas con firewalld","firewall-cmd --list-all","Permite confirmar servicios, puertos y zonas cuando la conexion falla localmente."],
+["ver reglas iptables relevantes","iptables -L -n -v","Muestra reglas, contadores y politicas; util para detectar drops locales."],
+["confirmar si un servicio systemd esta sano","systemctl status servicio","Muestra estado, PID, ultimos logs y si reinicia o falla al arrancar.",true],
+["ver logs de un servicio systemd","journalctl -u servicio --since '1 hour ago'","Filtra logs recientes del servicio, ideal para analizar arranque o reinicios."],
+["seguir logs de aplicacion en vivo","tail -n 200 -F /ruta/app.log","Da contexto y seguimiento durante reproduccion, deploy o incidente."],
+["buscar errores comunes en logs recientes","grep -RniE 'error|exception|timeout|refused|denied' /ruta/logs","Encuentra patrones frecuentes sin depender de mayusculas."],
+["ver archivos abiertos por un proceso","lsof -p PID","Ayuda a detectar logs, sockets, librerias, archivos temporales o handles retenidos."],
+["ver llamadas de sistema de un proceso colgado","strace -tt -p PID","Muestra si espera en red, archivos, locks o llamadas repetidas; usar con cuidado en produccion.",true],
+["generar thread dump de una JVM en Linux","kill -3 PID","Pide a la JVM imprimir threads en stdout/log sin matar el proceso; clave para stuck threads.",true],
+["ver argumentos y flags de una JVM","jcmd PID VM.command_line","Confirma heap, GC, classpath, propiedades y parametros reales con los que corre Java."],
+["ver estadisticas GC basicas de una JVM","jstat -gcutil PID 1000 10","Muestra uso de generaciones y frecuencia de GC para sospechas de memoria Java."],
+["confirmar variables de ambiente de un proceso","tr '\\0' '\\n' < /proc/PID/environ","Permite revisar configuracion efectiva del proceso sin confiar en scripts."],
+["probar lectura/escritura en una ruta de app","touch /ruta/.write-test && rm /ruta/.write-test","Valida permisos y filesystem; hacerlo solo en rutas seguras y acordadas."],
+["ver permisos y ownership de una ruta","namei -l /ruta/completa/archivo","Muestra permisos de cada componente del path, no solo del archivo final."],
+["revisar hora del sistema y sincronizacion","timedatectl status","Desfase de hora rompe TLS, tokens, logs correlacionados y autenticacion."],
+["comparar logs por ventana de tiempo","awk '$0 >= \"2026-07-08 10:00\" && $0 <= \"2026-07-08 10:30\"' app.log","Filtra una ventana si el log inicia con timestamp comparable; util para incident timeline."]
+].forEach(x=>add(L,"Issue Linux: "+x[0]+". ¿Qué comando usarías?",x[1],x[2],["Reiniciar el servidor sin capturar evidencia","Borrar logs para liberar espacio sin respaldo","Cambiar permisos a 777 recursivamente"],x[3]));
+add(L,"Una aplicacion no puede conectar a Oracle por el puerto 1521. ¿Como lo investigarias en Linux?","Validaria DNS con getent hosts, conectividad con nc -vz host 1521, ruta/firewall si falla, y logs de la app para distinguir timeout, refused o error de credenciales.","Separar DNS, red, listener, credenciales y aplicacion evita culpar a la base sin evidencia.",["Ejecutar commit en la base.","Borrar el datasource.","Aumentar memoria del servidor."],true);
+add(L,"El filesystem esta al 100% y la app falla al escribir logs. ¿Que harias?","Confirmaria df -h y df -i, buscaria crecimiento con du/find, revisaria lsof +L1, rotaria o moveria archivos con aprobacion y corregiria la causa de crecimiento.","Liberar espacio sin entender la fuente solo aplaza el incidente.",["Eliminar archivos aleatorios de /usr.","Reiniciar siempre la base.","Desactivar todos los logs permanentemente."],true);
+add(L,"CPU alta aparece justo despues de un deployment. ¿Que evidencia juntarias?","top/ps para procesos, pidstat/mpstat para patron, logs por timestamp, version desplegada, thread dump si es Java y comparacion con baseline.","La correlacion temporal con cambio, proceso y sintoma permite decidir rollback, tuning o fix.",["Cambiar el numero de CPUs en caliente.","Matar procesos hasta que baje el uso.","Ignorar si la app aun responde."],true);
+add(L,"La conexion a una API HTTPS falla desde un servidor pero funciona desde tu laptop. ¿Que revisarias?","DNS con getent, ruta/puerto con nc, TLS y certificado con curl -vk, proxy/no_proxy, firewall local y diferencia de red entre origenes.","El origen de la prueba importa: firewalls, proxy y truststores pueden variar por servidor.",["Cambiar el codigo sin probar red.","Pedir al usuario que limpie cache.","Reinstalar Linux."],true);
 
 const D="Oracle Database & Performance";
 add(D,"¿Por qué usar bind variables?","Reducen hard parses, favorecen reutilización de cursores y evitan concatenar entrada no confiable.","Son clave para estabilidad del shared pool y seguridad SQL.",["Para forzar full table scans.","Para evitar commits.","Para reemplazar índices."],true);
@@ -123,10 +167,98 @@ add(V,"¿Cómo responderías 'háblame de una vez que mentoraste a alguien'?","U
 add(V,"¿Qué posible preocupación puede generar tu inglés B2 y cómo la manejarías?","Responder con claridad en inglés, usar estructura breve, confirmar entendimiento y dar ejemplos de coordinación técnica con equipos internacionales.","La vacante exige comunicación oral y escrita; una demostración práctica pesa más que la etiqueta del nivel.",["Evitar toda respuesta en inglés.","Decir que el idioma no importa en soporte.","Memorizar párrafos sin aceptar preguntas."],true);
 add(V,"¿Qué respuesta cierra mejor la pregunta 'por qué eres buen candidato'?","Combino ocho años de soporte y administración empresarial, experiencia Oracle/WebLogic/cloud/Linux, base fuerte de bases de datos, automatización y liderazgo; puedo transferir ese criterio al dominio Oracle Retail.","Cierra conectando evidencia del CV con las necesidades reales del puesto y reconoce el dominio que estás incorporando.",["Porque necesito una nueva oportunidad.","Porque conozco todas las herramientas perfectamente.","Porque otros candidatos quizá tengan menos experiencia."],true);
 
+const K8S="kubectl comandos";
+[
+["listar pods de todos los namespaces","kubectl get pods -A","Muestra pods en todo el cluster; util para detectar estado, namespace y reinicios.",true],
+["ver detalle y eventos de un pod","kubectl describe pod POD -n NAMESPACE","Describe configuracion, eventos, probes, mounts, imagenes y razones de fallo.",true],
+["leer logs del contenedor actual","kubectl logs POD -n NAMESPACE","Obtiene stdout/stderr del contenedor principal para diagnosticar errores de aplicacion.",true],
+["leer logs del contenedor anterior en CrashLoopBackOff","kubectl logs POD -n NAMESPACE --previous","Recupera logs de la ejecucion previa, clave cuando el contenedor reinicia rapido.",true],
+["entrar a un contenedor para diagnostico puntual","kubectl exec -it POD -n NAMESPACE -- sh","Abre una shell dentro del contenedor; debe usarse con cuidado y sin cambios manuales permanentes."],
+["ver recursos consumidos por pods","kubectl top pods -n NAMESPACE","Muestra CPU y memoria si metrics-server esta disponible; ayuda a validar limites y saturacion."],
+["reiniciar gradualmente un deployment","kubectl rollout restart deployment/APP -n NAMESPACE","Dispara recreacion controlada de pods usando la estrategia del deployment."],
+["ver el historial de rollout","kubectl rollout history deployment/APP -n NAMESPACE","Lista revisiones desplegadas para entender cambios y posibles rollbacks."],
+["revertir al rollout anterior","kubectl rollout undo deployment/APP -n NAMESPACE","Regresa a la revision previa del deployment cuando el release falla.",true],
+["escalar replicas de un deployment","kubectl scale deployment/APP --replicas=3 -n NAMESPACE","Cambia el numero deseado de pods; no corrige por si solo cuellos de botella externos."],
+["ver manifiesto YAML aplicado","kubectl get deploy APP -n NAMESPACE -o yaml","Permite revisar imagen, env vars, probes, recursos, labels y configuracion efectiva."],
+["probar cambios sin aplicar","kubectl apply -f manifest.yaml --dry-run=server","Valida contra la API del cluster antes de modificar recursos."],
+["reenviar un puerto local hacia un pod o service","kubectl port-forward svc/APP 8080:80 -n NAMESPACE","Permite probar un servicio desde la maquina local sin exponerlo publicamente."],
+["filtrar pods por label","kubectl get pods -l app=APP -n NAMESPACE","Usa labels para encontrar los pods relacionados con una aplicacion."],
+["ver eventos ordenados por tiempo","kubectl get events -n NAMESPACE --sort-by=.lastTimestamp","Ayuda a correlacionar scheduling, pulls, probes, restarts y errores recientes."]
+].forEach(x=>add(K8S,"Que comando kubectl usarias para "+x[0]+"?",x[1],x[2],["kubectl delete namespace prod","kubectl apply -f todo.yaml --force","kubectl edit pod POD"],x[3]));
+
+const WLCMD="WebLogic comandos";
+[
+["iniciar Admin Server con script del dominio","./startWebLogic.sh","Levanta el Admin Server desde DOMAIN_HOME; primero valida variables y logs del dominio.",true],
+["detener Admin Server de forma ordenada","./stopWebLogic.sh","Solicita apagado controlado del Admin Server en lugar de matar el proceso."],
+["iniciar un Managed Server","./startManagedWebLogic.sh SERVER_NAME ADMIN_URL","Arranca un Managed Server apuntando al Admin Server del dominio.",true],
+["detener un Managed Server","./stopManagedWebLogic.sh SERVER_NAME ADMIN_URL","Hace shutdown controlado del servidor administrado indicado."],
+["arrancar Node Manager","./startNodeManager.sh","Inicia el agente que permite controlar servidores WebLogic de esa maquina."],
+["validar procesos Java/WebLogic activos","ps -ef | grep '[w]eblogic.Name'","Lista JVMs WebLogic evitando que el grep aparezca como falso positivo."],
+["seguir el log de un servidor","tail -F DOMAIN_HOME/servers/SERVER_NAME/logs/SERVER_NAME.log","Permite observar errores, despliegues, stuck threads y cambios durante una accion."],
+["buscar errores WebLogic por codigo","grep -R \"BEA-\" DOMAIN_HOME/servers/*/logs","Localiza mensajes WebLogic conocidos en logs de servidores."],
+["generar thread dump en Linux","kill -3 PID","Pide a la JVM imprimir thread dump en su salida/log sin terminar el proceso.",true],
+["revisar puertos escuchando","ss -lntp | grep java","Confirma puertos activos y proceso Java asociado, util para diagnosticar listen address y conflictos."],
+["validar conectividad HTTP local","curl -vk https://host:port/health","Prueba ruta, TLS, codigo HTTP y respuesta desde el punto de vista del cliente."],
+["ver argumentos de una JVM WebLogic","jcmd PID VM.command_line","Muestra clase principal, parametros JVM, memoria, system properties y rutas."]
+].forEach(x=>add(WLCMD,"Que comando WebLogic/Linux usarias para "+x[0]+"?",x[1],x[2],["Reiniciar toda la maquina sin evidencia","Borrar DOMAIN_HOME para limpiar el error","Cambiar config.xml manualmente en caliente"],x[3]));
+
+const SH="Shell operativo";
+[
+["fallar un script ante errores comunes","set -euo pipefail","Hace que Bash falle ante comando fallido, variable no definida y errores en pipelines.",true],
+["capturar stdout y stderr en un log","comando > salida.log 2>&1","Redirige salida normal y errores al mismo archivo para auditoria o troubleshooting."],
+["ejecutar en background y preservar despues de logout","nohup comando > app.log 2>&1 &","Lanza un proceso que no recibe SIGHUP al cerrar la sesion; valida PID y logs."],
+["mostrar las ultimas 100 lineas y seguir el archivo","tail -n 100 -F app.log","Combina contexto reciente con seguimiento aun si el log rota."],
+["buscar texto ignorando mayusculas con linea","grep -Rni \"timeout\" /opt/app/logs","Busca recursivamente e imprime numero de linea; util para incidentes con muchos logs."],
+["mostrar procesos por consumo de CPU","ps -eo pid,ppid,pcpu,pmem,cmd --sort=-pcpu | head","Ordena procesos para ubicar consumidores principales de CPU."],
+["ver uso de memoria legible","free -h","Resume memoria total, usada, libre, buffers/cache y swap."],
+["medir tiempo de un comando","time comando","Reporta tiempo real, usuario y sistema para comparar ejecuciones."],
+["validar DNS de un host","getent hosts host.example.com","Consulta resolucion usando las fuentes configuradas del sistema."],
+["probar si un puerto TCP responde","nc -vz host 1521","Valida conectividad de red a un puerto sin asumir que la aplicacion esta sana.",true],
+["ver archivos grandes en un directorio","du -ah /ruta | sort -h | tail -20","Encuentra archivos o subdirectorios que consumen mas espacio."],
+["ejecutar una tarea repetidamente para observar cambios","watch -n 2 'kubectl get pods -n NAMESPACE'","Refresca un comando cada dos segundos; util durante rollouts."]
+].forEach(x=>add(SH,"Que comando shell usarias para "+x[0]+"?",x[1],x[2],["cat archivo | sort | sort | sort","chmod 777 -R /opt/app","kill -9 -1"],x[3]));
+
+const SQLP="SQLPlus y SQL";
+[
+["conectarte a Oracle con service name","sqlplus usuario/password@//host:1521/service","Abre una sesion SQL*Plus contra un listener y servicio especificos.",true],
+["conectarte sin exponer password en el comando","sqlplus /nolog","Permite abrir SQL*Plus y luego usar CONNECT, reduciendo exposicion en historial y procesos.",true],
+["ver usuario y base actual","show user","Confirma con que esquema estas conectado antes de ejecutar cambios."],
+["activar tiempo por sentencia","set timing on","Muestra duracion de cada SQL; util para comparaciones rapidas."],
+["formatear salida de columnas","column NOMBRE format a30","Ajusta ancho/formato para que reportes SQL*Plus sean legibles."],
+["guardar salida de una investigacion","spool diagnostico.log","Escribe la salida de SQL*Plus a un archivo hasta ejecutar spool off."],
+["ver sesiones activas relevantes","select sid,serial#,username,status,machine,program from v$session where username is not null;","Ayuda a ubicar conexiones, programas clientes y estado de sesiones."],
+["identificar bloqueos","select blocking_session,sid,serial#,event,seconds_in_wait from v$session where blocking_session is not null;","Muestra sesiones bloqueadas y quien las bloquea para investigar antes de matar algo.",true],
+["ver SQL asociado a una sesion","select sql_id,event,state from v$session where sid = :sid;","Permite tomar sql_id y evento de espera de una sesion concreta."],
+["obtener plan real con estadisticas","select * from table(dbms_xplan.display_cursor('SQL_ID',null,'ALLSTATS LAST'));","Muestra plan ejecutado y filas reales cuando existen estadisticas del cursor.",true],
+["consultar objetos invalidos","select owner,object_type,object_name from dba_objects where status='INVALID';","Detecta paquetes, vistas u objetos que requieren recompilacion o revision."],
+["recompilar un paquete","alter package SCHEMA.PKG_NAME compile body;","Compila el cuerpo del paquete; revisar errores con show errors."],
+["confirmar cambios transaccionales","commit;","Persiste cambios DML; no debe usarse sin validar alcance e impacto."],
+["deshacer cambios no confirmados","rollback;","Revierte DML pendiente en la sesion actual."],
+["explicar una consulta antes de correrla","explain plan for SELECT ...","Genera un plan estimado; no sustituye el plan real de ejecucion."]
+].forEach(x=>add(SQLP,"Que comando o SQL usarias para "+x[0]+"?",x[1],x[2],["drop user app cascade","shutdown immediate","update tabla set estado='OK'"],x[3]));
+
+const WLSTC="WLST comandos";
+[
+["abrir WLST offline/online","$WL_HOME/common/bin/wlst.sh","Inicia WebLogic Scripting Tool para administrar dominio con Jython.",true],
+["conectarte al Admin Server","connect('weblogic','password','t3://host:7001')","Abre sesion online contra el Admin Server para consultar o cambiar configuracion.",true],
+["ver servidores del dominio","domainRuntime(); ls('/ServerRuntimes')","Cambia al arbol runtime y lista servidores activos."],
+["consultar estado de un servidor","state('managed1','Server')","Devuelve el estado de un servidor WebLogic segun el dominio."],
+["iniciar un Managed Server desde WLST","start('managed1','Server')","Solicita arranque del servidor usando Node Manager cuando esta configurado."],
+["detener un Managed Server con gracia","shutdown('managed1','Server',force='false')","Apaga ordenadamente el servidor para evitar cortar trabajo en curso."],
+["entrar a modo edicion","edit(); startEdit()","Bloquea una sesion de cambios de configuracion antes de modificar MBeans.",true],
+["guardar y activar cambios","save(); activate()","Persiste y activa cambios hechos en el arbol de configuracion."],
+["descartar una edicion","undo(); cancelEdit('y')","Revierte cambios pendientes y libera el bloqueo de edicion."],
+["listar deployments","cd('/AppDeployments'); ls()","Muestra aplicaciones desplegadas registradas en el dominio."],
+["desplegar una aplicacion","deploy('app','/path/app.ear',targets='cluster1')","Instala o actualiza un artefacto hacia targets definidos; requiere plan de rollback.",true],
+["retirar una aplicacion","undeploy('app')","Elimina el deployment del dominio; se usa con ventana y validacion."],
+["consultar data sources","cd('/JDBCSystemResources'); ls()","Lista recursos JDBC configurados para revisar pools y targets."],
+["salir de WLST","disconnect(); exit()","Cierra sesion online y termina la herramienta limpiamente."]
+].forEach(x=>add(WLSTC,"Que comando WLST usarias para "+x[0]+"?",x[1],x[2],["rm -rf DOMAIN_HOME","edit config.xml con vi mientras corre","kill -9 al Admin Server"],x[3]));
+
 const ESQ=structuredClone(Q);
 const ENQ=[];
 function en(cat,q,correct,exp,hot=false){ENQ.push({cat,q,opts:[correct,"Restart every component and check later.","Change several variables at once directly in production.","Escalate without evidence so another team can find the cause."],ans:0,exp,hot})}
-const ER="Oracle Retail",EW="WebLogic & SOA",EL="Linux & Text Processing",ED="Oracle Database & Performance",EC="Cloud Native & Infrastructure",EA="Automation, GitLab & Scripting",ES="Production Support & Leadership",EV="Your Resume & Interview";
+const ER="Oracle Retail",EW="WebLogic & SOA",EL="Linux Troubleshooting & Operations",ED="Oracle Database & Performance",EC="Cloud Native & Infrastructure",EA="Automation, GitLab & Scripting",ES="Production Support & Leadership",EV="Your Resume & Interview";
 en(ER,"What is the primary responsibility of RMS?","Managing items, suppliers, purchasing, inventory, transfers, and merchandising costs.","RMS is the transactional core of merchandising; it does not replace the POS or database engine.",true);
 en(ER,"A POS sale did not update downstream systems. Where would you begin?","In ReSA: verify receipt, audit status, errors, and publication of the transaction.","ReSA receives and audits sales before feeding inventory and financial systems.",true);
 en(ER,"What business problem does RPM solve?","Controlled management of regular prices, promotions, clearances, and price changes.","RPM governs price decisions and events across channels and locations.");
@@ -152,6 +284,50 @@ const commands=[
 commands.forEach((x,i)=>en(EL,"Which command would you use to "+x[0]+"?",x[1],"Explain the input, output, and one safety consideration before using the command on production files.",i%4===0));
 en(EL,"A process consumes CPU intermittently. What approach would you take?","Correlate top or pidstat timestamps with logs, thread dumps or strace, and recent changes.","Capturing evidence during the event is more useful than restarting first.",true);
 en(EL,"What is the practical difference between SIGTERM and SIGKILL?","SIGTERM allows graceful shutdown; SIGKILL cannot be handled and stops the process immediately.","Prefer TERM and reserve KILL for a process that will not stop.",true);
+[
+["the server is slow and you suspect high CPU","top -c","Shows per-process CPU usage in real time; -c displays the full command.",true],
+["check recent CPU by core","mpstat -P ALL 1 5","Distinguishes global saturation, one hot core, iowait, or virtualization steal time.",true],
+["identify top CPU processes","ps -eo pid,ppid,pcpu,pmem,etime,cmd --sort=-pcpu | head -15","Sorts processes by CPU and shows elapsed time to separate spikes from persistent load.",true],
+["analyze CPU for one process","pidstat -p PID 1 10","Measures CPU for a PID over intervals; useful for intermittent behavior."],
+["check memory and swap","free -h","Shows used, free, buffers/cache, and swap; cache is not automatically a memory leak.",true],
+["find top memory processes","ps -eo pid,ppid,pmem,rss,vsz,cmd --sort=-pmem | head -15","Finds high-RSS processes before changing limits or restarting.",true],
+["confirm whether the kernel killed a process for memory","dmesg -T | grep -i -E 'oom|killed process'","Looks for OOM events when an application disappears without its own log.",true],
+["inspect memory details for a process","cat /proc/PID/status","Shows VmRSS, VmSize, threads, state, and signals for one process."],
+["check filesystem space","df -h","Detects full filesystems, a common cause of failed logs, deployments, and databases.",true],
+["check inode exhaustion","df -i","A filesystem can have free space but fail because too many small files consumed inodes.",true],
+["find directories using the most space","du -xh /path | sort -h | tail -20","Finds large directories without crossing filesystems when -x is used."],
+["find large recent files","find /path -type f -size +500M -mtime -7 -ls","Finds large files modified recently to explain disk growth."],
+["list deleted files still consuming space","lsof +L1","Detects deleted files held open by processes; free space returns only after the handle closes.",true],
+["diagnose high disk I/O","iostat -xz 1 5","Shows disk utilization, latency, and queueing to separate CPU work from I/O wait.",true],
+["see which process is doing I/O","iotop -oPa","Shows active read/write by process; often requires elevated permissions."],
+["see listening ports and owning processes","ss -lntp","Lists listening TCP ports and process owners; useful when an app cannot bind a port.",true],
+["inspect connections to one port","ss -antp | grep ':1521'","Shows TCP sessions to Oracle, including ESTAB, TIME-WAIT, SYN-SENT, and process data."],
+["test TCP connectivity to a host and port","nc -vz host 1521","Checks whether the port is reachable from that server; it does not prove authentication or app health.",true],
+["test an HTTP/API route with TLS detail","curl -vk https://host:port/health","Shows TLS handshake, certificate, HTTP status, and response.",true],
+["validate DNS using system configuration","getent hosts name.example.com","Uses NSS like applications normally do, rather than assuming only /etc/hosts or external DNS."],
+["view configured DNS servers","cat /etc/resolv.conf","Shows nameservers, search domains, and resolver options."],
+["trace the network path to a host","traceroute host","Helps locate routing gaps, though some networks filter ICMP or UDP."],
+["show active firewalld rules","firewall-cmd --list-all","Confirms services, ports, and zones when local firewalling is suspected."],
+["show iptables rules and counters","iptables -L -n -v","Shows rules, counters, and policies to detect local drops."],
+["check whether a systemd service is healthy","systemctl status service","Shows state, PID, recent logs, and restart/failure behavior.",true],
+["read recent logs for a systemd service","journalctl -u service --since '1 hour ago'","Filters service logs for startup failures or restarts."],
+["follow application logs live","tail -n 200 -F /path/app.log","Provides context and live follow during reproduction, deployment, or incident response."],
+["search common errors in logs","grep -RniE 'error|exception|timeout|refused|denied' /path/logs","Finds common failure patterns case-insensitively."],
+["view files opened by a process","lsof -p PID","Reveals logs, sockets, libraries, temporary files, and retained handles."],
+["trace system calls for a stuck process","strace -tt -p PID","Shows whether the process waits on network, files, locks, or repeated calls; use carefully in production.",true],
+["generate a JVM thread dump on Linux","kill -3 PID","Asks the JVM to print thread state to stdout/log without killing the process.",true],
+["view JVM command-line flags","jcmd PID VM.command_line","Confirms heap, GC, classpath, properties, and real Java startup parameters."],
+["view basic JVM GC stats","jstat -gcutil PID 1000 10","Shows generation usage and GC frequency for Java memory suspicion."],
+["confirm process environment variables","tr '\\0' '\\n' < /proc/PID/environ","Reviews effective process configuration instead of trusting startup scripts."],
+["test write permission in an application path","touch /path/.write-test && rm /path/.write-test","Validates permissions and filesystem behavior only in a safe agreed path."],
+["check ownership and permissions for a full path","namei -l /full/path/file","Shows permissions for every path component, not only the final file."],
+["check time and clock synchronization","timedatectl status","Clock drift can break TLS, tokens, log correlation, and authentication."],
+["filter logs by an incident time window","awk '$0 >= \"2026-07-08 10:00\" && $0 <= \"2026-07-08 10:30\"' app.log","Works when log lines begin with comparable timestamps and helps build an incident timeline."]
+].forEach(x=>en(EL,"Linux issue: "+x[0]+". Which command would you use?",x[1],x[2],x[3]));
+en(EL,"An application cannot connect to Oracle on port 1521. How would you investigate from Linux?","Validate DNS with getent hosts, test the port with nc -vz host 1521, inspect route/firewall if it fails, and compare app logs for timeout, refused, or credential errors.","Separate DNS, network, listener, credentials, and application behavior before blaming the database.",true);
+en(EL,"A filesystem is at 100% and the app cannot write logs. What do you do?","Confirm df -h and df -i, find growth with du/find, check lsof +L1, rotate or move files with approval, and fix the source of growth.","Freeing space without finding the cause only postpones the incident.",true);
+en(EL,"CPU is high immediately after a deployment. What evidence do you collect?","Use top/ps for processes, pidstat/mpstat for pattern, timestamped logs, deployed version, JVM thread dump if relevant, and baseline comparison.","Correlating change, process, and symptom helps decide rollback, tuning, or code fix.",true);
+en(EL,"An HTTPS API fails from one server but works from your laptop. What would you check?","DNS with getent, route/port with nc, TLS and certificate with curl -vk, proxy/no_proxy, local firewall, and source-network differences.","The test source matters because firewall, proxy, and trust configuration can differ by server.",true);
 en(ED,"Why should applications use bind variables?","They reduce hard parses, promote cursor reuse, and avoid concatenating untrusted input.","Bind variables improve shared-pool stability and SQL security.",true);
 en(ED,"A query degraded after a table grew. What would you compare?","Actual plan, estimated and actual cardinalities, statistics, waits, binds, and data distribution.","Analyze the plan using representative volume and bind values.",true);
 en(ED,"What is the risk of adding an index without measurement?","It may increase DML and storage cost without improving access, or alter other execution plans.","Justify an index with predicates, selectivity, plans, and write load.");
@@ -205,11 +381,90 @@ en(EV,"What cloud experience supports your candidacy?","You managed OCI environm
 en(EV,"Which IBM story is useful for a performance question?","A DB2 bottleneck where you explain the signal, waits or plan, hypothesis, remediation, and measured improvement.","Your resume claims performance remediation, so bring one technical case.",true);
 en(EV,"What demonstrates readiness for on-call support?","Sustained L2/L3 production support, incident management, service continuity, and critical-incident ownership.","Clarify the actual support rotation you worked rather than overstating it.",true);
 en(EV,"How should you answer 'Tell me about a time you mentored someone'?","Use an onboarding case: starting level, coaching plan, delegated decisions, feedback, and time to autonomy.","Make your behavior and the engineer's resulting independence visible.",true);
+const EK8S="kubectl commands",EWLCMD="WebLogic commands",ESH="Operational shell",ESQLP="SQLPlus and SQL",EWLSTC="WLST commands";
+[
+["list pods across all namespaces","kubectl get pods -A","Shows pod status, namespace, restarts, and age across the cluster.",true],
+["inspect a pod and its events","kubectl describe pod POD -n NAMESPACE","Shows configuration, events, probes, mounts, image pulls, and failure reasons.",true],
+["read current container logs","kubectl logs POD -n NAMESPACE","Reads stdout/stderr from the main container for application troubleshooting.",true],
+["read previous logs during CrashLoopBackOff","kubectl logs POD -n NAMESPACE --previous","Retrieves logs from the previous container run before it restarted.",true],
+["open a temporary shell in a container","kubectl exec -it POD -n NAMESPACE -- sh","Starts an interactive shell for diagnosis; avoid permanent manual changes."],
+["check pod resource usage","kubectl top pods -n NAMESPACE","Shows CPU and memory when metrics-server is available."],
+["restart a deployment gradually","kubectl rollout restart deployment/APP -n NAMESPACE","Triggers controlled pod recreation using the deployment strategy."],
+["view rollout history","kubectl rollout history deployment/APP -n NAMESPACE","Lists deployed revisions to understand changes and rollback targets."],
+["roll back to the previous revision","kubectl rollout undo deployment/APP -n NAMESPACE","Reverts a failed deployment to the prior revision.",true],
+["scale deployment replicas","kubectl scale deployment/APP --replicas=3 -n NAMESPACE","Changes desired pod count; it does not fix downstream bottlenecks by itself."],
+["view effective YAML","kubectl get deploy APP -n NAMESPACE -o yaml","Reviews image, env vars, probes, resources, labels, and effective configuration."],
+["validate a manifest without applying it","kubectl apply -f manifest.yaml --dry-run=server","Asks the API server to validate the manifest before changing resources."],
+["forward a local port to a service","kubectl port-forward svc/APP 8080:80 -n NAMESPACE","Tests a service locally without exposing it publicly."],
+["filter pods by label","kubectl get pods -l app=APP -n NAMESPACE","Uses labels to find pods owned by an application."],
+["show events by time","kubectl get events -n NAMESPACE --sort-by=.lastTimestamp","Correlates scheduling, pulls, probes, restarts, and recent errors."]
+].forEach(x=>en(EK8S,"Which kubectl command would you use to "+x[0]+"?",x[1],x[2],x[3]));
+[
+["start Admin Server with the domain script","./startWebLogic.sh","Starts Admin Server from DOMAIN_HOME; validate environment variables and logs first.",true],
+["stop Admin Server gracefully","./stopWebLogic.sh","Requests a controlled shutdown instead of killing the process."],
+["start a Managed Server","./startManagedWebLogic.sh SERVER_NAME ADMIN_URL","Starts a Managed Server and points it to Admin Server.",true],
+["stop a Managed Server","./stopManagedWebLogic.sh SERVER_NAME ADMIN_URL","Performs a controlled shutdown of the selected Managed Server."],
+["start Node Manager","./startNodeManager.sh","Starts the machine agent that controls WebLogic server lifecycle."],
+["validate active WebLogic Java processes","ps -ef | grep '[w]eblogic.Name'","Lists WebLogic JVMs while avoiding a false positive from grep."],
+["follow a server log","tail -F DOMAIN_HOME/servers/SERVER_NAME/logs/SERVER_NAME.log","Watches errors, deployments, stuck threads, and runtime changes."],
+["search WebLogic error codes","grep -R \"BEA-\" DOMAIN_HOME/servers/*/logs","Finds known WebLogic messages across server logs."],
+["generate a JVM thread dump on Linux","kill -3 PID","Asks the JVM to print a thread dump without terminating the process.",true],
+["review listening ports","ss -lntp | grep java","Confirms active ports and the associated Java process."],
+["validate local HTTPS connectivity","curl -vk https://host:port/health","Tests route, TLS, HTTP code, and response from the client perspective."],
+["view JVM command-line arguments","jcmd PID VM.command_line","Shows main class, JVM parameters, memory options, properties, and paths."]
+].forEach(x=>en(EWLCMD,"Which WebLogic/Linux command would you use to "+x[0]+"?",x[1],x[2],x[3]));
+[
+["make a script fail on common errors","set -euo pipefail","Makes Bash fail on command errors, undefined variables, and pipeline errors.",true],
+["capture stdout and stderr in one log","command > output.log 2>&1","Redirects normal output and errors to the same file."],
+["run in background after logout","nohup command > app.log 2>&1 &","Runs a process immune to SIGHUP; still validate PID and logs."],
+["show the last 100 lines and follow the file","tail -n 100 -F app.log","Combines recent context with following through log rotation."],
+["search text recursively with line numbers","grep -Rni \"timeout\" /opt/app/logs","Finds matches recursively, case-insensitively, and prints line numbers."],
+["show top CPU processes","ps -eo pid,ppid,pcpu,pmem,cmd --sort=-pcpu | head","Sorts processes to find primary CPU consumers."],
+["show memory usage","free -h","Summarizes total, used, free, buffers/cache, and swap."],
+["measure command duration","time command","Reports real, user, and system time for comparisons."],
+["validate DNS resolution","getent hosts host.example.com","Uses the operating system name-resolution configuration."],
+["test whether a TCP port responds","nc -vz host 1521","Checks network reachability to a port without proving app health.",true],
+["find large files or directories","du -ah /path | sort -h | tail -20","Finds the largest consumers of filesystem space."],
+["repeat a command while observing changes","watch -n 2 'kubectl get pods -n NAMESPACE'","Refreshes output every two seconds during rollouts or incidents."]
+].forEach(x=>en(ESH,"Which shell command would you use to "+x[0]+"?",x[1],x[2],x[3]));
+[
+["connect to Oracle using a service name","sqlplus user/password@//host:1521/service","Opens SQL*Plus against a specific listener and service.",true],
+["connect without exposing the password in the command","sqlplus /nolog","Starts SQL*Plus first, then lets you CONNECT with less exposure in history/processes.",true],
+["show the current database user","show user","Confirms the schema before running changes."],
+["enable statement timing","set timing on","Displays duration for each SQL statement."],
+["format a column","column NAME format a30","Adjusts output width or format for readable SQL*Plus reports."],
+["save investigation output","spool diagnostic.log","Writes SQL*Plus output to a file until spool off."],
+["view relevant active sessions","select sid,serial#,username,status,machine,program from v$session where username is not null;","Shows connections, client programs, and session state."],
+["identify blocking sessions","select blocking_session,sid,serial#,event,seconds_in_wait from v$session where blocking_session is not null;","Shows blocked sessions and blockers before taking action.",true],
+["find SQL for one session","select sql_id,event,state from v$session where sid = :sid;","Captures sql_id and wait event for a specific session."],
+["get an actual execution plan with stats","select * from table(dbms_xplan.display_cursor('SQL_ID',null,'ALLSTATS LAST'));","Shows the executed plan and actual row counts when cursor stats exist.",true],
+["find invalid objects","select owner,object_type,object_name from dba_objects where status='INVALID';","Detects packages, views, or objects requiring review or recompilation."],
+["recompile a package body","alter package SCHEMA.PKG_NAME compile body;","Compiles the package body; review errors with show errors."],
+["persist transactional changes","commit;","Saves pending DML; validate scope and impact first."],
+["undo uncommitted changes","rollback;","Reverts pending DML in the current session."],
+["estimate a plan before running SQL","explain plan for SELECT ...","Generates an estimated plan; it does not replace the actual runtime plan."]
+].forEach(x=>en(ESQLP,"Which command or SQL would you use to "+x[0]+"?",x[1],x[2],x[3]));
+[
+["open WLST","$WL_HOME/common/bin/wlst.sh","Starts WebLogic Scripting Tool for domain administration with Jython.",true],
+["connect to Admin Server","connect('weblogic','password','t3://host:7001')","Opens an online WLST session against Admin Server.",true],
+["list domain servers","domainRuntime(); ls('/ServerRuntimes')","Switches to runtime tree and lists active servers."],
+["check one server state","state('managed1','Server')","Returns the WebLogic state of the selected server."],
+["start a Managed Server from WLST","start('managed1','Server')","Requests server start through Node Manager when configured."],
+["gracefully stop a Managed Server","shutdown('managed1','Server',force='false')","Stops the server without abruptly cutting in-flight work."],
+["enter edit mode","edit(); startEdit()","Locks a configuration edit session before changing MBeans.",true],
+["save and activate changes","save(); activate()","Persists and activates changes made in the configuration tree."],
+["discard pending edits","undo(); cancelEdit('y')","Reverts pending changes and releases the edit lock."],
+["list deployments","cd('/AppDeployments'); ls()","Shows deployments registered in the domain."],
+["deploy an application","deploy('app','/path/app.ear',targets='cluster1')","Deploys an artifact to targets; use with validation and rollback plan.",true],
+["remove an application deployment","undeploy('app')","Removes a deployment from the domain during a controlled change."],
+["list JDBC resources","cd('/JDBCSystemResources'); ls()","Lists configured JDBC resources for pools and targets."],
+["exit WLST cleanly","disconnect(); exit()","Closes the online session and exits the tool."]
+].forEach(x=>en(EWLSTC,"Which WLST command would you use to "+x[0]+"?",x[1],x[2],x[3]));
 const APP_LANG=localStorage.getItem("retail-quiz-language")||"es";
 if(APP_LANG==="en")Q.splice(0,Q.length,...ENQ);
 const tr=(es,en)=>APP_LANG==="en"?en:es;
 const modes=APP_LANG==="en"?{practice:["Practice","Immediate feedback"],study:["Flashcards","Reveal the answer"],exam:["Mock exam","Results at the end"]}:{practice:["Práctica","Feedback inmediato"],study:["Tarjetas","Revela respuesta"],exam:["Simulacro","Resultados al final"]};
-const cats=[...new Set(Q.map(x=>x.cat))],KEY="retail-engineer-bilingual-v3-"+APP_LANG;
+const cats=[...new Set(Q.map(x=>x.cat))],KEY="retail-engineer-bilingual-v4-"+APP_LANG;
 let saved={};try{saved=JSON.parse(localStorage.getItem(KEY)||"{}")}catch{}
 let state={mode:"practice",selected:[...cats],limit:20,seen:0,best:0,streak:0,...saved,active:false,queue:[],index:0,answers:[],revealed:false};
 const el=id=>document.getElementById(id),shuffle=a=>{a=[...a];for(let i=a.length-1;i;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a},esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
