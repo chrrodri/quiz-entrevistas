@@ -29,8 +29,8 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
         AWS_DEFAULT_REGION    = 'us-east-1'
-        AWS_DIST_ID           = 'EY11WN9Y0SH7C'
-        AWS_CLOUDFRONT_URL    = 'dr9700dq0dlpo.cloudfront.net'
+        AWS_DIST_ID           = 'E2IYXCREAKDD8I'
+        AWS_CLOUDFRONT_URL    = 'dqr66wzc8saoa.cloudfront.net'
 
     }
 
